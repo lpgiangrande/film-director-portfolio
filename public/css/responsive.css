@@ -1,0 +1,77 @@
+/* Medium to large */
+@media only screen and (min-width : 768px) and (max-width : 1200px){
+    ul {
+        margin-top: 0;
+        margin-bottom: 0.6rem;
+    }
+    nav{
+        line-height: 1.2;
+    }
+}
+
+@media only screen and (min-width : 481px) and (max-width : 767px)
+{
+    /* NAV */
+    h1{
+        font-size: 3.8vw;
+    }
+    h2{
+        font-weight: 300;
+        font-size: 3vw;
+    }
+    #logo{
+        width: 6vw;
+        height: auto;
+        margin: 10px;
+    }
+    .nav2{
+        margin-top: 0.5em;
+    }
+    .nav2 a{
+        margin: 8px;
+        font-size: 2.3vw;
+    } 
+        /* MAIN */
+
+    /* no title effect on mobile*/
+    h3{
+        opacity: 1;
+    }
+}
+
+/* Smartphones (portrait and landscape)*/
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) 
+{
+    /* NAV */
+    h1{
+        font-size: 3.7vw;
+        letter-spacing: 1.5px;
+    }
+    h2{
+        font-weight: 300;
+        font-size: 3vw;
+        letter-spacing: 1px;
+    }
+    #logo{
+        width: 7vw;
+        height: auto;
+        margin: 0 10px;
+    }
+    .nav2{
+        margin-bottom: 10px;
+    }
+    .nav2 li a{
+        font-size: 0.5em;
+        letter-spacing: 1px; 
+        margin: 5px;
+    }
+    /* MAIN */
+
+    /* no title effect on mobile*/
+    h3{
+        opacity: 1;
+    }
+
+}
+
+/*https://media-queries.aliasdmc.fr/media-queries-live.php*/
