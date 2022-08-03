@@ -9,6 +9,8 @@ app.set('view engine', 'ejs')
 
 app.use('/public', express.static(path.join(__dirname, 'public')))
 
+const PORT = process.env.PORT || 4000
+
 
 mongoose.connect('mongodb+srv://user1:useruser@cluster0.4k6lx.mongodb.net/siteregis?retryWrites=true&w=majority',
   { useNewUrlParser: true,
@@ -38,9 +40,12 @@ app.get('/', (req, res) => {
     })
 })
 
-app.listen(4000, function(){
+/*app.listen(4000, function(){
     console.log('server is running')
-})
+})*/
+app.listen(PORT, () => { 
+    console.log(`server is running on http://localhost:${PORT}`)
+  })
 
 
 
