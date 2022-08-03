@@ -1,7 +1,7 @@
 // alert('works only in desktop');
 
 // Function for titles appearing when hover on bg img
-let mouseTarget = document.getElementsByClassName('col-md-4');
+let mouseTarget = document.getElementsByClassName('title');
 let targetTitle = document.getElementsByTagName('h3');
 
 

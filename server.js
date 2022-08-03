@@ -2,7 +2,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
 const ejs = require('ejs')
-const path = require('path') 
+const path = require('path')
+const bodyParser = require('body-parser') 
 
 app.set('view engine', 'ejs')
 
@@ -16,17 +17,19 @@ mongoose.connect('mongodb+srv://user1:useruser@cluster0.4k6lx.mongodb.net/sitere
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
  
-  // model
+// MODEL - THUMBNAILS FOR HOMEPAGE
 const thumbnailsSchema = {
     title: String,
     altText: String,
-    url: String,
+    src: String,
     category: String
 }
 
 const Thumbnail = mongoose.model('Thumbnail', thumbnailsSchema);
-// model
+// MODEL - END
 
+
+// HOMEPAGE ROUTE TEST WITH EJS
 app.get('/', (req, res) => {
     Thumbnail.find({}, function(err, thumbnails){
         res.render('index', {

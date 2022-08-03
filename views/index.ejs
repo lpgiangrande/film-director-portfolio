@@ -26,7 +26,28 @@
         <script src="https://unpkg.com/vue@3"></script>
         -->
         <!-- JS -->
+        <!-- Check Device Type to load JS script for desktop only -->
+        <script>
+            let detectDeviceType = () =>
+                /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+                    ? 'Mobile'
+                    : 'Desktop';
+                console.log(detectDeviceType()); 
 
+            if (detectDeviceType() === 'Desktop'){
+                // append Js file to html file :
+                const script = document.createElement('script');
+                script.src = 'public/js/thumbnail-title.js';    
+
+                document.head.appendChild(script);
+            }
+        </script>
+        <!-- ? display page after all images are loaded-->
+        <script>
+            Promise.all(Array.from(document.getElementsByClassName('img-fluid')).filter(img => !img.complete).map(img => new Promise(resolve => { img.onload = img.onerror = resolve; }))).then(() => {
+                console.log('images finished loading');
+            });
+        </script>
     </head>
 <body>
     <header>
@@ -48,40 +69,30 @@
     </header>
 
     <main>
-        <h1>TEST EJS - BDD</h1>
-
+        <!-- THUMBNAILS GALLERY-->
         <div class="container-fluid gx-0 d-flex">
-    
-    
-            <!--ROW-->
-            <div class="row gx-0">
+            
+            <div class="row gx-0"><!--ROW-->
     
                 <% thumbnailsList.forEach(thumbnail => { %>
                 <!--COL-->
-                <div class="col-md-4 title">
-                    <a href="#">
-                        <h3><%= thumbnail.title %></h3>
-                        <img class="img-fluid" src="<%= thumbnail.src %>" alt="<%= thumbnail.altText %>">
-                    </a>
-                </div>
+                    <div class="col-md-4 title">
+                        <h3 class="text-center"><%= thumbnail.title %></h3>
+                        <a href="#">
+                            <img class="img-fluid" src="<%= thumbnail.src %>" 
+                            alt="<%= thumbnail.altText %>">
+                        </a>
+                    </div>
                 <!--/COL-->
                 <%})%>
-    
-            </div>
-            <!--/ROW-->
-    
-    
+            </div><!--END ROW-->
         </div>
-
-
-
-
     </main>
 
 
 
     <footer><!-- fontawsome 5 doc https://fontawesome.com/v5/docs/web/style/size-->
-        <div class="container d-flex">
+        <div class="container d-flex mb-4">
             <a class="text-white socials" href="https://www.linkedin.com/in/r%C3%A9gis-raffin-090a0759/?originalSubdomain=fr"><i class="fab fa-linkedin fa-2x"></i></a>
             <a class="text-white socials" href="https://vimeo.com/channels/regisraffin/"><i class="fab fa-vimeo fa-2x"></i></a>
             <a class="text-white socials" href="https://www.instagram.com/regis_raffin/?hl=fr"><i class="fab fa-instagram-square fa-2x"></i></a>
@@ -90,7 +101,7 @@
    
 
     <!-- JS -->
-    <script src="public/js/effects.js"></script>
+    <script src="public/js/thumbnail-title.js"></script>
     <script src="public/js/menu.js"></script>
     <!-- Bootstrap JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
