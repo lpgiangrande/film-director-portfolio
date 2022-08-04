@@ -1,4 +1,4 @@
-// alert('works only in desktop');
+// alert('works only for desktops');
 
 // Function for titles appearing when hover on bg img
 let mouseTarget = document.getElementsByClassName('title');
@@ -16,8 +16,7 @@ for (let i = 0 ; i < mouseTarget.length && i < targetTitle.length; i++) {
     function show(){
         targetTitle[i].style.opacity = "1";  
         // Replace div img with video
-        //imgTag[i].remove();
-        //videoTag[i].style.display = "block";
+
     }
 
     // LEAVE
@@ -30,16 +29,4 @@ for (let i = 0 ; i < mouseTarget.length && i < targetTitle.length; i++) {
 
  }
 
- for (let j = 0; j < imgTag.length ; j++){
-         // OVER
-    mouseTarget[i].addEventListener('mouseover', remove); 
-    
-    function remove(){
-        // Replace div img with video
-        imgTag[i].remove();
-        //videoTag[i].style.display = "block";
-    }
-
-
- }
 
