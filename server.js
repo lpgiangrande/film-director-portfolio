@@ -43,7 +43,7 @@ app.get('/animation:id', (req, res) => {
     res.render('animation-selected')
       
 })
-// PAGE 3 LIVE ACTION
+// PAGE 3 LIVE ACTION : only display thumbnails with category: live action
 app.get('/liveaction', (req, res) => {
     const query = Thumbnail.find({ 'category': 'live action' });
     query.exec(function(err, thumbnails){
