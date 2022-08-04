@@ -4,7 +4,8 @@ const app = express()
 const ejs = require('ejs')
 const path = require('path')
 const bodyParser = require('body-parser') 
-const Thumbnail = require('./models/models');
+const Thumbnail = require('./models/modelsThumbnails')
+const dbConnect = require('./dbConnect')
 
 /* EJS */
 app.set('view engine', 'ejs')
@@ -14,13 +15,6 @@ app.use('/public', express.static(path.join(__dirname, 'public')))
 
 /* PORT */
 const PORT = process.env.PORT || 4000
-
-/* DB CONNECT */
-mongoose.connect('mongodb+srv://user1:useruser@cluster0.4k6lx.mongodb.net/siteregis?retryWrites=true&w=majority',
-  { useNewUrlParser: true,
-    useUnifiedTopology: true })
-  .then(() => console.log('Connexion à MongoDB réussie !'))
-  .catch(() => console.log('Connexion à MongoDB échouée !'));
 
  
 /* ROUTES */

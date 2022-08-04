@@ -84,6 +84,9 @@ h3{
     transform: translate(-50%,-50%);
     z-index: 90;
 }
+.visibility{
+    display: none;
+}
 
 /* FOOTER */
 footer .d-flex{
