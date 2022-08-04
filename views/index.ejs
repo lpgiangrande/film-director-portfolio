@@ -12,11 +12,15 @@
                     <div class="col-md-4 title">
                         <h3 class="text-center"><%= thumbnail.title %></h3>
                         <a href="#">
-                            <img class="img-fluid thumbnail" src="<%= thumbnail.src %>" 
+                            <!-- SRC 1 : image -->
+                            <img class="img-fluid thumbnail" src="<%= thumbnail.imgSrc %>" 
                             alt="<%= thumbnail.altText %>">
+                            <!-- SRC 2 : image -->
+                            <video controls autoplay class="visibility" src="<%= thumbnail.videoSrc %>" type="video/mp4"></video>
+
                         </a>
                     </div>
-             
+      
                 <%})%>
                 
             </div>
