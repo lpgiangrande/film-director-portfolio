@@ -4,14 +4,18 @@ const app = express()
 const ejs = require('ejs')
 const path = require('path')
 const bodyParser = require('body-parser') 
+const Thumbnail = require('./models/models');
 
+/* EJS */
 app.set('view engine', 'ejs')
 
+/* GET PUBLIC FILES */
 app.use('/public', express.static(path.join(__dirname, 'public')))
 
+/* PORT */
 const PORT = process.env.PORT || 4000
 
-
+/* DB CONNECT */
 mongoose.connect('mongodb+srv://user1:useruser@cluster0.4k6lx.mongodb.net/siteregis?retryWrites=true&w=majority',
   { useNewUrlParser: true,
     useUnifiedTopology: true })
@@ -19,17 +23,7 @@ mongoose.connect('mongodb+srv://user1:useruser@cluster0.4k6lx.mongodb.net/sitere
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
  
-// MODEL - THUMBNAILS FOR HOMEPAGE
-const thumbnailsSchema = {
-    title: String,
-    altText: String,
-    src: String,
-    category: String
-}
-
-const Thumbnail = mongoose.model('Thumbnail', thumbnailsSchema);
-// MODEL - END
-
+/* ROUTES */
 
 // HOMEPAGE ROUTE TEST WITH EJS
 app.get('/', (req, res) => {
