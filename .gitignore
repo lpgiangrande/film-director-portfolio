@@ -1,5 +1,6 @@
 # Node build artifacts
 node_modules
+dbConnect.js
 
 # Local development
 config.env
