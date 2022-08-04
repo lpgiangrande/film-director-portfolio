@@ -70,7 +70,7 @@ ul {
 }
 /* à revoir*/
 /* MAIN */
-.img-fluid:hover{
+.thumbnail:hover{
     opacity: 0.5;
     transition-duration: 2s;
 }
@@ -89,7 +89,7 @@ h3{
 footer .d-flex{
     justify-content: center;
     align-items: center;
-    padding-top: 50px;
+    padding-top: 30px;
 }
 footer i{
     opacity: 0.6;
@@ -97,4 +97,18 @@ footer i{
 }
 footer i:hover{
     opacity: 1;
+}
+
+/* PAGE ABOUT */
+.about{
+    margin-bottom: 30px;
+}
+#button-email>a{
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 1.5em;
+    background-color: rgba(183, 250, 134, 0.694);
+    color: black;
+    padding: 0.5em 1em;
 }
