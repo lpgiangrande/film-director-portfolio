@@ -109,11 +109,11 @@ footer i:hover{
     text-transform: uppercase;
     font-weight: 500;
     font-size: 1.5em;
-    background-color: rgba(183, 250, 134, 0.694);
+    background-color: rgb(134, 170, 144);
     color: black;
-    padding: 0.5em 1em;
+    padding: 0.5em 1.1em;
 }
 #button-email>a:hover{
-    background-color: rgba(208, 247, 180, 0.694);
+    background-color: rgb(191, 213, 197);
     transition-duration: 1s;
 }
