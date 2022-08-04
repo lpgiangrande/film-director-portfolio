@@ -97,6 +97,7 @@ footer i{
 }
 footer i:hover{
     opacity: 1;
+    transition-duration: 1s;
 }
 
 /* PAGE ABOUT */
@@ -111,4 +112,8 @@ footer i:hover{
     background-color: rgba(183, 250, 134, 0.694);
     color: black;
     padding: 0.5em 1em;
+}
+#button-email>a:hover{
+    background-color: rgba(208, 247, 180, 0.694);
+    transition-duration: 1s;
 }
