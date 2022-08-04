@@ -5,6 +5,7 @@ const ejs = require('ejs')
 const path = require('path')
 const bodyParser = require('body-parser') 
 const Thumbnail = require('./models/modelsThumbnails')
+const animationContent = require('./models/animationContent')
 const dbConnect = require('./dbConnect')
 
 /* EJS */
@@ -19,7 +20,7 @@ const PORT = process.env.PORT || 4000
  
 /* ROUTES */
 
-// HOMEPAGE ROUTE TEST WITH EJS
+// HOMEPAGE : display all thumbnails
 app.get('/', (req, res) => {
     Thumbnail.find({}, function(err, thumbnails){
         res.render('index', {
@@ -28,15 +29,28 @@ app.get('/', (req, res) => {
     })
 })
 
-// PAGE 2 ANIMATION
+// PAGE 2 ANIMATION : only display thumbnails with category:animation
 app.get('/animation', (req, res) => {
-        res.render('animation')
-          
+    const query = Thumbnail.find({ 'category': 'animation' });
+    query.exec(function(err, thumbnails){
+        res.render('animation', {
+            thumbnailsList: thumbnails
+        })
+    })     
+})
+// SOUS PAGE ANIMATION
+app.get('/animation:id', (req, res) => {
+    res.render('animation-selected')
+      
 })
 // PAGE 3 LIVE ACTION
 app.get('/liveaction', (req, res) => {
-    res.render('liveaction')
-      
+    const query = Thumbnail.find({ 'category': 'live action' });
+    query.exec(function(err, thumbnails){
+        res.render('liveaction', {
+            thumbnailsList: thumbnails
+        })
+    })   
 })
 // PAGE 4 ABOUT
 app.get('/about', (req, res) => {

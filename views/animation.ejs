@@ -1,8 +1,28 @@
-<%- include('partials/header.ejs') %>
-
 <body>
-    <p class="text-center">AFFICHER THUMBNAILS DONT LA CATEGORY EST ANIMATION</p>
+    <%- include('partials/header.ejs') %>
+    <main>
+        <!-- THUMBNAILS GALLERY -  EJS & MONGODB -->
+        <div class="container-fluid gx-0 d-flex">
+            
+            <div class="row gx-0">
+    
+                <% thumbnailsList.forEach(thumbnail => { %>
+
+                    <div class="col-md-4 title">
+                        <h3 class="text-center"><%= thumbnail.title %></h3>
+                        <a href="#">
+                            <!-- image -->
+                            <img class="img-fluid thumbnail" src="<%= thumbnail.imgSrc %>" 
+                            alt="<%= thumbnail.altText %>">
+                        </a>
+                    </div>
+      
+                <%})%>
+                
+            </div>
+        </div>
+    </main>
+    <%- include('partials/footer.ejs') %>
 </body>
 
 
-<%- include('partials/footer.ejs') %>

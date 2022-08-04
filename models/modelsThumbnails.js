@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 // THUMBNAILS FOR HOMEPAGE
 
-const thumbnailsSchema = {
+const thumbnailsSchema = mongoose.Schema({
     title: {
         type: String,
         required: true
@@ -21,7 +21,7 @@ const thumbnailsSchema = {
         type: String,
         required: true
     }
-}
+})
 
 module.exports = mongoose.model('Thumbnail', thumbnailsSchema);
 
