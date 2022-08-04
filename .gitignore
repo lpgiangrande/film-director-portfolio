@@ -4,3 +4,4 @@ node_modules
 # Local development
 config.env
 .DS_Store
+.vscode

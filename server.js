@@ -40,11 +40,27 @@ app.get('/', (req, res) => {
     })
 })
 
+// PAGE 2 ANIMATION
+app.get('/animation', (req, res) => {
+        res.render('animation')
+          
+})
+// PAGE 3 LIVE ACTION
+app.get('/liveaction', (req, res) => {
+    res.render('liveaction')
+      
+})
+// PAGE 4 ABOUT
+app.get('/about', (req, res) => {
+    res.render('about')
+      
+})
+
 /*app.listen(4000, function(){
     console.log('server is running')
 })*/
 app.listen(PORT, () => { 
-    console.log(`server is running on http://localhost:${PORT}`)
+    console.log(`server is running on ${PORT}`)
   })
 
 
