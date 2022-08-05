@@ -9,20 +9,22 @@
                 <% thumbnailsList.forEach(thumbnail => { %>
 
                     <div class="col-md-4 title">
-                        <h3 class="text-center"><%= thumbnail.title %></h3>
-                        <a href="#">
+
+                        <a href="/<%= thumbnail._id %>">
+                            <h3 class="text-center"><%= thumbnail.title %></h3>
                             <!-- SRC 1 : image -->
-                            <img class="img-fluid thumbnail" src="<%= thumbnail.imgSrc %>" 
+                            <img class="img-fluid thumbnail" width="1200" height="496" src="<%= thumbnail.imgSrc %>" 
                             alt="<%= thumbnail.altText %>">
                             <!-- SRC 2 : image -->
                             <video controls autoplay class="visibility" src="<%= thumbnail.videoSrc %>" type="video/mp4"></video>
-
                         </a>
+
                     </div>
       
                 <%})%>
                 
             </div>
+            
         </div>
     </main>
     <%- include('partials/footer.ejs') %>
