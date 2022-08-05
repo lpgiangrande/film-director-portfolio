@@ -5,7 +5,7 @@ const ejs = require('ejs')
 const path = require('path')
 const bodyParser = require('body-parser') 
 const Thumbnail = require('./models/modelsThumbnails')
-const animationContent = require('./models/animationContent')
+//const Project = require('./models/modelsProject')
 const dbConnect = require('./dbConnect')
 
 /* EJS */
@@ -17,6 +17,8 @@ app.use('/public', express.static(path.join(__dirname, 'public')))
 /* PORT */
 const PORT = process.env.PORT || 4000
 
+// ?
+app.use(bodyParser.urlencoded({extended:false}));
  
 /* ROUTES */
 
@@ -38,11 +40,7 @@ app.get('/animation', (req, res) => {
         })
     })     
 })
-// SOUS PAGE ANIMATION
-app.get('/animation:id', (req, res) => {
-    res.render('animation-selected')
-      
-})
+
 // PAGE 3 LIVE ACTION : only display thumbnails with category: live action
 app.get('/liveaction', (req, res) => {
     const query = Thumbnail.find({ 'category': 'live action' });
@@ -52,11 +50,30 @@ app.get('/liveaction', (req, res) => {
         })
     })   
 })
+
 // PAGE 4 ABOUT
 app.get('/about', (req, res) => {
     res.render('about')
-      
 })
+
+// PAGE HOMEPAGE TO PROJET : display project details when you clic on a homepage thumbnail
+app.get('/:id', (req, res) => {
+    Thumbnail.findById(req.params.id)
+    .exec()
+    .then(thumbnails => {
+        res.render('project', {
+            thumbnailsList: thumbnails
+        })
+    })
+    .catch(error =>{
+        console.log(error);
+    })   
+})
+
+
+
+// routes
+//app.use("/", router);
 
 /*app.listen(4000, function(){
     console.log('server is running')
