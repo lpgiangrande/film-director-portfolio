@@ -7,6 +7,9 @@ const bodyParser = require('body-parser')
 const Thumbnail = require('./models/modelsThumbnails')
 //const Project = require('./models/modelsProject')
 const dbConnect = require('./dbConnect')
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
+
 
 /* EJS */
 app.set('view engine', 'ejs')
@@ -55,6 +58,16 @@ app.get('/liveaction', (req, res) => {
 app.get('/about', (req, res) => {
     res.render('about')
 })
+
+
+/* FORM UPLOAD */
+
+
+app.get('/upload-project', (req, res) => {
+    res.render('upload-project')
+})
+
+ /* - - - - - - */
 
 // PAGE HOMEPAGE TO PROJET : display project details when you clic on a homepage thumbnail
 app.get('/:id', (req, res) => {
