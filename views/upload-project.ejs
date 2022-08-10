@@ -1,0 +1,114 @@
+    <%- include('partials/header.ejs') %>
+        <main>
+            <div class="container mt-5 text-white">
+                <h1 style="color : red"><strong>EN CONSTRUCTION</strong></h1>
+                <br><br>
+
+                <div>
+                    <h1><strong>Ajouter un nouveau projet :</strong></h1>
+                </div>
+
+                <br><br>
+
+                <!-- FORM -->
+                <form action="/public/uploads/" method="POST" enctype="multipart/form-data">
+                    <h2>Eléments pour homepage</h2>
+                    <br>
+                    <!-- IMAGE THUMBNAIL -->
+                    <div class="row">
+                        <div class="col">
+                            <label for="img_thumbnail">Thumbnail (image) du projet pour homepage (obligatoire) : </label><br>
+                            <input type="file" size="50" id="img_thumbnail" name="img_thumbnail"><br>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- VIDEO THUMBNAIL -->
+                    <div class="row">
+                        <div class="col">
+                            <label for="vid_thumbnail">Thumbnail (video) du projet pour homepage (obligatoire) : </label><br>
+                            <input type="file" size="50" id="vid_video" name="vid_video" ><br>
+                        </div>
+                    </div>
+                    <br><hr><br>
+                    <h2>Eléments pour la page du projet</h2>
+                    <br>
+                    <!-- VIDEO -->
+                    <div class="row">
+                        <div class="col">
+                            <label for="main_video">Vidéo (lien) :</label><br>
+                            <input type="text" placeholder="https//www..." size="50" id="main_video" name="main_video" ><br>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col">
+                            <label for="main_video_title">Titre vidéo (obligatoire) : </label><br>
+                            <input type="text" placeholder="ex : Titre + date" size="50" id="main_video_title" name="main_video_title"><br>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col">
+                            <label for="main_video_subtitle1">Sous-titre vidéo 1 :</label><br>
+                            <input type="text" value="directed by Regis Raffin" size="50" id="main_video_subtitle1" name="main_video_subtitle1"><br>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col">
+                            <label for="main_video_subtitle2">Sous-titre vidéo 2 (optionnel):</label><br>
+                            <input type="text" placeholder="Autres crédits" size="50" id="main_video_subtitle2" name="main_video_subtitle2"><br>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col">
+                            <label for="main_video_subtitle3">Sous-titre vidéo 3 (optionnel):</label><br>
+                            <input type="text" placeholder="Autres crédits" size="50" id="main_video_subtitle3" name="main_video_subtitle3"><br>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col">
+                            <label for="main_video_subtitle4">Sous-titre vidéo 4 (optionnel):</label><br>
+                            <input type="text" placeholder="Autres crédits" size="50" id="main_video_subtitle4" name="main_video_subtitle4"><br>
+                        </div>
+                    </div><br>
+                    <!---->
+                    <br>
+                    <hr>
+                    <br>
+                    <!-- IMG et TXT - 1 -->
+                    <div class="row">
+                        <div class="col">
+                            <h2>Premier rang d'images : </h2>
+
+                            <label for="images_1">Upload multiple images (MAX 4):</label><br>
+                            <input type="file" id="images_1" name="images_1" multiple><br>
+                        </div>
+                        <div class="col">
+                            <h2>Entrez le nombre d'images uploadées pour ajuster le nombre de lignes et de colonnes du gabarit </h2>
+                            <h2>(Si 3 images --> affichage sur 1 rangée. Si 4 images, affichage sur 2 rangées)</h2>
+                            <h4>Ou Modulo : si nb img impair et < 5 : sur une rangée | si nb img pair : 2 max par rangée donc col-md-6</h4>
+
+                            <label for="nb_img_rang_1">Nombre entre 1 à 4:</label><br>
+                            <input type="text" id="nb_img_rang_11" name="nb_img_rang_1"><br>
+                        </div>
+                        <div class="col">
+                            <h2>Texte à afficher sous les images : </h2>
+
+                            <label for="images_1_description">Légende :</label><br>
+                            <textarea id="images_1_description" name="images_1_description" rows="4" cols="50"></textarea><br>
+                        </div>
+                    </div>
+                    <!-- IMG et TXT - 2 -->
+                    <button type="button" class="btn btn-info">Ajout rang d'images</button>
+                    <button type="button" class="btn btn-primary">Ajout vidéo</button>
+
+                    <br>
+                    <hr>
+                    <div class="text-center">
+                        <input type="submit" class="btn btn-light"  value="Send">
+                    </div>
+                </form>
+                <!---->
+            </div>
+        </main>
+        <%- include('partials/footer.ejs') %>
+    </body>
+</html>
