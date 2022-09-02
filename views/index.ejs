@@ -18,10 +18,13 @@
                         <a href="/<%= thumbnail._id %>">
                             <h3 class="text-center"><%= thumbnail.title %></h3>
                             <!-- SRC 1 : image -->
-                            <img class="img-fluid thumbnail visible" width="1200" height="496" src="<%= thumbnail.imgSrc %>" 
+                            <img class="img-fluid thumbnail_img visible" width="1200" height="496" src="<%= thumbnail.imgSrc %>" 
                             alt="<%= thumbnail.altText %>">
-                            <!-- SRC 2 : image 
-                            <video controls autoplay class="hidden" src="<%= thumbnail.videoSrc %>" type="video/mp4"></video>
+                            <!-- SRC 2 : video 
+                            <video class="thumbnail_vid hidden" controls autoplay src="<%= thumbnail.videoSrc %>" type="video/mp4"></video>
+                            -->
+                            <!-- SRC 2 : video
+                            <video class="thumbnail_vid" controls autoplay src="public/videos-homepage/COME_ON.mp4" type="video/mp4"></video>
                             -->
                         </a>
 
