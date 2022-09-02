@@ -1,5 +1,5 @@
 /* Medium to large */
-@media only screen and (min-width : 768px) and (max-width : 1200px){
+@media only screen and (min-width : 768px) and (max-width : 2560px){
     ul {
         margin-top: 0;
         margin-bottom: 0.6rem;
@@ -31,12 +31,20 @@
         margin: 8px;
         font-size: 2.3vw;
     } 
-        /* MAIN */
+    /* MAIN */
 
     /* no title effect on mobile*/
     h3{
         opacity: 1;
     }
+    /* ABOUT */
+    p.about{
+        font-size: 0.6em;
+    }
+    .about-wrapper{
+        width: 60vw;
+      }
+    
 }
 
 /* Smartphones (portrait and landscape)*/
@@ -71,7 +79,13 @@
     h3{
         opacity: 1;
     }
-
+    /* ABOUT */
+    p.about{
+        font-size: 0.5em;
+    }
+    .about-wrapper{
+        width: 70vw;
+      }
 }
 
 /*https://media-queries.aliasdmc.fr/media-queries-live.php*/
