@@ -67,7 +67,8 @@ ul {
 }
 /* à revoir*/
 /* MAIN */
-.thumbnail_img{
+
+/*.thumbnail_img{
     transition-duration: 2s;
 }
 .thumbnail_img:hover{
@@ -84,6 +85,7 @@ h3{
     transform: translate(-50%,-50%);
     z-index: 90;
 }
+*/
 
 /* toggle class on thumbnails 
 .visible{
@@ -100,7 +102,6 @@ h3{
     left: 0;
     z-index: -1000;
 }*/
-
 
 /* FOOTER */
 footer .d-flex{
@@ -138,5 +139,5 @@ footer i:hover{
   width: 35vw;
 }
 p.about {
-    font-size: 0.8rem;
+    font-size: 1rem;
 }

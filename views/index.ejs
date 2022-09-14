@@ -1,37 +1,23 @@
 <%- include('partials/header.ejs') %>
 <body>
-            <!-- Pour développement -->
-            <div class="container text-center">
-                <a href="/upload-project" target="_blank"> Upload new project (formulaire d'ajout de projet - temporaire) </a>
-            </div>
-            <!---->-->
+
+  
     <main>
         <!-- THUMBNAILS GALLERY -  EJS & MONGODB -->
-        <div class="container-fluid gx-0 d-flex">
+        <div class="container-fluid d-flex g-0">
             
             <div class="row gx-0">
     
-                <% thumbnailsList.forEach(thumbnail => { %>
+                <% thumbnailsList.forEach(thumbnail => {%>
 
-                    <div class="col-md-4 title">
-
-                        <a href="/<%= thumbnail._id %>">
-                            <h3 class="text-center"><%= thumbnail.title %></h3>
-                            <!-- SRC 1 : image -->
-                            <img class="img-fluid thumbnail_img visible" width="1200" height="496" src="<%= thumbnail.imgSrc %>" 
-                            alt="<%= thumbnail.altText %>">
-                            <!-- SRC 2 : video 
-                            <video class="thumbnail_vid hidden" controls autoplay src="<%= thumbnail.videoSrc %>" type="video/mp4"></video>
-                            -->
-                            <!-- SRC 2 : video
-                            <video class="thumbnail_vid" controls autoplay src="public/videos-homepage/COME_ON.mp4" type="video/mp4"></video>
-                            -->
+                    <div class="col-md-4 d-flex"> <!-- rajouter class title si titres par dessus video -->
+                        <a class="d-flex" href="/<%= thumbnail._id %>">
+                            <video class="w-100 h-100" autoplay playsinline muted loop width="1200" height="496" src="<%= thumbnail.videoSrc %>"></video>
                         </a>
-
                     </div>
       
                 <%})%>
-                
+            
             </div>
             
         </div>

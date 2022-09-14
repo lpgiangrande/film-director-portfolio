@@ -11,16 +11,16 @@ const thumbnailsSchema = mongoose.Schema({
     altText: {
         type: String,
         required: true
-    }, 
+    },
+    category: {
+        type: String,
+        required: true
+    },
     imgSrc: {
         type: String,
         required: true
     }, 
-    videoSrc: String,
-    category: {
-        type: String,
-        required: true
-    }
+    videoSrc: String
 })
 
 module.exports = mongoose.model('Thumbnail', thumbnailsSchema);
