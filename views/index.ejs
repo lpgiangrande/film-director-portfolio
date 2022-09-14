@@ -1,25 +1,22 @@
 <%- include('partials/header.ejs') %>
-<script>
-    document.onreadystatechange = function() {
-        if (document.readyState !== "complete") {
-            document.querySelector(
-              "main").style.visibility = "hidden";
-            document.querySelector(
-              "#loader").style.visibility = "visible";
-        } else {
-            document.querySelector(
-              "#loader").style.display = "none";
-            document.querySelector(
-              "main").style.visibility = "visible";
-        }
-    };
-</script>
 <body>
+    <!-- LOADER -->
     <div id="loader" class="center"></div>
-    <main>
+    <script>
+        document.onreadystatechange = function() {
+            if (document.readyState !== "complete") {
+                document.querySelector("main").style.visibility = "hidden";
+                document.querySelector("#loader").style.visibility = "visible";
+            } else {
+                document.querySelector( "#loader").style.display = "none";
+                document.querySelector("main").style.visibility = "visible";
+            }
+        };
+    </script>
 
+    <!-- VIDEO GALLERY-->
+    <main>
         <div class="container-fluid d-flex g-0">
-            
             <div class="row gx-0">
     
                 <% thumbnailsList.forEach(thumbnail => {%>
@@ -33,7 +30,6 @@
                 <%})%>
             
             </div>
-            
         </div>
     </main>
     <%- include('partials/footer.ejs') %>
