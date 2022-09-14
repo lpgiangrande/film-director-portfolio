@@ -3,21 +3,21 @@
     document.onreadystatechange = function() {
         if (document.readyState !== "complete") {
             document.querySelector(
-              "body").style.visibility = "hidden";
+              "main").style.visibility = "hidden";
             document.querySelector(
               "#loader").style.visibility = "visible";
         } else {
             document.querySelector(
               "#loader").style.display = "none";
             document.querySelector(
-              "body").style.visibility = "visible";
+              "main").style.visibility = "visible";
         }
     };
 </script>
 <body>
     <div id="loader" class="center"></div>
     <main>
-        <!-- THUMBNAILS GALLERY -  EJS & MONGODB -->
+
         <div class="container-fluid d-flex g-0">
             
             <div class="row gx-0">
