@@ -1,18 +1,4 @@
     <%- include('partials/header.ejs') %>
-    <body>
-        <!-- LOADER -->
-        <div id="loader" class="center"></div>
-        <script>
-            document.onreadystatechange = function() {
-                if (document.readyState !== "complete") {
-                    document.querySelector("main").style.visibility = "hidden";
-                    document.querySelector("#loader").style.visibility = "visible";
-                } else {
-                    document.querySelector("#loader").style.display = "none";
-                    document.querySelector("main").style.visibility = "visible";
-                }
-            };
-        </script>
         <main>
             <!-- THUMBNAILS GALLERY -  EJS & MONGODB - "CATEGORY "ANIMATION" -->
             <div class="container-fluid d-flex g-0 mt-4">
