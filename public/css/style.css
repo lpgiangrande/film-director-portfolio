@@ -18,14 +18,8 @@ h1{
     font-size: 1.2vw;
 }
 h2{
-    font-weight: 300;
+    font-weight: 400;
     font-size: 1vw;
-}
-h3{
-    font-weight: 300;
-    letter-spacing: 2px;
-    opacity: 0;
-    transition: 1s;
 }
 .nav1, .nav2{
     flex-direction: row;
@@ -104,12 +98,19 @@ ul {
 .title{
     position: relative;
 }
-h3{
+h3.thumbnail_title{
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     z-index: 90;
+
+    font-weight: 300;
+    letter-spacing: 2px;
+    opacity: 0;
+    transition: 1s;
+    /*white-space: nowrap;*/
+
 }
 .hidden{
     display: none;

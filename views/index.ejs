@@ -1,51 +1,50 @@
 <%- include('partials/header.ejs') %>
-<body>
-     <!-- Pour développement -->
-     <div class="container text-center">
-        <a href="/upload-project" target="_blank"> Upload new project (formulaire d'ajout de projet - temporaire) </a>
-    </div>
-    <!---->
+    <body>
+        <!-- LOADER -->
+        <div id="loader" class="center"></div>
+        <script>
+            document.onreadystatechange = function() {
+                if (document.readyState !== "complete") {
+                    document.querySelector("main").style.visibility = "hidden";
+                    document.querySelector("#loader").style.visibility = "visible";
+                } else {
+                    document.querySelector("#loader").style.display = "none";
+                    document.querySelector("main").style.visibility = "visible";
+                }
+            };
+        </script>
+        <!-- THUMBNAILS - IMG / VID GALLERY-->
+        <main>
+            <div class="container-fluid d-flex g-0">
+                <div class="row gx-0">
+        
+                    <% thumbnailsList.forEach(thumbnail => {%>
 
-    <!-- LOADER -->
-    <div id="loader" class="center"></div>
-    <script>
-        document.onreadystatechange = function() {
-            if (document.readyState !== "complete") {
-                document.querySelector("main").style.visibility = "hidden";
-                document.querySelector("#loader").style.visibility = "visible";
-            } else {
-                document.querySelector("#loader").style.display = "none";
-                document.querySelector("main").style.visibility = "visible";
-            }
-        };
-    </script>
-
-    <!-- THUMBNAILS / VIDEOS GALLERY-->
-    <main>
-        <div class="container-fluid d-flex g-0">
-            <div class="row gx-0">
+                        <div class="col-md-6 col-lg-4 d-flex title"> 
     
-                <% thumbnailsList.forEach(thumbnail => {%>
-
-                    <div class="col-md-4 d-flex title"> 
-   
-                        <a class="d-flex" href="/<%= thumbnail._id %>">
-                            <h3 class="text-center"><%= thumbnail.title %></h3>
-                            <div id="source1">
-                                <img class="img-fluid thumbnail_img" width="1200" height="496" src="<%= thumbnail.imgSrc %>" 
-                                alt="<%= thumbnail.altText %>">
-                            </div>
-                            <div id="source2">
-                                <video class="thumbnail_vid hidden w-100 h-100" autoplay playsinline muted loop src="<%= thumbnail.videoSrc %>" type="video/mp4"></video>
-                            </div>
-                        </a>
-                    </div>
-      
-                <%})%>
-            
+                            <a class="d-flex" href="/<%= thumbnail._id %>">
+                                <h3 class="text-center thumbnail_title"><%= thumbnail.title %></h3>
+                                <div id="source1">
+                                    <img class="img-fluid thumbnail_img" width="1200" height="496" src="<%= thumbnail.imgSrc %>" 
+                                    alt="<%= thumbnail.altText %>">
+                                </div>
+                                <div id="source2">
+                                    <video class="thumbnail_vid hidden w-100 h-100" autoplay playsinline muted loop src="<%= thumbnail.videoSrc %>" type="video/mp4"></video>
+                                </div>
+                            </a>
+                        </div>
+        
+                    <%})%>
+                
+                </div>
             </div>
+        </main>
+        <!-- Pour développement -->
+        <div class="container text-center">
+            <br><br>
+            <a href="/upload-project" target="_blank"> Upload new project - temporaire) </a>
         </div>
-    </main>
-    <%- include('partials/footer.ejs') %>
-</body>
+
+        <%- include('partials/footer.ejs') %>
+    </body>
 </html>

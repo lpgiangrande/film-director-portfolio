@@ -32,7 +32,7 @@ function blue() {
 const navLinks = [
   "all",
   "animation",
-  "aive-action",
+  "live-action",
   "about"
 ];
 
