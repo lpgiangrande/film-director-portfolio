@@ -1,22 +1,43 @@
 <%- include('partials/header.ejs') %>
 <body>
+    <!-- LOADER -->
+    <div id="loader" class="center"></div>
+    <script>
+        document.onreadystatechange = function() {
+            if (document.readyState !== "complete") {
+                document.querySelector("main").style.visibility = "hidden";
+                document.querySelector("#loader").style.visibility = "visible";
+            } else {
+                document.querySelector("#loader").style.display = "none";
+                document.querySelector("main").style.visibility = "visible";
+            }
+        };
+    </script>
     <main>
-            <!-- THUMBNAILS GALLERY -  EJS & MONGODB - "CATEGORY "LIVEACTION" -->
-            <div class="container-fluid d-flex g-0 mt-4">
-                
-                <div class="row gx-0">
+    <!-- THUMBNAILS GALLERY -  EJS & MONGODB - "CATEGORY "LIVEACTION" -->
+    <div class="container-fluid d-flex g-0 mt-4">
         
-                    <% thumbnailsList.forEach(thumbnail => {%>
+        <div class="row gx-0">
 
-                        <div class="col-md-4 d-flex"> <!-- rajouter class title si titres par dessus video -->
-                            <a class="d-flex" href="/<%= thumbnail._id %>">
-                                <video class="w-100 h-100" autoplay playsinline muted loop width="1200" height="496" src="<%= thumbnail.videoSrc %>"></video>
-                            </a>
+            <% thumbnailsList.forEach(thumbnail => {%>
+
+                <div class="col-md-6 col-lg-4 d-flex title"> 
+
+                    <a class="d-flex" href="/<%= thumbnail._id %>">
+                        <h3 class="text-center thumbnail_title"><%= thumbnail.title %></h3>
+                        <div id="source1">
+                            <img class="img-fluid thumbnail_img" width="1200" height="496" src="<%= thumbnail.imgSrc %>" 
+                            alt="<%= thumbnail.altText %>">
                         </div>
-        
-                    <%})%>
-                
+                        <div id="source2">
+                            <video class="thumbnail_vid hidden w-100 h-100" autoplay playsinline muted loop src="<%= thumbnail.videoSrc %>" type="video/mp4"></video>
+                        </div>
+                    </a>
                 </div>
+    
+            <%})%>
+        
+        </div>
     </main>
     <%- include('partials/footer.ejs') %>
 </body>
