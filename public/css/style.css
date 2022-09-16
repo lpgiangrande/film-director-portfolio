@@ -42,9 +42,9 @@ nav li a{
 li{
     list-style-type: none;
 }
-/* nav a:hover{
-    color:white;
-} */
+nav li a:hover{
+    color:rgba(147, 183, 227, 0.851);
+}
 .current{
     color:rgba(147, 183, 227, 0.851);
 }
