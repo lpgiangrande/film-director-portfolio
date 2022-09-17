@@ -8,15 +8,14 @@ This js file has two purposes :
 - 2. Switch thumbnail content from img to video when mouse enter
 
 */
+'use strict';
 
+const mouseTarget = document.getElementsByClassName('title');
+const targetTitle = document.getElementsByTagName('h3');
+const thumbnail_img = document.querySelectorAll("img.thumbnail_img");
+const thumbnail_vid = document.querySelectorAll("video.thumbnail_vid");
 
-let mouseTarget = document.getElementsByClassName('title');
-let targetTitle = document.getElementsByTagName('h3');
-let thumbnail_img = document.querySelectorAll("img.thumbnail_img");
-let thumbnail_vid = document.querySelectorAll("video.thumbnail_vid");
-
-
-for (let i = 0 ; i < mouseTarget.length && i < targetTitle.length && i < thumbnail_img.length && thumbnail_vid.length; i++) {
+for (let i = 0 ; i < mouseTarget.length && i < targetTitle.length && i < thumbnail_img.length && i < thumbnail_vid.length; i++) {
     // OVER
     mouseTarget[i].addEventListener('mouseover', show); 
     
