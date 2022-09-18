@@ -11,6 +11,8 @@ const multer  = require('multer');
 const upload = multer({ dest: 'uploads/' });
 //const router = require('./routes/basic.routes');
 const basicroutes = require('./routes/basicroutes.js')
+const hiddenroutes = require('./routes/hiddenroutes.js')
+
 
 /* EJS */
 app.set('view engine', 'ejs')
@@ -24,10 +26,12 @@ const PORT = process.env.PORT || 4000 // FOR DEV. IN PROD ?
 // ?
 app.use(bodyParser.urlencoded({extended:false}));
  
+// ? 
+app.use(express.json());
 
 /* ROUTES */
 app.use('/', basicroutes)
-
+app.use('/', hiddenroutes)
 
 
 /* FORM UPLOAD */
