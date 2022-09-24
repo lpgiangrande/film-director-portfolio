@@ -3,16 +3,36 @@ const app = express();
 const ejs = require('ejs');
 const path = require('path');
 const bodyParser = require('body-parser');
-const Thumbnail = require('./models/modelsThumbnails');
+const morgan = require("morgan");
+
 //const Project = require('./models/modelsProject')
+
+// DB
 const mongoose = require('mongoose');
 const dbConnect = require('./dbConnect');
+// Uploads
 const multer  = require('multer');
-const upload = multer({ dest: 'uploads/' });
-//const router = require('./routes/basic.routes');
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      if (file.mimetype === 'image/jpeg') {
+        cb(null, 'public/thumbnails')
+      } else if (file.mimetype === 'video/mp4') {
+        cb(null, 'public/videos-homepage')
+      } else {
+        console.log(file.mimetype)
+        cb({ error: 'Mime type not supported' })
+      }
+    }
+  })
+  
+const upload = multer({ storage: storage })
+
+// Routes
 const basicroutes = require('./routes/basicroutes.js')
 const hiddenroutes = require('./routes/hiddenroutes.js')
 
+
+app.use(morgan("dev"));
 
 /* EJS */
 app.set('view engine', 'ejs')
@@ -30,16 +50,14 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.json());
 
 /* ROUTES */
-app.use('/', basicroutes)
 app.use('/', hiddenroutes)
+app.use('/', basicroutes)
+
 
 
 /* FORM UPLOAD */
 
 
-app.get('/upload-project', (req, res) => {
-    res.render('upload-project')
-})
 
  
 /*app.listen(4000, function(){

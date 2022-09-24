@@ -20,4 +20,5 @@ router.get('/about', mainController.aboutPage);
 // Display project details when you clic on a homepage thumbnail
 router.get('/:id', mainController.projectFromHomePage);
 
+
 module.exports = router;
