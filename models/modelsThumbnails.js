@@ -11,7 +11,6 @@ const thumbnailsSchema = mongoose.Schema({
     }, 
     altText: {
         type: String,
-        required: true
     },
     category: {
         type: String,
@@ -21,7 +20,10 @@ const thumbnailsSchema = mongoose.Schema({
         type: String,
         required: true
     }, 
-    videoSrc: String
+    videoSrc: {
+        type : String,
+        required: true
+    }
 })
 
 module.exports = mongoose.model('Thumbnail', thumbnailsSchema);
