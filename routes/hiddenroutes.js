@@ -22,4 +22,7 @@ router.get('/admin/logoff', (req, res) => {
 
 //router.post('')
 
+// Page => Add book (Formulaire d'ajout de livre)
+//routeur.post("/livres", upload.single("image"), livreController.addBook);
+
 module.exports = router;
