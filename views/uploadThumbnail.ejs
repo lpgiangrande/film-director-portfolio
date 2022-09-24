@@ -1,0 +1,44 @@
+<%- include('partials/header_backoff.ejs') %>
+<br><br><br><br>
+        <!-- form multiple avec multer -->
+        <div class="container">
+            <form action="/addThumbnail" method="POST" enctype="multipart/form-data"> 
+                <!-- TITLE -->
+                <div>
+                    <label for="title_thumbnail"><h3>titre : </h3></label>
+                    <br><br>
+                    <input type="text" size="50" id="title_thumbnail" name="title_thumbnail"><br>
+                </div>
+                <br><br><!-- CATEGORY -->
+                <div>
+                    <label for="category"><h3>Catégorie :</h3></label>
+                    <br>
+                    <select>
+                        <option value="1">Animation</option>
+                        <option value="2">Liveaction</option>
+                    </select>
+                </div>
+                <br><br><!-- IMAGE --> 
+                <div>
+                    <label for="img_thumbnail"><h3>Image : </h3></label>
+                    <br><br>
+                    <input type="file" size="50" id="img_thumbnail" name="img_thumbnail"><br>
+                </div>   
+                <br><br><!-- VIDEO --> 
+                <div>
+                    <label for="vid_thumbnail"><h3>Video : </h3></label>
+                    <br><br>
+                    <input type="file" size="50" id="vid_thumbnail" name="vid_thumbnail"><br>
+                </div>    
+                <br><br><br>
+                <!-- SEND -->
+                <div class="text-center">
+                    <input type="submit" class="btn btn-light"  value="Send">
+                </div>
+            </form>
+
+        </div>
+        <%- include('partials/footer_backoff.ejs') %>
+    </body>
+</html>
+

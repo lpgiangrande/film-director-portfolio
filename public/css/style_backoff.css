@@ -1,0 +1,85 @@
+*, ::before, ::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color : black;
+}
+h1, h2, h3, p, span{
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+/* NAV */
+h1, h2, h3 {
+    text-transform: uppercase;
+}
+h1{
+    font-size: 1.2vw;
+}
+h2{
+    font-weight: 400;
+    font-size: 1vw;
+}
+.nav1, .nav2{
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 1.5px; 
+}
+nav li:nth-child(-n+3){
+    text-transform: uppercase;
+}
+nav li:nth-child(4){
+    text-transform: capitalize;
+}
+nav li a{
+    text-decoration: none; 
+    color: white;
+    font-size: 0.8vw;
+    margin: 0.5vw;
+}
+li{
+    list-style-type: none;
+}
+nav li a:hover{
+    color:rgba(147, 183, 227, 0.851);
+}
+.current{
+    color:rgba(147, 183, 227, 0.851);
+}
+.nav1>h1,.nav1>img, .nav1>h2{
+    margin: 0.5vw;
+}
+/* à revoir*/
+ul {
+    padding: 0!important;
+}
+
+
+/* FOOTER */
+footer .d-flex{
+    justify-content: center;
+    align-items: center;
+    padding-top: 200px;
+}
+footer a{
+    margin: 15px;
+}
+footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+/*
+footer i{
+    opacity: 0.6;
+    margin: 8px;
+}
+footer i:hover{
+    opacity: 1;
+    transition-duration: 1s;
+}
+*/
