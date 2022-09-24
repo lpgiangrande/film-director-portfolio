@@ -7,5 +7,19 @@ const ejs = require('ejs');
 router.get('/admin', (req, res) => {
     res.render('auth');
 })
+// Add thumbnail
+router.get('/admin/uploadThumbnail', (req, res) => {
+    res.render('uploadThumbnail');
+})
+// Add project
+router.get('/admin/uploadProject', (req, res) => {
+    res.render('uploadProject');
+})
+// Add thumbnail
+router.get('/admin/logoff', (req, res) => {
+    res.render('logoff');
+})
+
+//router.post('')
 
 module.exports = router;
