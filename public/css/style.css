@@ -88,13 +88,16 @@ ul {
 
 /* THUMBNAILS WITH TITLES & HOVER EFFECT */
 
+/* (Done with JS)
+
 .thumbnail_img{
     transition-duration: 2s;
 }
 .thumbnail_img:hover{
     opacity: 0.5;
     transition-duration: all 2s;
-}
+}*/
+
 .title{
     position: relative;
 }

@@ -29,11 +29,3 @@ function blue() {
 // window.location.href will get your current URL
 // You can get the document.URL, but you can not set it. You can both get and set the location.href
 
-const navLinks = [
-  "all",
-  "animation",
-  "live-action",
-  "about"
-];
-
-
