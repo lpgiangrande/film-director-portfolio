@@ -1,28 +1,30 @@
 <%- include('partials/header_backoff.ejs') %>
 <br><br><br><br>
-        <!-- form multiple avec multer -->
+        <!-- form - multer -->
         <div class="container">
+            <h2 class="mb-5">Pour homepage</h2>
             <form id="" action="" method="POST" enctype="multipart/form-data"> 
                 <!-- TITLE -->
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="title_thumbnail"><b>Nom du projet</b></span>
+                    <span class="input-group-text" id="title_thumbnail"><b>Titre du projet</b></span>
                     <input type="text" class="form-control" id="title_thumbnail" name="title_thumbnail" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                 </div>
-                <br><br><!-- CATEGORY -->
-                <select class="form-select" id="category" name="category" aria-label="Default select example">
+                <br>
+                <!-- CATEGORY -->
+                <select class="form-select mb-3" id="category" name="category" aria-label="Default select example">
                     <option selected>Catégorie</option>
                     <option value="animation">Animation</option>
                     <option value="liveaction">Live Action</option>
                   </select>
                 <div>
-                <br><br>
+                <br>
                 <!-- IMAGE --> 
                 <div class="input-group mb-3">
                     <label class="input-group-text" for="img_thumbnail"><b>Image</b></label>
                     <input type="file" class="form-control" size="50" id="img_thumbnail" name="img_thumbnail">
                     <br>
                 </div>   
-                <br><br>
+                <br>
                 <!-- VIDEO --> 
                 <div class="input-group mb-3">
                     <label class="input-group-text" for="vid_thumbnail"><b>Vidéo</b></label>
@@ -35,7 +37,6 @@
                     <input type="submit" class="btn btn-primary"  value="Send">
                 </div>
             </form>
-
         </div>
         <%- include('partials/footer_backoff.ejs') %>
     </body>
