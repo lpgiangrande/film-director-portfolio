@@ -83,3 +83,12 @@ footer i:hover{
     transition-duration: 1s;
 }
 */
+
+.btn{
+    background-color : rgba(86, 140, 207, 0.851);
+    color: white;
+    font-weight: bold;
+}
+.btn:hover{
+    color: white;
+}
