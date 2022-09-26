@@ -2,34 +2,33 @@
 <br><br><br><br>
         <!-- form multiple avec multer -->
         <div class="container">
-            <form action="/addThumbnail" method="POST" enctype="multipart/form-data"> 
+            <form id="" action="" method="POST" enctype="multipart/form-data"> 
                 <!-- TITLE -->
-                <div>
-                    <label for="title_thumbnail"><h3>titre : </h3></label>
-                    <br><br>
-                    <input type="text" size="50" id="title_thumbnail" name="title_thumbnail"><br>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="title_thumbnail"><b>Nom du projet</b></span>
+                    <input type="text" class="form-control" id="title_thumbnail" name="title_thumbnail" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                 </div>
                 <br><br><!-- CATEGORY -->
+                <select class="form-select" id="category" name="category" aria-label="Default select example">
+                    <option selected>Catégorie</option>
+                    <option value="animation">Animation</option>
+                    <option value="liveaction">Live Action</option>
+                  </select>
                 <div>
-                    <label for="category"><h3>Catégorie :</h3></label>
+                <br><br>
+                <!-- IMAGE --> 
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="img_thumbnail"><b>Image</b></label>
+                    <input type="file" class="form-control" size="50" id="img_thumbnail" name="img_thumbnail">
                     <br>
-                    <select>
-                        <option value="1">Animation</option>
-                        <option value="2">Liveaction</option>
-                    </select>
-                </div>
-                <br><br><!-- IMAGE --> 
-                <div>
-                    <label for="img_thumbnail"><h3>Image : </h3></label>
-                    <br><br>
-                    <input type="file" size="50" id="img_thumbnail" name="img_thumbnail"><br>
                 </div>   
-                <br><br><!-- VIDEO --> 
-                <div>
-                    <label for="vid_thumbnail"><h3>Video : </h3></label>
-                    <br><br>
-                    <input type="file" size="50" id="vid_thumbnail" name="vid_thumbnail"><br>
-                </div>    
+                <br><br>
+                <!-- VIDEO --> 
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="vid_thumbnail"><b>Vidéo</b></label>
+                    <input type="file" class="form-control" size="50" id="vid_thumbnail" name="vid_thumbnail">
+                    <br>
+                </div> 
                 <br><br><br>
                 <!-- SEND -->
                 <div class="d-grid gap-2">
