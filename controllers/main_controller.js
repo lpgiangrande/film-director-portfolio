@@ -8,6 +8,7 @@ exports.homePage = (req, res) => {
     })   
 };
 
+// Order thumbnails by category for the Animation page
 exports.animationPage = (req, res) => {
     const query = Thumbnail.find({ 'category': 'animation' })
     query.exec(function(err, thumbnails){
@@ -17,6 +18,7 @@ exports.animationPage = (req, res) => {
     })     
 };
 
+// Order thumbnails by category for the Liveaction page
 exports.liveActionPage = (req, res) => {
     const query = Thumbnail.find({ 'category': 'live action' })
     query.exec(function(err, thumbnails){
@@ -30,6 +32,8 @@ exports.aboutPage = (req, res) => {
     res.render('about')
 };
 
+/* From the clic on one thumbnail from the Hompage | Animation page 
+| live Action page to the project's details page */
 exports.projectFromHomePage = (req, res) => {
     Thumbnail.findById(req.params.id)
     .exec()

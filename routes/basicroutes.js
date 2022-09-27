@@ -2,7 +2,6 @@
 
 const express = require("express");
 const router = express.Router();
-const ejs = require('ejs');
 const mainController = require('../controllers/main_controller');
 
 
@@ -14,6 +13,7 @@ router.get('/animation/', mainController.animationPage);
 
 // PAGE 3 LIVE ACTION : only display thumbnails with category: live action
 router.get('/liveaction/', mainController.liveActionPage);
+
 // PAGE 4 ABOUT
 router.get('/about', mainController.aboutPage);
 

@@ -1,10 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const ejs = require('ejs');
-const mongoose = require("mongoose");
-const thumbnailsSchema = require('../models/modelsThumbnails');
-const destImg = 'public/thumbnails/';
-const destVidg = 'public/videos-homepage/';
+const backofficeController = require('../controllers/backoffice_controller');
+
 // Multer - Uploads
 const multer  = require('multer');
 
@@ -27,49 +24,33 @@ const storage = multer.diskStorage({
   const upload = multer({ storage: storage })
 
 
-// Sign In page to backoffice
+// GET to Log In page 
 router.get('/admin', (req, res) => {
     res.render('auth');
 })
-// Add thumbnail
+// GET to Add thumbnail page (thumbnails image/video seen on Homepage)
 router.get('/admin/uploadThumbnail', (req, res) => {
     res.render('uploadThumbnail');
 })
-// Add project
+// GET to Add project page (where the form to fill in the template for one projet is)
 router.get('/admin/uploadProject', (req, res) => {
     res.render('uploadProject');
 })
-// Add thumbnail
+// GET to the Log Out page
 router.get('/admin/logoff', (req, res) => {
     res.render('logoff');
 })
 
-//router.post('')
-
-
-//routeur.post("/livres", upload.single("image"), livreController.addBook);
+/* POST route for uploading data to the database (homepage - thumbnails) */
 router.post('/admin/uploadThumbnail', 
     upload.fields([{
         name: 'img_thumbnail', maxCount: 1
     }, {
         name: 'vid_thumbnail', maxCount: 1
     }
-]),(req, res) => {
-    const thumbnail = new thumbnailsSchema({
-        _id: new mongoose.Types.ObjectId(),
-        title : req.body.title_thumbnail,
-        category : req.body.category,
-        imgSrc : req.files.img_thumbnail[0].path,
-        videoSrc : req.files.vid_thumbnail[0].path
-    });
-    thumbnail.save()
-    .then(result => {
-        console.log(result);
-        res.redirect('/admin');
-    })
-    .catch(error => {
-        console.log(error);
-    })
-})
+]), backofficeController.addThumbnail);
+
+
+// POST route for uploading data to the database for the Project page
 
 module.exports = router;
