@@ -38,11 +38,6 @@ app.use('/', basicroutes)
 
 
 
-/* FORM UPLOAD */
-
-
-
- 
 /*app.listen(4000, function(){
     console.log('server is running')
 })*/
