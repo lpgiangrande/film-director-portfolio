@@ -5,32 +5,20 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const morgan = require("morgan");
 
-//const Project = require('./models/modelsProject')
-
 // DB
 const mongoose = require('mongoose');
 const dbConnect = require('./dbConnect');
-// Uploads
-const multer  = require('multer');
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      if (file.mimetype === 'image/jpeg') {
-        cb(null, 'public/thumbnails')
-      } else if (file.mimetype === 'video/mp4') {
-        cb(null, 'public/videos-homepage')
-      } else {
-        console.log(file.mimetype)
-        cb({ error: 'Mime type not supported' })
-      }
-    }
-  })
   
-const upload = multer({ storage: storage })
+// body parser pour traiter les URL et infos postées (form)
+app.use(bodyParser.urlencoded({extended:true}));
+// parse application/json
+app.use(bodyParser.json())
 
 // Routes
 const basicroutes = require('./routes/basicroutes.js')
 const hiddenroutes = require('./routes/hiddenroutes.js')
 
+// app.use(express.json());
 
 app.use(morgan("dev"));
 
@@ -43,11 +31,6 @@ app.use('/public', express.static(path.join(__dirname, 'public')))
 /* PORT */
 const PORT = process.env.PORT || 4000 // FOR DEV. IN PROD ?
 
-// ?
-app.use(bodyParser.urlencoded({extended:false}));
- 
-// ? 
-app.use(express.json());
 
 /* ROUTES */
 app.use('/', hiddenroutes)
