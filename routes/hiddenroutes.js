@@ -63,8 +63,8 @@ router.post('/admin/uploadThumbnail',
         videoSrc : req.files.vid_thumbnail[0].path
     });
     thumbnail.save()
-    .then(res => {
-        console.log(res);
+    .then(result => {
+        console.log(result);
         res.redirect('/admin');
     })
     .catch(error => {
