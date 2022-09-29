@@ -5,6 +5,8 @@
 }
 body {
     background-color : black;
+    position: relative;
+    height: 100vh;
 }
 h1, h2, h3, p, span{
     color: white;
@@ -84,11 +86,16 @@ footer i:hover{
 }
 */
 
-.btn{
-    background-color : rgba(86, 140, 207, 0.851);
-    color: white;
-    font-weight: bold;
+/* AUTH PAGE */
+
+#auth-form{
+    min-width: 600px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    
+
 }
-.btn:hover{
-    color: white;
-}
+  
+
