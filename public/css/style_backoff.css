@@ -87,15 +87,17 @@ footer i:hover{
 */
 
 /* AUTH PAGE */
-
 #auth-form{
     min-width: 600px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    
+}
+
+/* UPLOADTHUMBNAIL PAGE */
+#uploadFormThumb{
+    width: 60%;
+    margin-top: 100px;
 
 }
-  
-
