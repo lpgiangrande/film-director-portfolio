@@ -34,7 +34,7 @@ exports.aboutPage = (req, res) => {
 
 /* From the clic on one thumbnail from the Hompage | Animation page 
 | live Action page to the project's details page */
-exports.projectFromHomePage = (req, res) => {
+exports.seeFullProject = (req, res) => {
     Thumbnail.findById(req.params.id)
     .exec()
     .then(thumbnails => {

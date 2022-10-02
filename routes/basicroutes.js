@@ -18,7 +18,7 @@ router.get('/liveaction/', mainController.liveActionPage);
 router.get('/about', mainController.aboutPage);
 
 // Display project details when you clic on a homepage thumbnail
-router.get('/:id', mainController.projectFromHomePage);
+router.get('/:id', mainController.seeFullProject);
 
 
 module.exports = router;
