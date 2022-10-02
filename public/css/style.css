@@ -14,10 +14,10 @@ h1, h2, h3, p, span{
 h1, h2, h3 {
     text-transform: uppercase;
 }
-h1{
+nav h1{
     font-size: 1.2vw;
 }
-h2{
+nav h2{
     font-weight: 400;
     font-size: 1vw;
 }
