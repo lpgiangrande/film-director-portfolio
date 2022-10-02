@@ -1,17 +1,164 @@
     <%- include('partials/header_backoff.ejs') %>
         <main>
-            <div class="container mt-5 text-white">
-                <h1 style="color : red"><strong>EN CONSTRUCTION</strong></h1>
-                <br><br>
+            <div class="container mt-5 d-flex justify-content-center align-items-center">
 
-                <div>
-                    <h1><strong>Ajouter un nouveau projet</strong></h1>
-                </div>
+                <!-- FORM - MULTER-->
+                <form id="uploadFormProject" action="" method="POST" enctype="multipart/form-data"> 
 
-                <br><br>
-
-
+                    <h2 class="mb-4">Infos principales</h2>
+                    <!-- CATEGORY -->
+                    <select class="form-select mb-3" id="category" name="category" aria-label="Default select example" required>
+                        <option selected>Catégorie :</option>
+                        <option value="animation">Animation</option>
+                        <option value="liveaction">Live Action</option>
+                    </select>
+                    <div>
+                    <br>
+                    <!-- MAIN VIDEO --> 
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="main_video"><b>Main video (full width)</b></label>
+                        <input 
+                            type="file" 
+                            accept="video/*" 
+                            class="form-control" 
+                            id="main_video" 
+                            name="main_video"
+                            required>
+                    </div> 
+                    <br>
+                    <!-- TITRE PROJET --> 
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="project_title"><b>Project Name</b></label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="project_title" 
+                            name="project_title"
+                            required>
+                    </div> 
+                    <br>
+                    <!-- DIRECTOR -->
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="director_name"><b>Director</b></span>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="director" 
+                            name="director" 
+                            aria-label="Sizing example input" 
+                            aria-describedby="inputGroup-sizing-default"
+                            required>
+                    </div>
+                    <br>      
+                    <!-- OTHER CONTRIBUTORS -->
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="other_contributors_"><b>Other contributors (optional)</b></span>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="other_contributors" 
+                            name="other_contributors" 
+                            aria-label="Sizing example input" 
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <br>  
+                    <!-- PRODUCTOR -->
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="productor_"><b>Productor (optional)</b></span>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="productor" 
+                            name="productor" 
+                            aria-label="Sizing example input" 
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <br>
+                    <hr>
+                    <br>
+                    <!-- VISUALS ARRAY, 1 | multiple uploads --> 
+                    <h2 class="mb-4">Visuels & decription</h2>
+                    <br>
+                    <h3 class="mb-3">Groupe de visuels n°1</h3>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="visuals_array_1"><b>Upload multiple (images et/ou vidéos)</b></label>
+                        <input 
+                            type="file" 
+                            accept="image/*, video/*" 
+                            class="form-control" 
+                            id="visuals_array_1" 
+                            name="visuals_array_1" 
+                            multiple required>
+                        <br>
+                    </div> 
+                    <br>
+                    <!--DESCRIPTION VISUALS ARRAY 1-->
+                    <div class="input-group mb-3">
+                        <label class="text-white" for="visuals_array_1_description"><b>Description - visuels n°1</b></label>
+                        <textarea name="visuals_array_1_description"  id="visuals_array_1_description"  cols="100" rows="5"></textarea>
+                    </div>
+                    <br>
+                    <!-- VISUALS ARRAY, 2 | multiple uploads --> 
+                    <h3 class="mb-3">Groupe de visuels n°2 (optionnel)</h3>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="visuals_array_2"><b>Upload multiple (images et/ou vidéos)</b></label>
+                        <input 
+                            type="file" 
+                            accept="image/*, video/*" 
+                            class="form-control" 
+                            id="visuals_array_2" 
+                            name="visuals_array_2" 
+                            multiple>
+                        <br>
+                    </div> 
+                    <br>
+                    <!--DESCRIPTION VISUALS ARRAY 2-->
+                    <div class="input-group mb-3">
+                        <label class="text-white" for="visuals_array_2_description"><b>Description - visuels n°2</b></label>
+                        <textarea name="visuals_array_2_description"  id="visuals_array_2_description"  cols="100" rows="5"></textarea>
+                    </div>
+                    <br>    
+                    <!-- VISUALS ARRAY, 3 | multiple uploads --> 
+                    <h3 class="mb-3">Groupe de visuels n°3 (optionnel)</h3>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="visuals_array_3"><b>Upload multiple (images et/ou vidéos)</b></label>
+                        <input 
+                            type="file" 
+                            accept="image/*, video/*" 
+                            class="form-control" 
+                            id="visuals_array_3" 
+                            name="visuals_array_3" 
+                            multiple>
+                        <br>
+                    </div> 
+                    <br>
+                    <!--DESCRIPTION VISUALS ARRAY 3-->
+                    <div class="input-group mb-3">
+                        <label class="text-white" for="visuals_array_3_description"><b>Description - visuels n°3</b></label>
+                        <textarea name="visuals_array_3_description"  id="visuals_array_3_description"  cols="100" rows="5"></textarea>
+                    </div>
+                    <br> 
+                    <hr/>
+                    <br> 
+                    <!-- SECONDARY VIDEO --> 
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="secondary_video"><b>Secondary video (full width, optional)</b></label>
+                        <input type="file" accept="video/*" class="form-control" id="secondary_video" name="secondary_video">
+                        <br>
+                    </div> 
+                    <br>
+                    <!-- SECONDARY VIDEO DESCRIPTION-->
+                    <div class="input-group mb-3">
+                        <label class="text-white" for="secondary_video_description"><b>Description video</b></label>
+                        <textarea name="secondary_video_description"  id="secondary_video_description"  cols="100" rows="5"></textarea>
+                    </div>
+                    <br>
+                    <!-- SEND -->
+                    <div class="d-flex justify-content-center align-items-center">
+                        <input type="submit" class="btn btn-outline-light btn-lg"  value="Send">
+                    </div>
+                </form>
+            </div>
         </main>
-        <%- include('partials/footer_backoff.ejs') %>
     </body>
 </html>
