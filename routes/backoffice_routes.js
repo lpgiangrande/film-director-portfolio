@@ -51,6 +51,5 @@ router.post('/admin/uploadThumbnail',
 ]), backofficeController.addThumbnail);
 
 
-// POST route for uploading data to the database for the Project page
 
 module.exports = router;
