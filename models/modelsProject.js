@@ -60,6 +60,15 @@ const projectSchema = mongoose.Schema({
     },
     secondary_video_description: {
         type: String,
+    },
+    visuals_array_4: [
+        {
+            type: String
+        },
+        /*{ _id: false }*/
+    ],
+    visuals_array_4_description:{
+        type: String,
     }
 })
 
