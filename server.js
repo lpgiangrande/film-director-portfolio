@@ -16,7 +16,8 @@ app.use(bodyParser.json())
 
 // Routes
 const basicroutes = require('./routes/basicroutes.js')
-const hiddenroutes = require('./routes/hiddenroutes.js')
+const backoffice_routes = require('./routes/backoffice_routes.js')
+const backoffice_routes2 = require('./routes/backoffice_routes_2.js')
 
 // app.use(express.json());
 
@@ -33,7 +34,7 @@ const PORT = process.env.PORT || 4000 // FOR DEV. IN PROD ?
 
 
 /* ROUTES */
-app.use('/', hiddenroutes)
+app.use('/', backoffice_routes)
 app.use('/', basicroutes)
 
 
