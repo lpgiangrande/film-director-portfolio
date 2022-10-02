@@ -55,6 +55,10 @@ ul {
 hr{
     border: solid 2px white;
 }
+.section-reference{
+    width: 300px;
+    height:auto;
+}
 
 
 /* FOOTER */

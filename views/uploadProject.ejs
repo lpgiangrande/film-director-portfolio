@@ -5,18 +5,18 @@
                 <!-- FORM - MULTER-->
                 <form id="uploadFormProject" action="" method="POST" enctype="multipart/form-data"> 
 
-                    <h2 class="mb-4">Infos principales</h2>
+                    <h2 class="mb-4">Section 1 | Vidéo principale & infos :</h2>
+                    <img class="section-reference" src="../public/img-divers/section1.png" alt="référence section 1">
                     <!-- CATEGORY -->
                     <select class="form-select mb-3" id="category" name="category" aria-label="Default select example" required>
                         <option selected>Catégorie :</option>
                         <option value="animation">Animation</option>
                         <option value="liveaction">Live Action</option>
                     </select>
-                    <div>
                     <br>
                     <!-- MAIN VIDEO --> 
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="main_video"><b>Main video (full width)</b></label>
+                        <label class="input-group-text" for="main_video"><b>Vidéo</b></label>
                         <input 
                             type="file" 
                             accept="video/*" 
@@ -77,7 +77,8 @@
                     <hr>
                     <br>
                     <!-- VISUALS ARRAY, 1 | multiple uploads --> 
-                    <h2 class="mb-4">Visuels & decription</h2>
+                    <h2 class="mb-4">Section 2 | Visuels & description</h2>
+                    <img class="section-reference" src="../public/img-divers/section2.png" alt="référence section 2">
                     <br>
                     <h3 class="mb-3">Groupe de visuels n°1</h3>
                     <div class="input-group mb-3">
@@ -141,6 +142,8 @@
                     <hr/>
                     <br> 
                     <!-- SECONDARY VIDEO --> 
+                    <h2 class="mb-4">Section 3 | Vidéo (full width) supplémentaire :</h2>
+                    <img class="section-reference" src="../public/img-divers/section3.png" alt="référence section 3">
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="secondary_video"><b>Secondary video (full width, optional)</b></label>
                         <input type="file" accept="video/*" class="form-control" id="secondary_video" name="secondary_video">
@@ -153,6 +156,28 @@
                         <textarea name="secondary_video_description"  id="secondary_video_description"  cols="100" rows="5"></textarea>
                     </div>
                     <br>
+                    <!-- VISUALS ARRAY, 4 | multiple uploads --> 
+                    <h3 class="mb-3">Groupe de visuels n°4 (optionnel)</h3>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="visuals_array_4"><b>Upload multiple (images et/ou vidéos)</b></label>
+                        <input 
+                            type="file" 
+                            accept="image/*, video/*" 
+                            class="form-control" 
+                            id="visuals_array_4" 
+                            name="visuals_array_4" 
+                            multiple>
+                        <br>
+                    </div> 
+                    <br>
+                    <!--DESCRIPTION VISUALS ARRAY 4-->
+                    <div class="input-group mb-3">
+                        <label class="text-white" for="visuals_array_4_description"><b>Description - visuels n°4</b></label>
+                        <textarea name="visuals_array_4_description"  id="visuals_array_4_description"  cols="100" rows="5"></textarea>
+                    </div>
+                    <br> 
+                    <hr/>
+                    <br> 
                     <!-- SEND -->
                     <div class="d-flex justify-content-center align-items-center">
                         <input type="submit" class="btn btn-outline-light btn-lg"  value="Send">
