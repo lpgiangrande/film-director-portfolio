@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const backofficeController = require('../controllers/backoffice_controller');
+const thumbnailsSchema = require('../models/modelsThumbnails');
 
 // Multer - Uploads
 const multer  = require('multer');

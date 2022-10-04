@@ -41,6 +41,7 @@ exports.seeFullProject = (req, res) => {
         res.render('project', {
             thumbnailsList: thumbnails
         })
+        // LIER AVEC LE PROJET CORRESPONDANT ?
     })
     .catch(error =>{
         console.log(error);

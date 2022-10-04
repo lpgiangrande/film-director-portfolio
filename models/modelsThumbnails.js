@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
-
+const { Schema } = mongoose;
+//const projectSchema = require('../models/modelsProject');
+//const Project = require('../models/modelsProject');
 
 // THUMBNAILS FOR HOMEPAGE
 
@@ -14,7 +16,7 @@ const thumbnailsSchema = mongoose.Schema({
     },
     category: {
         type: String,
-        required: true
+        required: trueq
     },
     imgSrc: {
         type: String,
@@ -23,8 +25,12 @@ const thumbnailsSchema = mongoose.Schema({
     videoSrc: {
         type : String,
         required: true
-    }
+    },
+    //lier Thumbnail:id à project:id ?
+    project: [{ type: Schema.Types.ObjectId, ref: 'Project' }]
+    //The ref option is what tells Mongoose which model to use during population
 })
+//thumbnail.find({}).populate('project').exec();
 
 module.exports = mongoose.model('Thumbnail', thumbnailsSchema);
 
