@@ -16,7 +16,7 @@ const thumbnailsSchema = mongoose.Schema({
     },
     category: {
         type: String,
-        required: trueq
+        required: true
     },
     imgSrc: {
         type: String,
