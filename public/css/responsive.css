@@ -34,7 +34,7 @@
     /* MAIN */
 
     /* no title effect on mobile*/
-    h3{
+    h3.thumbnail_title{
         opacity: 1;
     }
     /* ABOUT */
@@ -43,9 +43,9 @@
     }
     .about-wrapper{
         width: 60vw;
-      }
-    
+    }
 }
+
 
 /* Smartphones (portrait and landscape)*/
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) 
@@ -76,7 +76,7 @@
     /* MAIN */
 
     /* no title effect on mobile*/
-    h3{
+    h3.thumbnail_title{
         opacity: 1;
     }
     /* ABOUT */
