@@ -26,24 +26,24 @@ const storage = multer.diskStorage({
 
 
 // GET to Log In page 
-router.get('/admin', (req, res) => {
+router.get('/', (req, res) => { // '/admin 
     res.render('auth');
 })
 // GET to Add thumbnail page (thumbnails image/video seen on Homepage)
-router.get('/admin/uploadThumbnail', (req, res) => {
+router.get('/uploadThumbnail', (req, res) => {
     res.render('uploadThumbnail');
 })
 // GET to Add project page (where the form to fill in the template for one projet is)
-router.get('/admin/uploadProject', (req, res) => {
+router.get('/uploadProject', (req, res) => {
     res.render('uploadProject');
 })
 // GET to the Log Out page
-router.get('/admin/logoff', (req, res) => {
+router.get('/logoff', (req, res) => {
     res.render('logoff');
 })
 
 /* POST route for uploading data to the database (homepage - thumbnails) */
-router.post('/admin/uploadThumbnail', 
+router.post('/uploadThumbnail', 
     upload.fields([{
         name: 'img_thumbnail', maxCount: 1
     }, {

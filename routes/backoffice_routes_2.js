@@ -10,6 +10,8 @@ const thumbnailsSchema = require('../models/modelsThumbnails');
 const multer  = require('multer');
 
 // CREER UN DOSSIER POUR CHAQUE PROJER DANS /UPLOADS?
+/*
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       if (file.mimetype === 'image/jpeg' || file.mimetype === 'video/mp4') {
@@ -26,6 +28,8 @@ const storage = multer.diskStorage({
 
   const upload = multer({ storage: storage })
 
+  */
+
 // POST route for uploading data to the database for the Project page
 /*router.post('/admin/uploadProject', 
     upload.fields([{
@@ -34,3 +38,5 @@ const storage = multer.diskStorage({
         name: 'vid_thumbnail', maxCount: 1
     }
 ]), backofficeController.addProject);*/
+
+module.exports = router;
