@@ -7,6 +7,7 @@ const fs = require("fs");
 exports.addThumbnail = (req, res) => {
     const thumbnail = new thumbnailsSchema({
         _id: new mongoose.Types.ObjectId(),
+        releaseDate : req.body.release_date,
         title : req.body.title_thumbnail,
         category : req.body.category,
         imgSrc : req.files.img_thumbnail[0].path,

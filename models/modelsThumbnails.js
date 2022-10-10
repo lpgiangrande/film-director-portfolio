@@ -7,6 +7,10 @@ const { Schema } = mongoose;
 
 const thumbnailsSchema = mongoose.Schema({
     _id : mongoose.Schema.Types.ObjectId,
+    releaseDate: {
+        type: Date,
+        required: true
+    },
     title: {
         type: String,
         required: true
