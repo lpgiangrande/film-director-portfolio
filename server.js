@@ -4,9 +4,10 @@ const ejs = require('ejs');
 const path = require('path');
 //const bodyParser = require('body-parser');
 const morgan = require("morgan");
+const mongoose = require('mongoose');
 
 // DB
-const mongoose = require('mongoose');
+const dotenv = require('dotenv').config();
 const dbConnect = require('./dbConnect');
 
 // for posted infos to server via forms, ... 
@@ -32,10 +33,9 @@ const backoffice_routes = require('./routes/backoffice_routes.js')
 const backoffice_routes2 = require('./routes/backoffice_routes_2.js')
 
 
-//app.use('/admin', backoffice_routes2)
+app.use('/admin/', backoffice_routes2)
 app.use('/admin', backoffice_routes)
 app.use('/', basicroutes)
-
 
 // PORT
 const PORT = process.env.PORT || 4000 // FOR DEV. IN PROD ?
