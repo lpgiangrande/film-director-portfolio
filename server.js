@@ -26,6 +26,20 @@ app.set('view engine', 'ejs')
 // GET PUBLIC FILES 
 app.use('/public', express.static(path.join(__dirname, 'public')))
 
+//Session - messages de validation
+const session = require('express-session');
+app.use(session({
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: true,
+  cookie: { maxAge: 60000 }
+}));
+
+app.use((req, res, next) =>{
+  res.locals.message = req.session.message;
+  delete req.session.message; // une fois le transfert de la req dans la res, on peut supprimer cette variable
+  next();
+})
 
 // Routes
 const basicroutes = require('./routes/basicroutes.js')
@@ -38,7 +52,7 @@ app.use('/admin', backoffice_routes)
 app.use('/', basicroutes)
 
 // PORT
-const PORT = process.env.PORT || 4000 // FOR DEV. IN PROD ?
+const PORT = process.env.PORT || 4000 
 
 /*app.listen(4000, function(){
     console.log('server is running')
