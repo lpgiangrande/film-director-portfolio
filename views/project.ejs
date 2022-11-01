@@ -2,40 +2,51 @@
 
 <br><br>
 
-<div class="container">
-    <main>
-
-        <p>test : affiche 1 donnée du projet lié à l'id du thumbnail associé :</p>
-        
-        <!-- SECTION 1
+<div class="container d-flex justify-content-center">
+    <main>        
+        <!-- SECTION 1-->
         <section id="section-1">
-            <p class="text-center">HERE insert video:id from DB</p>
-            <div id="animation-video">
-                <video src=""></video>
+            <div class="d-flex justify-content-center">
+                <video class="db-video img-fluid" controls src="<%= project.main_video%>" type="video/mp4"></video>
             </div>
             <div>
-                <p class="text-center">Insert TITLE from DB</p>
-                <p class="text-center">Insert SUB-TITLE1 from DB</p>
-                <p class="text-center">Insert SUB-TITLE2 from DB</p>
-                <p class="text-center">Insert SUB-TITLE3 from DB</p>
+                <p class="text-center title_uppercase"><%= project.project_title %></p>
+                <p class="text-center"><%= project.director %></p>
+                <p class="text-center"><%= project.other_contributors %></p>
+                <p class="text-center"><%= project.productor %></p>
             </div>
         </section>
 
-        <br><br><br><br>-->
+        <br><br><br><br>
 
-        <!-- SECTION 2
+        <!--2e Video-->
+        <div class="d-flex justify-content-center">
+            <video class="db-video img-fluid" controls src="<%= project.secondary_video%>" type="video/mp4"></video>
+        </div>
+        <!-- SECTION 2-->
         <section id="section-2">
-            <div class="row">
-                <div class="col-md-6"><p class="text-center">Insert IMG1 from DB</p></div>
-                <div class="col-md-6"><p class="text-center">Insert IMG2 from DB</p></div>
+            <div class="row  d-flex">
+                <div class="col-6 db-img"><img class="img-fluid" src="<%= project.visuals_array[1] %>"></div>
+                <div class="col-6 db-img"><img class="img-fluid" src="<%= project.visuals_array[2] %>"></div>
             </div>
+            <br>
             <div class="row">
-                <div class="col"><p class="text-center">Insert DESCRIPTION from DB</p></div>
+                <div class="col"><p class="text-center"><%= project.visuals_description_1 %> </p></div>
             </div>
          </section>
 
-        <br><br><br>-->
-
+        <br><br>
+        <section id="section-2">
+            <div class="row  d-flex">
+                <div class="col-4 db-img"><img class="img-fluid" src="<%= project.visuals_array[1] %>"></div>
+                <div class="col-4 db-img"><img class="img-fluid" src="<%= project.visuals_array[2] %>"></div>
+                <div class="col-4 db-img"><img class="img-fluid" src="<%= project.visuals_array[3] %>"></div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col"><p class="text-center"><%= project.visuals_description_1 %> </p></div>
+            </div>
+         </section>
         <!--
         <div class="row">
             <div class="col-md-4"><p class="text-center">Insert IMG3 from DB</p></div>

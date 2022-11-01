@@ -19,10 +19,10 @@ h1, h2, h3, p, span{
     align-items: center;
     letter-spacing: 1.5px; 
 }
-nav li:nth-child(-n+3){
+nav li:nth-child(-n+4){
     text-transform: uppercase;
 }
-nav li:nth-child(4){
+nav li:nth-child(5){
     text-transform: capitalize;
 }
 nav li a{
@@ -96,4 +96,10 @@ footer i:hover{
     width: 60%;
     margin-top: 100px;
 
+}
+
+
+/* form validation message */
+.validation-message{
+    visibility: hidden;
 }
