@@ -4,6 +4,8 @@ const express = require("express");
 const router = express.Router();
 const mainController = require('../controllers/main_controller');
 
+// Display project details when you clic on a homepage thumbnail
+router.get('/:id', mainController.seeFullProject);
 
 // HOME PAGE
 router.get('/', mainController.homePage);
@@ -16,9 +18,6 @@ router.get('/liveaction/', mainController.liveActionPage);
 
 // PAGE 4 ABOUT
 router.get('/about', mainController.aboutPage);
-
-// Display project details when you clic on a homepage thumbnail
-router.get('/:id', mainController.seeFullProject);
 
 
 module.exports = router;
