@@ -1,0 +1,27 @@
+<%- include('partials/header_backoff.ejs') %>
+
+<div class="container">
+
+    <h1>Liste projets</h1>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Project</th>
+                <th scope="col">Action</th>
+                <th scope="col">Action</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% projectsList.forEach(project => {%>
+            <tr>
+                <td scope="row"><%= project.project_title %></td>
+                <td><button type="button" class="btn btn-light"><a href="/<%= project._id %>" target="_blank">View</a></button></td>
+                <td><button type="button" class="btn btn-light">Update</button></td>
+                <td><button type="button" class="btn btn-light">Delete</button></td>
+            </tr>
+            <%})%>
+        </tbody>
+    </table>
+</div>
+
