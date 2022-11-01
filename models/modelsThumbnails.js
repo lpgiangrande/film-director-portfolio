@@ -1,19 +1,17 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose;
-//const projectSchema = require('../models/modelsProject');
-//const Project = require('../models/modelsProject');
+//const projectSchema = require('models/modelsProject');
+const Project = require('../models/modelsProject');
+
 
 // THUMBNAILS FOR HOMEPAGE
 
 const thumbnailsSchema = mongoose.Schema({
     _id : mongoose.Schema.Types.ObjectId,
-    releaseDate: {
-        type: Date,
-        required: true
-    },
     title: {
         type: String,
-        required: true
+        required: true//,
+        //project : {type: mongoose.Types.ObjectId, ref: "Project"}
     }, 
     altText: {
         type: String,
@@ -30,11 +28,22 @@ const thumbnailsSchema = mongoose.Schema({
         type : String,
         required: true
     },
-    //lier Thumbnail:id à project:id ?
-    project: [{ type: Schema.Types.ObjectId, ref: 'Project' }]
-    //The ref option is what tells Mongoose which model to use during population
+    releaseDate: {
+        type: Date,
+        required: true
+    },
+    // link with project 
+    project: {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "Project"
+    }
 })
-//thumbnail.find({}).populate('project').exec();
+
+/*thumbnailsSchema.virtual("thumbnails", {
+    ref : "Project",
+    localField : "_id",
+    foreignField : "project"
+})*/
 
 module.exports = mongoose.model('Thumbnail', thumbnailsSchema);
 
