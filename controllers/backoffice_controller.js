@@ -1,27 +1,31 @@
 const mongoose = require("mongoose");
 const thumbnailsSchema = require('../models/modelsThumbnails');
 const projectSchema = require('../models/modelsProject')
-const fs = require("fs");
 
 
-/*
- Multer notes :
+/**
+ * addProject from admin | upload
+ * @param {*} req  Iterate through req.files but on 2 differents fields before saving files path in mongodb | Create new instance of project | save it
+ * @param {*} res 
+ */
 
-    // req.files = array
-    // req.files['avatar'][0] -> File
-    // req.files['gallery'] -> Array
+exports.addProject = (req, res) => {
 
-    // upload.any(), backofficeController.addProject);
-    // upload.array('visuals_array_1', 3), backofficeController.addProject);
-    // upload.fields([{ name :'main_video', maxCount: 1 }]), backofficeController.addProject); ])
-*/
+    let vids = []; 
 
+    for(let i = 0; i < req.files.length; i++){ 
+        vids[i] = req.files[i].path; 
+        vids = vids.filter(vid => vid.endsWith('.mp4'))
+    } 
 
-/* 1er formulaire  */
-exports.addProject =  (req, res) => {
+    let  visuals = []; 
 
-    let array_files = req.files;
-    let visuals = array_files.map(a => a.path);
+    for(let j = 0; j < req.files.length; j++){ 
+
+        visuals[j] = req.files[j].path;
+        visuals = visuals.filter(visual => visual.endsWith('.jpg'))
+        
+    }
 
     const project = new projectSchema({
 
@@ -32,19 +36,19 @@ exports.addProject =  (req, res) => {
         director : req.body.director,
         other_contributors : req.body.other_contributors,
         productor : req.body.productor,
-        main_video : req.files.main_video[0].path, 
-        secondary_video : req.files.secondary_video[0].path,
-        //secondary_video_description: req.body.secondary_video_description
-        
-        visuals_array : visuals,
-        visuals_description_1 : req.body.visuals_description_1,
-        visuals_description_2 : req.body.visuals_description_2,
-        visuals_description_3 : req.body.visuals_description_3,
-        visuals_description_4 : req.body.visuals_description_4        
-    })
+        array_vids : vids, // voir remplacer par champs txt lien vimeo
 
-    console.log(project);
+        video_description: req.body.secondary_video_description,
+        
+        gallery : visuals,
+        gallery_row_1_description : req.body.description_1,
+        gallery_row_2_description : req.body.description_2,
+        gallery_row_3_description : req.body.description_3,
+        gallery_row_4_description : req.body.description_4     
+
+    })
     project.save()
+
     .then(result => {
         console.log(result);
         console.log(req.body.thumbnail);
@@ -55,17 +59,26 @@ exports.addProject =  (req, res) => {
 }
 
 
-// Send the data from the uploaded thumbnail from the backoffice form
+/**
+ * addThumbnail from admin | upload
+ * @param {*} req 
+ * @param {*} res 
+ */
+
 exports.addThumbnail = (req, res) => {
+    
     const thumbnail = new thumbnailsSchema({
+
         _id: new mongoose.Types.ObjectId(),
-        releaseDate : req.body.release_date,
         title : req.body.title_thumbnail,
         category : req.body.category,
         imgSrc : req.files.img_thumbnail[0].path,
-        videoSrc : req.files.vid_thumbnail[0].path
-    });
+        videoSrc : req.files.vid_thumbnail[0].path,
+        releaseDate : req.body.release_date
+
+    })
     thumbnail.save()
+
         .then(result => {
             console.log(result);
             res.redirect('/admin');
@@ -76,6 +89,21 @@ exports.addThumbnail = (req, res) => {
 }
 
 
+/**
+ * projectsList | render all projects into table
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.projectsList = (req, res) => {
+    projectSchema.find({}, function(err, projects) {
+            res.render('projects_list', {
+                projectsList: projects
+            })
+        })
+        .catch(error => {
+            console.log(error);
+        })
+}
 
 
 /*exports.seeProjectFromAdmin = (req, res) => {
@@ -90,15 +118,3 @@ exports.addThumbnail = (req, res) => {
             console.log(error)
         });
 }*/
-
-// Lister les projets | page "projects_list"
-exports.projectsList = (req, res) => {
-    projectSchema.find({}, function(err, projects) {
-            res.render('projects_list', {
-                projectsList: projects
-            })
-        })
-        .catch(error => {
-            console.log(error);
-        })
-}
