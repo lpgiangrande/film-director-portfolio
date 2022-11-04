@@ -14,6 +14,7 @@ exports.addProject = (req, res) => {
     let vids = []; 
 
     for(let i = 0; i < req.files.length; i++){ 
+
         vids[i] = req.files[i].path; 
         vids = vids.filter(vid => vid.endsWith('.mp4'))
     } 
@@ -36,7 +37,7 @@ exports.addProject = (req, res) => {
         director : req.body.director,
         other_contributors : req.body.other_contributors,
         productor : req.body.productor,
-        array_vids : vids, // voir remplacer par champs txt lien vimeo
+        array_vids : vids, 
 
         video_description: req.body.secondary_video_description,
         
