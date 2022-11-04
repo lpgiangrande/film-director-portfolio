@@ -1,10 +1,7 @@
 # PORTFOLIO WEBSITE 
 
-### BACKEND WITH NODE JS, EXPRESS JS, MONGODB & MONGOOSE
+### BACKEND WITH NODE JS, EXPRESS JS, MONGOOSE
 ### FRONTEND WITH  HTML, CSS, BOOSTRAP, EJS
-
-
-* more details & screenshots to come *  
 
 
 ## SITE PREVIEW (under construction)
@@ -13,7 +10,7 @@
 
 
 #### What I've learned
-* EJS (includes, ...)
+* EJS 
 * Deploy a node js app with heroku
 * 
 *
