@@ -1,8 +1,13 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose;
-const Thumbnail = require('../models/modelsThumbnails')
 
 // FULL PROJECT PAGE
+
+/**
+ * array_vids = Main videos (full width on the page)
+ * gallery = Gallery of visuals  | 1 to 4 rows of 3 images/videos
+ * gallery_row_n_description = text under each rows of visuals 
+ */
 
 const projectSchema = mongoose.Schema({
 
@@ -31,33 +36,32 @@ const projectSchema = mongoose.Schema({
     productor: {
         type: String,
     }, 
-    /* La vidéo d'entête qui s'affiche en grand */
-    main_video: {
-        type: String,
-        //required: true
+    array_vids: { 
+        type: [String],
+        required: true
     },
-    /* Possible 2e video en grand (à part de la gallerie de visuels) selon les projets */
-    secondary_video: {
-        type: String
-    },   
-    visuals_array: [String],
-
-    /* plusieurs champs textes de description, car les images vont être réparties sur plusieurs rows */
-    visuals_description_1: {
+    gallery: { 
+        type: [String],
+        required: true
+    },
+     gallery_row_1_description: {    
         type: String,
     },
-    visuals_description_2: {
+    gallery_row_2_description2: {
         type: String,
     },
-    visuals_description_3: {
+    gallery_row_3_description: {
         type: String,
     },
-    visuals_description_4: {
+    gallery_row_4_description: {
         type: String,
     }
 })
 
 module.exports = mongoose.model('Project', projectSchema);
+
+
+
 
 /*
 const mySchema = mongoose.Schema({

@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose;
-//const projectSchema = require('models/modelsProject');
 const Project = require('../models/modelsProject');
 
 
@@ -10,12 +9,8 @@ const thumbnailsSchema = mongoose.Schema({
     _id : mongoose.Schema.Types.ObjectId,
     title: {
         type: String,
-        required: true//,
-        //project : {type: mongoose.Types.ObjectId, ref: "Project"}
+        required: true
     }, 
-    altText: {
-        type: String,
-    },
     category: {
         type: String,
         required: true
@@ -39,13 +34,14 @@ const thumbnailsSchema = mongoose.Schema({
     }
 })
 
+module.exports = mongoose.model('Thumbnail', thumbnailsSchema);
+
+
 /*thumbnailsSchema.virtual("thumbnails", {
     ref : "Project",
     localField : "_id",
     foreignField : "project"
 })*/
-
-module.exports = mongoose.model('Thumbnail', thumbnailsSchema);
 
 
 
