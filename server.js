@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const ejs = require('ejs');
 const path = require('path');
-//const bodyParser = require('body-parser');
 const morgan = require("morgan");
 const mongoose = require('mongoose');
 
@@ -10,9 +9,9 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
 const dbConnect = require('./dbConnect');
 
-// for posted infos to server via forms, ... 
+// for posted data to server via forms : 
       /* bodyParser was added back to Express in release 4.16.0, 
-      That means you don't have to use bodyParser.
+      That means you don't have to use it.
       */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -54,13 +53,11 @@ app.use('/', basicroutes)
 // PORT
 const PORT = process.env.PORT || 4000 
 
-/*app.listen(4000, function(){
-    console.log('server is running')
-})*/
 app.listen(PORT, () => { 
     console.log(`server is running on ${PORT}`)
   })
+  
+
+
 // app listen loads the http module for you, creates a server and then starts it. no need for require http
-
-
 // src https://www.youtube.com/watch?v=yH593K9fYvE&ab_channel=MarinaKim

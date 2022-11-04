@@ -7,12 +7,10 @@ const backofficeController = require('../controllers/backoffice_controller');
 const thumbnailsSchema = require('../models/modelsThumbnails');
 const projectSchema = require('../models/modelsProject');
 
-// Multer - Uploads
+/* MULTER CONFIG - 2 */
 const multer  = require('multer');
 
-
 // CREER UN DOSSIER POUR CHAQUE PROJET UPLOADé serait mieux
-
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -32,38 +30,11 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-// POST route for uploading data to the database for the Project page - Part 1
-router.post('/uploadProject', 
-  
-    upload.any(), backofficeController.addProject);     
-    
-    
-/* Pareil avec upload fields
 
-router.post('/uploadProject', 
-  upload.fields([
-    { name: 'main_video', maxCount : 1},
-    { name: 'secondary_video', maxCount : 1},
-    { name: 'visuals_array', maxCount : 12} // 
-  ]), backofficeController.addProjectPartOne)
+// POST route for uploading text and files paths to the database for the Project page 
+router.post('/uploadProject', upload.any(), backofficeController.addProject);     
 
-  // array_files.map is not a function */
 
 module.exports = router;
 
 
-
-
-
-
-// POST route for uploading data to the database for the Project page - Part 2
-//router.post('/uploadProjectPartTwo', upload.any(), backofficeController.addProjectPartTwo);
-//router.post('/uploadProjectPartTwo', upload.array('visuals_array', 12), backofficeController.addProjectPartTwo);
-
-/*router.post('/uploadProjectPartTwo', 
-  
-    //UPLOAD.FIELDS : 
-
-    upload.fields([
-      { name: 'visuals_array', maxCount: 12 }
-    ]), backofficeController.addProjectPartTwo);   */
