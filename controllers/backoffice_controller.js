@@ -5,28 +5,50 @@ const projectSchema = require('../models/modelsProject')
 
 /**
  * addProject from admin | upload
- * @param {*} req  Iterate through req.files but on 2 differents fields before saving files path in mongodb | Create new instance of project | save it
+ * @param {*} req  
  * @param {*} res 
+ * Convert videos input content into an array or videos urls
+ * Map over req.files to get array of images
  */
+
+
+/* ONLY IF VIDS && IMG ARE UPLOADED FILES :
+
+
+let vids = []; 
+
+for(let i = 0; i < req.files.length; i++){ 
+
+    vids[i] = req.files[i].path; 
+    vids = vids.filter(vid => vid.endsWith('.mp4'))
+} 
+
+let  visuals = []; 
+
+for(let j = 0; j < req.files.length; j++){ 
+
+    visuals[j] = req.files[j].path;
+    visuals = visuals.filter(visual => visual.endsWith('.jpg'))
+    
+}
+
+*/
 
 exports.addProject = (req, res) => {
 
-    let vids = []; 
+    // vids array
+    let array_vids = [];
+    let contentFromInput = req.body.array_vids;
+    let splitContent = contentFromInput.split(',');
 
-    for(let i = 0; i < req.files.length; i++){ 
+    splitContent.forEach(function(vid){
+        array_vids.push(vid.trim());
+    });
+    
+    // imgs array
+    let array_files = req.files;
+    let visuals = array_files.map(visual => visual.path);
 
-        vids[i] = req.files[i].path; 
-        vids = vids.filter(vid => vid.endsWith('.mp4'))
-    } 
-
-    let  visuals = []; 
-
-    for(let j = 0; j < req.files.length; j++){ 
-
-        visuals[j] = req.files[j].path;
-        visuals = visuals.filter(visual => visual.endsWith('.jpg'))
-        
-    }
 
     const project = new projectSchema({
 
@@ -37,7 +59,7 @@ exports.addProject = (req, res) => {
         director : req.body.director,
         other_contributors : req.body.other_contributors,
         productor : req.body.productor,
-        array_vids : vids, 
+        array_vids : array_vids,
 
         video_description: req.body.secondary_video_description,
         
@@ -81,8 +103,9 @@ exports.addThumbnail = (req, res) => {
     thumbnail.save()
 
         .then(result => {
-            console.log(result);
-            res.redirect('/admin');
+            console.log("result = ",result);
+            res.redirect(301, '/admin/uploadProject');
+            // res.redirect(301, '/'); --> see result/homeapge
         })
         .catch(error => {
             console.log(error);
