@@ -17,10 +17,10 @@ const projectSchema = mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref : "Thumbnail",
         required : true
-    },
+    },/*
     category: {
         type: String,
-    },
+    },*/
     project_title: {
         type: String,
         required: true,
