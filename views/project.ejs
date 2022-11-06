@@ -5,10 +5,12 @@
 <div class="container d-flex justify-content-center">
     <main>        
         <!-- SECTION 1-->
-        <section id="section-1">
-            <div class="d-flex justify-content-center">
-                <video class="db-video img-fluid" controls src="<%= project.main_video%>" type="video/mp4"></video>
+        <section id="section-1" class="mb-4">
+            <!-- VID 1 -->
+            <div class="d-flex justify-content-center pb-4">
+                <iframe class="db-video img-fluid" width="1280" height="720" frameborder="0" allowfullscreen src="<%= project.array_vids[0]%>"></iframe>
             </div>
+            <!-- INFOS -->
             <div>
                 <p class="text-center title_uppercase"><%= project.project_title %></p>
                 <p class="text-center"><%= project.director %></p>
@@ -17,51 +19,44 @@
             </div>
         </section>
 
-        <br><br><br><br>
-
-        <!--2e Video-->
-        <div class="d-flex justify-content-center">
-            <video class="db-video img-fluid" controls src="<%= project.secondary_video%>" type="video/mp4"></video>
-        </div>
         <!-- SECTION 2-->
         <section id="section-2">
-            <div class="row  d-flex">
-                <div class="col-6 db-img"><img class="img-fluid" src="<%= project.visuals_array[1] %>"></div>
-                <div class="col-6 db-img"><img class="img-fluid" src="<%= project.visuals_array[2] %>"></div>
+            <div class="row d-flex">
+                <div class="col-6 db-img"><img class="img-fluid" src="<%= project.gallery[0] %>"></div>
+                <div class="col-6 db-img"><img class="img-fluid" src="<%= project.gallery[1] %>"></div>
             </div>
             <br>
+            <!-- TEXT -->
+            <div class="row mt-2 mb-4">
+                <div class="col"><p class="text-center"><%= project.gallery_row_1_description %> </p></div>
+            </div>
+            <!-- / TEXT -->
+            <div class="row d-flex">
+                <div class="col-4 db-img"><img class="img-fluid" src="<%= project.gallery[2] %>"></div>
+                <div class="col-4 db-img"><img class="img-fluid" src="<%= project.gallery[3] %>"></div>
+                <div class="col-4 db-img"><img class="img-fluid" src="<%= project.gallery[4] %>"></div>
+            </div>
+            <br>
+            <!-- TEXT -->
+            <div class="row mt-2 mb-4">
+                <div class="col"><p class="text-center"><%= project.gallery_row_2_description %> </p></div>
+            </div>
+            <!-- / TEXT -->
+            <div class="row d-flex">
+                <div class="col-4 db-img"><img class="img-fluid" src="<%= project.gallery[5] %>"></div>
+                <div class="col-4 db-img"><img class="img-fluid" src="<%= project.gallery[6] %>"></div>
+                <div class="col-4 db-img"><img class="img-fluid" src="<%= project.gallery[7] %>"></div>
+            </div>
             <div class="row">
-                <div class="col"><p class="text-center"><%= project.visuals_description_1 %> </p></div>
+                <div class="col"><p class="text-center"><%= project.gallery_row_3_description %> </p></div>
             </div>
          </section>
 
-        <br><br>
-        <section id="section-2">
-            <div class="row  d-flex">
-                <div class="col-4 db-img"><img class="img-fluid" src="<%= project.visuals_array[1] %>"></div>
-                <div class="col-4 db-img"><img class="img-fluid" src="<%= project.visuals_array[2] %>"></div>
-                <div class="col-4 db-img"><img class="img-fluid" src="<%= project.visuals_array[3] %>"></div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col"><p class="text-center"><%= project.visuals_description_1 %> </p></div>
-            </div>
-         </section>
-        <!--
-        <div class="row">
-            <div class="col-md-4"><p class="text-center">Insert IMG3 from DB</p></div>
-            <div class="col-md-4"><p class="text-center">Insert IMG4 from DB</p></div>
-            <div class="col-md-4"><p class="text-center">Insert IMG5 from DB</p></div>
+         
+        <!-- VID 2 - if exists -->
+        <div class="d-flex justify-content-center">
+            <iframe class="db-video img-fluid" width="1280" height="720"  src="<%= project.array_vids[1]%>"></iframe>
         </div>
-        <div class="row">
-            <div class="col"><p class="text-center">Insert DESCRIPTION2 from DB</p></div>
-        </div>
-        <br><br><br><br>
-
-        <div class="row">
-            <div class="col-md-6"><p class="text-center">Insert IMG6 from DB</p></div>
-            <div class="col-md-6"><p class="text-center">Insert IMG7 from DB</p></div>
-        </div>-->
     </main>
 </div>
 
