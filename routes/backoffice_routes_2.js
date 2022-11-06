@@ -16,9 +16,9 @@ const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       if (file.mimetype === 'image/jpeg') {
         cb(null, 'public/projects_images/')
-      } else if (file.mimetype === 'video/mp4'){
-        cb(null, 'public/projects_videos/')
-      } else {
+      } /* else if (file.mimetype === 'video/mp4'){
+        cb(null, 'public/projects_videos/') 
+      } */ else {
         console.log(file.mimetype)
         cb({ error: 'Mime type not supported' })
       }

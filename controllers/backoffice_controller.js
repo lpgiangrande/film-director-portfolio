@@ -114,21 +114,24 @@ exports.addThumbnail = (req, res) => {
 
 
 /**
- * projectsList | render all projects into table
+ * projectsList | render all thumbnails / projects into table
  * @param {*} req 
  * @param {*} res 
  */
-exports.projectsList = (req, res) => {
-    projectSchema.find({}, function(err, projects) {
-            res.render('projects_list', {
-                projectsList: projects
+exports.list = (req, res) => {
+    projectSchema.find({}, function(err, projects){
+        thumbnailsSchema.find({}, function(err,thumbnails) {
+            res.render('list', {
+                projectsList: projects,
+                thumbnailsList: thumbnails
             })
         })
-        .catch(error => {
-            console.log(error);
-        })
-}
+    })
+    .catch(error => {
+        console.log(error);
+    })
 
+}
 
 /*exports.seeProjectFromAdmin = (req, res) => {
     projectSchema.findOne({ "thumbnail": req.params.id })

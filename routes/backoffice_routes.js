@@ -12,9 +12,9 @@ const multer  = require('multer');
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       if (file.mimetype === 'image/jpeg') {
-        cb(null, 'public/thumbnails/')
+        cb(null, 'public/thumbnails_imgs/')
       } else if (file.mimetype === 'video/mp4') {
-        cb(null, 'public/videos-homepage/')
+        cb(null, 'public/thumbnails_vids/')
       } else {
         console.log(file.mimetype)
         cb({ error: 'Mime type not supported' })
@@ -36,8 +36,18 @@ router.get('/', (req, res) => { // '/admin
     res.render('auth');
 })
 
+
+// PUT - update thumbnails & projects
+
+
+
+
+
 // GET to projects list page
-router.get('/projects_list', backofficeController.projectsList);
+router.get('/list', backofficeController.list);
+// GET to projects list page
+
+
 
 // GET to Add thumbnail page (thumbnails image/video seen on Homepage)
 router.get('/uploadThumbnail', (req, res) => {
