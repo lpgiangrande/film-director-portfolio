@@ -36,11 +36,11 @@ const projectSchema = mongoose.Schema({
     productor: {
         type: String,
     }, 
-    array_vids: { 
+    array_vids: { // main vids, 1 or 2
         type: [String],
         required: true
-    },
-    gallery: { 
+    }, 
+    gallery: {  // img, sometimes vids
         type: [String],
         required: true
     },
