@@ -3,6 +3,32 @@ const Thumbnail = require('../models/modelsThumbnails');
 const projectSchema = require('../models/modelsProject');
 
 
+exports.homePage = (req, res) => {
+    Thumbnail.find({}, function(err, thumbnails){
+        res.render('index', {thumbnailsList: thumbnails })
+    })
+};
+
+// Order thumbnails by category for the Animation page
+exports.animationPage = (req, res) => {
+    const query = Thumbnail.find({ 'category': 'animation' })
+    query.exec(function(err, thumbnails){
+        res.render('animation', {
+            thumbnailsList: thumbnails
+        })
+    })     
+};
+
+// Order thumbnails by category for the Liveaction page
+exports.liveActionPage = (req, res) => {
+    const query = Thumbnail.find({ 'category': 'liveaction' })
+    query.exec(function(err, thumbnails){
+        res.render('liveaction', {
+            thumbnailsList: thumbnails
+        })
+    })      
+};
+
 /* From the clic on one thumbnail from the Homepage | Animation page 
 | live Action page to the project's details page */
 exports.seeFullProject = (req, res) => {
@@ -20,35 +46,6 @@ exports.seeFullProject = (req, res) => {
         });
 }
 
-
-exports.homePage = (req, res) => {
-    Thumbnail.find({}, function(err, thumbnails){
-        res.render('index', {thumbnailsList: thumbnails })
-    })
-};
-
-
-// Order thumbnails by category for the Animation page
-exports.animationPage = (req, res) => {
-    const query = Thumbnail.find({ 'category': 'animation' })
-    query.exec(function(err, thumbnails){
-        res.render('animation', {
-            thumbnailsList: thumbnails
-        })
-    })     
-};
-
-// Order thumbnails by category for the Liveaction page
-exports.liveActionPage = (req, res) => {
-    const query = Thumbnail.find({ 'category': 'live action' })
-    query.exec(function(err, thumbnails){
-        res.render('liveaction', {
-            thumbnailsList: thumbnails
-        })
-    })      
-};
-
 exports.aboutPage = (req, res) => {
     res.render('about')
 };
-
