@@ -9,15 +9,13 @@
                 <th scope="col">Thumbnail</th>
                 <th scope="col">Action</th>
                 <th scope="col">Action</th>
-                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
             <% thumbnailsList.forEach(thumbnail => {%>
             <tr>
                 <td scope="row"><%= thumbnail.title %></td>
-                <td><button type="button" class="btn btn-light"><a href="/<%= thumbnail._id %>" target="_blank">View</a></button></td>
-                <td><button type="button" class="btn btn-light">Update</button></td>
+                <td><button type="button" class="btn btn-light"><a href="/admin/updateThumbnail">Update</a></button></td>
                 <td><button type="button" class="btn btn-light">Delete</button></td>
             </tr>
             <%})%>
@@ -34,15 +32,13 @@
                 <th scope="col">Project</th>
                 <th scope="col">Action</th>
                 <th scope="col">Action</th>
-                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
             <% projectsList.forEach(project => {%>
             <tr>
                 <td scope="row"><%= project.project_title %></td>
-                <td><button type="button" class="btn btn-light"><a href="/<%= project._id %>" target="_blank">View</a></button></td>
-                <td><button type="button" class="btn btn-light">Update</button></td>
+                <td><button type="button" class="btn btn-light"><a href="/admin/updateProject">Update</a></button></td>
                 <td><button type="button" class="btn btn-light">Delete</button></td>
             </tr>
             <%})%>

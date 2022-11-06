@@ -1,0 +1,178 @@
+<%- include('partials/header_backoff.ejs') %>
+<main>
+
+    <!-- FORM 1 -->
+
+    <div class="container mt-5 d-flex justify-content-center align-items-center">
+        <form id="uploadFormProject1" action="/updateThumbnail" method="POST" enctype="multipart/form-data"> 
+
+            <h2 class="mb-4">Remplir données d'une page Projet</h2>
+
+            <!-- LINKED THUMBNAIL -->
+            <label class="text-white" for="linkedThumbnail">Thumbnail associé :</label>
+            <select class="form-select mb-3" id="linkedThumbnail" name="linkedThumbnail" aria-label="Default select example" required>
+                <% thumbnailsList.forEach(thumbnail => {%>
+                    <option value="<%= thumbnail._id %>"><%= thumbnail.title %></option>
+                    <%})%>
+            </select>
+            
+            <br><br>
+
+            <!-- CATEGORY -->
+            <p class="text-white">Catégorie:</p>
+            <select class="form-select mb-3" id="category" name="category" aria-label="Default select example" required>
+                <!--<option selected>Catégorie :</option>-->
+                <option value="animation">Animation</option>
+                <option value="liveaction">Live Action</option>
+            </select>
+            
+            <br><br>
+
+            <h2 class="mb-4">Section 1 | Entête projet</h2>
+            <img class="section-reference" src="../public/img-divers/section1.png" alt="référence section 1">
+            <!-- TITRE PROJET --> 
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="project_title"><b>Nom du projet</b></label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="project_title" 
+                    name="project_title"
+                    required
+                    > 
+            </div> 
+
+            <br>
+
+            <!-- DIRECTOR -->
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="director_name"><b>Directeur</b></span>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="director" 
+                    name="director" 
+                    aria-label="Sizing example input" 
+                    aria-describedby="inputGroup-sizing-default"
+                    value="Regis Raffin"
+                    required
+                    >
+            </div>
+
+            <br>      
+
+            <!-- OTHER CONTRIBUTORS -->
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="other_contributors_"><b>Autres contributeurs (optionnel)</b></span>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="other_contributors" 
+                    name="other_contributors" 
+                    aria-label="Sizing example input" 
+                    aria-describedby="inputGroup-sizing-default">
+            </div>
+
+            <br>  
+
+            <!-- PRODUCTOR -->
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="productor"><b>Producteur (optionnel)</b></span>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="productor" 
+                    name="productor" 
+                    aria-label="Sizing example input" 
+                    aria-describedby="inputGroup-sizing-default">
+            </div>
+
+            <!-- VIDEOS --> 
+            <p class="text-white">Vidéo principale + autre vidéo (optionnelle) à afficher en grand dans la page :</p>
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="array_vids"><b>Vidéos :</b></label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="array_vids" 
+                    name="array_vids"
+                   >
+            </div> 
+
+            <br>
+
+            <!-- VIDEO 2 DESCRIPTION-->
+            <div class="input-group mb-3">
+                <p>Texte sous 2e vidéo (optionnel)</p>
+                <label class="text-white" for="video_description"><b>Description</b></label>
+                <textarea name="video_description"  id="video_description"  cols="100" rows="5"></textarea>
+            </div>
+
+            <br>
+
+            <!-- GALLERY | multiple uploads --> 
+            <h2 class="mb-4">Section 2 | Galerie de visuels + textes :</h2>
+            <img class="section-reference" src="../public/img-divers/section2.png" alt="référence section 2">
+            <br>
+            <h3 class="mb-3">Fichiers</h3>
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="array_imgs"><b>Images :</b></label>
+                <input 
+                    type="file" 
+                    class="form-control" 
+                    accept="image/*"
+                    id="array_imgs" 
+                    name="array_imgs" 
+                    multiple required>
+                <br>
+            </div> 
+
+            <br>
+
+            <!-- DESCRIPTION VISUALS - 1 -->
+            <p class="text-white">Texte accompagnant 1er rang de visuels (optionnel) :</p>
+            <div class="input-group mb-3">
+                <label class="text-white" for="description_1"><b>row 1</b></label>
+                <textarea name="description_1"  id="description_1"  cols="100" rows="5"></textarea>
+            </div>
+            <br>
+            <!-- DESCRIPTION VISUALS - 2 -->
+            <p class="text-white">Texte accompagnant 2e rang de visuels (optionnel) : </p>
+            <div class="input-group mb-3">
+                <label class="text-white" for="description_2"><b>row 2</b></label>
+                <textarea name="description_2"  id="description_2"  cols="100" rows="5"></textarea>
+            </div>
+            <br>    
+            <!-- DESCRIPTION VISUALS - 3 -->
+            <p class="text-white">Texte accompagnant 3e rang de visuels (optionnel) : </p>
+            <div class="input-group mb-3">
+                <label class="text-white" for="description_3"><b>row 3</b></label>
+                <textarea name="description_3"  id="description_3"  cols="100" rows="5"></textarea>
+            </div>
+            <br> 
+            <!-- DESCRIPTION VISUALS - 4-->
+            <p class="text-white">Texte accompagnant 4e rang de visuels (optionnel) : </p>
+            <div class="input-group mb-3">
+                <label class="text-white" for="description_4"><b>row 4</b></label>
+                <textarea name="description_4"  id="description_4"  cols="100" rows="5"></textarea>
+            </div>
+
+            <br>
+
+            <!-- SEND -->
+            <div class="d-flex justify-content-center align-items-center">
+                <input type="submit" class="btn btn-outline-light btn-lg"  value="Send">
+            </div>
+            
+        </form>
+        <!--
+        <%# if (message.length > 0) { %>*/
+            <div class="alert alert-<%#= message.type %>" role="alert">
+                <%#= message.contenu %>
+            </div>
+        <%# } %>
+        -->
+    </div>
+</main>
+</body>
+</html>

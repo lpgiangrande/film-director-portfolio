@@ -31,30 +31,32 @@ const upload = multer({ storage: storage })
 
 /* ADMIN ROUTES */
 
-// GET to Log In page 
+// GET
+
+// Log In page 
 router.get('/', (req, res) => { // '/admin 
     res.render('auth');
 })
 
 
-// PUT - update thumbnails & projects
-
-
-
-
-
-// GET to projects list page
+// projects list page
 router.get('/list', backofficeController.list);
-// GET to projects list page
+
+// update thumbnail - update project
+router.get('/updateThumbnail', (req, res) => {
+  res.render('updateThumbnail');
+})
+router.get('/updateProject', (req, res) => {
+  res.render('updateProject');
+})
 
 
-
-// GET to Add thumbnail page (thumbnails image/video seen on Homepage)
+// Add thumbnail page (thumbnails image/video seen on Homepage)
 router.get('/uploadThumbnail', (req, res) => {
     res.render('uploadThumbnail');
 })
 
-// GET to Add project page 
+// Add project page 
 router.get('/uploadProject', (req, res) => {
     thumbnailsSchema.find()
     .populate("project")
@@ -65,7 +67,10 @@ router.get('/uploadProject', (req, res) => {
       .catch();
 })
 
-/* POST route for uploading files paths to the database (homepage - thumbnails) */
+
+// POST
+
+// Upload files paths to the database (homepage - thumbnails) 
 router.post('/uploadThumbnail', 
 
     upload.fields(

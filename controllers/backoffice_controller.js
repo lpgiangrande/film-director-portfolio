@@ -100,6 +100,7 @@ exports.addThumbnail = (req, res) => {
         releaseDate : req.body.release_date
 
     })
+
     thumbnail.save()
 
         .then(result => {
@@ -110,6 +111,7 @@ exports.addThumbnail = (req, res) => {
         .catch(error => {
             console.log(error);
         })
+
 }
 
 
@@ -132,6 +134,9 @@ exports.list = (req, res) => {
     })
 
 }
+
+
+
 
 /*exports.seeProjectFromAdmin = (req, res) => {
     projectSchema.findOne({ "thumbnail": req.params.id })
