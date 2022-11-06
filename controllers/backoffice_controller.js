@@ -61,7 +61,7 @@ exports.addProject = (req, res) => {
         productor : req.body.productor,
         array_vids : array_vids,
 
-        video_description: req.body.secondary_video_description,
+        vid_description: req.body.secondary_video_description,
         
         gallery : visuals,
         gallery_row_1_description : req.body.description_1,
@@ -70,6 +70,7 @@ exports.addProject = (req, res) => {
         gallery_row_4_description : req.body.description_4     
 
     })
+    
     project.save()
 
     .then(result => {

@@ -18,15 +18,6 @@
                     
                     <br><br>
 
-                    <!-- CATEGORY -->
-                    <p class="text-white">Catégorie:</p>
-                    <select class="form-select mb-3" id="category" name="category" aria-label="Default select example" required>
-                        <!--<option selected>Catégorie :</option>-->
-                        <option value="animation">Animation</option>
-                        <option value="liveaction">Live Action</option>
-                    </select>
-                    
-                    <br><br>
 
                     <h2 class="mb-4">Section 1 | Entête projet</h2>
                     <img class="section-reference" src="../public/img-divers/section1.png" alt="référence section 1">
@@ -54,7 +45,7 @@
                             name="director" 
                             aria-label="Sizing example input" 
                             aria-describedby="inputGroup-sizing-default"
-                            value="Regis Raffin"
+                            value="directed by Regis Raffin"
                             required
                             >
                     </div>
@@ -87,8 +78,11 @@
                             aria-describedby="inputGroup-sizing-default">
                     </div>
 
+                    <hr>
+                    <br>
+
                     <!-- VIDEOS --> 
-                    <p class="text-white">Vidéo principale + autre vidéo (optionnelle) à afficher en grand dans la page :</p>
+                    <p class="text-white">Vidéo principale + autre vidéo (optionnelle) à afficher en grand dans la page | séparer les liens par des virgules:</p>
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="array_vids"><b>Vidéos :</b></label>
                         <input 
@@ -104,8 +98,8 @@
                     <!-- VIDEO 2 DESCRIPTION-->
                     <div class="input-group mb-3">
                         <p>Texte sous 2e vidéo (optionnel)</p>
-                        <label class="text-white" for="video_description"><b>Description</b></label>
-                        <textarea name="video_description"  id="video_description"  cols="100" rows="5"></textarea>
+                        <label class="text-white" for="vid_description"><b>Description</b></label>
+                        <textarea name="vid_description"  id="vid_description"  cols="100" rows="5"></textarea>
                     </div>
 
                     <br>

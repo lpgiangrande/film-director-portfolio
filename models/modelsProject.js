@@ -20,7 +20,6 @@ const projectSchema = mongoose.Schema({
     },
     category: {
         type: String,
-        required: true
     },
     project_title: {
         type: String,
@@ -44,10 +43,13 @@ const projectSchema = mongoose.Schema({
         type: [String],
         required: true
     },
-     gallery_row_1_description: {    
+    vid_description:{
         type: String,
     },
-    gallery_row_2_description2: {
+    gallery_row_1_description: {    
+        type: String,
+    },
+    gallery_row_2_description: {
         type: String,
     },
     gallery_row_3_description: {
