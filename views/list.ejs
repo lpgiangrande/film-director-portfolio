@@ -2,7 +2,32 @@
 
 <div class="container">
 
-    <h1>Liste projets</h1>
+    <h2>Liste thumbnails</h2>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Thumbnail</th>
+                <th scope="col">Action</th>
+                <th scope="col">Action</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% thumbnailsList.forEach(thumbnail => {%>
+            <tr>
+                <td scope="row"><%= thumbnail.title %></td>
+                <td><button type="button" class="btn btn-light"><a href="/<%= thumbnail._id %>" target="_blank">View</a></button></td>
+                <td><button type="button" class="btn btn-light">Update</button></td>
+                <td><button type="button" class="btn btn-light">Delete</button></td>
+            </tr>
+            <%})%>
+        </tbody>
+    </table>
+
+    <br>
+
+
+    <h2>Liste projets</h2>
     <table class="table table-dark table-striped">
         <thead>
             <tr>
