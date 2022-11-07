@@ -53,21 +53,21 @@ exports.addProject = (req, res) => {
     const project = new projectSchema({
 
         _id: new mongoose.Types.ObjectId(),
+
         thumbnail : req.body.linkedThumbnail,
         category : req.body.category,
         project_title : req.body.project_title,
         director : req.body.director,
         other_contributors : req.body.other_contributors,
         productor : req.body.productor,
-        array_vids : array_vids,
 
+        array_vids : array_vids,
         vid_description: req.body.secondary_video_description,
         
         gallery : visuals,
         gallery_row_1_description : req.body.description_1,
         gallery_row_2_description : req.body.description_2,
-        gallery_row_3_description : req.body.description_3,
-        gallery_row_4_description : req.body.description_4     
+        gallery_row_3_description : req.body.description_3   
 
     })
     
@@ -75,7 +75,8 @@ exports.addProject = (req, res) => {
 
     .then(result => {
         console.log(result);
-        console.log(req.body.thumbnail);
+        res.redirect(301, '/admin/list');
+
     })
     .catch(error => {
         console.log(error);
