@@ -5,7 +5,7 @@ const projectSchema = require('../models/modelsProject');
 
 exports.homePage = (req, res) => {
     Thumbnail.find({}, function(err, thumbnails){
-        res.render('index', {thumbnailsList: thumbnails })
+        res.render('index', { thumbnailsList: thumbnails })
     })
 };
 
@@ -29,17 +29,26 @@ exports.liveActionPage = (req, res) => {
     })      
 };
 
-/* From the clic on one thumbnail from the Homepage | Animation page 
-| live Action page to the project's details page */
+/* 
+From thumbnail clic to project details page 
+--> If img gallery nb = odd, render template 1
+--> If img gallery nb = even, render template 2
+*/
 exports.seeFullProject = (req, res) => {
 
     //req.params.id = id du thumbnail
     projectSchema.findOne({ "thumbnail": req.params.id })
-        .populate("thumbnail")
+        //.populate("thumbnail")
         .exec()
         .then(project => {
-            res.render('project', { project : project});
-            console.log("id du projet : " + project._id);
+
+            ( project.gallery.length % 2 === 0 ) ? 
+                res.render('project_v2', { project : project})
+                : res.render('project', { project : project});
+            
+            console.log( "nb d'images : ", project.gallery.length);
+            
+            //console.log("id du projet : " + project._id);
         })
         .catch(error => {
             console.log(error)
