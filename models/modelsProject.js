@@ -54,9 +54,6 @@ const projectSchema = mongoose.Schema({
     },
     gallery_row_3_description: {
         type: String,
-    },
-    gallery_row_4_description: {
-        type: String,
     }
 })
 
