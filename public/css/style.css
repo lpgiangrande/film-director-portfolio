@@ -168,9 +168,9 @@ p{
     margin-bottom: 0.4em;
 }
 .video-iframe{
-position: relative; 
-  overflow: hidden; 
-  padding-top: 56.25%; 
+    position: relative; 
+     overflow: hidden; 
+    padding-top: 56.25%; 
 }
 .resp-iframe { 
     position: absolute; 
@@ -180,3 +180,4 @@ position: relative;
     height: 100%; 
     border: 0; 
   }
+

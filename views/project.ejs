@@ -7,8 +7,8 @@
         <!-- SECTION 1-->
         <section id="section-1" class="mb-4">
             <!-- VID 1 -->
-            <div class="d-flex justify-content-center pb-4">
-                <iframe class="db-video img-fluid" width="1280" height="720" frameborder="0" allowfullscreen src="<%= project.array_vids[0]%>"></iframe>
+            <div class="video-iframe d-flex justify-content-center pb-4">
+                <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[0]%>"  frameborder="0" allowfullscreen></iframe>
             </div>
             <!-- INFOS -->
             <div>
@@ -22,8 +22,8 @@
         <!-- SECTION 2-->
         <section id="section-2">
             <div class="row d-flex">
-                <div class="col-6 db-img"><img class="img-fluid" src="<%= project.gallery[0] %>"></div>
-                <div class="col-6 db-img"><img class="img-fluid" src="<%= project.gallery[1] %>"></div>
+                <div class="col-6 db-img"><img class="img-fluid" src="<%= project.gallery[0] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+                <div class="col-6 db-img"><img class="img-fluid" src="<%= project.gallery[1] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
             </div>
             <br>
             <!-- TEXT -->
@@ -32,9 +32,9 @@
             </div>
             <!-- / TEXT -->
             <div class="row d-flex">
-                <div class="col-4 db-img"><img class="img-fluid" src="<%= project.gallery[2] %>"></div>
-                <div class="col-4 db-img"><img class="img-fluid" src="<%= project.gallery[3] %>"></div>
-                <div class="col-4 db-img"><img class="img-fluid" src="<%= project.gallery[4] %>"></div>
+                <div class="col-4 db-img"><img class="img-fluid" src="<%= project.gallery[2] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+                <div class="col-4 db-img"><img class="img-fluid" src="<%= project.gallery[3] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+                <div class="col-4 db-img"><img class="img-fluid" src="<%= project.gallery[4] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
             </div>
             <br>
             <!-- TEXT -->
@@ -43,9 +43,8 @@
             </div>
             <!-- / TEXT -->
             <div class="row d-flex">
-                <div class="col-4 db-img"><img class="img-fluid" src="<%= project.gallery[5] %>"></div>
-                <div class="col-4 db-img"><img class="img-fluid" src="<%= project.gallery[6] %>"></div>
-                <div class="col-4 db-img"><img class="img-fluid" src="<%= project.gallery[7] %>"></div>
+                <div class="col-6 db-img"><img class="img-fluid" src="<%= project.gallery[5] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+                <div class="col-6 db-img"><img class="img-fluid" src="<%= project.gallery[6] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
             </div>
             <div class="row">
                 <div class="col"><p class="text-center"><%= project.gallery_row_3_description %> </p></div>

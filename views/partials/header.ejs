@@ -14,10 +14,14 @@
         <!--FONTAWESOME 5 CDN-->
         <script src="https://kit.fontawesome.com/5d934be3de.js" crossorigin="anonymous"></script>
         <!-- CSS -->
+        <link rel="stylesheet" href="public/css/zoom.css">
         <link rel="stylesheet" type="text/css"  href="public/css/style.css">
         <link rel="stylesheet" type="text/css"  href="public/css/responsive.css">
         <!-- JS -->
         <script src="public/js/menu.js"></script>
+        <!-- zoom vanilla js -->
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/zoom-vanilla.js/dist/zoom.css">
         <!--FAVICON-->
         <link rel="icon" type="image/x-icon" href="public/img-divers/favicon-regis.svg">
         <!-- POLICE - Roboto -->
@@ -35,10 +39,13 @@
 
             if (detectDeviceType() === 'Desktop'){
                 // append Js file to html file :
-                const script = document.createElement('script');
-                script.src = 'public/js/thumbnail.js';    
+                const script1 = document.createElement('script');
+                const script2 = document.createElement('script');
+                
+                script1.src = 'public/js/thumbnail.js';  
+                script2.src = 'public/js/zoom.js';  
 
-                document.head.appendChild(script);
+                document.head.appendChild(script1, script2);
             }
         </script>
     </head>
