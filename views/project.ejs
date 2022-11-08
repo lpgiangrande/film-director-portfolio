@@ -1,6 +1,6 @@
 <%- include('partials/header.ejs') %>
 
-<div class="container d-flex justify-content-center">
+<div class="container d-flex ">
     <main class="project-wrapper">        
         <!-- SECTION 1-->
         <section id="section-1" class="mb-4">
@@ -26,7 +26,7 @@
             <br>
             <!-- TEXT -->
             <div class="row mt-2 mb-4">
-                <div class="col"><p class="text-center project"><%= project.gallery_row_1_description %> </p></div>
+                <div class="col"><p class="project"><%= project.gallery_row_1_description %> </p></div>
             </div>
             <!-- / TEXT -->
             <div class="row gy-3 d-flex">
@@ -37,7 +37,7 @@
             <br>
             <!-- TEXT -->
             <div class="row mt-2 mb-4">
-                <div class="col"><p class="text-center project"><%= project.gallery_row_2_description %> </p></div>
+                <div class="col"><p class="project"><%= project.gallery_row_2_description %> </p></div>
             </div>
             <!-- / TEXT -->
             <div class="row gy-3 d-flex">
@@ -45,7 +45,7 @@
                 <div class="col-sm-6 col-xs-12"><img class="img-fluid" src="<%= project.gallery[6] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
             </div>
             <div class="row">
-                <div class="col"><p class="text-center project"><%= project.gallery_row_3_description %> </p></div>
+                <div class="col"><p class="project"><%= project.gallery_row_3_description %> </p></div>
             </div>
          </section>
 
