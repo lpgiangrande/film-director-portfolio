@@ -16,11 +16,11 @@ h1, h2, h3 {
     text-transform: uppercase;
 }
 nav h1{
-    font-size: 1.2vw;
+    font-size: 1.7em;
 }
 nav h2{
     font-weight: 400;
-    font-size: 0.8vw;
+    font-size: 1.1em;
 }
 .nav1, .nav2{
     flex-direction: row;
@@ -37,8 +37,8 @@ nav li:nth-child(4){
 nav li a{
     text-decoration: none; 
     color: white;
-    font-size: 0.6vw;
-    margin: 0.3vw;
+    font-size: 0.9em;
+    margin: 5px;
 }
 li{
     list-style-type: none;
@@ -50,10 +50,10 @@ nav li a:hover{
     color:rgba(147, 183, 227, 0.851);
 }
 .nav1>h1,.nav1>img, .nav1>h2{
-    margin: 0.5vw;
+    margin: 0.4em;
 }
 #logo{
-    width: 2vw;
+    width: 2.7em;
     height: auto;
 }
 /* à revoir*/
