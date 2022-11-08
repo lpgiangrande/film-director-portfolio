@@ -1,4 +1,4 @@
-/* Medium to xlarge */
+/* Medium -> xlarge */
 @media only screen and (min-width : 768px) and (max-width : 2600px){
     ul{
         margin-top: 0;
@@ -12,8 +12,24 @@
     }
 }
 
+/* small -> medium */
 @media only screen and (min-width : 481px) and (max-width : 767px)
 {
+    /* ABOUT */
+    p.about{
+        font-size: 0.6em;
+    }
+    .about-wrapper{
+        width: 60vw;
+    }
+    /* no title effect on mobile*/
+    h3.thumbnail_title{
+        opacity: 1;
+    }
+}
+
+/* smartphones & tabl */
+@media only screen and (min-device-width : 320px) and (max-device-width : 767px){
     /* NAV */
     nav h1{
         font-size: 1.5em;
@@ -30,44 +46,16 @@
     }
     .nav2 a{
         margin: 5px;
-        font-size: 2.3vw;
+        font-size: 0.9em;
     } 
     /* no title effect on mobile*/
     h3.thumbnail_title{
         opacity: 1;
     }
-    /* ABOUT */
-    p.about{
-        font-size: 0.6em;
-    }
-    .about-wrapper{
-        width: 60vw;
-    }
-}
-
-
+} 
 /* Smartphones (portrait and landscape)*/
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) 
 {
-    nav h1{
-        font-size: 1.5em;
-    }
-    nav h2{
-        font-size: 1em;
-    }
-    nav li a{
-        font-size: 0.8em!important;
-    }
-    #logo{
-        width: 30px;
-        height: auto;
-    }
-    .nav2 a{
-
-        font-size: 2.3vw;
-    } 
-    /* MAIN */
-
     /* no title effect on mobile*/
     h3.thumbnail_title{
         opacity: 1;
