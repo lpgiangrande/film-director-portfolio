@@ -1,5 +1,6 @@
 /* Medium -> xlarge */
-@media only screen and (min-width : 768px) and (max-width : 2600px){
+@media only screen and (min-width : 768px) and (max-width : 2600px)
+{
     ul{
         margin-top: 0;
         margin-bottom: 0.6rem;
@@ -10,6 +11,9 @@
     .project-wrapper{
         margin: 0 100px;
     }
+    .about-wrapper{
+        width: 35vw;
+      }
 }
 
 /* small -> medium */
@@ -17,16 +21,16 @@
 {
     /* ABOUT */
     p.about{
-        font-size: 0.6em;
+        font-size: 0.8em;
     }
     .about-wrapper{
-        width: 60vw;
-    }
+        width: 50vw;
+      }
 }
 
 /* titres thumbails apparents sur tablette ->  paysage */
-@media only screen and (min-device-width : 320px) and (max-device-width : 1200px){
-
+@media only screen and (min-device-width : 320px) and (max-device-width : 1200px)
+{
     h3.thumbnail_title{
         opacity: 1;
     }
@@ -57,6 +61,9 @@
     h3.thumbnail_title{
         opacity: 1;
     }
+    .about-wrapper{
+        width: 50vw;
+      }
 } 
 /* Smartphones (portrait and landscape)*/
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) 
@@ -67,10 +74,7 @@
     }
     /* ABOUT */
     p.about{
-        font-size: 0.5em;
-    }
-    .about-wrapper{
-        width: 70vw;
+        font-size: 0.8em;
     }
     h1.project_title{
         font-size: 12px;
@@ -79,5 +83,36 @@
         font-size: 10px;
     }
 }
+
+/* galaxy fold */
+@media only screen and (min-device-width : 280px) and (max-device-width : 320px) 
+{
+    /* NAV */
+    nav h1{
+        font-size: 1em;
+    }
+    nav h2{
+        font-size: 0.7em;
+    }
+    nav li a{
+        font-size: 0.8em!important;
+    }
+    #logo{
+        width: 20px;
+        height: auto;
+    }
+    .nav2 a{
+        margin: 4px;
+        font-size: 0.6em;
+    } 
+    /* no title effect on mobile*/
+    h3.thumbnail_title{
+        opacity: 1;
+    }
+    p.about{
+        font-size: 0.8em;
+    }
+}
+
 
 /*https://media-queries.aliasdmc.fr/media-queries-live.php*/

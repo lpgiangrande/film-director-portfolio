@@ -155,11 +155,8 @@ footer i:hover{
     background-color: rgb(191, 213, 197);
     transition-duration: 1s;
 }
-.about-wrapper{
-  width: 35vw;
-}
 p.about {
-    font-size: 1rem;
+    font-size: 1em;
 }
 
 

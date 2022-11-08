@@ -39,13 +39,10 @@
 
             if (detectDeviceType() === 'Desktop'){
                 // append Js file to html file :
-                const script1 = document.createElement('script');
-                const script2 = document.createElement('script');
-                
-                script1.src = 'public/js/thumbnail.js';  
-                script2.src = 'public/js/zoom.js';  
+                const script = document.createElement('script');
+                script.src = 'public/js/thumbnail.js';  
 
-                document.head.appendChild(script1, script2);
+                document.head.appendChild(script);
             }
         </script>
     </head>
