@@ -53,8 +53,9 @@ nav li a:hover{
     margin: 0.4em;
 }
 #logo{
-    width: 2.7em;
+    width: 33px;
     height: auto;
+    margin: 0 5px;
 }
 /* à revoir*/
 ul {

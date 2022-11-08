@@ -8,8 +8,7 @@
         line-height: 1.2;
     }
     .project-wrapper{
-        margin-left: 100px;
-        margin-right: 100px;
+        margin: 0 100px;
     }
 }
 
@@ -17,23 +16,18 @@
 {
     /* NAV */
     nav h1{
-        font-size: 2vw;
+        font-size: 1.5em;
     }
     nav h2{
-        font-weight: 300;
-        font-size: 1.5vw;
+        font-size: 1em;
     }
     nav li a{
-        font-size: 1.4vw!important;
-        margin: 0.5vw!important;
+        font-size: 0.8em!important;
     }
     #logo{
-        width: 4vw;
+        width: 30px;
         height: auto;
-        margin: 0.5vw;
-    }
-    .nav2{
-        margin-top: 0.5em;
+   
     }
     .nav2 a{
         margin: 8px;
