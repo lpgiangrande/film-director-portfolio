@@ -1,5 +1,5 @@
-/* Medium to large */
-@media only screen and (min-width : 768px) and (max-width : 1400px){
+/* Medium to xlarge */
+@media only screen and (min-width : 768px) and (max-width : 2600px){
     ul {
         margin-top: 0;
         margin-bottom: 0.6rem;
@@ -8,8 +8,8 @@
         line-height: 1.2;
     }
     .project-wrapper{
-        margin-left: 70px;
-        margin-right: 70px;
+        margin-left: 100px;
+        margin-right: 100px;
     }
 }
 
