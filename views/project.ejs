@@ -3,7 +3,7 @@
 <br><br>
 
 <div class="container d-flex justify-content-center">
-    <main>        
+    <main class="project-wrapper">        
         <!-- SECTION 1-->
         <section id="section-1" class="mb-4">
             <!-- VID 1 -->
@@ -12,7 +12,7 @@
             </div>
             <!-- INFOS -->
             <div>
-                <p class="text-center title_uppercase"><%= project.project_title %></p>
+                <h1 class="text-center project_title"><%= project.project_title %></h1>
                 <p class="text-center"><%= project.director %></p>
                 <p class="text-center"><%= project.other_contributors %></p>
                 <p class="text-center"><%= project.productor %></p>
@@ -21,9 +21,9 @@
 
         <!-- SECTION 2-->
         <section id="section-2">
-            <div class="row d-flex">
-                <div class="col-6 db-img"><img class="img-fluid" src="<%= project.gallery[0] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
-                <div class="col-6 db-img"><img class="img-fluid" src="<%= project.gallery[1] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+            <div class="row gy-3 d-flex">
+                <div class="col-sm-6 col-xs-12"><img class="img-fluid" src="<%= project.gallery[0] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+                <div class="col-sm-6 col-xs-12"><img class="img-fluid" src="<%= project.gallery[1] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
             </div>
             <br>
             <!-- TEXT -->
@@ -31,10 +31,10 @@
                 <div class="col"><p class="text-center"><%= project.gallery_row_1_description %> </p></div>
             </div>
             <!-- / TEXT -->
-            <div class="row d-flex">
-                <div class="col-4 db-img"><img class="img-fluid" src="<%= project.gallery[2] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
-                <div class="col-4 db-img"><img class="img-fluid" src="<%= project.gallery[3] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
-                <div class="col-4 db-img"><img class="img-fluid" src="<%= project.gallery[4] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+            <div class="row gy-3 d-flex">
+                <div class="col-sm-4 col-xs-12"><img class="img-fluid" src="<%= project.gallery[2] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+                <div class="col-sm-4 col-xs-12"><img class="img-fluid" src="<%= project.gallery[3] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+                <div class="col-sm-4 col-xs-12"><img class="img-fluid" src="<%= project.gallery[4] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
             </div>
             <br>
             <!-- TEXT -->
@@ -42,9 +42,9 @@
                 <div class="col"><p class="text-center"><%= project.gallery_row_2_description %> </p></div>
             </div>
             <!-- / TEXT -->
-            <div class="row d-flex">
-                <div class="col-6 db-img"><img class="img-fluid" src="<%= project.gallery[5] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
-                <div class="col-6 db-img"><img class="img-fluid" src="<%= project.gallery[6] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+            <div class="row gy-3 d-flex">
+                <div class="col-sm-6 col-xs-12"><img class="img-fluid" src="<%= project.gallery[5] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+                <div class="col-sm-6 col-xs-12"><img class="img-fluid" src="<%= project.gallery[6] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
             </div>
             <div class="row">
                 <div class="col"><p class="text-center"><%= project.gallery_row_3_description %> </p></div>

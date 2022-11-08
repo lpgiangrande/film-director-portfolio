@@ -5,6 +5,7 @@
 }
 body {
     background-color : black;
+    font-size: 12px;
 }
 h1, h2, h3, p, span{
     color: white;
@@ -160,9 +161,12 @@ p.about {
     font-size: 1rem;
 }
 
+
 /* PAGE PROJET */
-p.title_uppercase{
+
+h1.project_title{
     text-transform: uppercase;
+    font-size: 14px;
 }
 p{
     margin-bottom: 0.4em;
@@ -180,4 +184,7 @@ p{
     height: 100%; 
     border: 0; 
   }
-
+.project-wrapper{
+    margin-left: 70px;
+    margin-right: 70px;
+}
