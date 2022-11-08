@@ -172,7 +172,7 @@ p{
 }
 .video-iframe{
     position: relative; 
-     overflow: hidden; 
+    overflow: hidden; 
     padding-top: 56.25%; 
 }
 .resp-iframe { 

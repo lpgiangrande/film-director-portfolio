@@ -12,8 +12,8 @@
         margin: 0 100px;
     }
     .about-wrapper{
-        width: 35vw;
-      }
+        width: 500px;
+    }
 }
 
 /* small -> medium */
@@ -24,8 +24,8 @@
         font-size: 0.8em;
     }
     .about-wrapper{
-        width: 50vw;
-      }
+        width: 400px;
+    }
 }
 
 /* titres thumbails apparents sur tablette ->  paysage */
@@ -61,9 +61,6 @@
     h3.thumbnail_title{
         opacity: 1;
     }
-    .about-wrapper{
-        width: 50vw;
-      }
 } 
 /* Smartphones (portrait and landscape)*/
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) 
@@ -81,6 +78,9 @@
     }
     p.project{
         font-size: 10px;
+    }
+    .about-wrapper{
+        width: 80vw;
     }
 }
 
