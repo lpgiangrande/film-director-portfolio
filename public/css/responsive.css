@@ -22,11 +22,16 @@
     .about-wrapper{
         width: 60vw;
     }
-    /* no title effect on mobile*/
+}
+
+/* titres thumbails apparents sur tablette ->  paysage */
+@media only screen and (min-device-width : 320px) and (max-device-width : 1200px){
+
     h3.thumbnail_title{
         opacity: 1;
     }
 }
+
 
 /* smartphones & tabl */
 @media only screen and (min-device-width : 320px) and (max-device-width : 767px){
