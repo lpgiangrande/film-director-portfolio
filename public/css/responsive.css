@@ -16,17 +16,21 @@
 @media only screen and (min-width : 481px) and (max-width : 767px)
 {
     /* NAV */
-    h1{
-        font-size: 3.8vw;
+    nav h1{
+        font-size: 2vw;
     }
-    h2{
+    nav h2{
         font-weight: 300;
-        font-size: 3vw;
+        font-size: 1.5vw;
+    }
+    nav li a{
+        font-size: 1.4vw!important;
+        margin: 0.5vw!important;
     }
     #logo{
-        width: 6vw;
+        width: 4vw;
         height: auto;
-        margin: 10px;
+        margin: 0.5vw;
     }
     .nav2{
         margin-top: 0.5em;
@@ -55,11 +59,11 @@
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) 
 {
     /* NAV */
-    h1{
+    nav h1{
         font-size: 3.7vw;
         letter-spacing: 1.5px;
     }
-    h2{
+    nav h2{
         font-weight: 300;
         font-size: 3vw;
         letter-spacing: 1px;

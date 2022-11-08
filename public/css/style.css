@@ -20,7 +20,7 @@ nav h1{
 }
 nav h2{
     font-weight: 400;
-    font-size: 1vw;
+    font-size: 0.8vw;
 }
 .nav1, .nav2{
     flex-direction: row;
@@ -37,8 +37,8 @@ nav li:nth-child(4){
 nav li a{
     text-decoration: none; 
     color: white;
-    font-size: 0.8vw;
-    margin: 0.5vw;
+    font-size: 0.6vw;
+    margin: 0.3vw;
 }
 li{
     list-style-type: none;
