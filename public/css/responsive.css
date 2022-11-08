@@ -27,7 +27,6 @@
     #logo{
         width: 30px;
         height: auto;
-   
     }
     .nav2 a{
         margin: 8px;
@@ -52,29 +51,23 @@
 /* Smartphones (portrait and landscape)*/
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) 
 {
-    /* NAV */
     nav h1{
-        font-size: 3.7vw;
-        letter-spacing: 1.5px;
+        font-size: 1.5em;
     }
     nav h2{
-        font-weight: 300;
-        font-size: 3vw;
-        letter-spacing: 1px;
+        font-size: 1em;
+    }
+    nav li a{
+        font-size: 0.8em!important;
     }
     #logo{
-        width: 7vw;
+        width: 30px;
         height: auto;
-        margin: 0 10px;
     }
-    .nav2{
-        margin-bottom: 10px;
-    }
-    .nav2 li a{
-        font-size: 0.5em;
-        letter-spacing: 1px; 
+    .nav2 a{
         margin: 5px;
-    }
+        font-size: 2.3vw;
+    } 
     /* MAIN */
 
     /* no title effect on mobile*/
