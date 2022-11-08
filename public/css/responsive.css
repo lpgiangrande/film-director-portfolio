@@ -7,6 +7,10 @@
     nav{
         line-height: 1.2;
     }
+    .project-wrapper{
+        margin-left: 70px;
+        margin-right: 70px;
+    }
 }
 
 @media only screen and (min-width : 481px) and (max-width : 767px)
@@ -85,7 +89,13 @@
     }
     .about-wrapper{
         width: 70vw;
-      }
+    }
+    h1.project_title{
+        font-size: 12px;
+    }
+    p.project{
+        font-size: 10px;
+    }
 }
 
 /*https://media-queries.aliasdmc.fr/media-queries-live.php*/
