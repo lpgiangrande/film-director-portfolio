@@ -11,9 +11,9 @@ const multer  = require('multer');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      if (file.mimetype === 'image/jpeg') {
-        cb(null, 'public/thumbnails_imgs/')
-      } else if (file.mimetype === 'video/mp4') {
+      /* if(file.mimetype === 'image/jpeg') {
+        cb(null, 'public/thumbnails_imgs/')*/
+      /*} else*/ if (file.mimetype === 'video/mp4') {
         cb(null, 'public/thumbnails_vids/')
       } else {
         console.log(file.mimetype)

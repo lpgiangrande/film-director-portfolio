@@ -97,7 +97,7 @@ exports.addThumbnail = (req, res) => {
         _id: new mongoose.Types.ObjectId(),
         title : req.body.title_thumbnail,
         category : req.body.category,
-        imgSrc : req.files.img_thumbnail[0].path,
+        imgSrc : req.body.img_thumbnail,//req.files.img_thumbnail[0].path,
         videoSrc : req.files.vid_thumbnail[0].path,
         releaseDate : req.body.release_date
 
@@ -139,16 +139,3 @@ exports.list = (req, res) => {
 
 
 
-
-/*exports.seeProjectFromAdmin = (req, res) => {
-    projectSchema.findOne({ "thumbnail": req.params.id })
-        .populate("thumbnail")
-        .exec()
-        .then(project => {
-            res.render('project', { project : project});
-            console.log("id du projet : " + project._id);
-        })
-        .catch(error => {
-            console.log(error)
-        });
-}*/
