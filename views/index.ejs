@@ -15,11 +15,13 @@
                 }
             };
             </script>-->
+
             <div class="container-fluid d-flex g-0">
+
                 <div class="row gx-0 thumb_box">
         
                     <% thumbnailsList.forEach(thumbnail => {%>
-
+                        
                         <div class="col-md-6 col-lg-4 d-flex title"> 
     
                             <a class="d-flex" href="/<%= thumbnail._id %>">
@@ -29,7 +31,7 @@
                                     alt="visual for <%= thumbnail.title %> by regis raffin">
                                 </div>
                                 <div id="source2">
-                                    <video class="thumbnail_vid hidden w-100 h-100" autoplay playsinline muted loop src="<%= thumbnail.videoSrc %>" type="video/webm"></video>
+                                    <video class="thumbnail_vid hidden w-100 h-100" autoplay playsinline muted loop src="<%= thumbnail.videoSrc %>" type="video/mp4"></video>
                                 </div>
                             </a>
                         </div>
