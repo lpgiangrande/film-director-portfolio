@@ -4,9 +4,8 @@
 
 This js file has two purposes :
 
-- 1. Remove video tag from DOM on smartphones
-- 2. Make thumbnails title appear when mouse enter
-- 3. Switch thumbnail content from img to video when mouse enter
+- 1. Make thumbnails title appear when mouse enter
+- 2. Switch thumbnail content from img to video when mouse enter
 
 */
 'use strict';
@@ -17,12 +16,6 @@ const thumbnail_img = document.querySelectorAll("img.thumbnail_img");
 const thumbnail_vid = document.querySelectorAll("video.thumbnail_vid");
 
 
-if (detectDeviceType() === 'Mobile'){
-// remove video tags for thumbnails :
-const thumbnail_vid = document.querySelectorAll("video.thumbnail_vid");
-thumbnail_vid.remove();
-
-} 
 
 for (let i = 0 ; i < mouseTarget.length && i < targetTitle.length && i < thumbnail_img.length && i < thumbnail_vid.length; i++) {
 
