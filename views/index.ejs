@@ -5,42 +5,7 @@
         
         <!-- LOADER -->
         <div id="loader" class="center"></div>
-        <script>
 
-            function blue() {
-                const currentPage = window.location.href;
-                const links = document.getElementsByTagName('a');
-                for (let link of links) {
-                    if (link.href == currentPage) {
-                        //console.log(currentPage);
-                        link.classList.add("current");
-                    }
-                }
-            }
-
-            let titles = document.querySelectorAll('h3.thumbnail_title'); 
-
-            document.onreadystatechange = () => {
-                if (document.readyState !="complete") {
-                    document.querySelector("main").style.visibility = "hidden";
-                    document.querySelector("#loader").style.visibility = "visible";
-
-                    titles.forEach(function(title){
-                        title.style.left = "-999px";
-                    })
-                    
-                } else {
-                    document.querySelector("#loader").style.display = "none";
-                    document.querySelector("main").style.visibility = "visible";
-
-                    titles.forEach(function(title){
-                        title.style.position = "absolute";
-                    })
-
-                    blue();
-                }
-            };
-        </script>
 
             <div class="container-fluid d-flex g-0">
 
