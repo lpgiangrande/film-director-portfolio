@@ -7,7 +7,7 @@
         <div id="loader" class="center"></div>
         <script>
             document.onreadystatechange = () => {
-                if (document.readyState === "loading") {
+                if (document.readyState !="complete") {
                     document.querySelector("main").style.visibility = "hidden";
                     document.querySelector("#loader").style.visibility = "visible";
                 } else {
