@@ -11,23 +11,23 @@
         <meta name="google-site-verification" content="" />
         <!--BOOTSTRAP 5-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <!--FONTAWESOME 5 CDN-->
-        <script src="https://kit.fontawesome.com/5d934be3de.js" crossorigin="anonymous"></script>
-        <!-- CSS -->
-        <link rel="stylesheet" href="https://site-regis.s3.eu-west-3.amazonaws.com/public/css/style.min.css">
-        <link rel="stylesheet" href="https://site-regis.s3.eu-west-3.amazonaws.com/public/css/responsive.min.css">
-        <link rel="stylesheet" href="https://site-regis.s3.eu-west-3.amazonaws.com/public/css/zoom.min.css" media="print" onload="this.media='all'">
-        <!-- JS -->
-        <script src="https://site-regis.s3.eu-west-3.amazonaws.com/public/js/menu.js" async></script>
+        <!-- CSS "https://site-regis.s3.eu-west-3.amazonaws.com/public/css/style.min.css" -->
+        <link rel="stylesheet" href="public/css/style.css">
+        <link rel="stylesheet" href="https://site-regis.s3.eu-west-3.amazonaws.com/public/css/responsive.min.css" media="print" onload="this.media='all'; this.onload=null;">
+        <link rel="stylesheet" href="https://site-regis.s3.eu-west-3.amazonaws.com/public/css/zoom.min.css" media="print" onload="this.media='all'; this.onload=null;">
+        <!-- JS https://site-regis.s3.eu-west-3.amazonaws.com/public/js/menu.js -->
+        <script src="public/js/menu.js" async></script>
         <!--FAVICON-->
         <link rel="icon" type="image/x-icon" href="https://site-regis.s3.eu-west-3.amazonaws.com/public/img-divers/favicon-regis.svg">
         <!-- POLICE - Roboto -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;">
+       <!--FONTAWESOME 5 CDN-->
+       <script src="https://kit.fontawesome.com/5d934be3de.js" crossorigin="anonymous" async></script>
        
-       
-        <!-- CHECK DEVICE TYPE TO LOAD JS SCRIPT FOR DESKTOP ONLY -->
+        <!-- CHECK DEVICE TYPE  -->
+
         <script>
             let detectDeviceType = () =>
                 /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
@@ -48,7 +48,6 @@
 
                 document.head.appendChild(script);
             }
-    
         </script>
     </head>
     <body>
