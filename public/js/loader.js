@@ -1,4 +1,3 @@
-
 function blue() {
     const currentPage = window.location.href;
     const links = document.getElementsByTagName('a');
@@ -18,7 +17,7 @@ document.onreadystatechange = () => {
         document.querySelector("#loader").style.visibility = "visible";
 
         titles.forEach(function(title){
-            title.style.opacity = "0";
+            title.style.visibility = "hidden";
         })
         
     } else {
@@ -26,7 +25,7 @@ document.onreadystatechange = () => {
         document.querySelector("main").style.visibility = "visible";
 
         titles.forEach(function(title){
-            title.style.opacity = "1";
+            title.style.visibility = "visible";
         })
 
         blue();
