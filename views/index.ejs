@@ -22,10 +22,11 @@
                 if (document.readyState !="complete") {
                     document.querySelector("main").style.visibility = "hidden";
                     document.querySelector("#loader").style.visibility = "visible";
-                    document.querySelector('.thumbnail_title').style.visibility = "hidden";
+                    document.querySelector('.thumbnail_title').style.display = "none";
                 } else {
                     document.querySelector("#loader").style.display = "none";
                     document.querySelector("main").style.visibility = "visible";
+                    document.querySelector('.thumbnail_title').style.display = "block";
 
                     blue();
                 }
