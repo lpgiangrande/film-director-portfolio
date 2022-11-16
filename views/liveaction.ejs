@@ -1,6 +1,34 @@
 <%- include('partials/header.ejs') %>
     <main>
 
+        <!-- LOADER -->
+        <div id="loader" class="center"></div>
+        <script>
+
+            function blue() {
+                const currentPage = window.location.href;
+                const links = document.getElementsByTagName('a');
+                for (let link of links) {
+                    if (link.href == currentPage) {
+                        //console.log(currentPage);
+                        link.classList.add("current");
+                    }
+                }
+            }
+
+            document.onreadystatechange = () => {
+                if (document.readyState !="complete") {
+                    document.querySelector("main").style.visibility = "hidden";
+                    document.querySelector("#loader").style.visibility = "visible";
+                } else {
+                    document.querySelector("#loader").style.display = "none";
+                    document.querySelector("main").style.visibility = "visible";
+
+                    blue();
+                }
+            };
+        </script>
+        
         <!-- THUMBNAILS GALLERY - "CATEGORY "LIVEACTION" -->
         <div class="container-fluid d-flex g-0 mt-4">
             
@@ -26,7 +54,7 @@
                 <%})%>
             
             </div>
-            
+
         </div>
 
     </main>

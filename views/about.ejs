@@ -1,7 +1,38 @@
 <%- include('partials/header.ejs') %>
 
 <body>
+
     <div class="container d-flex mt-4">
+
+
+<!-- LOADER -->
+    <div id="loader" class="center"></div>
+    <script>
+
+        function blue() {
+            const currentPage = window.location.href;
+            const links = document.getElementsByTagName('a');
+            for (let link of links) {
+                if (link.href == currentPage) {
+                    //console.log(currentPage);
+                    link.classList.add("current");
+                }
+            }
+        }
+
+        document.onreadystatechange = () => {
+            if (document.readyState !="complete") {
+                document.querySelector(".about-wrapper").style.visibility = "hidden";
+                document.querySelector("#loader").style.visibility = "visible";
+            } else {
+                document.querySelector("#loader").style.display = "none";
+                document.querySelector(".about-wrapper").style.visibility = "visible";
+
+                blue();
+            }
+        };
+    </script>
+
         <div class="container about-wrapper">
             <img class="img-fluid mb-4" id="portrait" src="https://site-regis.s3.eu-west-3.amazonaws.com/public/img-divers/about.jpg" width="1831" height="1097" alt="portrait régis raffin">
             <p class="about">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris pharetra turpis et maximus euismod. Cras et euismod eros. Integer erat mauris, suscipit vel pellentesque vitae, suscipit ut sapien. Ut id magna id dolor pretium pharetra nec ac nunc. Donec tortor nulla, vehicula sit amet nibh et, iaculis aliquet nisl. Ut tempus enim ac scelerisque tempor. </p>
