@@ -31,9 +31,7 @@
                                     alt="visual for <%= thumbnail.title %> by regis raffin">
                                 </div>
                                 <div id="source2">
-                                    <video id="no-load-mobile" class="thumbnail_vid hidden w-100 h-100" autoplay playsinline muted loop type="video/mp4">
-                                        <source   data-src= "<%= thumbnail.videoSrc %>" >
-                                    </video>  
+                                    <video id="no-load-mobile" class="thumbnail_vid hidden w-100 h-100" autoplay playsinline muted loop src="<%= thumbnail.videoSrc %>" type="video/mp4"></video>
                                 </div>
                             </a>
                         </div>
