@@ -26,7 +26,7 @@
                     document.querySelector("#loader").style.visibility = "visible";
 
                     titles.forEach(function(title){
-                        title.style.display = "none";
+                        title.style.opacity = "0";
                     })
                     
                 } else {
@@ -34,7 +34,7 @@
                     document.querySelector("main").style.visibility = "visible";
 
                     titles.forEach(function(title){
-                        title.style.display = "block";
+                        title.style.opacity = "1";
                     })
 
                     blue();
