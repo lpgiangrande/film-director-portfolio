@@ -6,6 +6,7 @@
 body {
     background-color : black;
     font-size: 12px;
+    overflow: hidden;
 }
 h1, h2, h3, p, span{
     color: white;
@@ -87,6 +88,7 @@ ul {
     left: 0;
     right: 0;
     margin: auto;
+    z-index: 9999;
 }
 
 
