@@ -2,11 +2,12 @@
 
         <!-- THUMBNAILS - IMG / VID GALLERY-->
         <main>
-        <!-- LOADER 
+        
+        <!-- LOADER -->
         <div id="loader" class="center"></div>
         <script>
-            document.onreadystatechange = function() {
-                if (document.readyState !== "complete") {
+            document.onreadystatechange = () => {
+                if (document.readyState === "loading") {
                     document.querySelector("main").style.visibility = "hidden";
                     document.querySelector("#loader").style.visibility = "visible";
                 } else {
@@ -14,7 +15,7 @@
                     document.querySelector("main").style.visibility = "visible";
                 }
             };
-            </script>-->
+        </script>
 
             <div class="container-fluid d-flex g-0">
 
@@ -39,7 +40,9 @@
                     <%})%>
                 
                 </div>
+
             </div>
+
         </main>
         <%- include('partials/footer.ejs') %>
     </body>

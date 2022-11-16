@@ -43,7 +43,7 @@ nav li a{
 li{
     list-style-type: none;
 }
-nav li a:hover{
+nav li a:hover, nav li a:focus { 
     color:rgba(147, 183, 227, 0.851);
 }
 .current{
@@ -65,14 +65,15 @@ ul {
 
 /* MAIN */
 
-/*
+
 #loader {
     border: 12px solid #f3f3f3;
+    opacity: 0.6;
     border-radius: 50%;
     border-top: 12px solid black;
-    width: 70px;
-    height: 70px;
-    animation: spin 1.5s linear infinite;
+    width: 80px;
+    height: 80px;
+    animation: spin 1s linear infinite;
 }
 @keyframes spin {
     100% {
@@ -87,7 +88,7 @@ ul {
     right: 0;
     margin: auto;
 }
-*/
+
 
 
 /* THUMBNAILS WITH TITLES & HOVER EFFECT */
@@ -124,6 +125,7 @@ h3.thumbnail_title{
 }
 
 /* FOOTER */
+
 footer .d-flex{
     justify-content: center;
     align-items: center;
@@ -182,3 +184,4 @@ p{
     height: 100%; 
     border: 0; 
   }
+
