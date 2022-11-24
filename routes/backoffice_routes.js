@@ -41,7 +41,6 @@ router.get('/', (req, res) => { // '/admin
     res.render('auth');
 })
 
-
 // projects list page
 router.get('/list', backofficeController.list);
 
@@ -52,7 +51,6 @@ router.get('/updateThumbnail', (req, res) => {
 router.get('/updateProject', (req, res) => {
   res.render('updateProject');
 })
-
 
 // Add thumbnail page (thumbnails image/video seen on Homepage)
 router.get('/uploadThumbnail', (req, res) => {
