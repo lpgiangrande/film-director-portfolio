@@ -8,6 +8,11 @@ const backofficeController = require('../controllers/backoffice_controller');
 const thumbnailsSchema = require('../models/modelsThumbnails');
 const projectSchema = require('../models/modelsProject');
 
+// POST route for uploading text and files paths to the database for the Project page 
+router.post('/uploadProject', backofficeController.addProject);     
+
+module.exports = router; 
+
 
 // ENLEVER CONFIG MULTER SI TOUT SUR AWS 
 
@@ -37,9 +42,6 @@ const upload = multer({ storage: storage })
 
 
 // POST route for uploading text and files paths to the database for the Project page 
-router.post('/uploadProject', upload.any(), backofficeController.addProject);     
-
-
-module.exports = router; */
+router.post('/uploadProject', upload.any(), backofficeController.addProject);     */
 
 
