@@ -9,20 +9,21 @@ const thumbnailsSchema = require('../models/modelsThumbnails');
 const projectSchema = require('../models/modelsProject');
 
 
-/* ENLEVER CONFIG MULTER SI TOUT SUR AWS 
+// ENLEVER CONFIG MULTER SI TOUT SUR AWS 
 
-/* MULTER CONFIG - 2 */
-const multer  = require('multer');
-
+// MULTER CONFIG - 2 
 // CREER UN DOSSIER POUR CHAQUE PROJET UPLOADé serait mieux
+
+/*
+const multer  = require('multer');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       if (file.mimetype === 'image/jpeg') {
         cb(null, 'public/projects_images/')
-      } /* else if (file.mimetype === 'video/mp4'){
+      }  else if (file.mimetype === 'video/mp4'){
         cb(null, 'public/projects_videos/') 
-      } */ else {
+      } else {
         console.log(file.mimetype)
         cb({ error: 'Mime type not supported' })
       }
@@ -39,6 +40,6 @@ const upload = multer({ storage: storage })
 router.post('/uploadProject', upload.any(), backofficeController.addProject);     
 
 
-module.exports = router;
+module.exports = router; */
 
 
