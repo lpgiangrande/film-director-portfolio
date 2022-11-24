@@ -48,10 +48,10 @@ app.use((req, res, next) =>{
 // Routes
 const backoffice_routes = require('./routes/backoffice_routes.js')
 const basicroutes = require('./routes/basicroutes.js')
-const backoffice_routes2 = require('./routes/backoffice_routes_2.js')
 
 
-app.use('/admin/', backoffice_routes2)
+
+app.use('/admin/', backoffice_routes)
 app.use('/admin', backoffice_routes)
 app.use('/', basicroutes)
 
