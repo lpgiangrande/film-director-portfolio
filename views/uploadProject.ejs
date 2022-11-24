@@ -4,7 +4,7 @@
             <!-- FORM 1 -->
 
             <div class="container mt-5 d-flex justify-content-center align-items-center">
-                <form id="uploadFormProject1" action="" method="POST" enctype="multipart/form-data"> 
+                <form id="uploadFormProject1" action="" method="POST"> <!--enctype="multipart/form-data"-->
 
                     <h2 class="mb-4">Remplir données d'une page Projet</h2>
 
@@ -20,7 +20,7 @@
 
 
                     <h2 class="mb-4">Section 1 | Entête projet</h2>
-                    <img class="section-reference" src="../public/img-divers/section1.webp" alt="référence section 1">
+                    <img class="section-reference" src="https://site-regis.s3.eu-west-3.amazonaws.com/public/img-divers/section1.png" alt="référence section 1">
                     <!-- TITRE PROJET --> 
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="project_title"><b>Nom du projet</b></label>
@@ -82,7 +82,7 @@
                     <br>
 
                     <!-- VIDEOS --> 
-                    <p class="text-white">Vidéo principale + autre vidéo (optionnelle) à afficher en grand dans la page | séparer les liens par des virgules:</p>
+                    <p class="text-white">Vidéo(s) principale(s)(Liens Vimeo) | séparer les liens par des virgules | max 4 :</p>
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="array_vids"><b>Vidéos :</b></label>
                         <input 
@@ -95,29 +95,27 @@
 
                     <br>
 
-                    <!-- VIDEO 2 DESCRIPTION-->
+                    <!-- VIDEO 2 DESCRIPTION -->
                     <div class="input-group mb-3">
-                        <label class="text-white" for="vid_description"><b>Texte sous 2e vidéo (optionnel) :</b></label>
-                        <textarea name="vid_description"  id="vid_description"  cols="100" rows="5"></textarea>
+                        <label class="text-white" for="video_description"><b>Texte sous 2e vidéo (optionnel) :</b></label>
+                        <textarea name="vvideo_description"  id="video_description"  cols="100" rows="5"></textarea>
                     </div>
 
                     <br>
 
                     <!-- GALLERY | multiple uploads --> 
                     <h2 class="mb-4">Section 2 | Galerie de visuels + textes :</h2>
-                    <img class="section-reference" src="../public/img-divers/section2.webp" alt="référence section 2">
+                    <img class="section-reference" src="https://site-regis.s3.eu-west-3.amazonaws.com/public/img-divers/section2.png" alt="référence section 2">
                     <br>
-                    <h3 class="mb-3">Fichiers</h3>
+                    <p class="text-white"><b>Images (Liens S3) | Importer les img dans l'ordre d'apparition dans la page et les séparer les liens par des virgules : </b></p>
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="array_imgs"><b>Images :</b></label>
-                        <input 
-                            type="file" 
-                            class="form-control" 
-                            accept="image/*"
-                            id="array_imgs" 
-                            name="array_imgs" 
-                            multiple required>
-                        <br>
+                        <label class="text-white" for="gallery"><b>max 15 : </b></label>
+                        <textarea 
+                            name="gallery"  
+                            id="gallery"  
+                            cols="100" 
+                            rows="10">
+                        </textarea>
                     </div> 
 
                     <br>

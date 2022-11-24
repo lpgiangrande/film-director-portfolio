@@ -2,8 +2,7 @@
 <br><br><br><br>
         <!-- form - multer -->
         <div class="container d-flex justify-content-center align-items-center">
-            <form id="uploadFormThumb" action="" method="POST" enctype="multipart/form-data"> 
-                <!-- TITLE -->
+            <form id="uploadFormThumb" action="" method="POST"> <!--enctype="multipart/form-data"-->               <!-- TITLE -->
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="title_thumbnail"><b>Titre du projet</b></span>
                     <input type="text" class="form-control" id="title_thumbnail" name="title_thumbnail" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
@@ -20,14 +19,24 @@
                 <!-- IMAGE --> 
                 <div class="input-group mb-3">
                     <label class="input-group-text" for="img_thumbnail"><b>Thumbnail - Image</b></label>
-                    <input type="text" class="form-control" id="img_thumbnail" name="img_thumbnail">
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="img_thumbnail" 
+                        name="img_thumbnail"
+                        required >
                     <br>
                 </div>   
                 <br>
                 <!-- VIDEO --> 
                 <div class="input-group mb-3">
                     <label class="input-group-text" for="vid_thumbnail"><b>Thumbnail - Vidéo</b></label>
-                    <input type="file" accept="video/*" class="form-control" id="vid_thumbnail" name="vid_thumbnail">
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="vid_thumbnail" 
+                        name="vid_thumbnail"
+                        required >
                     <br>
                 </div> 
                 <br>

@@ -1,11 +1,15 @@
 /* SECOND FILE FOR BACK OFFICE'S ROUTES 
 BECAUSE OF A DIFFERENT MULTER CONFIGURATION (destination folder) */
 
+
 const express = require("express");
 const router = express.Router();
 const backofficeController = require('../controllers/backoffice_controller');
 const thumbnailsSchema = require('../models/modelsThumbnails');
 const projectSchema = require('../models/modelsProject');
+
+
+/* ENLEVER CONFIG MULTER SI TOUT SUR AWS 
 
 /* MULTER CONFIG - 2 */
 const multer  = require('multer');

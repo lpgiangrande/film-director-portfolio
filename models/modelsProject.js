@@ -43,9 +43,10 @@ const projectSchema = mongoose.Schema({
         type: [String],
         required: true
     },
+    /*
     vid_description:{
         type: String,
-    },
+    },*/
     gallery_row_1_description: {    
         type: String,
     },
@@ -54,6 +55,9 @@ const projectSchema = mongoose.Schema({
     },
     gallery_row_3_description: {
         type: String,
+    },
+    video_description:{
+        type: String
     }
 })
 
