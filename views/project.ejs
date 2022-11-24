@@ -16,44 +16,89 @@
                 <p class="text-center project"><%= project.productor %></p>
             </div>
         </section>
-
+       
         <!-- SECTION 2-->
         <section id="section-2">
+            <!--ROW 1-->
             <div class="row gy-3 d-flex"> 
-                <div class="col-sm-6 col-xs-12"><img class="img-fluid" src="<%= project.gallery[0] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
-                <div class="col-sm-6 col-xs-12"><img class="img-fluid" src="<%= project.gallery[1] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
-            </div>
-            <br>
-            <!-- TEXT -->
-            <div class="row mt-2 mb-4">
-                <div class="col"><p class="project"><%= project.gallery_row_1_description %> </p></div>
-            </div>
-            <!-- / TEXT -->
-            <div class="row gy-3 d-flex">
-                <div class="col-sm-4 col-xs-12"><img class="img-fluid" src="<%= project.gallery[2] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
-                <div class="col-sm-4 col-xs-12"><img class="img-fluid" src="<%= project.gallery[3] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
-                <div class="col-sm-4 col-xs-12"><img class="img-fluid" src="<%= project.gallery[4] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
-            </div>
-            <br>
-            <!-- TEXT -->
-            <div class="row mt-2 mb-4">
-                <div class="col"><p class="project"><%= project.gallery_row_2_description %> </p></div>
-            </div>
-            <!-- / TEXT -->
-            <div class="row gy-3 d-flex">
-                <div class="col-sm-6 col-xs-12"><img class="img-fluid" src="<%= project.gallery[5] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
-                <div class="col-sm-6 col-xs-12"><img class="img-fluid" src="<%= project.gallery[6] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
-            </div>
-            <div class="row">
-                <div class="col"><p class="project"><%= project.gallery_row_3_description %> </p></div>
-            </div>
-         </section>
 
-         
-        <!-- VID 2 - if exists -->
-        <div class="d-flex justify-content-center">
-            <iframe class="db-video img-fluid" width="1280" height="720"  src="<%= project.array_vids[1]%>"></iframe>
-        </div>
+                <% project.gallery.slice(0, 2).forEach((element, index) => {%>
+
+                    <% console.log("DECOUPE 1", project.gallery.slice(0, 2)) %> 
+
+                    <%if(project.gallery[index].endsWith('.jpg')){%>
+                        <div class="col-sm-6 col-xs-12"><img class="img-fluid" src="<%= project.gallery[index] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+                    <% }  else { %>
+                        <div class="col-sm-6 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/webm" data-action="zoom"></video></div>
+                    <% } %>
+                    <%# console.log(project.gallery) %>
+            
+                <%})%>
+               
+            </div>
+            <br><!--ROW 1 TEXT -->
+            <div>
+                <p class="text-white"> <%= project.gallery_row_1_description %> </p>
+            </div>
+            <br> 
+            <!-- ROW 2 -->
+            <div class="row gy-3 d-flex"> 
+
+                <% project.gallery.forEach((element, index) => {%>
+                    <% if(index > 1 && index < 5) {%>
+
+                        <%if(project.gallery[index].endsWith('.jpg')){%>
+                            <div class="col-sm-4 col-xs-12"><img class="img-fluid" src="<%= project.gallery[index] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+                        <% }  else { %>
+                            <div class="col-sm-4 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/mp4" data-action="zoom"></video></div>
+                        <% } %>
+
+                    <% } %>
+                <%})%>
+
+            </div>
+            <br><!--ROW 2 TEXT -->
+            <div>
+                <p class="text-white"> <%= project.gallery_row_2_description %> </p>
+            </div>
+            <br> 
+            <!-- ROW 3 -->
+            <div class="row gy-3 d-flex"> 
+
+                <% project.gallery.forEach((element, index) => {%>
+                    <% if(index > 4) {%>
+
+                        <%if(project.gallery[index].endsWith('.jpg')){%>
+                            <div class="col-sm-6 col-xs-12"><img class="img-fluid" src="<%= project.gallery[index] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+                        <% }  else { %>
+                            <div class="col-sm-6 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/mp4" data-action="zoom"></video></div>
+                        <% } %>
+
+                    <% } %>
+                <%})%>
+
+            </div>
+            <br><!--ROW 3 TEXT -->
+            <div>
+                <p class="text-white"> <%= project.gallery_row_3_description %> </p>
+            </div>
+            <br> 
+        </section>
+
+        <!-- IF MORE THAN 1 VIMEO VIDS :  -->
+        <section>
+            <div class="d-flex justify-content-center">
+                <iframe class="db-video img-fluid" width="1280" height="720"  src="<%= project.array_vids[1]%>"></iframe>
+            </div>
+            <br>
+            <div class="d-flex justify-content-center">
+                <iframe class="db-video img-fluid" width="1280" height="720"  src="<%= project.array_vids[2]%>"></iframe>
+            </div>
+            <br>
+            <div class="d-flex justify-content-center">
+                <iframe class="db-video img-fluid" width="1280" height="720"  src="<%= project.array_vids[3]%>"></iframe>
+            </div>
+        </section>
     </main>
 </div>
 
