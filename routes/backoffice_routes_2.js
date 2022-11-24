@@ -9,9 +9,9 @@ const thumbnailsSchema = require('../models/modelsThumbnails');
 const projectSchema = require('../models/modelsProject');
 
 // POST route for uploading text and files paths to the database for the Project page 
-router.post('/uploadProject', backofficeController.addProject);     
+//router.post('/uploadProject', backofficeController.addProject);     
 
-module.exports = router; 
+//module.exports = router; 
 
 
 // ENLEVER CONFIG MULTER SI TOUT SUR AWS 
