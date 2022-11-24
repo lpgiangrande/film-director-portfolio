@@ -4,6 +4,9 @@ const ejs = require('ejs');
 const path = require('path');
 const morgan = require("morgan");
 const mongoose = require('mongoose');
+const compression = require("compression");
+
+app.use(compression())
 
 // DB
 const dotenv = require('dotenv').config();
@@ -16,10 +19,12 @@ const dbConnect = require('./dbConnect');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
+
 // to log HTTP requests and errors
 app.use(morgan("dev"));
 
-// EJS
+// EJS 
 app.set('view engine', 'ejs')
 
 // GET PUBLIC FILES 
@@ -41,8 +46,8 @@ app.use((req, res, next) =>{
 })
 
 // Routes
-const basicroutes = require('./routes/basicroutes.js')
 const backoffice_routes = require('./routes/backoffice_routes.js')
+const basicroutes = require('./routes/basicroutes.js')
 const backoffice_routes2 = require('./routes/backoffice_routes_2.js')
 
 
