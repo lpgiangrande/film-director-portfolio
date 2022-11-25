@@ -9,7 +9,7 @@
                     <h2 class="mb-4">Remplir données d'une page Projet</h2>
 
                     <!-- LINKED THUMBNAIL -->
-                    <label class="text-white" for="linkedThumbnail">Thumbnail associé :</label>
+                    <label class="text-white" for="linkedThumbnail"><b>Sélectionner thumbnail associé :</b></label>
                     <select class="form-select mb-3" id="linkedThumbnail" name="linkedThumbnail" aria-label="Default select example" required>
                         <% thumbnailsList.forEach(thumbnail => {%>
                             <option value="<%= thumbnail._id %>"><%= thumbnail.title %></option>
@@ -18,9 +18,9 @@
                     
                     <br><br>
 
-
-                    <h2 class="mb-4">Section 1 | Entête projet</h2>
-                    <img class="section-reference" src="https://site-regis.s3.eu-west-3.amazonaws.com/public/img-divers/section1.png" alt="référence section 1">
+                    <h2 class="mb-4">1 | Entête projet - texte </h2>
+                    <img class="section-reference" src="https://site-regis.s3.eu-west-3.amazonaws.com/public/img-divers/entete+projet.png" alt="entete projet">
+                    <br><br>
                     <!-- TITRE PROJET --> 
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="project_title"><b>Nom du projet</b></label>
@@ -32,9 +32,7 @@
                             required
                             > 
                     </div> 
-
                     <br>
-
                     <!-- DIRECTOR -->
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="director_name"><b>Directeur</b></span>
@@ -49,9 +47,7 @@
                             required
                             >
                     </div>
-
                     <br>      
-
                     <!-- OTHER CONTRIBUTORS -->
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="other_contributors_"><b>Autres contributeurs (optionnel)</b></span>
@@ -63,9 +59,7 @@
                             aria-label="Sizing example input" 
                             aria-describedby="inputGroup-sizing-default">
                     </div>
-
                     <br>  
-
                     <!-- PRODUCTOR -->
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="productor"><b>Producteur (optionnel)</b></span>
@@ -77,12 +71,11 @@
                             aria-label="Sizing example input" 
                             aria-describedby="inputGroup-sizing-default">
                     </div>
-
                     <hr>
                     <br>
-
                     <!-- VIDEOS --> 
-                    <p class="text-white">Vidéo(s) principale(s)(Liens Vimeo) | séparer les liens par des virgules | max 4 :</p>
+                    <h2 class="mb-4"> 2 | Vimeo </h2>
+                    <p class="text-white"><b>Liens Vimeos - Video principale (entête) + autres si besoin | séparer les liens par des virgules | max 4 :</b></p>
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="array_vids"><b>Vidéos :</b></label>
                         <input 
@@ -90,63 +83,74 @@
                             class="form-control" 
                             id="array_vids" 
                             name="array_vids"
+                            placeholder="https://player.vimeo.com/video/341833479, https://player.vimeo.com/video/341833479,..."
                            >
                     </div> 
-
                     <br>
-
                     <!-- VIDEO 2 DESCRIPTION -->
                     <div class="input-group mb-3">
-                        <label class="text-white" for="video_description"><b>Texte sous 2e vidéo (optionnel) :</b></label>
-                        <textarea name="vvideo_description"  id="video_description"  cols="100" rows="5"></textarea>
+                        <label class="text-white" for="video2_description"><b>Texte sous 2e vidéo (optionnel) :</b></label>
+                        <textarea name="video2_description"  id="video2_description"  cols="100" rows="4"></textarea>
                     </div>
-
                     <br>
-
+                    <!-- VIDEO 3 DESCRIPTION -->
+                    <div class="input-group mb-3">
+                        <label class="text-white" for="video3_description"><b>Texte sous 3e vidéo (optionnel) :</b></label>
+                        <textarea name="video3_description"  id="video3_description"  cols="100" rows="4"></textarea>
+                    </div>
+                    <br>
+                    <!-- VIDEO 4 DESCRIPTION -->
+                    <div class="input-group mb-3">
+                        <label class="text-white" for="video4_description"><b>Texte sous 4e vidéo (optionnel) :</b></label>
+                        <textarea name="video4_description"  id="video4_description"  cols="100" rows="4"></textarea>
+                    </div>
+                    <br>
                     <!-- GALLERY | multiple uploads --> 
-                    <h2 class="mb-4">Section 2 | Galerie de visuels + textes :</h2>
-                    <img class="section-reference" src="https://site-regis.s3.eu-west-3.amazonaws.com/public/img-divers/section2.png" alt="référence section 2">
+                    <h2 class="mb-4">3 | Galerie de visuels + textes :</h2>
+                    <div>
+                        <img class="section-reference" src="https://site-regis.s3.eu-west-3.amazonaws.com/public/img-divers/template1-min.png" alt="template 1">
+                        <img class="section-reference" src="https://site-regis.s3.eu-west-3.amazonaws.com/public/img-divers/template2-min.png" alt="template 2">
+                    </div>
                     <br>
                     <p class="text-white"><b>Images (Liens S3) | Importer les img dans l'ordre d'apparition dans la page et les séparer les liens par des virgules : </b></p>
                     <div class="input-group mb-3">
-                        <label class="text-white" for="gallery"><b>max 15 : </b></label>
-                        <textarea 
-                            name="gallery"  
-                            id="gallery"  
-                            cols="100" 
-                            rows="10">
-                        </textarea>
+                        <label class="text-white" for="gallery"><b>max 16 : </b></label>
+                        <textarea placeholder="https://AMAZONBUCKET.s3.eu-west-3.amazonaws.com/FOLDER/IMG_1.jpg, 
+https://AMAZONBUCKET.s3.eu-west-3.amazonaws.com/FOLDER/IMG_2.jpg, ..."" name="gallery"  id="gallery" cols="100" rows="10"></textarea>
                     </div> 
-
                     <br>
-
                     <!-- DESCRIPTION VISUALS - 1 -->
-                    <p class="text-white">Texte accompagnant 1er rang de visuels (optionnel) :</p>
+                    <p class="text-white"><b>Texte accompagnant 1er rang de visuels (optionnel) :</b></p>
                     <div class="input-group mb-3">
                         <label class="text-white" for="description_1"><b>row 1</b></label>
-                        <textarea name="description_1"  id="description_1"  cols="100" rows="5"></textarea>
+                        <textarea name="description_1"  id="description_1"  cols="100" rows="4"></textarea>
                     </div>
                     <br>
                     <!-- DESCRIPTION VISUALS - 2 -->
-                    <p class="text-white">Texte accompagnant 2e rang de visuels (optionnel) : </p>
+                    <p class="text-white"><b>Texte accompagnant 2e rang de visuels (optionnel) :</b></p>
                     <div class="input-group mb-3">
                         <label class="text-white" for="description_2"><b>row 2</b></label>
-                        <textarea name="description_2"  id="description_2"  cols="100" rows="5"></textarea>
+                        <textarea name="description_2"  id="description_2"  cols="100" rows="4"></textarea>
                     </div>
                     <br>    
                     <!-- DESCRIPTION VISUALS - 3 -->
-                    <p class="text-white">Texte accompagnant 3e rang de visuels (optionnel) : </p>
+                    <p class="text-white"><b>Texte accompagnant 3e rang de visuels (optionnel) :</b></p>
                     <div class="input-group mb-3">
                         <label class="text-white" for="description_3"><b>row 3</b></label>
-                        <textarea name="description_3"  id="description_3"  cols="100" rows="5"></textarea>
+                        <textarea name="description_3"  id="description_3"  cols="100" rows="4"></textarea>
                     </div>
                     <br> 
-        
+                    <!-- DESCRIPTION VISUALS - 4 -->
+                    <p class="text-white"><b>Texte accompagnant 4e rang de visuels (optionnel) :</b></p>
+                    <div class="input-group mb-3">
+                        <label class="text-white" for="description_4"><b>row 4</b></label>
+                        <textarea name="description_4"  id="description_4"  cols="100" rows="4"></textarea>
+                    </div>
+                    <br> 
                     <!-- SEND -->
                     <div class="d-flex justify-content-center align-items-center">
                         <input type="submit" class="btn btn-outline-light btn-lg"  value="Send">
                     </div>
-                    
                 </form>
                 <!--
                 <%# if (message.length > 0) { %>*/

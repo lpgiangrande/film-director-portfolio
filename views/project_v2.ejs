@@ -1,1 +1,142 @@
-<p>test</p>
+<%- include('partials/header.ejs') %>
+
+<div class="container d-flex ">
+    <main class="project-wrapper">        
+        <!-- SECTION 1-->
+        <section id="section-1" class="mb-4">
+            <!-- VID 1 -->
+            <div class="video-iframe d-flex justify-content-center pb-4">
+                <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[0]%>"  frameborder="0" allowfullscreen></iframe>
+            </div>
+            <br>
+            <!-- INFOS -->
+            <div>
+                <h1 class="text-center project_title"><%= project.project_title %></h1>
+                <p class="text-center project"><%= project.director %></p>
+                <p class="text-center project"><%= project.other_contributors %></p>
+                <p class="text-center project"><%= project.productor %></p>
+            </div>
+        </section>
+       
+        <!-- SECTION 2-->
+        <section id="section-2">
+            <!--ROW 1 - Gallery : indexes 0 to 3 -->
+            <div class="row gy-3 d-flex"> 
+
+                <% project.gallery.forEach((element, index) => {%>
+
+                    <% if (index <= 3) {%>
+
+                        <%if (project.gallery[index].endsWith('.jpg')) {%>
+                            <div class="col-sm-6 col-xs-12"><img class="img-fluid w-100" src="<%= project.gallery[index] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+                        <% }  else { %>
+                            <div class="col-sm-6 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/mp4" data-action="zoom"></video></div>
+                        <% } %>
+
+                    <% } %>
+            
+                <%})%>
+            
+            </div>
+            <br>
+            <br><!--ROW 1 TEXT -->
+            <div>
+                <p class="text-white"> <%= project.gallery_row_1_description %> </p>
+            </div>
+            <br> 
+
+            <!-- VID 2 -->
+            <div class="video-iframe d-flex justify-content-center pb-4">
+                <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[1]%>"  frameborder="0" allowfullscreen></iframe>
+            </div>
+            <br>
+            <p class="text-white"> <%= project.video2_description %> </p>
+            <br>
+
+            <!-- ROW 2 - gallery : indexes 4 to 7 -->
+            <div class="row gy-3 d-flex"> 
+
+                <% project.gallery.forEach((element, index) => {%>
+
+                    <% if (index >3 && index <=7 ) {%>
+
+                        <%if (project.gallery[index].endsWith('.jpg')) {%>
+                            <div class="col-sm-6 col-xs-12"><img class="img-fluid w-100" src="<%= project.gallery[index] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+                        <% }  else { %>
+                            <div class="col-sm-6 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/mp4" data-action="zoom"></video></div>
+                        <% } %>
+            
+                    <% } %>
+                <%})%>
+            </div>
+            <br><!--ROW 2 TEXT -->
+            <div>
+                <p class="text-white"> <%= project.gallery_row_2_description %> </p>
+            </div>
+            <br> 
+            <!-- ROW 3 - Gallery : indexes 8 to max 11-->
+            <div class="row gy-3 d-flex"> 
+
+                <% project.gallery.forEach((element, index) => {%>
+                    <% if (index >7 && index <= 11) {%>
+
+                        <%if(project.gallery[index].endsWith('.jpg')){%>
+                            <div class="col-sm-6 col-xs-12"><img class="img-fluid w-100" src="<%= project.gallery[index] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+                        <% }  else { %>
+                            <div class="col-sm-6 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/mp4" data-action="zoom"></video></div>
+                        <% } %>
+
+                    <% } %>
+                <%})%>
+
+            </div>
+            <br>
+            <!--ROW 3 TEXT -->
+            <div>
+                <p class="text-white"> <%= project.gallery_row_3_description %> </p>
+            </div>
+            <br> 
+            <!-- ROW 4 - Gallery : indexes 12 to max 15-->
+            <div class="row gy-3 d-flex"> 
+
+                <% project.gallery.forEach((element, index) => {%>
+                    <% if (index >11 && index <= 15) {%>
+
+                        <%if(project.gallery[index].endsWith('.jpg')){%>
+                            <div class="col-sm-6 col-xs-12"><img class="img-fluid w-100" src="<%= project.gallery[index] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+                        <% }  else { %>
+                            <div class="col-sm-6 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/mp4" data-action="zoom"></video></div>
+                        <% } %>
+
+                    <% } %>
+                <%})%>
+
+            </div>
+            <br>
+           <!--ROW 4 TEXT -->
+            <div>
+                <p class="text-white"> <%= project.gallery_row_4_description %> </p>
+            </div>
+            <br> 
+        </section>
+        <!-- IF MORE VIMEO VIDS :  -->
+        <section>
+            <!-- VID 3 -->
+            <div class="video-iframe d-flex justify-content-center pb-4">
+                <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[2]%>"  frameborder="0" allowfullscreen></iframe>
+            </div>
+            <br>
+            <p class="text-white"> <%= project.video3_description %> </p>
+            <br>
+            <!-- VID 4 -->
+            <div class="video-iframe d-flex justify-content-center pb-4">
+                <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[3]%>"  frameborder="0" allowfullscreen></iframe>
+            </div>
+            <br>
+            <p class="text-white"> <%= project.video4_description %> </p>
+            <br> 
+        </section>
+    </main>
+</div>
+
+<%- include('partials/footer.ejs') %></br>

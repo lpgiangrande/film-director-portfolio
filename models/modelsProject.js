@@ -35,18 +35,25 @@ const projectSchema = mongoose.Schema({
     productor: {
         type: String,
     }, 
-    array_vids: { // main vids, 1 or 2
+    // Liens vimeo, max 4 :
+    array_vids: { 
         type: [String],
         required: true
     }, 
-    gallery: {  // img, sometimes vids
+    video2_description:{
+        type: String
+    },
+    video3_description:{
+        type: String
+    },
+    video4_description:{
+        type: String
+    },
+    // Images ou vids, max 16
+    gallery: {  
         type: [String],
         required: true
     },
-    /*
-    vid_description:{
-        type: String,
-    },*/
     gallery_row_1_description: {    
         type: String,
     },
@@ -56,8 +63,8 @@ const projectSchema = mongoose.Schema({
     gallery_row_3_description: {
         type: String,
     },
-    video_description:{
-        type: String
+    gallery_row_4_description: {
+        type: String,
     }
 })
 

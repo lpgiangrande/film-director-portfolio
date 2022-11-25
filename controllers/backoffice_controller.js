@@ -69,13 +69,18 @@ exports.addProject = (req, res) => {
         other_contributors : req.body.other_contributors,
         productor : req.body.productor,
 
-        array_vids : array_vids,
-        gallery : gallery, // gallery_video : req.files.gallery_video;
+        // Videos
+        array_vids : array_vids, 
+        video2_description: req.body.video2_description, 
+        video3_description: req.body.video3_description,
+        video4_description: req.body.video4_description,
 
+        //images
+        gallery : gallery, // gallery_video : req.files.gallery_video;
         gallery_row_1_description : req.body.description_1,
         gallery_row_2_description : req.body.description_2,
         gallery_row_3_description : req.body.description_3,
-        video_description: req.body.video_description   
+        gallery_row_4_description : req.body.description_4
 
     })
     

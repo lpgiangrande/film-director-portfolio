@@ -8,6 +8,7 @@
             <div class="video-iframe d-flex justify-content-center pb-4">
                 <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[0]%>"  frameborder="0" allowfullscreen></iframe>
             </div>
+            <br>
             <!-- INFOS -->
             <div>
                 <h1 class="text-center project_title"><%= project.project_title %></h1>
@@ -19,7 +20,7 @@
        
         <!-- SECTION 2-->
         <section id="section-2">
-            <!--ROW 1-->
+            <!--ROW 1 - GALLERY : indexes 0 to 1 -->
             <div class="row gy-3 d-flex"> 
 
                 <% project.gallery.slice(0, 2).forEach((element, index) => {%>
@@ -29,19 +30,19 @@
                     <%if(project.gallery[index].endsWith('.jpg')){%>
                         <div class="col-sm-6 col-xs-12"><img class="img-fluid" src="<%= project.gallery[index] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
                     <% }  else { %>
-                        <div class="col-sm-6 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/webm" data-action="zoom"></video></div>
+                        <div class="col-sm-6 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/mp4" data-action="zoom"></video></div>
                     <% } %>
                     <%# console.log(project.gallery) %>
             
                 <%})%>
                
             </div>
-            <br><!--ROW 1 TEXT -->
+            <br><!--ROW 1 - TEXT -->
             <div>
                 <p class="text-white"> <%= project.gallery_row_1_description %> </p>
             </div>
             <br> 
-            <!-- ROW 2 -->
+            <!-- ROW 2 - GALLERY : indexes 2 to 4 -->
             <div class="row gy-3 d-flex"> 
 
                 <% project.gallery.forEach((element, index) => {%>
@@ -62,14 +63,14 @@
                 <p class="text-white"> <%= project.gallery_row_2_description %> </p>
             </div>
             <br> 
-            <!-- ROW 3 -->
+            <!-- ROW 3 - GALLERY : indexes 5 to 6 -->
             <div class="row gy-3 d-flex"> 
 
                 <% project.gallery.forEach((element, index) => {%>
                     <% if(index > 4) {%>
 
                         <%if(project.gallery[index].endsWith('.jpg')){%>
-                            <div class="col-sm-6 col-xs-12"><img class="img-fluid" src="<%= project.gallery[index] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+                            <div class="col-sm-6 col-xs-12"><img class="img-fluid w-100" src="<%= project.gallery[index] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
                         <% }  else { %>
                             <div class="col-sm-6 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/mp4" data-action="zoom"></video></div>
                         <% } %>
@@ -83,21 +84,47 @@
                 <p class="text-white"> <%= project.gallery_row_3_description %> </p>
             </div>
             <br> 
-        </section>
+            <!-- ROW 4 - GALLERY - ALL THE IMGS LEFT, indexes 7 to 15 -->
+            <div class="row gy-3 d-flex"> 
 
+                <% project.gallery.forEach((element, index) => {%>
+                    <% if(index >= 7) {%>
+
+                        <%if(project.gallery[index].endsWith('.jpg')){%>
+                            <div class="col-sm-6 col-xs-12"><img class="img-fluid w-100" src="<%= project.gallery[index] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+                        <% }  else { %>
+                            <div class="col-sm-6 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/mp4" data-action="zoom"></video></div>
+                        <% } %>
+
+                    <% } %>
+                <%})%>
+
+            </div>
+        </section>
+        <br>
         <!-- IF MORE THAN 1 VIMEO VIDS :  -->
         <section>
-            <div class="d-flex justify-content-center">
-                <iframe class="db-video img-fluid" width="1280" height="720"  src="<%= project.array_vids[1]%>"></iframe>
+            <!-- VID 2 -->
+            <div class="video-iframe d-flex justify-content-center pb-4">
+                <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[1]%>"  frameborder="0" allowfullscreen></iframe>
             </div>
             <br>
-            <div class="d-flex justify-content-center">
-                <iframe class="db-video img-fluid" width="1280" height="720"  src="<%= project.array_vids[2]%>"></iframe>
+            <p class="text-white"> <%= project.video2_description %> </p>
+            <br>
+            <!-- VID 3 -->
+            <div class="video-iframe d-flex justify-content-center pb-4">
+                <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[2]%>"  frameborder="0" allowfullscreen></iframe>
             </div>
             <br>
-            <div class="d-flex justify-content-center">
-                <iframe class="db-video img-fluid" width="1280" height="720"  src="<%= project.array_vids[3]%>"></iframe>
+            <p class="text-white"> <%= project.video3_description %> </p>
+            <br>
+            <!-- VID 4 -->
+            <div class="video-iframe d-flex justify-content-center pb-4">
+                <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[3]%>"  frameborder="0" allowfullscreen></iframe>
             </div>
+            <br>
+            <p class="text-white"> <%= project.video4_description %> </p>
+            <br> 
         </section>
     </main>
 </div>
