@@ -25,7 +25,7 @@
 
                 <% project.gallery.slice(0, 2).forEach((element, index) => {%>
 
-                    <% console.log("DECOUPE 1", project.gallery.slice(0, 2)) %> 
+                    <%# console.log("DECOUPE 1", project.gallery.slice(0, 2)) %> 
 
                     <%if(project.gallery[index].endsWith('.jpg')){%>
                         <div class="col-sm-6 col-xs-12"><img class="img-fluid" src="<%= project.gallery[index] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
