@@ -103,28 +103,34 @@
         </section>
         <br>
         <!-- IF MORE THAN 1 VIMEO VIDS :  -->
+        
         <section>
             <!-- VID 2 -->
-            <div class="video-iframe d-flex justify-content-center pb-4">
-                <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[1]%>"  frameborder="0" allowfullscreen></iframe>
-            </div>
-            <br>
+            <% if (project.array_vids[1]) {%>
+                <div class="video-iframe d-flex justify-content-center pb-4">
+                    <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[1]%>"  frameborder="0" allowfullscreen></iframe>
+                </div>
+                <br>
+            <% } %>
             <p class="text-white"> <%= project.video2_description %> </p>
             <br>
             <!-- VID 3 -->
-            <div class="video-iframe d-flex justify-content-center pb-4">
-                <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[2]%>"  frameborder="0" allowfullscreen></iframe>
-            </div>
-            <br>
+            <% if (project.array_vids[2]) {%>
+                <div class="video-iframe d-flex justify-content-center pb-4">
+                    <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[2]%>"  frameborder="0" allowfullscreen></iframe>
+                </div>
+                <br>
+            <% } %>
             <p class="text-white"> <%= project.video3_description %> </p>
             <br>
             <!-- VID 4 -->
-            <div class="video-iframe d-flex justify-content-center pb-4">
-                <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[3]%>"  frameborder="0" allowfullscreen></iframe>
-            </div>
-            <br>
+            <% if (project.array_vids[3]) {%>
+                <div class="video-iframe d-flex justify-content-center pb-4">
+                    <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[3]%>"  frameborder="0" allowfullscreen></iframe>
+                </div>
+                <br>
+            <% } %>
             <p class="text-white"> <%= project.video4_description %> </p>
-            <br> 
         </section>
     </main>
 </div>
