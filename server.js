@@ -1,9 +1,8 @@
-// serveur.js
+// server.js (app.js)
 
 /**
  * Required External Modules
  */
-
 const express = require('express');
 const ejs = require('ejs');
 const path = require('path');
@@ -78,15 +77,12 @@ app.use(function(req, res, next) {
 /**
  * Routes
  */
-//const backoffice_routes2 = require('./routes/backoffice_routes_2.js')
 const backoffice_routes = require('./routes/backoffice_routes.js')
 const basicroutes = require('./routes/basicroutes.js')
 
 // ROUTES
-//app.use('/admin/', backoffice_routes)
 app.use('/admin', backoffice_routes)
 app.use('/', basicroutes)
-
 
 
 // PORT
@@ -98,7 +94,5 @@ app.listen(PORT, () => {
   
 
 
-// app listen loads the http module for you, creates a server and then starts it. no need for require http
-// src https://www.youtube.com/watch?v=yH593K9fYvE&ab_channel=MarinaKim
 
-// auth : https://auth0.com/blog/create-a-simple-and-secure-node-express-app/
+
