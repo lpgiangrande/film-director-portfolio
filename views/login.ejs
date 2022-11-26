@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <!-- SEO -->
+        <meta name="description" content="Regis Raffin - Film Director">
+        <link rel="canonical" href="#">
+        <meta name="google-site-verification" content="" />
+        <!--BOOTSTRAP 5-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <!--FONTAWESOME 5 CDN-->
+        <script src="https://kit.fontawesome.com/5d934be3de.js" crossorigin="anonymous"></script>
+        <!-- CSS -->
+        <link rel="stylesheet" type="text/css"  href="https://site-regis.s3.eu-west-3.amazonaws.com/public/css/style_backoff.min.css">
+        <!--<link rel="stylesheet" type="text/css"  href="public/css/style_backoff_resp.css">-->
+         <!-- JS -->
+         <script src="https://site-regis.s3.eu-west-3.amazonaws.com/public/js/menu.js" async></script>
+         <!--FAVICON-->
+         <link rel="icon" type="image/x-icon" href="https://site-regis.s3.eu-west-3.amazonaws.com/public/img-divers/favicon-regis.svg">
+        <!-- POLICE - Roboto -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    </head>
+    <br><br>
+        <div class="container mt-5">
+            <form action="/login" method="POST">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-md-6">
+
+                        <div class="card bg-dark text-white text-center card-body p-5" style="border-radius: 1rem;">
+                            <%- include ("./partials/messages"); %>
+                            
+                                <p class="text-white-50 mb-5">Please enter your login and password!</p>
+                        
+                                <div class="mb-4">
+                                    <label class="form-label" for="username">Username</label>
+                                    <input 
+                                        type="text" 
+                                        id="username" 
+                                        name="username" 
+                                        class="form-control form-control-lg"
+                                        value="<%= typeof username != 'undefined' ? username :'' %>" 
+                                    />
+                                </div>
+                
+                                <div class="mb-4">
+                                    <label class="form-label" for="pwd">Password</label>
+                                    <input 
+                                        type="password" 
+                                        id="pwd" 
+                                        name="pwd" 
+                                        class="form-control form-control-lg"
+                                        value="<%= typeof pwd != 'undefined' ? pwd : '' %>" 
+                                        />
+                                </div>
+                
+                                <p class="small mb-5 "><a class="text-white-50" href="#!">Forgot password?</a></p>
+                
+                                <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+
+                        </div>
+                        <a href="/register">register</a>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+        <%- include('partials/footer_backoff.ejs') %>
+    </body>
+</html>
