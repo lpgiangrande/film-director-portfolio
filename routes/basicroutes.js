@@ -7,8 +7,6 @@ const backofficeController = require('../controllers/backoffice_controller');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const User = require('../models/User')
-//require('../config/passport') // test
-//const { ensureAuthenticated } = require('../config/auth');
 const { forwardAuthenticated } = require('../config/auth');
 
 
