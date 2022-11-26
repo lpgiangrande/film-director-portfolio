@@ -1,39 +1,34 @@
-//const { S3Client, PutObjectAclCommand } = require("@aws-sdk/client-s3");
 const express = require("express");
 const router = express.Router();
 const backofficeController = require('../controllers/backoffice_controller');
-const thumbnailsSchema = require('../models/modelsThumbnails');
-const projectSchema = require('../models/modelsProject');
+const thumbnailsSchema = require('../models/Thumbnails');
+const User = require('../models/User');
+const projectSchema = require('../models/Project');
+const bcrypt = require('bcryptjs');
+const passport = require('passport');
+const { ensureAuthenticated } = require('../config/auth');
 
 
 /* ADMIN ROUTES */
 
-
-// GET
-
-// Log In page 
-router.get('/', (req, res) => { // '/admin 
-  res.render('auth');
-})
-
 // projects list page
-router.get('/list', backofficeController.list);
+router.get('/list', ensureAuthenticated, backofficeController.list);
 
 // update thumbnail - update project
-router.get('/updateThumbnail', (req, res) => {
-res.render('updateThumbnail');
+router.get('/updateThumbnail', ensureAuthenticated, (req, res) => {
+  res.render('updateThumbnail');
 })
-router.get('/updateProject', (req, res) => {
-res.render('updateProject');
+router.get('/updateProject', ensureAuthenticated, (req, res) => {
+  res.render('updateProject');
 })
 
 // Add thumbnail page (thumbnails image/video seen on Homepage)
-router.get('/uploadThumbnail', (req, res) => {
+router.get('/uploadThumbnail', ensureAuthenticated, (req, res) => {
   res.render('uploadThumbnail');
 })
 
 // Add project page 
-router.get('/uploadProject', (req, res) => {
+router.get('/uploadProject', ensureAuthenticated, (req, res) => {
   thumbnailsSchema.find()
   .populate("project")
   .exec()
@@ -42,6 +37,20 @@ router.get('/uploadProject', (req, res) => {
     })
     .catch();
 })
+
+/**
+ * auth | log out
+ */
+router.get('/logoff', function (req, res, next) {
+  req.logout(function(err){
+    if(err) {
+      return next(err);
+    }
+  req.flash('success_msg', "You are logged out");
+  res.redirect('/login');
+});
+});
+
 
 // POST
 
