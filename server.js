@@ -1,69 +1,104 @@
+// serveur.js
+
+/**
+ * Required External Modules
+ */
+
 const express = require('express');
-const app = express();
 const ejs = require('ejs');
 const path = require('path');
 const morgan = require("morgan");
 const mongoose = require('mongoose');
-const compression = require("compression");
+const passport = require('passport');
+const flash = require('connect-flash');
+const session = require('express-session');
+const cors = require('cors')
+require("dotenv").config();
 
-app.use(compression())
+const app = express();
 
-// DB
-const dotenv = require('dotenv').config();
+/**
+ * Passport config
+ */
+ require('./config/passport')(passport);
+
+/**
+ * DB
+ */
 const dbConnect = require('./dbConnect');
 
-// for posted data to server via forms : 
-      /* bodyParser was added back to Express in release 4.16.0, 
-      That means you don't have to use it.
-      */
+/**
+ * APP CONFIGURATION 
+ */
+
+// for posted data to server via forms 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(cors())
 
-
-// to log HTTP requests and errors
+//to log HTTP requests and errors
 app.use(morgan("dev"));
 
-// EJS 
+// EJS
 app.set('view engine', 'ejs')
 
-// GET PUBLIC FILES 
+// GET PUBLIC FILES
 app.use('/public', express.static(path.join(__dirname, 'public')))
 
-//Session - messages de validation
-const session = require('express-session');
-app.use(session({
-  secret: 'keyboard cat',
-  resave: true,
-  saveUninitialized: true,
-  cookie: { maxAge: 60000 }
-}));
 
-app.use((req, res, next) =>{
-  res.locals.message = req.session.message;
-  delete req.session.message; // une fois le transfert de la req dans la res, on peut supprimer cette variable
+
+/**
+ * Session Configuration 
+ */
+app.use(
+  session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+  })
+);
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Connect flash
+app.use(flash()); // req.flash
+
+// Global vars
+app.use(function(req, res, next) {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
   next();
-})
+});
 
-// Routes
+
+/**
+ * Routes
+ */
 //const backoffice_routes2 = require('./routes/backoffice_routes_2.js')
 const backoffice_routes = require('./routes/backoffice_routes.js')
 const basicroutes = require('./routes/basicroutes.js')
 
-
-
-
-app.use('/admin/', backoffice_routes)
+// ROUTES
+//app.use('/admin/', backoffice_routes)
+app.use('/admin', backoffice_routes)
 app.use('/', basicroutes)
+
+
 
 // PORT
 const PORT = process.env.PORT || 4000 
 
 app.listen(PORT, () => { 
     console.log(`server is running on ${PORT}`)
-  })
+})
   
 
 
 // app listen loads the http module for you, creates a server and then starts it. no need for require http
 // src https://www.youtube.com/watch?v=yH593K9fYvE&ab_channel=MarinaKim
+
+// auth : https://auth0.com/blog/create-a-simple-and-secure-node-express-app/

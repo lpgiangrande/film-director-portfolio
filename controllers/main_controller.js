@@ -1,6 +1,13 @@
+const express = require("express");
+const router = express.Router();
+
 const mongoose = require("mongoose");
-const Thumbnail = require('../models/modelsThumbnails');
-const projectSchema = require('../models/modelsProject');
+const Thumbnail = require('../models/Thumbnails');
+const projectSchema = require('../models/Project');
+
+const bcrypt = require('bcryptjs');
+const User = require('../models/User');
+
 
 
 exports.homePage = (req, res) => {
@@ -58,3 +65,85 @@ exports.seeFullProject = (req, res) => {
 exports.aboutPage = (req, res) => {
     res.render('about')
 };
+
+// --> to backoffice
+
+exports.loginPage = (req, res) => {
+    res.render('login') // router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
+}
+
+exports.registerPage = (req, res) => {
+    res.render('register') // router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
+}
+
+
+// Register handle - POST
+exports.handleRegistration =  (req, res) => { 
+    
+    console.log("req body : ", req.body);
+    //res.status(200).json({"data" : req.body});
+    const { username, pwd, pwd2 } = req.body;
+    let errors = [];
+  
+    // Check required fields
+    if(!username || !pwd || !pwd2) {
+      errors.push({msg: 'Fields should not be empty'})
+    }
+  
+    // Check Pwd match
+    if(pwd !== pwd2){
+      errors.push({msg: 'Passwords do not match'})
+    }
+  
+    // Check pwd length
+    if(pwd.length < 6){
+      errors.push(({msg: 'Password should be at least 6 characters'}))
+    }
+  
+    if(errors.length > 0) {
+      res.render('register', {
+        errors, 
+        username,
+        pwd,
+        pwd2
+      })
+    } else {
+      //res.send('pass');
+      User.findOne({ username: username})
+        .then(user => {
+            if(user){
+                // User exists
+                errors.push({ msg: 'already registered'})
+                res.render('register', {
+                    errors, 
+                    username,
+                    pwd,
+                    pwd2
+                });
+            } else {
+                const newUser = new User({
+                    _id: new mongoose.Types.ObjectId(),
+                    username : username,
+                    pwd : pwd
+                });
+               // console.log(newUser)
+               // res.send('Hello user')
+
+               // Hash pwd
+               bcrypt.genSalt(10, (err, salt) => 
+                bcrypt.hash(newUser.pwd, salt, (err, hash) => {
+                    if(err) throw err;
+                    // Set pwd to hash
+                    newUser.pwd = hash;
+                    // Save user
+                    newUser.save()
+                        .then(user => {
+                            req.flash('success_msg', 'You are now registered. You can log in');
+                            res.redirect('/login')
+                        })
+                        .catch(err => console.log(err));
+                }))
+            }
+        })
+    }
+  }

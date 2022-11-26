@@ -1,6 +1,14 @@
 const mongoose = require("mongoose");
-const thumbnailsSchema = require('../models/modelsThumbnails');
-const projectSchema = require('../models/modelsProject');
+const thumbnailsSchema = require('../models/Thumbnails');
+const projectSchema = require('../models/Project');
+const { ensureAuthenticated } = require('../config/auth')
+const User = require('../models/User');
+
+//const User = require('../models/User');
+//const bcrypt = require('bcryptjs');
+//const passport = require('passport');
+
+require('../config/passport') // test
 
 /**
  * addProject from admin | upload
@@ -96,7 +104,6 @@ exports.addProject = (req, res) => {
     })
 }
 
-
 /**
  * addThumbnail from admin | upload to s3 bucket
  * @param {*} req 
@@ -141,7 +148,8 @@ exports.list = (req, res) => {
         thumbnailsSchema.find({}, function(err,thumbnails) {
             res.render('list', {
                 projectsList: projects,
-                thumbnailsList: thumbnails
+                thumbnailsList: thumbnails,
+                username: req.user.username
             })
         })
     })
@@ -150,6 +158,7 @@ exports.list = (req, res) => {
     })
 
 }
+
 
 
 
