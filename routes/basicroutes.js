@@ -21,14 +21,11 @@ router.post('/login', (req, res, next) => {
     })(req, res, next);
   });
 
-
-
     
 router.get('/', mainController.homePage); 
 router.get('/animation/', mainController.animationPage);
 router.get('/liveaction/', mainController.liveActionPage);
 router.get('/about', mainController.aboutPage);
-router.get('/register', forwardAuthenticated, mainController.registerPage); //  DO NOT PUT ON PUBLIC GITHUB
 router.get('/login',  forwardAuthenticated, mainController.loginPage);
 // Display project details when clic on a homepage/animation page/liveaction page thumbnail
 router.get('/:id', mainController.seeFullProject);
