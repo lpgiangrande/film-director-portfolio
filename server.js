@@ -1,8 +1,7 @@
-// server.js (app.js)
-
 /**
- * Required External Modules
+ * REQUIRED EXTERNAL MODULES
  */
+
 const express = require('express');
 const ejs = require('ejs');
 const path = require('path');
@@ -11,19 +10,15 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
-const cors = require('cors')
+//const cors = require('cors')
 require("dotenv").config();
-
 const app = express();
 
-/**
- * Passport config
- */
- require('./config/passport')(passport);
 
-/**
- * DB
- */
+//Passport config
+require('./config/passport')(passport);
+
+// Mongodb connect
 const dbConnect = require('./dbConnect');
 
 /**
@@ -34,8 +29,6 @@ const dbConnect = require('./dbConnect');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors())
-
 //to log HTTP requests and errors
 app.use(morgan("dev"));
 
@@ -45,11 +38,9 @@ app.set('view engine', 'ejs')
 // GET PUBLIC FILES
 app.use('/public', express.static(path.join(__dirname, 'public')))
 
+//app.use(cors())
 
-
-/**
- * Session Configuration 
- */
+// Session Configuration 
 app.use(
   session({
     secret: 'secret',
@@ -75,12 +66,11 @@ app.use(function(req, res, next) {
 
 
 /**
- * Routes
+ * ROUTES
  */
 const backoffice_routes = require('./routes/backoffice_routes.js')
 const basicroutes = require('./routes/basicroutes.js')
 
-// ROUTES
 app.use('/admin', backoffice_routes)
 app.use('/', basicroutes)
 
@@ -92,7 +82,5 @@ app.listen(PORT, () => {
     console.log(`server is running on ${PORT}`)
 })
   
-
-
 
 
