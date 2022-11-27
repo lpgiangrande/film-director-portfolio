@@ -22,7 +22,7 @@ router.post('/login', (req, res, next) => {
   });
 
 
-router.post('/register', mainController.handleRegistration);  //  DO NOT PUT ON PUBLIC GITHUB
+
     
 router.get('/', mainController.homePage); 
 router.get('/animation/', mainController.animationPage);
