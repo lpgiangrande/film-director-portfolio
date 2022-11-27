@@ -84,3 +84,6 @@ app.listen(PORT, () => {
   
 
 
+// app listen loads the http module for you, creates a server and then starts it. no need for require http
+// src https://www.youtube.com/watch?v=yH593K9fYvE&ab_channel=MarinaKim
+

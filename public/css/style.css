@@ -6,7 +6,6 @@
 body {
     background-color : black;
     font-size: 12px;
-    overflow: hidden;
 }
 h1, h2, h3, p, span{
     color: white;
@@ -184,5 +183,5 @@ p{
     width: 100%; 
     height: 100%; 
     border: 0; 
-  }
+}
 
