@@ -1,1 +1,63 @@
-<p>test</p>
+<%- include('partials/header_backoff.ejs') %>
+<br><br><br><br>
+      
+        <div class="container d-flex justify-content-center align-items-center">
+            <form id="updateFormThumb" action="/admin/thumbnailUpdated" method="POST">            
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="title_thumbnail"><b>Titre du projet</b></span>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="title_thumbnail" 
+                        name="title_thumbnail" 
+                        aria-label="Sizing example input" 
+                        aria-describedby="inputGroup-sizing-default"
+                        value="<%= thumbnail.title %>"
+                        >
+                        
+                </div>
+                <br>
+                <!-- CATEGORY -->
+                <select class="form-select mb-3" id="category" name="category" aria-label="Default select example">
+                    <option selected><%= thumbnail.category %></option>
+                    <option value="animation">Animation</option>
+                    <option value="liveaction">Live Action</option>
+                  </select>
+                <div>
+                <br>
+                <!-- IMAGE --> 
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="img_thumbnail"><b>Thumbnail - Image</b></label>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="img_thumbnail" 
+                        name="img_thumbnail"
+                        value="<%= thumbnail.imgSrc %>"
+                        required >
+                    <br>
+                </div>   
+                <br>
+                <!-- VIDEO --> 
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="vid_thumbnail"><b>Thumbnail - Vidéo</b></label>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="vid_thumbnail" 
+                        name="vid_thumbnail"
+                        value="<%= thumbnail.videoSrc %>"
+                        required >
+                    <br>
+                </div>
+                <br><br>
+                <!-- SEND -->
+                <div class="d-flex justify-content-center align-items-center">
+                    <input type="hidden" name="identifiant" value="<%= thumbnail._id %>">
+                    <input type="submit" class="btn btn-outline-light btn-lg"  value="Update">
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
+

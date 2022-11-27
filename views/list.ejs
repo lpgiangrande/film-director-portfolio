@@ -2,49 +2,47 @@
 
 <div class="container">
 
-   <br><h2>Hello <%= username %> </h2><br>
-
-    <h3>Liste thumbnails</h3>
+   <h2 class="mt-5 mb-5">Hello <%= username %> </h2>
+    
     <table class="table table-dark table-striped">
         <thead>
             <tr>
-                <th scope="col">Thumbnail</th>
-                <th scope="col">Action</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% thumbnailsList.forEach(thumbnail => {%>
-            <tr>
-                <td scope="row"><%= thumbnail.title %></td>
-                <td><button type="button" class="btn btn-light"><a href="/admin/updateThumbnail">Update</a></button></td>
-                <td><button type="button" class="btn btn-light">Delete</button></td>
-            </tr>
-            <%})%>
-        </tbody>
-    </table>
-
-    <br>
-
-
-    <h3>Liste projets</h3>
-    <table class="table table-dark table-striped">
-        <thead>
-            <tr>
-                <th scope="col">Project</th>
-                <th scope="col">Action</th>
-                <th scope="col">Action</th>
+                <th scope="col"><h5>Projects</h5></th>
+                <th scope="col">Modifier</th>
+                <th scope="col">Supprimer</th>
             </tr>
         </thead>
         <tbody>
             <% projectsList.forEach(project => {%>
             <tr>
                 <td scope="row"><%= project.project_title %></td>
-                <td><button type="button" class="btn btn-light"><a href="/admin/updateProject">Update</a></button></td>
+                <td><button type="button" class="btn btn-light"><a href="/admin/updateProject/<%= project._id %>">Update</a></button></td>
                 <td><button type="button" class="btn btn-light">Delete</button></td>
             </tr>
             <%})%>
         </tbody>
     </table>
+
+    <br><br>
+
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th scope="col"><h5>Thumbnails</h5></th>
+                <th scope="col">Modifier</th>
+                <th scope="col">Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% thumbnailsList.forEach(thumbnail => {%>
+            <tr>
+                <td scope="row"><%= thumbnail.title %></td>
+                <td><button type="button" class="btn btn-light"><a href="/admin/updateThumbnail/<%= thumbnail._id %>">Update</a></button></td>
+                <td><button type="button" class="btn btn-light">Delete</button></td>
+            </tr>
+            <%})%>
+        </tbody>
+    </table>
+
 </div>
 

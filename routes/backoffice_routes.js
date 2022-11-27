@@ -14,14 +14,6 @@ const { ensureAuthenticated } = require('../config/auth');
 // projects list page
 router.get('/list', ensureAuthenticated, backofficeController.list);
 
-// update thumbnail - update project
-router.get('/updateThumbnail', ensureAuthenticated, (req, res) => {
-  res.render('updateThumbnail');
-})
-router.get('/updateProject', ensureAuthenticated, (req, res) => {
-  res.render('updateProject');
-})
-
 // Add thumbnail page (thumbnails image/video seen on Homepage)
 router.get('/uploadThumbnail', ensureAuthenticated, (req, res) => {
   res.render('uploadThumbnail');
@@ -39,7 +31,7 @@ router.get('/uploadProject', ensureAuthenticated, (req, res) => {
 })
 
 /**
- * auth | log out
+ * auth | log
  */
 router.get('/logoff', function (req, res, next) {
   req.logout(function(err){
@@ -47,12 +39,17 @@ router.get('/logoff', function (req, res, next) {
       return next(err);
     }
   req.flash('success_msg', "You are logged out");
-  res.redirect('/login');
-});
+  res.redirect('/login'); 
+  });
 });
 
+// update 
+router.get('/updateThumbnail/:id', ensureAuthenticated, backofficeController.updateThumbnail);
+router.get('/updateProject/:id', ensureAuthenticated, backofficeController.updateProject);
 
-// POST
+router.post('/thumbnailUpdated', ensureAuthenticated, backofficeController.handleThumbnailUpdate);
+router.post('/projectUpdated', ensureAuthenticated, backofficeController.handleProjectUpdate);
+
 
 // Upload files paths to the database (homepage - thumbnails) 
 router.post('/uploadThumbnail', 
@@ -65,6 +62,9 @@ router.post('/uploadThumbnail',
 
 // POST route for uploading text and files paths to the database for the Project page 
 router.post('/uploadProject', backofficeController.addProject);     
+
+
+
 
 
 module.exports = router;
