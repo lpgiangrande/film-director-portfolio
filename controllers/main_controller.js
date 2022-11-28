@@ -11,10 +11,18 @@ const User = require('../models/User');
 
 
 exports.homePage = (req, res) => {
-    Thumbnail.find({}, function(err, thumbnails){
+    
+Thumbnail.find()
+    .sort({"releaseDate": -1})
+    .exec(function(err, thumbnails){
+        res.render('index', { thumbnailsList: thumbnails })}
+    )
+}
+   /* Thumbnail.find({}, function(err, thumbnails){
         res.render('index', { thumbnailsList: thumbnails })
     })
-};
+};*/
+
 
 // Order thumbnails by category for the Animation page
 exports.animationPage = (req, res) => {
