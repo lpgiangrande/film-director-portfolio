@@ -11,6 +11,7 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
 //const cors = require('cors')
+const helmet = require('helmet');
 require("dotenv").config();
 const app = express();
 
@@ -39,6 +40,11 @@ app.set('view engine', 'ejs')
 app.use('/public', express.static(path.join(__dirname, 'public')))
 
 //app.use(cors())
+
+// Helmet (helps secure your Express apps by setting various HTTP headers)
+// -> doc : https://helmetjs.github.io/
+app.use(helmet())
+app.disable('x-powered-by')
 
 // Session Configuration 
 app.use(
@@ -76,7 +82,7 @@ app.use('/', basicroutes)
 
 
 // PORT
-const PORT = process.env.PORT || 4000 
+const PORT = process.env.PORT || 3000 
 
 app.listen(PORT, () => { 
     console.log(`server is running on ${PORT}`)
