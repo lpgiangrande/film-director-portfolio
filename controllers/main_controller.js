@@ -26,7 +26,7 @@ Thumbnail.find()
 
 // Order thumbnails by category for the Animation page
 exports.animationPage = (req, res) => {
-    const query = Thumbnail.find({ 'category': 'animation' })
+    const query = Thumbnail.find({ 'category': 'animation' }).sort({"releaseDate": -1})
     query.exec(function(err, thumbnails){
         res.render('animation', {
             thumbnailsList: thumbnails
@@ -36,7 +36,7 @@ exports.animationPage = (req, res) => {
 
 // Order thumbnails by category for the Liveaction page
 exports.liveActionPage = (req, res) => {
-    const query = Thumbnail.find({ 'category': 'liveaction' })
+    const query = Thumbnail.find({ 'category': 'liveaction' }).sort({"releaseDate": -1})
     query.exec(function(err, thumbnails){
         res.render('liveaction', {
             thumbnailsList: thumbnails
