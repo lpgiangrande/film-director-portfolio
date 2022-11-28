@@ -11,7 +11,7 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
 //const cors = require('cors')
-const helmet = require('helmet');
+//const helmet = require('helmet');
 require("dotenv").config();
 const app = express();
 
@@ -43,8 +43,8 @@ app.use('/public', express.static(path.join(__dirname, 'public')))
 
 // Helmet (helps secure your Express apps by setting various HTTP headers)
 // -> doc : https://helmetjs.github.io/
-app.use(helmet());
-app.disable('x-powered-by');
+//app.use(helmet());
+//app.disable('x-powered-by');
 
 // Session Configuration 
 app.use(
