@@ -30,7 +30,7 @@
                     <%if(project.gallery[index].endsWith('.jpg')){%>
                         <div class="col-sm-6 col-xs-12"><img class="img-fluid" src="<%= project.gallery[index] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
                     <% }  else { %>
-                        <div class="col-sm-6 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/mp4" data-action="zoom"></video></div>
+                        <div class="col-sm-6 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/mp4"></video></div>
                     <% } %>
                     <%# console.log(project.gallery) %>
             
@@ -51,7 +51,7 @@
                         <%if(project.gallery[index].endsWith('.jpg')){%>
                             <div class="col-sm-4 col-xs-12"><img class="img-fluid" src="<%= project.gallery[index] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
                         <% }  else { %>
-                            <div class="col-sm-4 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/mp4" data-action="zoom"></video></div>
+                            <div class="col-sm-4 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/mp4"></video></div>
                         <% } %>
 
                     <% } %>
@@ -72,7 +72,7 @@
                         <%if(project.gallery[index].endsWith('.jpg')){%>
                             <div class="col-sm-6 col-xs-12"><img class="img-fluid w-100" src="<%= project.gallery[index] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
                         <% }  else { %>
-                            <div class="col-sm-6 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/mp4" data-action="zoom"></video></div>
+                            <div class="col-sm-6 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/mp4"></video></div>
                         <% } %>
 
                     <% } %>
@@ -92,8 +92,8 @@
 
                         <%if(project.gallery[index].endsWith('.jpg')){%>
                             <div class="col-sm-6 col-xs-12"><img class="img-fluid w-100" src="<%= project.gallery[index] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
-                        <% }  else { %>
-                            <div class="col-sm-6 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/mp4" data-action="zoom"></video></div>
+                        <% } else { %>
+                            <div class="col-sm-6 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/mp4"></video></div>
                         <% } %>
 
                     <% } %>
