@@ -64,7 +64,7 @@
             <div class="row gy-4 gx-4 d-flex mb-4"> 
 
                 <% project.gallery.forEach((element, index) => {%>
-                    <% if(index > 4) {%>
+                    <% if(index >=5  && index <= 8) {%>
 
                         <%if(project.gallery[index].endsWith('.jpg')){%>
                             <div class="col-sm-6 col-xs-12"><img class="img-fluid w-100" src="<%= project.gallery[index] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
@@ -80,22 +80,26 @@
             <div>
                 <p class="text-white projet-paragraphe mb-4"><%=project.gallery_row_3_description%></p>
             </div>
-            <!-- ROW 4 - GALLERY - ALL THE IMGS LEFT, indexes 7 to 15 
+            <!-- ROW 4 - GALLERY - ALL THE IMGS LEFT, indexes 7 to 15 -->
             <div class="row gy-4 gx-4 d-flex mb-4"> 
 
-                <#% project.gallery.forEach((element, index) => {%>
-                    <#% if(index >= 7) {%>
+                <% project.gallery.forEach((element, index) => {%>
+                    <% if(index > 8 && index <=16) {%>
 
-                        <#%if(project.gallery[index].endsWith('.jpg')){%>
-                            <div class="col-sm-6 col-xs-12"><img class="img-fluid w-100" src="<#%= project.gallery[index] %>" alt="visuel pour <#%= project.project_title %>" data-action="zoom"></div>
-                        <#% } else { %>
-                            <div class="col-sm-6 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<#%= project.gallery[index] %>"  type="video/mp4"></video></div>
-                        <#% } %>
+                        <%if(project.gallery[index].endsWith('.jpg')){%>
+                            <div class="col-sm-6 col-xs-12"><img class="img-fluid w-100" src="<%= project.gallery[index] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+                        <% } else { %>
+                            <div class="col-sm-6 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/mp4"></video></div>
+                        <% } %>
 
-                    <#% } %>
-                <#%})%>
+                    <% } %>
+                <%})%>
 
-            </div>-->
+            </div>
+            <!--ROW 4 TEXT -->
+            <div>
+                <p class="text-white projet-paragraphe mb-4"><%=project.gallery_row_4_description%></p>
+            </div>
         </section>
         <!-- IF MORE THAN 1 VIMEO VIDS :  -->
         <section>
