@@ -21,7 +21,7 @@
         <!-- SECTION 2-->
         <section id="section-2">
             <!--ROW 1 - Gallery : indexes 0 to 3 -->
-            <div class="row gy-4 gx-4 d-flex"> 
+            <div class="row gy-4 gx-4 mb-4 d-flex"> 
 
                 <% project.gallery.forEach((element, index) => {%>
 
@@ -38,12 +38,10 @@
                 <%})%>
             
             </div>
-            <br>
             <!--ROW 1 TEXT -->
             <div>
-                <p class="text-white projet-paragraphe"> <%= project.gallery_row_1_description %> </p>
+                <p class="text-white projet-paragraphe mb-4"> <%= project.gallery_row_1_description %> </p>
             </div>
-            <br> 
             <!-- VID 2 -->
             <% if (project.array_vids[1]) {%>
                 <div class="video-iframe d-flex justify-content-center pb-4">
@@ -52,12 +50,11 @@
                 <br>
             <% } %>
             <% if (project.video2_description) {%>
-                <p class="text-white projet-paragraphe"> <%= project.video2_description %> </p>
-                <br>
+                <p class="text-white projet-paragraphe mb-4"> <%= project.video2_description %> </p>
             <% } %>
 
             <!-- ROW 2 - gallery : indexes 4 to 7 -->
-            <div class="row gy-4 gx-4 d-flex"> 
+            <div class="row gy-4 gx-4 mb-4 d-flex"> 
 
                 <% project.gallery.forEach((element, index) => {%>
 
@@ -72,13 +69,12 @@
                     <% } %>
                 <%})%>
             </div>
-            <br><!--ROW 2 TEXT -->
+            <!--ROW 2 TEXT -->
             <div>
-                <p class="text-white projet-paragraphe"> <%= project.gallery_row_2_description %> </p>
+                <p class="text-white projet-paragraphe mb-4"> <%= project.gallery_row_2_description %> </p>
             </div>
-            <br> 
             <!-- ROW 3 - Gallery : indexes 8 to max 11-->
-            <div class="row gy-4 gx-4 d-flex"> 
+            <div class="row gy-4 gx-4 mb-4 d-flex"> 
 
                 <% project.gallery.forEach((element, index) => {%>
                     <% if (index >7 && index <= 11) {%>
@@ -93,14 +89,12 @@
                 <%})%>
 
             </div>
-            <br>
             <!--ROW 3 TEXT -->
             <div>
-                <p class="text-white projet-paragraphe"> <%= project.gallery_row_3_description %> </p>
+                <p class="text-white projet-paragraphe mb-4"> <%= project.gallery_row_3_description %> </p>
             </div>
-            <br> 
             <!-- ROW 4 - Gallery : indexes 12 to max 15-->
-            <div class="row gy-4 gx-4 d-flex"> 
+            <div class="row gy-4 gx-4 mb-4 d-flex"> 
 
                 <% project.gallery.forEach((element, index) => {%>
                     <% if (index >11 && index <= 15) {%>
@@ -115,12 +109,10 @@
                 <%})%>
 
             </div>
-            <br>
            <!--ROW 4 TEXT -->
             <div>
-                <p class="text-white projet-paragraphe"> <%= project.gallery_row_4_description %> </p>
+                <p class="text-white projet-paragraphe mb-4"> <%= project.gallery_row_4_description %> </p>
             </div>
-            <br> 
         </section>
         <!-- IF MORE VIMEO VIDS :  -->
         <section>
@@ -131,8 +123,7 @@
                 </div>
                 <br>
             <% } %>
-            <p class="text-white projet-paragraphe"> <%= project.video3_description %> </p>
-            <br>
+            <p class="text-white projet-paragraphe mb-4"> <%= project.video3_description %> </p>
             <!-- VID 4 -->
             <% if (project.array_vids[3]) {%>
             <div class="video-iframe d-flex justify-content-center pb-4">
@@ -140,8 +131,7 @@
             </div>
             <br>
             <% } %>
-            <p class="text-white projet-paragraphe"> <%= project.video4_description %> </p>
-            <br> 
+            <p class="text-white projet-paragraphe mb-4"> <%= project.video4_description %> </p>
         </section>
     </main>
 </div>
