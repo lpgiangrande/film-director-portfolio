@@ -172,7 +172,7 @@ p{
     margin-bottom: 0.4em;
 }
 p.projet-paragraphe{
-    font-size: 14px;
+    font-size: 1.167em!important;
 }
 .video-iframe{
     position: relative; 
@@ -188,3 +188,7 @@ p.projet-paragraphe{
     border: 0; 
 }
 
+/* page upload */
+textarea, p.projet-paragraphe{
+    white-space: pre-wrap;
+}

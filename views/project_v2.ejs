@@ -40,7 +40,7 @@
             </div>
             <!--ROW 1 TEXT -->
             <div>
-                <p class="text-white projet-paragraphe mb-4"> <%= project.gallery_row_1_description %> </p>
+                <p class="text-white projet-paragraphe mb-4"><%=project.gallery_row_1_description%></p>
             </div>
             <!-- VID 2 -->
             <% if (project.array_vids[1]) {%>
@@ -50,7 +50,7 @@
                 <br>
             <% } %>
             <% if (project.video2_description) {%>
-                <p class="text-white projet-paragraphe mb-4"> <%= project.video2_description %> </p>
+                <p class="text-white projet-paragraphe mb-4"><%=project.video2_description%></p>
             <% } %>
 
             <!-- ROW 2 - gallery : indexes 4 to 7 -->
@@ -71,7 +71,7 @@
             </div>
             <!--ROW 2 TEXT -->
             <div>
-                <p class="text-white projet-paragraphe mb-4"> <%= project.gallery_row_2_description %> </p>
+                <p class="text-white projet-paragraphe mb-4"><%=project.gallery_row_2_description%></p>
             </div>
             <!-- ROW 3 - Gallery : indexes 8 to max 11-->
             <div class="row gy-4 gx-4 mb-4 d-flex"> 
@@ -91,7 +91,7 @@
             </div>
             <!--ROW 3 TEXT -->
             <div>
-                <p class="text-white projet-paragraphe mb-4"> <%= project.gallery_row_3_description %> </p>
+                <p class="text-white projet-paragraphe mb-4"><%=project.gallery_row_3_description%></p>
             </div>
             <!-- ROW 4 - Gallery : indexes 12 to max 15
             <div class="row gy-4 gx-4 mb-4 d-flex"> 
@@ -111,7 +111,7 @@
             </div>-->
            <!--ROW 4 TEXT -->
             <div>
-                <p class="text-white projet-paragraphe mb-4"> <%= project.gallery_row_4_description %> </p>
+                <p class="text-white projet-paragraphe mb-4"><%=project.gallery_row_4_description%></p>
             </div>
         </section>
         <!-- IF MORE VIMEO VIDS :  -->
@@ -123,7 +123,7 @@
                 </div>
                 <br>
             <% } %>
-            <p class="text-white projet-paragraphe mb-4"> <%= project.video3_description %> </p>
+            <p class="text-white projet-paragraphe mb-4"><%=project.video3_description%></p>
             <!-- VID 4 -->
             <% if (project.array_vids[3]) {%>
             <div class="video-iframe d-flex justify-content-center pb-4">
@@ -131,7 +131,7 @@
             </div>
             <br>
             <% } %>
-            <p class="text-white projet-paragraphe mb-4"> <%= project.video4_description %> </p>
+            <p class="text-white projet-paragraphe mb-4"> <%project.video4_description%></p>
         </section>
     </main>
 </div>
