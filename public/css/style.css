@@ -171,6 +171,9 @@ h1.project_title{
 p{
     margin-bottom: 0.4em;
 }
+p.projet-paragraphe{
+    font-size: 14px;
+}
 .video-iframe{
     position: relative; 
     overflow: hidden; 
