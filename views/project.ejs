@@ -60,6 +60,17 @@
             <div>
                 <p class="text-white projet-paragraphe mb-4"><%=project.gallery_row_2_description%></p>
             </div>
+            <!-- VID 2 -->
+            <% if (project.video2_description) {%>
+                <p class="text-white projet-paragraphe mb-4"><%=project.video2_description%></p>
+            <% } %>
+            <% if (project.array_vids[1]) {%>
+                <div class="video-iframe d-flex justify-content-center pb-4">
+                    <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[1]%>"  frameborder="0" allowfullscreen></iframe>
+                </div>
+                <br>
+            <% } %>
+            <br>
             <!-- ROW 3 - GALLERY : indexes 5 to 6 -->
             <div class="row gy-4 gx-4 d-flex mb-4"> 
 
@@ -80,6 +91,16 @@
             <div>
                 <p class="text-white projet-paragraphe mb-4"><%=project.gallery_row_3_description%></p>
             </div>
+            <!-- VID 3 -->
+            <% if (project.video3_description) {%>
+                <p class="text-white projet-paragraphe mb-4"><%=project.video3_description%></p>
+            <% } %>
+            <% if (project.array_vids[2]) {%>
+                <div class="video-iframe d-flex justify-content-center pb-4">
+                    <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[2]%>"  frameborder="0" allowfullscreen></iframe>
+                </div>
+                <br>
+            <% } %>
             <!-- ROW 4 - GALLERY - ALL THE IMGS LEFT, indexes 7 to 15 -->
             <div class="row gy-4 gx-4 d-flex mb-4"> 
 
@@ -102,27 +123,7 @@
             </div>
         </section>
         <!-- IF MORE THAN 1 VIMEO VIDS :  -->
-        <section>
-            <!-- VID 2 -->
-            <% if (project.video2_description) {%>
-                <p class="text-white projet-paragraphe mb-4"><%=project.video2_description%></p>
-            <% } %>
-            <% if (project.array_vids[1]) {%>
-                <div class="video-iframe d-flex justify-content-center pb-4">
-                    <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[1]%>"  frameborder="0" allowfullscreen></iframe>
-                </div>
-                <br>
-            <% } %>
-            <!-- VID 3 -->
-            <% if (project.video3_description) {%>
-                <p class="text-white projet-paragraphe mb-4"><%=project.video3_description%></p>
-            <% } %>
-            <% if (project.array_vids[2]) {%>
-                <div class="video-iframe d-flex justify-content-center pb-4">
-                    <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[2]%>"  frameborder="0" allowfullscreen></iframe>
-                </div>
-                <br>
-            <% } %>
+        <section>           
             <!-- VID 4 -->
             <% if (project.video4_description) {%>
                 <p class="text-white projet-paragraphe mb-4"><%=project.video4_description%></p>
