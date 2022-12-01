@@ -82,6 +82,8 @@ exports.addProject = (req, res) => {
         video2_description: req.body.video2_description, 
         video3_description: req.body.video3_description,
         video4_description: req.body.video4_description,
+        video5_description: req.body.video5_description,
+        video6_description: req.body.video6_description,
 
         //images
         gallery : gallery, // gallery_video : req.files.gallery_video;
@@ -167,12 +169,12 @@ exports.updateThumbnail = (req, res) => {
     thumbnailsSchema.findById(id)
     //.then(thumbnail => res.json(thumbnail))
     //.catch(err => res.status(400).json('The fuck is the Error: ' + err));
-    .exec()
-    .then(thumbnail => {
-        res.render("updateThumbnail", {
-            thumbnail: thumbnail
+        .exec()
+        .then(thumbnail => {
+            res.render("updateThumbnail", {
+                thumbnail: thumbnail
+            })
         })
-    })
 }
 
 // UPDATE project by id in the request

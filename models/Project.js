@@ -34,7 +34,7 @@ const projectSchema = mongoose.Schema({
     productor: {
         type: String,
     }, 
-    // Liens vimeo, max 4 :
+    // Liens vimeo, max 6 :
     array_vids: { 
         type: [String],
         required: true
@@ -46,6 +46,12 @@ const projectSchema = mongoose.Schema({
         type: String
     },
     video4_description:{
+        type: String
+    },
+    video5_description:{
+        type: String
+    },
+    video6_description:{
         type: String
     },
     // Images ou vids, max 16
