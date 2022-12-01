@@ -44,7 +44,7 @@
                 <p class="text-white projet-paragraphe mb-4"><%=project.gallery_row_1_description%></p>
             </div>
             <!-- ROW 2 - GALLERY : indexes 2 to 4 -->
-            <div class="row gy-4 gx-4 d-flex"> 
+            <div class="row gy-4 gx-4 d-flex mb-4"> 
 
                 <% project.gallery.forEach((element, index) => {%>
                     <% if(index > 1 && index < 5) {%>
@@ -61,7 +61,7 @@
             </div>
             <!--ROW 2 TEXT -->
             <div>
-                <p class="text-white projet-paragraphe"><%=project.gallery_row_2_description%></p>
+                <p class="text-white projet-paragraphe mb-4"><%=project.gallery_row_2_description%></p>
             </div>
             <!-- VID 2 -->
             <% if (project.video2_description) {%>
@@ -74,7 +74,7 @@
             <% } %>
 
             <!-- ROW 3 - GALLERY : indexes 5 to 6 -->
-            <div class="row gy-4 gx-4 d-flex mt-2"> 
+            <div class="row gy-4 gx-4 d-flex mt-2 mb-4"> 
 
                 <% project.gallery.forEach((element, index) => {%>
                     <% if(index >=5  && index <= 8) {%>
