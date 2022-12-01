@@ -1,27 +1,37 @@
-# PORTFOLIO WEBSITE 
-
-### BACKEND : NODE JS, EXPRESS JS, MONGOOSE
-### FRONTEND : HTML, CSS, BOOSTRAP 5, EJS
-
+# PORTFOLIO WEBSITE WITH ADMIN PANEL
 
 ## SITE PREVIEW (under construction)
 
 (https://mysterious-taiga-64071.herokuapp.com/).
 
 
-#### What I've learned
+## Built with
+
+* NODEJS, EXPRESS, MONGOOSE
+* HTML, CSS, BOOTSTRAP 5, EJS
+
+
+## Purpose
+
+Each time the owner wants to add a project to his portfolio, he can create the thumbnail for the homepage, and a linked page where he 
+adds videos (vimeo links), images (aws s3 files) and texts all stored in a MongoDb database.
+He can classify his projects by category, update them.
+
+
+### What I've learned / reviewed
+
 * EJS 
 * Secured admin panel | User registration, password hash, User authentification, secured routes, login, logout | (passport.js, bcryptjs)
 * Dotenv for environment variables
-*
-*
-*
-* NOTES (voc mongoose)
-* Collection : equivalent to tables in relational databases. They can hold multiple JSON documents.
-* Documents : records or rows of data in SQL.
-* Fields : ‘Fields’ or attributes are similar to columns in a SQL table.
-* Schema : A Mongoose ‘schema’ defines the structure of the document, default values, validators
-* Model :  Higher-order constructors that take a schema and create an instance of a document 
-* equivalent to records in a relational database.
-* Populate() : create ref between 2 collections / can accept a string or an object as an input.
-* Mongoose Provides an interface to the database for creating, querying, updating, deleting records
+* CRUD operations 
+* Mongoose 
+
+
+### Screenshots
+
+![](public/screenshots-readme/fullpageliveaction.png)
+![](public/screenshots-readme/fullpage.png)
+![](public/screenshots-readme/list.png)
+![](public/screenshots-readme/ajoutthumb.png)
+![](public/screenshots-readme/logout.png)
+![](public/screenshots-readme/secured_routes.png)
