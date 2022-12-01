@@ -130,6 +130,28 @@
                 </div>
                 <br>
             <% } %>
+
+            <!-- VID 5 -->
+            <% if (project.video5_description) {%>
+                <p class="text-white projet-paragraphe mb-4"><%=project.video5_description%></p>
+            <% } %>
+            <% if (project.array_vids[4]) {%>
+                <div class="video-iframe d-flex justify-content-center pb-4">
+                    <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[4]%>"  frameborder="0" allowfullscreen></iframe>
+                </div>
+            <% } %>
+
+            <br>
+            
+            <!-- VID 6 -->
+            <% if (project.video6_description) {%>
+                <p class="text-white projet-paragraphe mb-4"><%=project.video6_description%></p>
+            <% } %>
+            <% if (project.array_vids[5]) {%>
+                <div class="video-iframe d-flex justify-content-center pb-4">
+                    <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[5]%>"  frameborder="0" allowfullscreen></iframe>
+                </div>
+            <% } %>
         </section>
     </main>
 </div>

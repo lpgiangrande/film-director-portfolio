@@ -191,4 +191,5 @@ p.projet-paragraphe{
 /* page upload */
 textarea, p.projet-paragraphe{
     white-space: pre-wrap;
+    text-align : justify;
 }
