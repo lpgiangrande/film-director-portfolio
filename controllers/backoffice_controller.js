@@ -248,6 +248,7 @@ exports.handleProjectUpdate = (req, res) => {
         video4_description: req.body.video4_description,
         video5_description: req.body.video5_description,
         video6_description: req.body.video6_description,
+        video7_description: req.body.video7_description,
 
         gallery : gallery, 
         gallery_row_1_description : req.body.description_1,
