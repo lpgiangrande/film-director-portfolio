@@ -9,6 +9,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 
 
+// HOME PAGE -> display and order thumbnails from most recent to oldest 
 
 exports.homePage = (req, res) => {
     
@@ -18,13 +19,10 @@ Thumbnail.find()
         res.render('index', { thumbnailsList: thumbnails })}
     )
 }
-   /* Thumbnail.find({}, function(err, thumbnails){
-        res.render('index', { thumbnailsList: thumbnails })
-    })
-};*/
 
 
-// Order thumbnails by category for the Animation page
+// "ANIMATION" PAGE : -> Order thumbnails by said category & from most recent to oldest :
+
 exports.animationPage = (req, res) => {
     const query = Thumbnail.find({ 'category': 'animation' }).sort({"releaseDate": -1})
     query.exec(function(err, thumbnails){
@@ -34,7 +32,19 @@ exports.animationPage = (req, res) => {
     })     
 };
 
-// Order thumbnails by category for the Liveaction page
+/*
+exports.animationPage = (req, res) => {
+    Thumbnail.find({ 'category': 'animation' }).sort({"releaseDate": -1}).exec(function(err, thumbnails){
+        res.render('animation', {
+            thumbnailsList: thumbnails
+        })
+    })     
+};
+*/
+
+
+// "LIVE ACTION" PAGE : -> Order thumbnails by said category & from most recent to oldest :
+
 exports.liveActionPage = (req, res) => {
     const query = Thumbnail.find({ 'category': 'liveaction' }).sort({"releaseDate": -1})
     query.exec(function(err, thumbnails){
@@ -44,11 +54,16 @@ exports.liveActionPage = (req, res) => {
     })      
 };
 
-/* 
-From thumbnail clic to project details page 
+
+// WHEN A THUMBNAIL IS SELECTED -> homepage/:id, liveaction/:id, animation/:id :
+
+/*
 --> If img gallery nb = odd, render template 1 
 --> If img gallery nb = even, render template 2 
+
+--> This allows for an alternative layout and ensures that no images are left isolated outside of the grid.
 */
+
 exports.seeFullProject = (req, res) => {
 
     //req.params.id = id du thumbnail
@@ -74,7 +89,20 @@ exports.aboutPage = (req, res) => {
 };
 
 
-// --> to backoffice
+
+// ***** Access to the admin panel *****
+
+/*
+ This code checks for the required fields, whether the passwords match, 
+ and the length of the password. It then checks if the user already exists 
+ in the database, and if not, it creates a new user with a hashed password and saves 
+ the user to the database.
+
+ Bcrypt is the hashing algorithm used to hash passwords before storing them in the DB.
+ */
+
+
+ // Render auth pages :
 
 exports.loginPage = (req, res) => {
     res.render('login') // router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
@@ -85,7 +113,8 @@ exports.registerPage = (req, res) => {
 }
 
 
-// Register handle - POST
+// Register handle - POST :
+
 exports.handleRegistration =  (req, res) => { 
     
     console.log("req body : ", req.body);
