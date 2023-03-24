@@ -46,8 +46,8 @@ exports.liveActionPage = (req, res) => {
 
 /* 
 From thumbnail clic to project details page 
---> If img gallery nb = odd, render template 1
---> If img gallery nb = even, render template 2
+--> If img gallery nb = odd, render template 1 
+--> If img gallery nb = even, render template 2 
 */
 exports.seeFullProject = (req, res) => {
 
@@ -58,11 +58,10 @@ exports.seeFullProject = (req, res) => {
         .then(project => {
 
             ( project.gallery.length % 2 === 0 ) ? 
-                res.render('project_v2', { project : project})
-                : res.render('project', { project : project});
+                res.render('project_v2', { project : project}) // pair
+                : res.render('project', { project : project}); // impair
             
-            console.log( "nb d'images : ", project.gallery.length);
-            
+            //console.log("nb d'images : ", project.gallery.length);
             //console.log("id du projet : " + project._id);
         })
         .catch(error => {
@@ -73,6 +72,7 @@ exports.seeFullProject = (req, res) => {
 exports.aboutPage = (req, res) => {
     res.render('about')
 };
+
 
 // --> to backoffice
 
