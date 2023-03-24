@@ -1,31 +1,37 @@
 # PORTFOLIO WEBSITE WITH ADMIN PANEL
 
-## SITE PREVIEW (under construction)
+## LIVE SITE
 
-(https://mysterious-taiga-64071.herokuapp.com/).
-
+(https://www.regisraffin.com/).
 
 ## Built with
 
-* NODEJS, EXPRESS, MONGOOSE
-* HTML, CSS, BOOTSTRAP 5, EJS
-
+- Backend : Nodejs & Expressjs, MongoDB & Mongoose
+- Frontend : html, css, bootstrap 5, ejs, javaScript
 
 ## Purpose
 
-Each time the owner wants to add a project to his portfolio, he can create the thumbnail for the homepage, and a linked page where he 
-adds videos (vimeo links), images (aws s3 files) and texts all stored in a MongoDb database.
-He can classify his projects by category, update them.
+Portfolio website with a content management system.
 
+### What I've learned or reviewed
 
-### What I've learned / reviewed
+- EJS
+- Secured admin panel | User registration, password hash, User authentification, secured routes, login, logout | (passport.js, bcryptjs)
+- Dotenv for environment variables
+- CRUD operations
+- Mongoose ORM with NoSQL database MongoDB
+- JSDoc
+- AWS : S3 bucket policies - Host on Amazon Lightsail, use of nano editor
 
-* EJS 
-* Secured admin panel | User registration, password hash, User authentification, secured routes, login, logout | (passport.js, bcryptjs)
-* Dotenv for environment variables
-* CRUD operations 
-* Mongoose 
+### To do / improve :
 
+- Cache-control, Page loading speed
+- Helmet library config / csp
+- express-mongo-sanitize library or express-validator, sanitize-html
+
+### Updated :
+
+- Do not allow more than two Users in db
 
 ### Screenshots
 
@@ -35,3 +41,4 @@ He can classify his projects by category, update them.
 ![](public/screenshots-readme/ajoutthumb.png)
 ![](public/screenshots-readme/logout.png)
 ![](public/screenshots-readme/secured_routes.png)
+![](public/screenshots-readme/two-users-only.png)
