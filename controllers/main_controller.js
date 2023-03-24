@@ -182,4 +182,4 @@ exports.handleRegistration =  (req, res) => {
             }
         })
     }
-  }
+}
