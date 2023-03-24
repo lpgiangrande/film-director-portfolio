@@ -1,6 +1,6 @@
-# PORTFOLIO WEBSITE WITH ADMIN PANEL
+# PORTFOLIO WEBSITE WITH A CONTENT MANAGEMENT SYSTEM
 
-## LIVE SITE
+## Live site
 
 (https://www.regisraffin.com/).
 
@@ -8,10 +8,6 @@
 
 - Backend : Nodejs & Expressjs, MongoDB & Mongoose
 - Frontend : html, css, bootstrap 5, ejs, javaScript
-
-## Purpose
-
-Portfolio website with a content management system.
 
 ### What I've learned or reviewed
 
