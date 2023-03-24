@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
-
 const mongoose = require("mongoose");
+const bcrypt = require('bcryptjs');
+
 const Thumbnail = require('../models/Thumbnails');
 const projectSchema = require('../models/Project');
-
-const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 
 
