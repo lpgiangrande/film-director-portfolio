@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
+const cacheControl = require('cache-control');
 //const cors = require('cors')
 //const helmet = require('helmet');
 require("dotenv").config();
@@ -70,6 +71,10 @@ app.use(function(req, res, next) {
   next();
 });
 
+// Cache-control
+app.use(cacheControl({
+  maxAge: 86400 // durée de mise en cache en secondes (ici 24 heures)
+}));
 
 /**
  * ROUTES
