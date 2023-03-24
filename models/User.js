@@ -18,10 +18,8 @@ const userSchema = mongoose.Schema({
     }
 });
 
-// userSchema.statics.countUsers = function () {
-//     return this.countDocuments();
-// };
-
-userSchema.statics.countUsers = () => this.countDocuments();
+userSchema.statics.countUsers = function () {
+    return this.countDocuments();
+};
 
 module.exports = mongoose.model('User', userSchema);
