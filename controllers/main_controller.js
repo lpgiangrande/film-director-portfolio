@@ -30,22 +30,32 @@ const User = require('../models/User');
  * @returns {void}
  */
 
-exports.homePage = (req, res) => {
-    
-    Thumbnail.find()
-        .sort({"releaseDate": -1})
-        .exec((err, thumbnails) => {
-            /*if (err) {
-                // traitement de l'erreur ici
-                console.log(err);
-                res.status(500).send('message d'erreur');
-            } else {
-                // traitement en cas de succès
-                res.render('index', { thumbnailsList: thumbnails });
-            }*/
-            res.render('index', { thumbnailsList: thumbnails })
-        })
-}
+//async/await
+exports.homePage = async (req, res) => {
+
+    try {
+      const thumbnails = await Thumbnail.find().sort({ releaseDate: -1 });
+      res.render('index', { thumbnailsList: thumbnails });
+    } catch (err) {
+      console.log(err);
+      res.status(500).send('Sorry, we could not retrieve the data at this time. Please try again later.');
+    }
+
+};
+  
+// With Promises
+//   exports.homePage = (req, res) => {
+//     Thumbnail.find()
+//       .sort({ releaseDate: -1 })
+//       .then((thumbnails) => {
+//         res.render('index', { thumbnailsList: thumbnails });
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//         res.status(500).send('error');
+//       });
+//   };
+  
 
 
 /**
@@ -53,26 +63,40 @@ exports.homePage = (req, res) => {
  * sorted by release date in descending order.
 */
 
-exports.animationPage = (req, res) => {
-    const query = Thumbnail.find({ 'category': 'animation' }).sort({"releaseDate": -1})
-    query.exec((err, thumbnails) => {
-        res.render('animation', {
-            thumbnailsList: thumbnails
-        })
-    })     
+exports.animationPage = async (req, res) => {
+
+    try {
+      const thumbnails = await Thumbnail.find({ category: 'animation' })
+        .sort({ releaseDate: -1 })
+        .exec();
+  
+      res.render('animation', { thumbnailsList: thumbnails });
+    } catch (err) {
+      console.log(err);
+      res.status(500).send('Sorry, we could not retrieve the data at this time. Please try again later.');
+    }
+    
 };
+  
 
 
 /**
  * Same with liveaction page. 
 */
 
-exports.liveActionPage = (req, res) => {
-    const query = Thumbnail.find({ 'category': 'liveaction' }).sort({"releaseDate": -1})
-    query.exec((err, thumbnails) => {
-        res.render('liveaction', { thumbnailsList: thumbnails })
-    })      
-};
+exports.liveActionPage = async (req, res) => {
+    try {
+      const thumbnails = await Thumbnail.find({ category: 'liveaction' })
+        .sort({ releaseDate: -1 })
+        .exec();
+  
+      res.render('liveaction', { thumbnailsList: thumbnails });
+    } catch (err) {
+      console.log(err);
+      res.status(500).send('Sorry, we could not retrieve the live action thumbnails at this time. Please try again later.');
+    }
+  };
+  
 
 
 /**
@@ -88,24 +112,7 @@ exports.liveActionPage = (req, res) => {
  * @returns {void}
  */
 
-exports.seeFullProject = (req, res) => {
 
-    projectSchema.findOne({ "thumbnail": req.params.id })
-        //.populate("thumbnail")
-        .exec()
-        .then(project => {
-
-            ( project.gallery.length % 2 === 0 ) ? 
-                res.render('project_v2', { project : project}) // pair
-                : res.render('project', { project : project}); // impair
-            
-            //console.log("nb d'images : ", project.gallery.length);
-            //console.log("id du projet : " + project._id);
-        })
-        .catch(error => {
-            console.log(error)
-        });
-}
 
 
 /**
@@ -116,6 +123,22 @@ exports.aboutPage = (req, res) => {
     res.render('about')
 };
 
+exports.seeFullProject = async (req, res) => {
+    try {
+        const project = await projectSchema.findOne({ "thumbnail": req.params.id })/*.populate("thumbnail")*/.exec();
+        
+        if (project.gallery.length % 2 === 0) {
+            res.render('project_v2', { project: project }); // even
+        } else {
+            res.render('project', { project: project }); // odd
+        }
+        //console.log("nb d'images : ", project.gallery.length);
+        //console.log("id du projet : " + project._id);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Sorry, we could not retrieve the live action thumbnails at this time. Please try again later.');
+    }
+}
 
 
 // ***** ACCESS TO ADMIN PANEL *****
