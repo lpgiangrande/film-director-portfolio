@@ -93,7 +93,7 @@ exports.liveActionPage = async (req, res) => {
       res.render('liveaction', { thumbnailsList: thumbnails });
     } catch (err) {
       console.log(err);
-      res.status(500).send('Sorry, we could not retrieve the live action thumbnails at this time. Please try again later.');
+      res.status(500).send('Sorry, we could not retrieve the data at this time. Please try again later.');
     }
   };
   
@@ -126,7 +126,7 @@ exports.seeFullProject = async (req, res) => {
         //console.log("id du projet : " + project._id);
     } catch (error) {
         console.log(error);
-        res.status(500).send('Sorry, we could not retrieve the live action thumbnails at this time. Please try again later.');
+        res.status(500).send('Sorry, we could not retrieve the data at this time. Please try again later.');
     }
 }
 
