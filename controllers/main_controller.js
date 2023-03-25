@@ -143,11 +143,11 @@ exports.aboutPage = (req, res) => {
 // ***** ACCESS TO ADMIN PANEL *****
 
 exports.loginPage = (req, res) => {
-    res.render('login') // router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
+    res.render('login')
 }
 
 exports.registerPage = (req, res) => {
-    res.render('register') // router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
+    res.render('register') 
 }
 
 
@@ -194,6 +194,7 @@ exports.handleRegistration =  async (req, res) => {
       })
     } else {
         try {
+          //check for nb of users already registered
             const userCount = await User.countUsers();
             if (userCount >= 2) {
                 errors.push({ msg: 'Only two users are allowed.' });
@@ -204,7 +205,6 @@ exports.handleRegistration =  async (req, res) => {
                     pwd2
                 });
             } else {
-                //res.send('pass');
                 const user = await User.findOne({ username: username});
                 if(user){
                     // User exists
@@ -230,7 +230,7 @@ exports.handleRegistration =  async (req, res) => {
                             // Save user
                             newUser.save()
                                 .then(user => {
-                                    req.flash('success_msg', 'You are now registered. You can log in');
+                                    req.flash('success_msg', 'You are now registered. You can log in.');
                                     res.redirect('/login')
                                 })
                                 .catch(err => console.log(err));
