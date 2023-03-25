@@ -112,17 +112,6 @@ exports.liveActionPage = async (req, res) => {
  * @returns {void}
  */
 
-
-
-
-/**
- * Render the view for the About page (biography, photo, contact infos).
- */
-
-exports.aboutPage = (req, res) => {
-    res.render('about')
-};
-
 exports.seeFullProject = async (req, res) => {
     try {
         const project = await projectSchema.findOne({ "thumbnail": req.params.id })/*.populate("thumbnail")*/.exec();
@@ -132,6 +121,7 @@ exports.seeFullProject = async (req, res) => {
         } else {
             res.render('project', { project: project }); // odd
         }
+
         //console.log("nb d'images : ", project.gallery.length);
         //console.log("id du projet : " + project._id);
     } catch (error) {
@@ -139,6 +129,15 @@ exports.seeFullProject = async (req, res) => {
         res.status(500).send('Sorry, we could not retrieve the live action thumbnails at this time. Please try again later.');
     }
 }
+
+
+/**
+ * Render the view for the About page (biography, photo, contact infos).
+ */
+
+exports.aboutPage = (req, res) => {
+    res.render('about')
+};
 
 
 // ***** ACCESS TO ADMIN PANEL *****
