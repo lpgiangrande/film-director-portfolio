@@ -1,13 +1,6 @@
 const mongoose = require("mongoose");
 const thumbnailsSchema = require('../models/Thumbnails');
 const projectSchema = require('../models/Project');
-const { ensureAuthenticated } = require('../config/auth')
-const User = require('../models/User');
-
-//const User = require('../models/User');
-//const bcrypt = require('bcryptjs');
-//const passport = require('passport');
-
 require('../config/passport') // test
 
 /**
@@ -268,3 +261,5 @@ exports.handleProjectUpdate = (req, res) => {
     })
     
 }
+
+
