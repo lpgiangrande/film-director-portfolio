@@ -2,10 +2,6 @@ const express = require("express");
 const router = express.Router();
 const backofficeController = require('../controllers/backoffice_controller');
 const thumbnailsSchema = require('../models/Thumbnails');
-const User = require('../models/User');
-const projectSchema = require('../models/Project');
-const bcrypt = require('bcryptjs');
-const passport = require('passport');
 const { ensureAuthenticated } = require('../config/auth');
 
 
@@ -30,6 +26,12 @@ router.get('/uploadProject', ensureAuthenticated, (req, res) => {
     .catch();
 })
 
+// Update bio page
+router.get('/updateAbout', ensureAuthenticated, (req, res) => {
+  res.render('updateAbout');
+})
+
+
 /**
  * auth | log
  */
@@ -43,13 +45,15 @@ router.get('/logoff', function (req, res, next) {
   });
 });
 
-// update 
+// Update 
 router.get('/updateThumbnail/:id', ensureAuthenticated, backofficeController.updateThumbnail);
 router.get('/updateProject/:id', ensureAuthenticated, backofficeController.updateProject);
 
 router.post('/thumbnailUpdated', ensureAuthenticated, backofficeController.handleThumbnailUpdate);
 router.post('/projectUpdated', ensureAuthenticated, backofficeController.handleProjectUpdate);
 
+// Delete
+//router.get('/deleteThumbnail/:id', ensureAuthenticated, backofficeController.deleteThumbnail);
 
 // Upload files paths to the database (homepage - thumbnails) 
 router.post('/uploadThumbnail', 

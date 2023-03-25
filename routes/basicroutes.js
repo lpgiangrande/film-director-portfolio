@@ -7,10 +7,7 @@
 const express = require("express");
 const router = express.Router();
 const mainController = require('../controllers/main_controller');
-const backofficeController = require('../controllers/backoffice_controller');
-const bcrypt = require('bcryptjs');
 const passport = require('passport');
-const User = require('../models/User')
 const { forwardAuthenticated } = require('../config/auth');
 
 
