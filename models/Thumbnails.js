@@ -3,7 +3,14 @@ const { Schema } = mongoose;
 const Project = require('./Project');
 
 
-// THUMBNAILS FOR HOMEPAGE
+/* next time, use :
+
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+
+*/
 
 const thumbnailsSchema = mongoose.Schema({
     _id : mongoose.Schema.Types.ObjectId,
