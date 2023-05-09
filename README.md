@@ -18,7 +18,7 @@
 - Mongoose ORM with NoSQL database MongoDB
 - Asynchronous JS with async await keywords
 - JSDoc
-- AWS : S3 bucket policies - Host on Amazon Lightsail, use of nano editor
+- AWS : S3 bucket policies - Host on Amazon Lightsail, use of nano editor, server protection (fail2ban, logwatch...)
 
 ### To do / improve :
 
@@ -29,6 +29,7 @@
 ### Updated :
 
 - Do not allow more than two Users in db
+- instance security
 
 ### Screenshots
 
