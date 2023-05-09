@@ -155,7 +155,7 @@ exports.list = (req, res) => {
 
 }
 
-// UPDATE thumbnail by id in the request
+// UPDATE thumbnail by id 
 exports.updateThumbnail = (req, res) => {
 
     const id = req.params.id;
@@ -171,7 +171,7 @@ exports.updateThumbnail = (req, res) => {
         })
 }
 
-// UPDATE project by id in the request
+// UPDATE project by id
 exports.updateProject = (req, res) => {
 
     const projectId = req.params.id;
