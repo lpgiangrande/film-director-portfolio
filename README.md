@@ -18,7 +18,7 @@
 - Mongoose ORM with NoSQL database MongoDB
 - Asynchronous JS with async await keywords
 - JSDoc
-- AWS / debian server
+- AWS / debian server TEST
 
 ### To do / improve :
 
@@ -29,7 +29,6 @@
 ### Updated :
 
 - Do not allow more than two Users in db
-- instance security
 
 ### Screenshots
 
