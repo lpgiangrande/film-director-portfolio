@@ -1,0 +1,17 @@
+<%- include('partials/header_backoff.ejs') %>
+
+        <div class="container">
+            <form action="/updateBio" method="POST" id="bio-form"  class="justify-content-center align-items-center">
+            
+                <label for="message">Texte bio :</label>
+                <textarea id="bio-textarea" name="bioText" rows="20" cols="100"><%= biography.textBio %></textarea>
+                    
+                <div class="d-flex justify-content-center align-items-center">
+                    <input type="submit" class="btn btn-outline-light btn-lg"  value="Update bio">
+                </div>
+            </form>  
+        </div>
+    </body>
+</html>
+
+ 
