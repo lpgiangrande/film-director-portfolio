@@ -18,7 +18,11 @@
 - Mongoose ORM with NoSQL database MongoDB
 - Asynchronous JS with async await keywords
 - JSDoc
+<<<<<<< HEAD
 - AWS / debian server TEST
+=======
+- AWS / debian server
+>>>>>>> origin/master
 
 ### To do / improve :
 

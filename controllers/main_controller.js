@@ -4,7 +4,7 @@
  * to handle HTTP requests and render views using the Express framework. 
  * It also interacts with a MongoDB database using Mongoose ORM.
  * 
- * The 5 first functions is to display views for the user
+ * first 5 functions : display views for the user
  *  
  * The last functions are for the client to either register or login to access his admin panel. 
  * 
