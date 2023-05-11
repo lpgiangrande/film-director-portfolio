@@ -9,6 +9,7 @@ const router = express.Router();
 const mainController = require('../controllers/main_controller');
 const passport = require('passport');
 const { forwardAuthenticated } = require('../config/auth');
+const rateLimit = require('express-rate-limit');
 
 
 /**
@@ -22,7 +23,7 @@ const { forwardAuthenticated } = require('../config/auth');
  * @param {function} next - The next middleware function.
  * @returns {undefined}
  */
-router.post('/login', (req, res, next) => {
+router.post('/login', limiter, (req, res, next) => {
   passport.authenticate('local', {
     successRedirect: '/admin/list',
     failureRedirect: '/login',

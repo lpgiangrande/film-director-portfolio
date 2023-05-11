@@ -14,7 +14,9 @@ const cacheControl = require('cache-control');
 //const cors = require('cors')
 //const helmet = require('helmet');
 require("dotenv").config();
+const rateLimit = require('express-rate-limit')
 const app = express();
+
 
 
 //Passport config
@@ -75,6 +77,19 @@ app.use(function(req, res, next) {
 app.use(cacheControl({
   maxAge: 86400 // durée de mise en cache en secondes (ici 24 heures)
 }));
+
+
+// Protect form
+const limiter = rateLimit({
+	windowMs: 15 * 60 * 1000, // 15 minutes
+	max: 5, 
+	standardHeaders: true, 
+	legacyHeaders: false, 
+  message: "Too many login attempts from this IP, please try again in 15 minutes",
+})
+
+// Apply the rate limiting middleware to all requests
+app.use(limiter);
 
 /**
  * ROUTES
