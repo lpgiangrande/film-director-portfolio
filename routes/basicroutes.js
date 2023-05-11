@@ -9,7 +9,7 @@ const router = express.Router();
 const mainController = require('../controllers/main_controller');
 const passport = require('passport');
 const { forwardAuthenticated } = require('../config/auth');
-const rateLimit = require('express-rate-limit');
+const { limiter } = require('../server');
 
 
 /**

@@ -14,7 +14,7 @@ const cacheControl = require('cache-control');
 //const cors = require('cors')
 //const helmet = require('helmet');
 require("dotenv").config();
-const rateLimit = require('express-rate-limit')
+const rateLimit = require('express-rate-limit');
 const app = express();
 
 
@@ -88,20 +88,27 @@ const limiter = rateLimit({
   message: "Too many login attempts from this IP, please try again in 15 minutes",
 })
 
-// Apply the rate limiting middleware to all requests
-app.use(limiter);
+app.use('/login', limiter);
+module.exports = { limiter };
+
 
 /**
  * ROUTES
  */
+
+// Import routes
 const backoffice_routes = require('./routes/backoffice_routes.js')
 const basicroutes = require('./routes/basicroutes.js')
 
+// Use routes
 app.use('/admin', backoffice_routes)
 app.use('/', basicroutes)
 
 
-// PORT
+/**
+ * SERVER CONFIGURATION
+ */
+
 const PORT = process.env.PORT || 3000 
 
 app.listen(PORT, () => { 
