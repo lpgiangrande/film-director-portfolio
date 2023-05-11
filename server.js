@@ -18,7 +18,6 @@ const rateLimit = require('express-rate-limit');
 const app = express();
 
 
-
 //Passport config
 require('./config/passport')(passport);
 
