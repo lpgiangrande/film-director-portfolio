@@ -11,7 +11,6 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
 const cacheControl = require('cache-control');
-//const cors = require('cors')
 const helmet = require('helmet');
 require("dotenv").config();
 const rateLimit = require('express-rate-limit');
@@ -41,12 +40,7 @@ app.set('view engine', 'ejs')
 // GET PUBLIC FILES
 app.use('/public', express.static(path.join(__dirname, 'public')))
 
-//app.use(cors())
-
 // Helmet (helps secure your Express apps by setting various HTTP headers)
-// -> doc : https://helmetjs.github.io/
-//app.use(helmet());
-//app.disable('x-powered-by');
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
@@ -74,10 +68,6 @@ app.use(
     },
   })
 );
-
-
-
-
 
 // Session Configuration 
 app.use(
@@ -111,8 +101,8 @@ app.use(cacheControl({
 
 // Protect form
 const limiter = rateLimit({
-	windowMs: 15 * 60 * 1000, // 15 minutes
-	max: 5, 
+	windowMs: 15 * 60 * 1000, // ban 15 minutes + fail2ban 
+	max: 3, 
 	standardHeaders: true, 
 	legacyHeaders: false, 
   message: "Too many login attempts from this IP, please try again in 15 minutes",
