@@ -5,8 +5,7 @@
 This js file has two purposes :
 
 - 1. Make thumbnails title appear when mouse enter
-- 2. Switch thumbnail content from img to video when mouse enter
-- 3. On mouseleave (default) = show only thumbnail image
+- 2. Switch thumbnail content from img to video when mouse enter & video to img on mouse leave
 
 */
 'use strict';
@@ -44,4 +43,3 @@ for (let i = 0 ;
             thumbnail_img[i].style.display = "block";
         }
     }
-
