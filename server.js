@@ -12,7 +12,7 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const cacheControl = require('cache-control');
 //const cors = require('cors')
-//const helmet = require('helmet');
+const helmet = require('helmet');
 require("dotenv").config();
 const rateLimit = require('express-rate-limit');
 const app = express();
@@ -47,6 +47,37 @@ app.use('/public', express.static(path.join(__dirname, 'public')))
 // -> doc : https://helmetjs.github.io/
 //app.use(helmet());
 //app.disable('x-powered-by');
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      connectSrc: ["https://ka-f.fontawesome.com"],
+      frameSrc: ["'self'", "https://player.vimeo.com"],
+      scriptSrc: [
+        "'self'",
+        "https://site-regis.s3.eu-west-3.amazonaws.com",
+        "https://cdn.jsdelivr.net",
+        "https://kit.fontawesome.com",
+      ],
+      styleSrc: [
+        "'unsafe-inline'",
+        "https://site-regis.s3.eu-west-3.amazonaws.com",
+        "https://cdn.jsdelivr.net",
+        "https://fonts.googleapis.com",
+        "https://ka-f.fontawesome.com",
+      ],
+      fontSrc: ["'self'", "https://fonts.gstatic.com", "https://ka-f.fontawesome.com"],
+      imgSrc: ["'self'", "https://site-regis.s3.eu-west-3.amazonaws.com"],
+      mediaSrc: ["'self'", "https://site-regis.s3.eu-west-3.amazonaws.com"],
+      scriptSrcAttr: ["'unsafe-inline'"],
+      styleSrcAttr: ["'none'"],
+    },
+  })
+);
+
+
+
+
 
 // Session Configuration 
 app.use(

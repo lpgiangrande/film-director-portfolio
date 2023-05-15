@@ -35,7 +35,7 @@
         </main>
         <%- include('partials/footer.ejs') %>
         <!-- CHECK DEVICE TYPE  -->
-        <script>
+        <!-- <script>
             let detectDeviceType = () =>
                 /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
                     ? 'Mobile'
@@ -55,6 +55,7 @@
 
                 document.head.appendChild(script);
             }
-        </script>
+        </script> -->
+        <script src="https://site-regis.s3.eu-west-3.amazonaws.com/public/js/detectDeviceType.js"></script>
     </body>
 </html>

@@ -24,6 +24,7 @@
                                     <video class="thumbnail_vid hidden w-100 h-100" autoplay playsinline muted loop src="<%= thumbnail.videoSrc %>" type="video/mp4"></video>
                                 </div>
                             </a>
+                            
                         </div>
           
                     <%})%>
@@ -35,26 +36,6 @@
         </main>
         <%- include('partials/footer.ejs') %>
         <!-- CHECK DEVICE TYPE  -->
-        <script>
-            let detectDeviceType = () =>
-                /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-                    ? 'Mobile'
-                    : 'Desktop';
-                console.log(detectDeviceType()); 
-
-            if (detectDeviceType() === 'Desktop'){
-                // append Js file to html file :
-                const script = document.createElement('script');
-                script.src = 'https://site-regis.s3.eu-west-3.amazonaws.com/public/js/thumbnail.js';  
-
-                document.head.appendChild(script);
-
-            } else {
-                const script = document.createElement('script');
-                script.src = 'https://site-regis.s3.eu-west-3.amazonaws.com/public/js/remove_vids.js' //public/js/remove_vids.js';  
-
-                document.head.appendChild(script);
-            }
-        </script>
+        <script src="https://site-regis.s3.eu-west-3.amazonaws.com/public/js/detectDeviceType.js"></script>
     </body>
 </html>
