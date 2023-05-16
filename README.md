@@ -16,15 +16,13 @@
 - Dotenv for environment variables
 - CRUD operations
 - Mongoose ORM with NoSQL database MongoDB
-- Asynchronous JS with async await keywords
-- JSDoc
-- AWS / debian server, ...
+- Asynchronous JS
+- Security of express app (helmet, express-validator...)
+- AWS / debian server
 
 ### To do / improve :
 
-- Cache-control, Page loading speed
-- Helmet library config / csp
-- express-mongo-sanitize library or express-validator, sanitize-html
+- autoplay system on safari
 
 ### Updated :
 
