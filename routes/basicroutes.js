@@ -44,17 +44,6 @@ const limiter = rateLimit({
   message: "Too many login attempts from this IP, please try again in 15 minutes",
 });
 
-/**
- * POST route for user login.
- *
- * @function
- * @name login
- * @memberof router
- * @param {Object} req - The HTTP request object.
- * @param {Object} res - The HTTP response object.
- * @param {function} next - The next middleware function.
- * @returns {undefined}
- */
 
 router.post('/login', limiter, (req, res, next) => {
   const username = req.body.username.trim();
