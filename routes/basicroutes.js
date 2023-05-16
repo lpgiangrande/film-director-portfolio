@@ -9,7 +9,19 @@ const router = express.Router();
 const mainController = require('../controllers/main_controller');
 const passport = require('passport');
 const { forwardAuthenticated } = require('../config/auth');
-const { limiter } = require('../server');
+const rateLimit = require('express-rate-limit');
+const he = require('he'); // prevent cross-site scripting (XSS) attacks by encoding the characters
+
+// Protect auth form with rateLimit middleware
+const limiter = rateLimit({
+  //windowMs: 1000, // Set a very short ban duration (1 second) for testing purposes
+  windowMs: 15 * 60 * 1000, // ban 15 minutes + fail2ban 
+	max: 3, 
+	standardHeaders: true, 
+	legacyHeaders: false, 
+  message: "Too many login attempts from this IP, please try again in 15 minutes",
+})
+
 
 
 /**
@@ -23,7 +35,17 @@ const { limiter } = require('../server');
  * @param {function} next - The next middleware function.
  * @returns {undefined}
  */
+
 router.post('/login', limiter, (req, res, next) => {
+  const username = req.body.username.trim();
+  const pwd = req.body.pwd.trim();
+
+  // Escape characters that may cause security issues
+  const sanitizedUsername = he.encode(username);
+  const sanitizedPwd = he.encode(pwd);
+  console.log('Sanitized username:', sanitizedUsername);
+  console.log('Sanitized pwd:', sanitizedPwd);
+
   passport.authenticate('local', {
     successRedirect: '/admin/list',
     failureRedirect: '/login',

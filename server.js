@@ -54,6 +54,7 @@ app.use(
         "https://kit.fontawesome.com",
       ],
       styleSrc: [
+        "'self'",
         "'unsafe-inline'",
         "https://site-regis.s3.eu-west-3.amazonaws.com",
         "https://cdn.jsdelivr.net",
@@ -64,7 +65,7 @@ app.use(
       imgSrc: ["'self'", "https://site-regis.s3.eu-west-3.amazonaws.com"],
       mediaSrc: ["'self'", "https://site-regis.s3.eu-west-3.amazonaws.com"],
       scriptSrcAttr: ["'unsafe-inline'"],
-      styleSrcAttr: ["'none'"],
+      styleSrcAttr: ["'unsafe-inline'"],
     },
   })
 );
@@ -101,15 +102,16 @@ app.use(cacheControl({
 
 // Protect form
 const limiter = rateLimit({
-	windowMs: 15 * 60 * 1000, // ban 15 minutes + fail2ban 
+  //windowMs: 1000, // Set a very short ban duration (1 second) for testing purposes
+  windowMs: 15 * 60 * 1000, // ban 15 minutes + fail2ban 
 	max: 3, 
 	standardHeaders: true, 
 	legacyHeaders: false, 
   message: "Too many login attempts from this IP, please try again in 15 minutes",
 })
 
-app.use('/login', limiter);
-module.exports = { limiter };
+// app.use('/login', limiter);
+module.exports = limiter;
 
 
 /**
