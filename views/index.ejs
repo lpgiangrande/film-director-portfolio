@@ -1,5 +1,4 @@
 <%- include('partials/header.ejs') %>
-
         <!-- THUMBNAILS - IMG / VID GALLERY-->
         <main>
         
@@ -34,28 +33,10 @@
 
         </main>
         <%- include('partials/footer.ejs') %>
-        <!-- CHECK DEVICE TYPE  -->
-        <!-- <script>
-            let detectDeviceType = () =>
-                /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-                    ? 'Mobile'
-                    : 'Desktop';
-                console.log(detectDeviceType()); 
-
-            if (detectDeviceType() === 'Desktop'){
-                // append Js file to html file :
-                const script = document.createElement('script');
-                script.src = 'https://site-regis.s3.eu-west-3.amazonaws.com/public/js/thumbnail.js';  
-
-                document.head.appendChild(script);
-
-            } else {
-                const script = document.createElement('script');
-                script.src = 'https://site-regis.s3.eu-west-3.amazonaws.com/public/js/remove_vids.js' //public/js/remove_vids.js';  
-
-                document.head.appendChild(script);
-            }
-        </script> -->
+        <!-- CHECK DEVICE TYPE AND LOAD APPROPRIATED SCRIPT  -->
         <script src="https://site-regis.s3.eu-west-3.amazonaws.com/public/js/detectDeviceType.js"></script>
+        <!-- CHECK BROWSER - SAFARI ISSUE - DEV -->
+        <!-- <script src="../public/js/detectBrowserType.js"></script> -->
+        <!-- <script src="../public/js/thumbnail.js"></script> DEV-->
     </body>
 </html>
