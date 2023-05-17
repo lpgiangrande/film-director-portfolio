@@ -16,7 +16,7 @@ require('../config/passport') // test
  * Array of trimmed images links obtained from the request body
  * @const {Array<string>} gallery
  * 
- * Project object representing a new project.
+ * Project object representing a new project (new web page) linked to a thumbnail
  * @const {newProject} project
  * @properties ... id, thumbnail, title, ... gallery ...
  */
@@ -113,7 +113,7 @@ exports.list = async (req, res) => {
   };
   
 
-// UPDATE thumbnail by id
+// Retrieve it by id in order to update it in handleThumbnailUpdate()
 exports.updateThumbnail = async (req, res) => {
 
     try {
@@ -130,7 +130,7 @@ exports.updateThumbnail = async (req, res) => {
 };
 
 
-// UPDATE project by id
+// Retrieve it by id in order to update it in handleProjectUpdate()
 exports.updateProject = async (req, res) => {
 
     try {
@@ -140,7 +140,7 @@ exports.updateProject = async (req, res) => {
         const project = await Project.findById(projectId).populate("thumbnail").exec();
 
         res.render("updateProject", {
-        project: project
+            project: project
         });
     } catch (error) {
         console.log(error);
@@ -148,7 +148,7 @@ exports.updateProject = async (req, res) => {
 
 };
   
-
+// Submit the updated thumbnail 
 exports.handleThumbnailUpdate = async (req, res) => {
 
     try {
@@ -169,7 +169,7 @@ exports.handleThumbnailUpdate = async (req, res) => {
 
   };
   
-
+// Submit the updated Project
 exports.handleProjectUpdate = async (req, res) => {
 
     try {
