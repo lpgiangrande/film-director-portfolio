@@ -1,7 +1,6 @@
 /**
  * REQUIRED EXTERNAL MODULES
  */
-
 const express = require('express');
 const ejs = require('ejs');
 const path = require('path');
