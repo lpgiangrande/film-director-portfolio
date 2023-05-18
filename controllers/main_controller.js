@@ -38,7 +38,6 @@ exports.homePage = async (req, res) => {
       console.log(err);
       res.status(500).send('Sorry, we could not retrieve the data at this time. Please try again later.');
     }
-
 };
   
 /**
@@ -57,7 +56,6 @@ exports.animationPage = async (req, res) => {
       console.log(err);
       res.status(500).send('Sorry, we could not retrieve the data at this time. Please try again later.');
     }
-    
 };
   
 
