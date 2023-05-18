@@ -17,16 +17,16 @@
 - CRUD operations
 - Mongoose ORM with NoSQL database MongoDB
 - Asynchronous JS
-- Security of express app (helmet, express-validator...)
-- AWS / debian server
+- Security of ExpressJs apps (helmet, express-validator...)
+- AWS services
+- Debian VPS | fail2ban, ufw, snort, ...
 
 ### To do / improve :
 
 - autoplay system on safari
-
-### Updated :
-
-- Do not allow more than two Users in db
+- https://expressjs.com/en/advanced/best-practice-security.html
+- modify password
+- modify biography
 
 ### Screenshots
 
