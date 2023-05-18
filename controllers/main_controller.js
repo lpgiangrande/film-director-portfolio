@@ -29,8 +29,6 @@ const User = require('../models/User');
  * @param {Object} res - The HTTP response object.
  * @returns {void}
  */
-
-//async/await
 exports.homePage = async (req, res) => {
 
     try {
@@ -43,26 +41,10 @@ exports.homePage = async (req, res) => {
 
 };
   
-// With Promises
-//   exports.homePage = (req, res) => {
-//     Thumbnail.find()
-//       .sort({ releaseDate: -1 })
-//       .then((thumbnails) => {
-//         res.render('index', { thumbnailsList: thumbnails });
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//         res.status(500).send('error');
-//       });
-//   };
-  
-
-
 /**
  * Renders the animation page and displays the list of animation thumbnails 
  * sorted by release date in descending order.
 */
-
 exports.animationPage = async (req, res) => {
 
     try {
@@ -79,11 +61,9 @@ exports.animationPage = async (req, res) => {
 };
   
 
-
 /**
  * Same with liveaction page. 
 */
-
 exports.liveActionPage = async (req, res) => {
     try {
       const thumbnails = await Thumbnail.find({ category: 'liveaction' })
@@ -97,7 +77,6 @@ exports.liveActionPage = async (req, res) => {
     }
   };
   
-
 
 /**
  * Render either homepage/:id, liveaction/:id, animation/:id.
@@ -121,7 +100,6 @@ exports.seeFullProject = async (req, res) => {
         } else {
             res.render('project', { project: project }); // odd
         }
-
         //console.log("nb d'images : ", project.gallery.length);
         //console.log("id du projet : " + project._id);
     } catch (error) {
@@ -134,7 +112,6 @@ exports.seeFullProject = async (req, res) => {
 /**
  * Render the view for the About page (biography, photo, contact infos).
  */
-
 exports.aboutPage = (req, res) => {
     res.render('about')
 };
@@ -156,13 +133,8 @@ exports.registerPage = (req, res) => {
  * and the length of the password. It then checks if the user already exists 
  * in the database, and if not, it creates a new user with a hashed password and saves 
  * the user to the database.
- * 
- * Bcrypt is the hashing algorithm used to hash passwords before storing them in the DB.
- * 
- * 
- * /!\ Update : only 2 users allowed in DB, already created.
+ * Limit of 2 users.
  */
-
 exports.handleRegistration =  async (req, res) => { 
     
     console.log("req body : ", req.body);
