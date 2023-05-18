@@ -1,23 +1,21 @@
+/**
+ * This file contains the routes for the admin panel
+ */
 const express = require("express");
 const router = express.Router();
 const backofficeController = require('../controllers/backoffice_controller');
-const thumbnailsSchema = require('../models/Thumbnails');
+const Thumbnail = require('../models/Thumbnails');
 const { ensureAuthenticated } = require('../config/auth');
 
 
-/* ADMIN ROUTES */
-
-// projects list page
 router.get('/list', ensureAuthenticated, backofficeController.list);
-
-// Add thumbnail page (thumbnails image/video seen on Homepage)
 router.get('/uploadThumbnail', ensureAuthenticated, (req, res) => {
   res.render('uploadThumbnail');
 })
 
-// Add project page 
+
 router.get('/uploadProject', ensureAuthenticated, (req, res) => {
-  thumbnailsSchema.find()
+  Thumbnail.find()
   .populate("project")
   .exec()
   .then(thumbnails => {
@@ -26,15 +24,10 @@ router.get('/uploadProject', ensureAuthenticated, (req, res) => {
     .catch();
 })
 
-// Update bio page
 router.get('/updateAbout', ensureAuthenticated, (req, res) => {
   res.render('updateAbout');
 })
 
-
-/**
- * auth | log
- */
 router.get('/logoff', function (req, res, next) {
   req.logout(function(err){
     if(err) {
@@ -55,56 +48,43 @@ router.post('/projectUpdated', ensureAuthenticated, backofficeController.handleP
 // Delete
 //router.get('/deleteThumbnail/:id', ensureAuthenticated, backofficeController.deleteThumbnail);
 
-// Upload files paths to the database (homepage - thumbnails) 
-router.post('/uploadThumbnail', 
+
+router.post('/uploadThumbnail', backofficeController.addThumbnail);
 /*upload.fields(
   [
     { name: 'img_thumbnail', maxCount: 1}, 
     { name: 'vid_thumbnail', maxCount: 1}
   ]
-),*/ backofficeController.addThumbnail);
+),*/ 
 
-// POST route for uploading text and files paths to the database for the Project page 
 router.post('/uploadProject', backofficeController.addProject);     
-
-
 
 
 
 module.exports = router;
 
 
+/**
+ * // SIMPLE MULTER CONFIG
+ */
 
 //require('dotenv').config();
 //const multer = require('multer');
 
-/* SIMPLE MULTER CONFIG
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//        if(file.mimetype === 'image/jpeg') {
+//         cb(null, 'public/thumbnails_imgs/')
+//       } else if (file.mimetype === 'video/mp4') {
+//         cb(null, 'public/thumbnails_vids/')
+//       } else {
+//         console.log(file.mimetype)
+//         cb({ error: 'Mime type not supported' })
+//       }
+//     },
+//     filename: function (req, file, cb) {
+//         cb(null, file.originalname)
+//     },
+//   })
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      /* if(file.mimetype === 'image/jpeg') {
-        cb(null, 'public/thumbnails_imgs/')*/
-      /*} else*/ /* if (file.mimetype === 'video/mp4') {
-        cb(null, 'public/thumbnails_vids/')
-      } else {
-        console.log(file.mimetype)
-        cb({ error: 'Mime type not supported' })
-      }
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname)
-    },
-  })
-
-const upload = multer({ storage: storage })*/
-
-
-
-
-
-
-
-
-
-
-
+// const upload = multer({ storage: storage })
