@@ -1,99 +1,107 @@
+/**
+ * This file contains functions for the admin panel.:
+ *  - addProject: Adds a new project.
+ *  - addThumbnail: Adds a new thumbnail.
+ *  - list: Renders a list of projects and thumbnails.
+ *  - updateThumbnail: Handles the update of a thumbnail.
+ *  - updateProject: Handles the update of a project.
+ *  - handleThumbnailUpdate: Submits the updated thumbnail.
+ *  - handleProjectUpdate: Submits the updated project.
+ */
+
 const mongoose = require("mongoose");
 const Thumbnail = require('../models/Thumbnails');
 const Project = require('../models/Project');
-require('../config/passport') // test
+require('../config/passport') 
+
 
 /**
- * addProject from admin | upload 
- * Each "project" is a new web page with project id, title, images & video links...
- * & a thumbnail added on the homepage to clic on it 
- * @param {*} req  
- * @param {*} res 
+ * Adds a new project.
+ *
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {void}
  * 
- * Array of trimmed video links obtained from the request body.
+ * @private
+ * This funcrion is 
+ *
+ * @description
+ * This function handles the creation of a new project (a web page) based on the data provided in the request body.
+ * The request body should contain informations such as the project title, images and videos links, paragraphs of texts...
+ * Upon successful creation of the project, the function redirects the user to the updated list of projects.
+ * 
  * @const {Array<string>} array_vids 
+ * Array of trimmed video links obtained from the request body.
  * 
- * Array of trimmed images links obtained from the request body
  * @const {Array<string>} gallery
+ * Array of trimmed images links obtained from the request body
  * 
  * Project object representing a new project (new web page) linked to a thumbnail
- * @const {newProject} project
+ * @const {newProject} Project
  * @properties ... id, thumbnail, title, ... gallery ...
  */
-
-exports.addProject = (req, res) => {
-
-    const array_vids = req.body.array_vids.split(',').map(vid => vid.trim());
-    const gallery = req.body.gallery.split(',').map(gallery_img => gallery_img.trim());
-
-    const newProject = new Project({
+exports.addProject = async (req, res) => {
+    try {
+      const array_vids = req.body.array_vids.split(',').map((vid) => vid.trim());
+      const gallery = req.body.gallery.split(',').map((gallery_img) => gallery_img.trim());
+  
+      const newProject = new Project({
         _id: new mongoose.Types.ObjectId(),
-        thumbnail : req.body.linkedThumbnail,
-        project_title : req.body.project_title,
-        director : req.body.director,
-        other_contributors : req.body.other_contributors,
-        productor : req.body.productor,
-        array_vids : array_vids, // ARRAY
-        video2_description: req.body.video2_description, 
+        thumbnail: req.body.linkedThumbnail,
+        project_title: req.body.project_title,
+        director: req.body.director,
+        other_contributors: req.body.other_contributors,
+        productor: req.body.productor,
+        array_vids: array_vids, // ARRAY
+        video2_description: req.body.video2_description,
         video3_description: req.body.video3_description,
         video4_description: req.body.video4_description,
         video5_description: req.body.video5_description,
         video6_description: req.body.video6_description,
         video7_description: req.body.video7_description,
-        gallery : gallery, // ARRAY
-        gallery_row_1_description : req.body.description_1,
-        gallery_row_2_description : req.body.description_2,
-        gallery_row_3_description : req.body.description_3,
-        gallery_row_4_description : req.body.description_4
-    });
+        gallery: gallery, // ARRAY
+        gallery_row_1_description: req.body.description_1,
+        gallery_row_2_description: req.body.description_2,
+        gallery_row_3_description: req.body.description_3,
+        gallery_row_4_description: req.body.description_4,
+      });
+  
+      const result = await newProject.save();
+      //console.log(result);
+      res.redirect(301, '/admin/list');
 
-    newProject
-        .save()
-        .then(result => {
-            console.log(result);
-            res.redirect(301, '/admin/list');
-        })
-        .catch(error => {
-            console.log(error);
-        });
-
-};
-
+    } catch (error) {
+        console.log(error);
+    }
+  };
+  
 /**
- * addThumbnail from admin - before adding a project page, add its thumbnail for the home page
- * @param {*} req 
- * @param {*} res 
+ * addThumbnail - before adding a project page, add its thumbnail for the home page
  */
-
-exports.addThumbnail = (req, res) => {
-
-    const newThumbnail = new Thumbnail({
+exports.addThumbnail = async (req, res) => {
+    try {
+      const newThumbnail = new Thumbnail({
         _id: new mongoose.Types.ObjectId(),
-        title : req.body.title_thumbnail,
-        category : req.body.category,
-        imgSrc : req.body.img_thumbnail, //req.files.img_thumbnail[0].path, 
-        videoSrc : req.body.vid_thumbnail, //req.files.vid_thumbnail[0].path, 
-        releaseDate : req.body.release_date
-    });
-
-    newThumbnail
-        .save()
-        .then(result => {
-            console.log("result = ",result);
-            res.redirect(301, '/admin/uploadProject');
-            // res.redirect(301, '/'); --> see result/homeapge
-        })
-        .catch(error => {
-            console.log(error);
-            res.status(500).json({msg: 'Error'});
-        });
-}
-
-
+        title: req.body.title_thumbnail,
+        category: req.body.category,
+        imgSrc: req.body.img_thumbnail, //req.files.img_thumbnail[0].path,
+        videoSrc: req.body.vid_thumbnail, //req.files.vid_thumbnail[0].path,
+        releaseDate: req.body.release_date,
+      });
+  
+      const result = await newThumbnail.save();
+      console.log("result = ", result);
+      res.redirect(301, '/admin/uploadProject');
+      // res.redirect(301, '/'); --> see result/homepage
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ msg: 'Error' });
+    }
+  };
+  
 /**
- * projectsList | render all thumbnails / projects into table
- * @param {*} req 
- * @param {*} res 
+ * GET /admin/list 
+ * Render all thumbnails / projects into table
  */
 exports.list = async (req, res) => {
 
@@ -107,22 +115,20 @@ exports.list = async (req, res) => {
         username: req.user.username,
       });
     } catch (error) {
-      console.log(error);
+        console.log(error);
     }
-
   };
   
 
-// Retrieve it by id in order to update it in handleThumbnailUpdate()
+// Retrieve Thumbnail by id in order to update it in handleThumbnailUpdate()
 exports.updateThumbnail = async (req, res) => {
 
     try {
         const id = req.params.id;
         const thumbnail = await Thumbnail.findById(id).exec();
 
-        res.render('updateThumbnail', {
-            thumbnail: thumbnail
-        });
+        res.render('updateThumbnail', {thumbnail: thumbnail});
+
     } catch (error) {
         console.log(error);
     }
@@ -130,7 +136,7 @@ exports.updateThumbnail = async (req, res) => {
 };
 
 
-// Retrieve it by id in order to update it in handleProjectUpdate()
+// Retrieve Project by id in order to update it in handleProjectUpdate()
 exports.updateProject = async (req, res) => {
 
     try {
@@ -139,9 +145,8 @@ exports.updateProject = async (req, res) => {
         await Thumbnail.find().exec();
         const project = await Project.findById(projectId).populate("thumbnail").exec();
 
-        res.render("updateProject", {
-            project: project
-        });
+        res.render("updateProject", { project: project });
+
     } catch (error) {
         console.log(error);
     }
@@ -160,11 +165,10 @@ exports.handleThumbnailUpdate = async (req, res) => {
       };
   
       await Thumbnail.updateOne({ _id: req.body.identifiant }, thumbnailUpdate).exec();
-  
-      //console.log(result);
       res.redirect(301, '/admin/list');
+
     } catch (error) {
-      console.log(error);
+        console.log(error);
     }
 
   };
@@ -202,7 +206,7 @@ exports.handleProjectUpdate = async (req, res) => {
       //console.log(result);
       res.redirect(301, '/admin/list');
     } catch (error) {
-      console.log(error);
+        console.log(error);
     }
 };
   
