@@ -18,7 +18,7 @@ const mongoose = require("mongoose");
 const bcrypt = require('bcryptjs');
 
 const Thumbnail = require('../models/Thumbnails');
-const projectSchema = require('../models/Project');
+const Project = require('../models/Project');
 const User = require('../models/User');
 
 
@@ -114,7 +114,7 @@ exports.liveActionPage = async (req, res) => {
 
 exports.seeFullProject = async (req, res) => {
     try {
-        const project = await projectSchema.findOne({ "thumbnail": req.params.id })/*.populate("thumbnail")*/.exec();
+        const project = await Project.findOne({ "thumbnail": req.params.id })/*.populate("thumbnail")*/.exec();
         
         if (project.gallery.length % 2 === 0) {
             res.render('project_v2', { project: project }); // even
