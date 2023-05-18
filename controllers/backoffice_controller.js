@@ -1,8 +1,9 @@
 /**
- * This file contains functions for the admin panel.:
- *  - addProject: Adds a new project.
- *  - addThumbnail: Adds a new thumbnail.
- *  - list: Renders a list of projects and thumbnails.
+ * This file contains @private functions for the admin panel.:
+ *
+ *  - addProject: Adds a new project (a new web page)
+ *  - addThumbnail: Adds a new Project's thumbnail for the homepage
+ *  - list: Renders a list of projects and thumbnails in a table
  *  - updateThumbnail: Handles the update of a thumbnail.
  *  - updateProject: Handles the update of a project.
  *  - handleThumbnailUpdate: Submits the updated thumbnail.
@@ -21,9 +22,6 @@ require('../config/passport')
  * @param {Object} req - The request object.
  * @param {Object} res - The response object.
  * @returns {void}
- * 
- * @private
- * This funcrion is 
  *
  * @description
  * This function handles the creation of a new project (a web page) based on the data provided in the request body.
@@ -76,7 +74,7 @@ exports.addProject = async (req, res) => {
   };
   
 /**
- * addThumbnail - before adding a project page, add its thumbnail for the home page
+ * addThumbnail 
  */
 exports.addThumbnail = async (req, res) => {
     try {
@@ -101,7 +99,7 @@ exports.addThumbnail = async (req, res) => {
   
 /**
  * GET /admin/list 
- * Render all thumbnails / projects into table
+ * Render all projects in a table on admin homepage
  */
 exports.list = async (req, res) => {
 
