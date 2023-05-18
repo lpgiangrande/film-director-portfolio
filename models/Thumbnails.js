@@ -49,6 +49,3 @@ module.exports = mongoose.model('Thumbnail', thumbnailsSchema);
     localField : "_id",
     foreignField : "project"
 })*/
-
-
-

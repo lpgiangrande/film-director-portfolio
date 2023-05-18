@@ -1,7 +1,5 @@
 const mongoose = require('mongoose')
 
-// User
-
 const userSchema = mongoose.Schema({
    // _id : mongoose.Schema.Types.ObjectId,
     username: {
@@ -17,7 +15,7 @@ const userSchema = mongoose.Schema({
         default: Date.now
     }
 });
-
+//max 2 users
 userSchema.statics.countUsers = function () {
     return this.countDocuments();
 };

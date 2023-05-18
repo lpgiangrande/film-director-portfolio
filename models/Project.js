@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose;
 
-// FULL PROJECT PAGE
+// PROJECT PAGE
 
 /**
  * array_vids = Main videos (full width on the page)
@@ -11,7 +11,6 @@ const { Schema } = mongoose;
 
 const projectSchema = mongoose.Schema({
 
-    // link project with thumbnail 
     _id : mongoose.Schema.Types.ObjectId,
     thumbnail : {
         type : mongoose.Schema.Types.ObjectId,
