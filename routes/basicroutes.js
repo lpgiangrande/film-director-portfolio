@@ -14,14 +14,6 @@ const he = require('he'); // prevent cross-site scripting (XSS) attacks by encod
 
 /**
  * POST route for user login.
- *
- * @function
- * @name login
- * @memberof router
- * @param {Object} req - The HTTP request object.
- * @param {Object} res - The HTTP response object.
- * @param {function} next - The next middleware function.
- * @returns {undefined}
  */
 
 /**
@@ -37,7 +29,7 @@ const he = require('he'); // prevent cross-site scripting (XSS) attacks by encod
 
 const limiter = rateLimit({
   //windowMs: 1000, // Set a very short ban duration (1 second) for testing purposes
-  windowMs: 15 * 60 * 1000, // ban 15 minutes + fail2ban 
+  windowMs: 15 * 60 * 1000, // ban 15 minutes 
   max: 3, 
   standardHeaders: true, 
   legacyHeaders: false, 
