@@ -35,8 +35,8 @@ exports.homePage = async (req, res) => {
       const thumbnails = await Thumbnail.find().sort({ releaseDate: -1 });
       res.render('index', { thumbnailsList: thumbnails });
     } catch (err) {
-      console.log(err);
-      res.status(500).send('Sorry, we could not retrieve the data at this time. Please try again later.');
+        console.log(err);
+        res.status(500).send('Sorry, we could not retrieve the data at this time. Please try again later.');
     }
 };
   
@@ -53,8 +53,8 @@ exports.animationPage = async (req, res) => {
   
       res.render('animation', { thumbnailsList: thumbnails });
     } catch (err) {
-      console.log(err);
-      res.status(500).send('Sorry, we could not retrieve the data at this time. Please try again later.');
+        console.log(err);
+        res.status(500).send('Sorry, we could not retrieve the data at this time. Please try again later.');
     }
 };
   
@@ -70,8 +70,8 @@ exports.liveActionPage = async (req, res) => {
   
       res.render('liveaction', { thumbnailsList: thumbnails });
     } catch (err) {
-      console.log(err);
-      res.status(500).send('Sorry, we could not retrieve the data at this time. Please try again later.');
+        console.log(err);
+        res.status(500).send('Sorry, we could not retrieve the data at this time. Please try again later.');
     }
   };
   
