@@ -20,7 +20,7 @@ const app = express();
 require('./config/passport')(passport);
 
 // Mongodb connect
-const dbConnect = require('./dbConnect');
+const dbConnect = require('./db/dbConnect');
 
 /**
  * APP CONFIGURATION 
