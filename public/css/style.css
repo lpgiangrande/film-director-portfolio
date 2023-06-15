@@ -139,6 +139,17 @@ footer i:hover{
     opacity: 1;
     transition-duration: 1s;
 }
+.discrete-link{
+    text-decoration: none;
+    opacity: 0.6;
+    color: rgb(101, 101, 101);
+}
+.discrete-link:hover{
+    opacity: 1;
+    transition-duration: 1s;
+    color: rgb(174, 174, 174);
+}
+
 
 /* PAGE ABOUT */
 .about{

@@ -16,7 +16,6 @@ const thumbnail_img = document.querySelectorAll("img.thumbnail_img");
 const thumbnail_vid = document.querySelectorAll("video.thumbnail_vid");
 
 
-
 for (let i = 0 ; 
     i < mouseTarget.length 
     && i < targetTitle.length 

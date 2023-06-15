@@ -16,7 +16,6 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const bcrypt = require('bcryptjs');
-
 const Thumbnail = require('../models/Thumbnails');
 const Project = require('../models/Project');
 const User = require('../models/User');
@@ -111,9 +110,17 @@ exports.seeFullProject = async (req, res) => {
  * Render the view for the About page (biography, photo, contact infos).
  */
 exports.aboutPage = (req, res) => {
-    res.render('about')
-};
+    const biography = req.biography; 
+    res.render('about', { biography });
+  };
 
+/**
+ * Render privacy policy page
+ */
+exports.privacyPolicy = (req, res) => {
+    res.render('privacy-policy');
+};
+  
 
 // ***** ACCESS TO ADMIN PANEL *****
 

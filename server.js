@@ -13,8 +13,14 @@ const cacheControl = require('cache-control');
 const helmet = require('helmet');
 require("dotenv").config();
 const rateLimit = require('express-rate-limit');
+//const csrf = require('csrf');
 const app = express();
 
+// Set X-Frame-Options header middleware
+app.use((req, res, next) => {
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  next();
+});
 
 //Passport config
 require('./config/passport')(passport);
@@ -38,8 +44,11 @@ app.set('view engine', 'ejs')
 
 // GET PUBLIC FILES
 app.use('/public', express.static(path.join(__dirname, 'public')))
+//app.use(express.static(path.join(__dirname, 'public')));
 
 // Helmet (helps secure your Express apps by setting various HTTP headers)
+app.use(helmet.noSniff());
+
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
@@ -69,6 +78,15 @@ app.use(
   })
 );
 
+// Enable Strict-Transport-Security header
+app.use(
+  helmet.hsts({
+    maxAge: 31536000,
+    includeSubDomains: true,
+    preload: true,
+  })
+);
+
 // Session Configuration 
 app.use(
   session({
@@ -77,6 +95,16 @@ app.use(
     saveUninitialized: true
   })
 );
+
+// CSRF Protection
+//app.use(csrf());
+
+/*ensures that the CSRF token is added to the res.locals object for every subsequent route or handler that needs access to the CSRF token. */
+// app.use((req, res, next) => {
+//   res.locals.csrfToken = req.csrfToken();
+//   next();
+// });
+
 
 // Passport middleware
 app.use(passport.initialize());

@@ -16,11 +16,11 @@
     
                             <a class="d-flex thumbnail_title hidden" href="/<%= thumbnail._id %>">
                                 <h3 class="text-center thumbnail_title"><%= thumbnail.title %></h3>
-                                <div id="source1">
+                                <div class="source1">
                                     <img class="img-fluid thumbnail_img" width="1000" src="<%= thumbnail.imgSrc %>" alt="visual for <%= thumbnail.title %> by regis raffin">
                                 </div>
-                                <div id="source2"> 
-                                    <video id="no-load-mobile" class="thumbnail_vid hidden w-100 h-100" autoplay playsinline muted loop preload="metadata" src="<%= thumbnail.videoSrc %>" type="video/mp4"></video>
+                                <div class="source2"> 
+                                    <video class="thumbnail_vid hidden w-100 h-100 no-load-mobile" autoplay playsinline muted loop preload="metadata" src="<%= thumbnail.videoSrc %>" type="video/mp4"></video>
                                 </div>                                
                             </a>
                         </div>
