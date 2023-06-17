@@ -16,6 +16,7 @@ const rateLimit = require('express-rate-limit');
 //const csrf = require('csrf');
 const app = express();
 
+
 // Set X-Frame-Options header middleware
 app.use((req, res, next) => {
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
@@ -43,8 +44,11 @@ app.use(morgan("dev"));
 app.set('view engine', 'ejs')
 
 // GET PUBLIC FILES
-app.use('/public', express.static(path.join(__dirname, 'public')))
-//app.use(express.static(path.join(__dirname, 'public')));
+//app.use('/public', express.static(path.join(__dirname, 'public')))
+//app.use(express.static('public'));
+
+// Serve static files from the root route ("/")
+app.use('/', express.static(path.join(__dirname, 'public')));
 
 // Helmet (helps secure your Express apps by setting various HTTP headers)
 app.use(helmet.noSniff());

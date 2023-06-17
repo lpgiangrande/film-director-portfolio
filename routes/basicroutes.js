@@ -37,6 +37,10 @@ const limiter = rateLimit({
   message: "Too many login attempts from this IP, please try again in 15 minutes",
 });
 
+router.get('/robots.txt', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/robots.txt'));
+});
+
 
 router.post('/login', limiter, (req, res, next) => {
   const username = req.body.username.trim();
@@ -58,6 +62,7 @@ router.post('/login', limiter, (req, res, next) => {
 router.post('/register', mainController.handleRegistration);
 
 router.get('/', mainController.homePage);
+// router.get('/privacypolicy', mainController.privacyPolicy);
 router.get('/animation/', mainController.animationPage);
 router.get('/liveaction/', mainController.liveActionPage);
 
@@ -75,10 +80,7 @@ const getBiography = async (req, res, next) => {
     next(error);
   }
 };
-
 router.get('/about', getBiography, mainController.aboutPage);
-router.get('/privacy-policy', mainController.privacyPolicy);
-
 router.get('/register', forwardAuthenticated, mainController.registerPage);
 router.get('/login', forwardAuthenticated, mainController.loginPage);
 router.get('/:id', mainController.seeFullProject);
