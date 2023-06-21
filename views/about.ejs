@@ -3,14 +3,16 @@
             <div class="container d-flex mt-4">
 
                 <div class="container about-wrapper">
-                    <img class="img-fluid mb-4" id="portrait" src="https://site-regis.s3.eu-west-3.amazonaws.com/public/img-divers/about.jpg" width="1831" height="1097" alt="portrait régis raffin">
-                    <p class="about"><%- biography.bioText %></p>
-                    <p class="text-center about mt-4" id="button-email"><a href="mailto:rage.raffin@gmail.com">say hi</a></p>
+                    <img class="img-fluid mb-4" id="portrait" src="<%= biography.bioImg %>" width="1831" height="1097" alt="portrait régis raffin">
+                    <p class="about"><%- biography.bioText.replace(/\n/g, "<br>") %></p>
+                    <p class="about"><%= biography.bioEmail %></p>
+                    <p class="text-center about mt-4" id="button-email"><a href="mailto:<%= biography.bioEmail %>">say hi</a></p>
                 </div>
             </div>
         </main>
         <%- include('partials/footer.ejs') %>
     </body>
 </html>
+
 
 
