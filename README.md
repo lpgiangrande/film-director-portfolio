@@ -20,6 +20,7 @@
 - Security of ExpressJs apps (helmet, express-validator...)
 - AWS services
 - Debian VPS | fail2ban, ufw, snort, ...
+- Jest
 
 ### To do / improve :
 
