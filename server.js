@@ -51,7 +51,8 @@ app.set('view engine', 'ejs')
 app.use('/', express.static(path.join(__dirname, 'public')));
 
 // Helmet (helps secure your Express apps by setting various HTTP headers)
-app.use(helmet.noSniff());
+ app.use(helmet.noSniff());
+//app.use(helmet());
 
 app.use(
   helmet.contentSecurityPolicy({
@@ -141,10 +142,6 @@ const limiter = rateLimit({
   message: "Too many login attempts from this IP, please try again in 15 minutes",
 })
 
-// app.use('/login', limiter);
-module.exports = limiter;
-
-
 /**
  * ROUTES
  */
@@ -157,18 +154,16 @@ const basicroutes = require('./routes/basicroutes.js')
 app.use('/admin', backoffice_routes)
 app.use('/', basicroutes)
 
-
 /**
  * SERVER CONFIGURATION
  */
 const PORT = process.env.PORT || 3000 
 
-app.listen(PORT, () => { 
-    console.log(`server is running on ${PORT}`)
-})
-  
+// app.use('/login', limiter);
+module.exports = {
+  app,
+  limiter
+};
 
 
-// app listen loads the http module for you, creates a server and then starts it. no need for require http
-// src https://www.youtube.com/watch?v=yH593K9fYvE&ab_channel=MarinaKim
 
