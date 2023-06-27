@@ -26,30 +26,6 @@ module.exports = Biography;
 
 
 
-
-// const mongoose = require('mongoose');
-
-// const biographySchema = new mongoose.Schema({
-//   bioImg: {
-//     type: String,
-//     required: true
-//   },
-//   bioText: {
-//     type: String,
-//     required: true
-//   },
-//   bioEmail: {
-//     type: String,
-//     required: true
-//   }
-// }, { collection: 'biography' });
-
-// module.exports = mongoose.model('Biography', biographySchema);
-
-
-
-
-
   /*
   email: {
     type: String,
