@@ -41,9 +41,3 @@ const thumbnailsSchema = mongoose.Schema({
 
 module.exports = mongoose.model('Thumbnail', thumbnailsSchema);
 
-
-/*thumbnailsSchema.virtual("thumbnails", {
-    ref : "Project",
-    localField : "_id",
-    foreignField : "project"
-})*/
