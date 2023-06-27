@@ -1,0 +1,22 @@
+<%- include('partials/header_backoff.ejs') %>
+
+        <div class="container">
+            <form action="/updateAbout" method="POST" id="bio-form"  class="justify-content-center align-items-center">
+                
+                <label for="photo">Photo</label>
+                <input type="text" name="pic" id="pic" value="<%= biography.pic %>">
+
+                <label for="bioText">Texte bio :</label>
+                <textarea id="text" name="text" rows="20" cols="100"><%= biography.text %></textarea>
+
+                <label for="mail">mail</label>
+                <input type="text" name="email" id="email" value="<%= biography.email %>">
+                    
+                <div class="d-flex justify-content-center align-items-center">
+                    <input type="submit" class="btn btn-outline-light btn-lg"  value="Update bio">
+                </div>
+            </form>  
+        </div>
+    </body>
+</html>
+
