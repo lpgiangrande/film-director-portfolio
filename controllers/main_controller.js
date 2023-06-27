@@ -19,6 +19,7 @@ const bcrypt = require('bcryptjs');
 const Thumbnail = require('../models/Thumbnails');
 const Project = require('../models/Project');
 const User = require('../models/User');
+const Biography = require('../models/Biography');
 
 
 /**
@@ -31,7 +32,7 @@ const User = require('../models/User');
 exports.homePage = async (req, res) => {
 
     try {
-      const thumbnails = await Thumbnail.find().sort({ releaseDate: -1 });
+      const thumbnails = await Thumbnail.find().populate('project').sort({ releaseDate: -1 });
       res.render('index', { thumbnailsList: thumbnails });
     } catch (err) {
         console.log(err);
@@ -47,9 +48,10 @@ exports.animationPage = async (req, res) => {
 
     try {
       const thumbnails = await Thumbnail.find({ category: 'animation' })
-        .sort({ releaseDate: -1 })
-        .exec();
-  
+      .populate('project')
+      .sort({ releaseDate: -1 })
+      .exec();
+
       res.render('animation', { thumbnailsList: thumbnails });
     } catch (err) {
         console.log(err);
@@ -64,6 +66,7 @@ exports.animationPage = async (req, res) => {
 exports.liveActionPage = async (req, res) => {
     try {
       const thumbnails = await Thumbnail.find({ category: 'liveaction' })
+        .populate('project')
         .sort({ releaseDate: -1 })
         .exec();
   
@@ -89,37 +92,73 @@ exports.liveActionPage = async (req, res) => {
  */
 
 exports.seeFullProject = async (req, res) => {
-    try {
-        const project = await Project.findOne({ "thumbnail": req.params.id })/*.populate("thumbnail")*/.exec();
-        
-        if (project.gallery.length % 2 === 0) {
-            res.render('project_v2', { project: project }); // even
-        } else {
-            res.render('project', { project: project }); // odd
-        }
-        //console.log("nb d'images : ", project.gallery.length);
-        //console.log("id du projet : " + project._id);
-    } catch (error) {
-        console.log(error);
-        res.status(500).send('Sorry, we could not retrieve the data at this time. Please try again later.');
+  try {
+    if (req.params.id === "favicon.ico") {
+      // Skip processing for the /favicon.ico route
+      return;
     }
-}
+
+    const isValidObjectId = mongoose.isValidObjectId(req.params.id);
+
+    if (!isValidObjectId) {
+      res.status(400).send('Invalid project ID.');
+      return;
+    }
+    
+    const project = await Project.findOne({ thumbnail: mongoose.Types.ObjectId(req.params.id) })
+      .populate('thumbnail')
+      .exec();
+
+    if (!project) {
+      res.status(404).send('Project not found.');
+      return;
+    }
+
+    if (project.gallery.length % 2 === 0) {
+      res.render('project_v2', { project: project }); // even
+    } else {
+      res.render('project', { project: project }); // odd
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Sorry, we could not retrieve the data at this time. Please try again later.');
+  }
+};
+
+
 
 
 /**
  * Render the view for the About page (biography, photo, contact infos).
  */
-exports.aboutPage = (req, res) => {
-    const biography = req.biography; 
-    res.render('about', { biography });
-  };
+
+// test on another ocntroller file
+exports.aboutPage = async (req, res, next) => {
+  try {
+    const biography = await Biography.findOne().exec();
+
+    if (!biography) {
+      console.log('Biography entry not found');
+      return res.status(404).send('Biography entry not found');
+    }
+
+    console.log('Rendering about page with biography:', biography);
+    res.render('about', { biography: biography });
+  } catch (error) {
+    console.log('Error:', error);
+    next(error);
+  }
+};
+  
+  
+  
 
 /**
  * Render privacy policy page
  */
-exports.privacyPolicy = (req, res) => {
-    res.render('privacy-policy');
-};
+// exports.privacyPolicy = (req, res) => {
+//     res.render('privacy-policy');
+// };
   
 
 // ***** ACCESS TO ADMIN PANEL *****

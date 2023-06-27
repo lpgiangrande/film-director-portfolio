@@ -154,10 +154,16 @@ const basicroutes = require('./routes/basicroutes.js')
 app.use('/admin', backoffice_routes)
 app.use('/', basicroutes)
 
+
 /**
  * SERVER CONFIGURATION
  */
 const PORT = process.env.PORT || 3000 
+
+app.listen(PORT, () => {
+    console.log(`server is running on ${PORT}`);
+  });
+
 
 // app.use('/login', limiter);
 module.exports = {
@@ -166,4 +172,6 @@ module.exports = {
 };
 
 
+// app listen loads the http module for you, creates a server and then starts it. no need for require http
+// src https://www.youtube.com/watch?v=yH593K9fYvE&ab_channel=MarinaKim
 

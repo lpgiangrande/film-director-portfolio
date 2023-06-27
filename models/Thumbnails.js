@@ -1,7 +1,4 @@
 const mongoose = require('mongoose')
-const { Schema } = mongoose;
-const Project = require('./Project');
-
 
 /* next time, use :
 
@@ -32,6 +29,7 @@ const thumbnailsSchema = mongoose.Schema({
     },
     releaseDate: {
         type: Date,
+        default: Date.now,
         required: true
     },
     // link with project 

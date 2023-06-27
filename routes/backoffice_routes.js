@@ -4,39 +4,14 @@
 const express = require("express");
 const router = express.Router();
 const backofficeController = require('../controllers/backoffice_controller');
-const Thumbnail = require('../models/Thumbnails');
 const { ensureAuthenticated } = require('../config/auth');
 
 
+router.get('/updateAbout', ensureAuthenticated, backofficeController.updateBiography);
 router.get('/list', ensureAuthenticated, backofficeController.list);
-router.get('/uploadThumbnail', ensureAuthenticated, (req, res) => {
-  res.render('uploadThumbnail');
-})
-
-
-router.get('/uploadProject', ensureAuthenticated, (req, res) => {
-  Thumbnail.find()
-  .populate("project")
-  .exec()
-  .then(thumbnails => {
-      res.render('uploadProject', {thumbnailsList: thumbnails})
-    })
-    .catch();
-})
-
-router.get('/updateAbout', ensureAuthenticated, (req, res) => {
-  res.render('updateAbout');
-})
-
-router.get('/logoff', function (req, res, next) {
-  req.logout(function(err){
-    if(err) {
-      return next(err);
-    }
-  req.flash('success_msg', "You are logged out");
-  res.redirect('/login'); 
-  });
-});
+router.get('/uploadThumbnail', ensureAuthenticated, backofficeController.uploadThumbnail);
+router.get('/uploadProject', ensureAuthenticated,  backofficeController.uploadProject);
+router.get('/logoff', ensureAuthenticated, backofficeController.logoff);
 
 // Update 
 router.get('/updateThumbnail/:id', ensureAuthenticated, backofficeController.updateThumbnail);
@@ -44,22 +19,14 @@ router.get('/updateProject/:id', ensureAuthenticated, backofficeController.updat
 
 router.post('/thumbnailUpdated', ensureAuthenticated, backofficeController.handleThumbnailUpdate);
 router.post('/projectUpdated', ensureAuthenticated, backofficeController.handleProjectUpdate);
+// router.post('/updateAbout', ensureAuthenticated, backofficeController.handleBiographyUpdate);
 
 // Delete
 //router.get('/deleteThumbnail/:id', ensureAuthenticated, backofficeController.deleteThumbnail);
 
-
+// Uploads
 router.post('/uploadThumbnail', backofficeController.addThumbnail);
-/*upload.fields(
-  [
-    { name: 'img_thumbnail', maxCount: 1}, 
-    { name: 'vid_thumbnail', maxCount: 1}
-  ]
-),*/ 
-
 router.post('/uploadProject', backofficeController.addProject);     
-
-
 
 module.exports = router;
 
@@ -88,3 +55,13 @@ module.exports = router;
 //   })
 
 // const upload = multer({ storage: storage })
+
+
+
+
+/*upload.fields(
+  [
+    { name: 'img_thumbnail', maxCount: 1}, 
+    { name: 'vid_thumbnail', maxCount: 1}
+  ]
+),*/ 

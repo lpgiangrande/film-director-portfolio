@@ -7,7 +7,7 @@ This js file prevents videos from loading on mobile devices
 */
 
 
-let videos = document.querySelectorAll('video#no-load-mobile'); 
+let videos = document.querySelectorAll('video.no-load-mobile');
 
 videos.forEach(function(video){ 
 

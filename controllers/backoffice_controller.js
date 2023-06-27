@@ -8,11 +8,15 @@
  *  - updateProject: Handles the update of a project.
  *  - handleThumbnailUpdate: Submits the updated thumbnail.
  *  - handleProjectUpdate: Submits the updated project.
+ *  - updateBio
+ *  - handleBioUpdate
  */
 
 const mongoose = require("mongoose");
 const Thumbnail = require('../models/Thumbnails');
 const Project = require('../models/Project');
+const Biography = require('../models/Biography');
+// const biography = req.session.biography;
 require('../config/passport') 
 
 
@@ -96,31 +100,48 @@ exports.addThumbnail = async (req, res) => {
         res.status(500).json({ msg: 'Error' });
     }
   };
-  
+
 /**
- * GET /admin/list 
- * Render all projects in a table on admin homepage
+ * GET controllers
  */
+  
+// /admin/list : Render all projects into a table on admin homepage
 exports.list = async (req, res) => {
 
     try {
       const projects = await Project.find({});
       const thumbnails = await Thumbnail.find({});
+      // const biography = await Biography.findOne();
   
       res.render('list', {
+        // biography: biography,
         projectsList: projects,
         thumbnailsList: thumbnails,
         username: req.user.username,
+        biography: res.locals.biography
       });
     } catch (error) {
         console.log(error);
     }
-  };
-  
+  }; 
+// /admin/uploadThumbnail : Thumbnail upload form
+exports.uploadThumbnail = (req, res) => {
+  res.render('uploadThumbnail');
+}
+
+// /admin/uploadProject : Project upload form linked to a home page thumbnail 
+exports.uploadProject = async (req, res) => {
+  try {
+    const thumbnails = await Thumbnail.find().populate("project").exec();
+    res.render('uploadProject', {thumbnailsList: thumbnails});
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Une erreur s'est produite lors de la récupération des miniatures.");
+  }
+}
 
 // Retrieve Thumbnail by id in order to update it in handleThumbnailUpdate()
 exports.updateThumbnail = async (req, res) => {
-
     try {
         const id = req.params.id;
         const thumbnail = await Thumbnail.findById(id).exec();
@@ -130,13 +151,11 @@ exports.updateThumbnail = async (req, res) => {
     } catch (error) {
         console.log(error);
     }
-
 };
 
 
 // Retrieve Project by id in order to update it in handleProjectUpdate()
 exports.updateProject = async (req, res) => {
-
     try {
         const projectId = req.params.id;
 
@@ -148,12 +167,28 @@ exports.updateProject = async (req, res) => {
     } catch (error) {
         console.log(error);
     }
-
 };
-  
+
+// /admin/updateBiography : form for updating the biography (view)
+exports.updateBiography = (req, res) => {
+  Biography.findOne({}).exec((err, biography) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    console.log('Biography:', biography);
+    res.render('updateAbout', { biography: biography });
+  });
+};
+
+
+
+/**
+ *  POST REQUESTS
+ */
+
 // Submit the updated thumbnail 
 exports.handleThumbnailUpdate = async (req, res) => {
-
     try {
       const thumbnailUpdate = {
         title: req.body.title_thumbnail,
@@ -168,7 +203,6 @@ exports.handleThumbnailUpdate = async (req, res) => {
     } catch (error) {
         console.log(error);
     }
-
   };
   
 // Submit the updated Project
@@ -207,7 +241,47 @@ exports.handleProjectUpdate = async (req, res) => {
         console.log(error);
     }
 };
-  
-  
+
+
+exports.handleBiographyUpdate = async (req, res, next) => {
+  try {
+    const { pic, text, email } = req.body;
+
+    const biography = await Biography.findOne();
+    if (!biography) {
+      // Handle case when no biography entry exists
+      return res.status(404).send('Biography entry not found');
+    }
+
+    biography.pic = pic;
+    biography.text = text;
+    biography.email = email;
+
+    await biography.save();
+
+    req.flash('success_msg', 'Biography updated successfully');
+    res.redirect('/updateAbout');
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+
+
+// Log out admin panel
+exports.logoff = (req, res, next) => {
+  req.logout(function(err) {
+    if (err) {
+      next(err); // Passes the error to the next error-handling middleware or default error handler
+    } else {
+      req.flash('success_msg', 'You are logged out');
+      res.redirect('/login');
+    }
+  });
+};
+
+
+
 
 

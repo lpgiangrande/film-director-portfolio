@@ -3,10 +3,10 @@
             <div class="container d-flex mt-4">
 
                 <div class="container about-wrapper">
-                    <img class="img-fluid mb-4" id="portrait" src="<%= biography.bioImg %>" width="1831" height="1097" alt="portrait régis raffin">
-                    <p class="about"><%- biography.bioText.replace(/\n/g, "<br>") %></p>
-                    <p class="about"><%= biography.bioEmail %></p>
-                    <p class="text-center about mt-4" id="button-email"><a href="mailto:<%= biography.bioEmail %>">say hi</a></p>
+                    <img class="img-fluid mb-4" id="portrait" src="<%= biography.pic %>" width="1831" height="1097" alt="portrait régis raffin">
+                    <p class="about"><%- biography.text.replace(/\n/g, "<br>") %></p>
+                    <p class="about"><%= biography.email %></p>
+                    <p class="text-center about mt-4" id="button-email"><a href="mailto:<%= biography.mail %>">say hi</a></p>
                 </div>
             </div>
         </main>

@@ -21,3 +21,4 @@ userSchema.statics.countUsers = function () {
 };
 
 module.exports = mongoose.model('User', userSchema);
+

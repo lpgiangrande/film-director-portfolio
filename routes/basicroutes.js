@@ -7,7 +7,6 @@
 const express = require("express");
 const router = express.Router();
 const mainController = require('../controllers/main_controller');
-const Biography = require('../models/Biography');
 const passport = require('passport');
 const { forwardAuthenticated } = require('../config/auth');
 const rateLimit = require('express-rate-limit');
@@ -65,22 +64,8 @@ router.get('/', mainController.homePage);
 // router.get('/privacypolicy', mainController.privacyPolicy);
 router.get('/animation/', mainController.animationPage);
 router.get('/liveaction/', mainController.liveActionPage);
+router.get('/about/', mainController.aboutPage);
 
-// Middleware function to retrieve Biography object
-const getBiography = async (req, res, next) => {
-  try {
-    const biography = await Biography.findOne().exec();
-    if (!biography) {
-      throw new Error('Biography not found');
-    }
-    req.biography = biography;
-    next();
-  } catch (error) {
-    console.log(error);
-    next(error);
-  }
-};
-router.get('/about', getBiography, mainController.aboutPage);
 router.get('/register', forwardAuthenticated, mainController.registerPage);
 router.get('/login', forwardAuthenticated, mainController.loginPage);
 router.get('/:id', mainController.seeFullProject);

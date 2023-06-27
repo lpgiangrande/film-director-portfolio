@@ -5,3 +5,8 @@ node_modules
 .env
 .DS_Store
 .vscode
+
+
+# others
+/views/privacy-policy.ejs
+ancien-about.ejs
