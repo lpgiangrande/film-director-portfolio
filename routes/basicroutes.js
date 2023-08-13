@@ -36,11 +36,23 @@ const limiter = rateLimit({
   message: "Too many login attempts from this IP, please try again in 15 minutes",
 });
 
+
+
+// specific routes 
 router.get('/robots.txt', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/robots.txt'));
 });
+router.get('/', mainController.homePage);
+router.get('/animation/', mainController.animationPage);
+router.get('/liveaction/', mainController.liveActionPage);
+router.get('/about/', mainController.aboutPage);
+// router.get('/privacypolicy', mainController.privacyPolicy);
 
 
+// Registration and login routes
+router.get('/register', forwardAuthenticated, mainController.registerPage);
+router.get('/login', forwardAuthenticated, mainController.loginPage);
+router.post('/register', mainController.handleRegistration);
 router.post('/login', limiter, (req, res, next) => {
   const username = req.body.username.trim();
   const pwd = req.body.pwd.trim();
@@ -58,16 +70,7 @@ router.post('/login', limiter, (req, res, next) => {
   })(req, res, next);
 });
 
-router.post('/register', mainController.handleRegistration);
-
-router.get('/', mainController.homePage);
-// router.get('/privacypolicy', mainController.privacyPolicy);
-router.get('/animation/', mainController.animationPage);
-router.get('/liveaction/', mainController.liveActionPage);
-router.get('/about/', mainController.aboutPage);
-
-router.get('/register', forwardAuthenticated, mainController.registerPage);
-router.get('/login', forwardAuthenticated, mainController.loginPage);
+// Dynamic parameter routes
 router.get('/:id', mainController.seeFullProject);
 
 

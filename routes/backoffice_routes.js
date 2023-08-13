@@ -6,27 +6,29 @@ const router = express.Router();
 const backofficeController = require('../controllers/backoffice_controller');
 const { ensureAuthenticated } = require('../config/auth');
 
-
-router.get('/updateAbout', ensureAuthenticated, backofficeController.updateBiography);
+// General Admin Routes
 router.get('/list', ensureAuthenticated, backofficeController.list);
-router.get('/uploadThumbnail', ensureAuthenticated, backofficeController.uploadThumbnail);
-router.get('/uploadProject', ensureAuthenticated,  backofficeController.uploadProject);
 router.get('/logoff', ensureAuthenticated, backofficeController.logoff);
 
-// Update 
+// Thumbnail Routes
+router.get('/uploadThumbnail', ensureAuthenticated, backofficeController.uploadThumbnail);
+router.post('/uploadThumbnail', backofficeController.addThumbnail);
 router.get('/updateThumbnail/:id', ensureAuthenticated, backofficeController.updateThumbnail);
-router.get('/updateProject/:id', ensureAuthenticated, backofficeController.updateProject);
-
-router.post('/updateAbout', ensureAuthenticated, backofficeController.handleBiographyUpdate);
 router.post('/thumbnailUpdated', ensureAuthenticated, backofficeController.handleThumbnailUpdate);
+
+// Project Routes
+router.get('/uploadProject', ensureAuthenticated,  backofficeController.uploadProject);
+router.post('/uploadProject', backofficeController.addProject);
+router.get('/updateProject/:id', ensureAuthenticated, backofficeController.updateProject);
 router.post('/projectUpdated', ensureAuthenticated, backofficeController.handleProjectUpdate);
 
-// Delete
-//router.get('/deleteThumbnail/:id', ensureAuthenticated, backofficeController.deleteThumbnail);
+// Biography Route
+router.get('/updateAbout', ensureAuthenticated, backofficeController.updateBiography);
+router.post('/updateAbout', ensureAuthenticated, backofficeController.handleBiographyUpdate);
 
-// Uploads
-router.post('/uploadThumbnail', backofficeController.addThumbnail);
-router.post('/uploadProject', backofficeController.addProject);     
+// Other Routes
+//router.get('/deleteThumbnail/:id', ensureAuthenticated, backofficeController.deleteThumbnail);
+   
 
 module.exports = router;
 
