@@ -98,12 +98,12 @@ exports.seeFullProject = async (req, res) => {
       return;
     }
 
-    const isValidObjectId = mongoose.isValidObjectId(req.params.id);
+    // const isValidObjectId = mongoose.isValidObjectId(req.params.id);
 
-    if (!isValidObjectId) {
-      res.status(400).send('Invalid project ID.');
-      return;
-    }
+    // if (!isValidObjectId) {
+    //   res.status(400).send('Invalid project ID.');
+    //   return;
+    // }
     
     const project = await Project.findOne({ thumbnail: mongoose.Types.ObjectId(req.params.id) })
       .populate('thumbnail')

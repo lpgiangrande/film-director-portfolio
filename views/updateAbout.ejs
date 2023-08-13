@@ -1,18 +1,20 @@
 <%- include('partials/header_backoff.ejs') %>
 
         <div class="container">
-            <form action="/updateAbout" method="POST" id="bio-form"  class="justify-content-center align-items-center">
-                
-                <label for="photo">Photo</label>
-                <input type="text" name="pic" id="pic" value="<%= biography.pic %>">
-
+            <form action="/admin/updateAbout" method="POST" id="bio-form" class="d-flex flex-column align-items-center">
                 <label for="bioText">Texte bio :</label>
                 <textarea id="text" name="text" rows="20" cols="100"><%= biography.text %></textarea>
+  
+
+                <label for="photo">Photo</label>
+                <input type="text" name="pic" id="pic" size="100" value="<%= biography.pic %>"> 
+             
 
                 <label for="mail">mail</label>
-                <input type="text" name="email" id="email" value="<%= biography.email %>">
+                <input type="text" name="email" id="email" size="30" value="<%= biography.email %>">
+          
                     
-                <div class="d-flex justify-content-center align-items-center">
+                <div class="mt-3">
                     <input type="submit" class="btn btn-outline-light btn-lg"  value="Update bio">
                 </div>
             </form>  

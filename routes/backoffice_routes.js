@@ -17,9 +17,9 @@ router.get('/logoff', ensureAuthenticated, backofficeController.logoff);
 router.get('/updateThumbnail/:id', ensureAuthenticated, backofficeController.updateThumbnail);
 router.get('/updateProject/:id', ensureAuthenticated, backofficeController.updateProject);
 
+router.post('/updateAbout', ensureAuthenticated, backofficeController.handleBiographyUpdate);
 router.post('/thumbnailUpdated', ensureAuthenticated, backofficeController.handleThumbnailUpdate);
 router.post('/projectUpdated', ensureAuthenticated, backofficeController.handleProjectUpdate);
-// router.post('/updateAbout', ensureAuthenticated, backofficeController.handleBiographyUpdate);
 
 // Delete
 //router.get('/deleteThumbnail/:id', ensureAuthenticated, backofficeController.deleteThumbnail);
