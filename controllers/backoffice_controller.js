@@ -187,30 +187,6 @@ exports.updateBiography = (req, res) => {
  *  POST REQUESTS
  */
 
-// Submit updated biography
-exports.handleBiographyUpdate = async (req, res, next) => {
-  try {
-    const { pic, text, email } = req.body;
-
-    const biography = await Biography.findOne();
-    if (!biography) {
-      // Handle case when no biography entry exists
-      return res.status(404).send('Biography entry not found');
-    }
-
-    biography.pic = pic;
-    biography.text = text;
-    biography.email = email;
-
-    await biography.save();
-
-    req.flash('success_msg', 'Biography updated successfully');
-    res.redirect('/admin/list');
-  } catch (error) {
-    next(error);
-  }
-};
-
 // Submit the updated thumbnail 
 exports.handleThumbnailUpdate = async (req, res) => {
     try {
@@ -266,6 +242,30 @@ exports.handleProjectUpdate = async (req, res) => {
     }
 };
 
+
+// Submit updated biography
+exports.handleBiographyUpdate = async (req, res, next) => {
+  try {
+    const { pic, text, email } = req.body;
+
+    const biography = await Biography.findOne();
+    if (!biography) {
+      // Handle case when no biography entry exists
+      return res.status(404).send('Biography entry not found');
+    }
+
+    biography.pic = pic;
+    biography.text = text;
+    biography.email = email;
+
+    await biography.save();
+
+    req.flash('success_msg', 'Biography updated successfully');
+    res.redirect('/admin/list');
+  } catch (error) {
+    next(error);
+  }
+};
 
 
 // Log out admin panel
