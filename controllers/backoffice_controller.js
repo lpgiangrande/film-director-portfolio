@@ -124,6 +124,7 @@ exports.list = async (req, res) => {
         console.log(error);
     }
   }; 
+
 // /admin/uploadThumbnail : Thumbnail upload form
 exports.uploadThumbnail = (req, res) => {
   res.render('uploadThumbnail');
@@ -261,7 +262,7 @@ exports.handleBiographyUpdate = async (req, res, next) => {
     await biography.save();
 
     req.flash('success_msg', 'Biography updated successfully');
-    res.redirect('/admin/list');
+    res.redirect(301, '/admin/list');
   } catch (error) {
     next(error);
   }
