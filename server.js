@@ -59,7 +59,7 @@ app.use(
     directives: {
       defaultSrc: ["'self'"],
       connectSrc: ["https://ka-f.fontawesome.com"],
-      frameSrc: ["'self'", "https://player.vimeo.com"],
+      frameSrc: ["'self'", "https://player.vimeo.com", "https://www.youtube.com"],
       scriptSrc: [
         "'self'",
         "https://site-regis.s3.eu-west-3.amazonaws.com",
