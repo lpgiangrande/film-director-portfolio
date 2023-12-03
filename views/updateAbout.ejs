@@ -1,7 +1,7 @@
 <%- include('partials/header_backoff.ejs') %>
 
-        <div class="container">
-            <form action="/admin/updateAbout" method="POST" id="bio-form" class="d-flex flex-column align-items-center">
+        <div class="container d-flex flex-column align-items-center">
+            <form action="/admin/updateAbout" method="POST" id="bio-form">
                 <label for="bioText">Texte bio :</label>
                 <textarea id="text" name="text" rows="20" cols="100"><%= biography.text %></textarea>
   

@@ -10,6 +10,10 @@ const { ensureAuthenticated } = require('../config/auth');
 router.get('/list', ensureAuthenticated, backofficeController.list);
 router.get('/logoff', ensureAuthenticated, backofficeController.logoff);
 
+// Biography Route
+router.get('/updateAbout', ensureAuthenticated, backofficeController.updateBiography);
+router.post('/updateAbout', backofficeController.handleBiographyUpdate);
+
 // Thumbnail Routes
 router.get('/uploadThumbnail', ensureAuthenticated, backofficeController.uploadThumbnail);
 router.post('/uploadThumbnail', backofficeController.addThumbnail);
@@ -22,9 +26,7 @@ router.post('/uploadProject', backofficeController.addProject);
 router.get('/updateProject/:id', ensureAuthenticated, backofficeController.updateProject);
 router.post('/projectUpdated', ensureAuthenticated, backofficeController.handleProjectUpdate);
 
-// Biography Route
-router.get('/updateAbout', ensureAuthenticated, backofficeController.updateBiography);
-router.post('/updateAbout', ensureAuthenticated, backofficeController.handleBiographyUpdate);
+
 
 // Other Routes
 //router.get('/deleteThumbnail/:id', ensureAuthenticated, backofficeController.deleteThumbnail);
