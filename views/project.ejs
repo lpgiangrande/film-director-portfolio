@@ -1,15 +1,21 @@
  <%- include('partials/header.ejs') %>
+
          <!-- TEMPLATE 1 - impair -->
 
         <div class="container d-flex ">
             <main class="project-wrapper">  
                     
                 <!-- SECTION 1 - Intro -->
-
                 <section id="section-1" class="mb-3">
                     <!-- VID 1 -->
                     <div class="video-iframe d-flex justify-content-center mb-3">
-                        <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[0]%>"  frameborder="0" allowfullscreen></iframe>
+                        <iframe 
+                            class="resp-iframe" 
+                            title="vimeo-player" 
+                            src="<%= project.array_vids[0]%>"  
+                            frameborder="0" 
+                            allowfullscreen>
+                        </iframe>
                     </div>
                     <!-- INFOS -->
                     <div class="mt-3">
@@ -22,7 +28,6 @@
                 
 
                 <!-- SECTION 2 -  Gallerie -->
-
                 <section id="section-2">
 
                     <!--ROW 1 - GALLERY : indexes 0 to 1 | visuels 1 et 2  -->
@@ -33,9 +38,27 @@
                             <%# console.log("DECOUPE 1", project.gallery.slice(0, 2)) %> 
 
                             <%if(project.gallery[index].endsWith('.jpg')){%>
-                                <div class="col-sm-6 col-xs-12"><img class="img-fluid" src="<%= project.gallery[index] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+
+                                <div class="col-sm-6 col-xs-12">
+                                    <img 
+                                        class="img-fluid" 
+                                        src="<%= project.gallery[index] %>" 
+                                        alt="visuel pour <%= project.project_title %>" 
+                                        data-action="zoom"
+                                    >
+                                </div>
+
                             <% }  else { %>
-                                <div class="col-sm-6 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/mp4"></video></div>
+
+                                <div class="col-sm-6 col-xs-12">
+                                    <video 
+                                        class="img-fluid"  
+                                        autoplay playsinline muted loop 
+                                        src="<%= project.gallery[index] %>"  
+                                        type="video/mp4">
+                                    </video>
+                                </div>
+
                             <% } %>
                             <%# console.log(project.gallery) %>
                     
@@ -45,50 +68,104 @@
 
                     <!--ROW 1 - TEXT -->
                     <% if (project.gallery_row_1_description) {%>
-                        <p class="text-white projet-paragraphe mb-4"><%=project.gallery_row_1_description%></p>
+
+                        <p class="text-white projet-paragraphe mb-4">
+                            <%=project.gallery_row_1_description%>
+                        </p>
+
                     <% } %>
 
                     <!-- VID 2 -->
                     <% if (project.video2_description) {%>
-                        <p class="text-white projet-paragraphe mb-4"><%=project.video2_description%></p>
+
+                        <p class="text-white projet-paragraphe mb-4">
+                            <%=project.video2_description%>
+                        </p>
+
                     <% } %>
+
                     <% if (project.array_vids[1]) {%>
+
                         <div class="video-iframe d-flex justify-content-center mb-4">
-                            <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[1]%>"  frameborder="0" allowfullscreen></iframe>
+                            <iframe 
+                                class="resp-iframe" 
+                                title="vimeo-player" 
+                                src="<%= project.array_vids[1]%>"  
+                                frameborder="0" 
+                                allowfullscreen>
+                            </iframe>
                         </div>
+
                     <% } %>
 
                     <!-- ROW 2 - GALLERY : indexes 2 to 4 | visuels 3 à 5 -->
                     <div class="row gy-4 gx-4 d-flex mb-4"> 
 
                         <% project.gallery.forEach((element, index) => {%>
+                            
                             <% if(index > 1 && index < 5) {%>
 
                                 <%if(project.gallery[index].endsWith('.jpg')){%>
-                                    <div class="col-sm-4 col-xs-12"><img class="img-fluid" src="<%= project.gallery[index] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+
+                                    <div class="col-sm-4 col-xs-12">
+                                        <img 
+                                            class="img-fluid" 
+                                            src="<%= project.gallery[index] %>" 
+                                            alt="visuel pour <%= project.project_title %>" 
+                                            data-action="zoom"
+                                        >
+                                    </div>
+
                                 <% }  else { %>
-                                    <div class="col-sm-4 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/mp4"></video></div>
+
+                                    <div class="col-sm-4 col-xs-12">
+                                        <video 
+                                            class="img-fluid"  
+                                            autoplay playsinline muted loop 
+                                            src="<%= project.gallery[index] %>"  
+                                            type="video/mp4">
+                                        </video>
+                                    </div>
+
                                 <% } %>
 
                             <% } %>
+
                         <%})%>
 
                     </div>
 
                     <!--ROW 2 TEXT -->
                     <% if (project.gallery_row_2_description) {%>
-                        <p class="text-white projet-paragraphe mb-4"><%=project.gallery_row_2_description%></p>
+
+                        <p class="text-white projet-paragraphe mb-4">
+                            <%=project.gallery_row_2_description%>
+                        </p>
+
                     <% } %>
 
                     <!-- VID 3 -->
                     <% if (project.video3_description) {%>
-                        <p class="text-white projet-paragraphe mb-4"><%=project.video3_description%></p>
+
+                        <p class="text-white projet-paragraphe mb-4">
+                            <%=project.video3_description%>
+                        </p>
+
                     <% } %>
+
                     <% if (project.array_vids[2]) {%>
+
                         <div class="video-iframe d-flex justify-content-center pb-4">
-                            <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[2]%>"  frameborder="0" allowfullscreen></iframe>
+                            <iframe 
+                                class="resp-iframe" 
+                                title="vimeo-player" 
+                                src="<%= project.array_vids[2]%>"  
+                                frameborder="0" 
+                                allowfullscreen>
+                            </iframe>
                         </div>
                         <br>
+
                     <% } %>
                     
                     <!-- ROW 3 - GALLERY : indexes 5 to 8 | visuels 6 à 9 -->
@@ -99,9 +176,26 @@
                             <% if(index >=5  && index <= 8) {%>
 
                                 <%if(project.gallery[index].endsWith('.jpg')){%>
-                                    <div class="col-sm-6 col-xs-12"><img class="img-fluid w-100" src="<%= project.gallery[index] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+                                    
+                                    <div class="col-sm-6 col-xs-12">
+                                        <img class="img-fluid w-100" 
+                                            src="<%= project.gallery[index] %>" 
+                                            alt="visuel pour <%= project.project_title %>" 
+                                            data-action="zoom"
+                                        >
+                                    </div>
+
                                 <% }  else { %>
-                                    <div class="col-sm-6 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/mp4"></video></div>
+
+                                    <div class="col-sm-6 col-xs-12">
+                                        <video 
+                                            class="img-fluid"  
+                                            autoplay playsinline muted loop 
+                                            src="<%= project.gallery[index] %>"  
+                                            type="video/mp4">
+                                        </video>
+                                    </div>
+
                                 <% } %>
 
                             <% } %>
@@ -112,18 +206,35 @@
 
                     <!--ROW 3 TEXT -->
                     <% if (project.gallery_row_3_description) {%>
-                        <p class="text-white projet-paragraphe mb-4"><%=project.gallery_row_3_description%></p>
+
+                        <p class="text-white projet-paragraphe mb-4">
+                            <%=project.gallery_row_3_description%>
+                        </p>
+
                     <% } %>
 
                     <!-- VID 4 -->
                     <% if (project.video4_description) {%>
-                        <p class="text-white projet-paragraphe mb-4"><%=project.video4_description%></p>
+
+                        <p class="text-white projet-paragraphe mb-4">
+                            <%=project.video4_description%>
+                        </p>
+
                     <% } %>
+
                     <% if (project.array_vids[3]) {%>
+
                         <div class="video-iframe d-flex justify-content-center pb-4">
-                            <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[3]%>"  frameborder="0" allowfullscreen></iframe>
+                            <iframe 
+                                class="resp-iframe" 
+                                title="vimeo-player" 
+                                src="<%= project.array_vids[3]%>"  
+                                frameborder="0" 
+                                allowfullscreen>
+                            </iframe>
                         </div>
                         <br>
+
                     <% } %>
 
                     <!-- ROW 4 - GALLERY : indexes 9 to 12 | visuels 10 à 13 -->
@@ -134,9 +245,27 @@
                             <% if(index > 8 && index <=12) {%>
 
                                 <%if(project.gallery[index].endsWith('.jpg')){%>
-                                    <div class="col-sm-6 col-xs-12"><img class="img-fluid w-100" src="<%= project.gallery[index] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
-                                <% } else { %>
-                                    <div class="col-sm-6 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/mp4"></video></div>
+
+                                    <div class="col-sm-6 col-xs-12">
+                                        <img 
+                                            class="img-fluid w-100" 
+                                            src="<%= project.gallery[index] %>" 
+                                            alt="visuel pour <%= project.project_title %>" 
+                                            data-action="zoom"
+                                        >
+                                    </div>
+                                
+                                 <% } else { %>
+
+                                    <div class="col-sm-6 col-xs-12">
+                                        <video 
+                                            class="img-fluid"  
+                                            autoplay playsinline muted loop 
+                                            src="<%= project.gallery[index] %>"  
+                                            type="video/mp4">
+                                        </video>
+                                    </div>
+
                                 <% } %>
 
                             <% } %>
@@ -147,18 +276,36 @@
 
                     <!--ROW 4 TEXT -->
                     <% if (project.gallery_row_4_description) {%>
-                        <p class="text-white projet-paragraphe mb-4"><%=project.gallery_row_4_description%></p>
+
+                        <p class="text-white projet-paragraphe mb-4">
+                            <%=project.gallery_row_4_description%>
+                        </p>
+
                     <% } %>
 
                     <!-- VID 5 -->
                     <% if (project.video5_description) {%>
-                        <p class="text-white projet-paragraphe mb-4"><%=project.video5_description%></p>
+
+                        <p class="text-white projet-paragraphe mb-4">
+                            <%=project.video5_description%>
+                        </p>
+
                     <% } %>
+
                     <% if (project.array_vids[4]) {%>
+
                         <div class="video-iframe d-flex justify-content-center pb-4">
-                            <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[4]%>"  frameborder="0" allowfullscreen></iframe>
+                            <iframe 
+                                class="resp-iframe" 
+                                title="vimeo-player" 
+                                src="<%= project.array_vids[4]%>"  
+                                frameborder="0" 
+                                allowfullscreen>
+                            </iframe>
                         </div>
+
                     <% } %>
+
                     <br>
 
                     <!-- ROW 5 - GALLERY : indexes 13 to 14 | visuels 14 à 15 -->
@@ -169,9 +316,27 @@
                             <% if(index > 12 && index <=14) {%>
 
                                 <%if(project.gallery[index].endsWith('.jpg')){%>
-                                    <div class="col-sm-6 col-xs-12"><img class="img-fluid w-100" src="<%= project.gallery[index] %>" alt="visuel pour <%= project.project_title %>" data-action="zoom"></div>
+
+                                    <div class="col-sm-6 col-xs-12">
+                                        <img 
+                                            class="img-fluid w-100" 
+                                            src="<%= project.gallery[index] %>" 
+                                            alt="visuel pour <%= project.project_title %>" 
+                                            data-action="zoom"
+                                        >
+                                    </div>
+
                                 <% } else { %>
-                                    <div class="col-sm-6 col-xs-12"><video class="img-fluid"  autoplay playsinline muted loop src="<%= project.gallery[index] %>"  type="video/mp4"></video></div>
+
+                                    <div class="col-sm-6 col-xs-12">
+                                        <video 
+                                            class="img-fluid"  
+                                            autoplay playsinline muted loop 
+                                            src="<%= project.gallery[index] %>"  
+                                            type="video/mp4">
+                                        </video>
+                                    </div>
+                                
                                 <% } %>
 
                             <% } %>
@@ -182,23 +347,50 @@
 
                     <!-- VID 6 -->
                     <% if (project.video6_description) {%>
-                        <p class="text-white projet-paragraphe mb-4"><%=project.video6_description%></p>
+
+                        <p class="text-white projet-paragraphe mb-4">
+                            <%=project.video6_description%>
+                        </p>
+
                     <% } %>
+
                     <% if (project.array_vids[5]) {%>
+
                         <div class="video-iframe d-flex justify-content-center pb-4">
-                            <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[5]%>"  frameborder="0" allowfullscreen></iframe>
+                            <iframe 
+                                class="resp-iframe" 
+                                title="vimeo-player" 
+                                src="<%= project.array_vids[5]%>"  
+                                frameborder="0" 
+                                allowfullscreen>
+                            </iframe>
                         </div>
+
                         <br>
+
                     <% } %>
 
                     <!-- VID 7 -->
                     <% if (project.video7_description) {%>
-                        <p class="text-white projet-paragraphe mb-4"><%=project.video7_description%></p>
+
+                        <p class="text-white projet-paragraphe mb-4">
+                            <%=project.video7_description%>
+                        </p>
+
                     <% } %>
+
                     <% if (project.array_vids[6]) {%>
+
                         <div class="video-iframe d-flex justify-content-center pb-4">
-                            <iframe class="resp-iframe" title="vimeo-player" src="<%= project.array_vids[6]%>"  frameborder="0" allowfullscreen></iframe>
+                            <iframe 
+                                class="resp-iframe" 
+                                title="vimeo-player" 
+                                src="<%= project.array_vids[6]%>"  
+                                frameborder="0" 
+                                allowfullscreen>
+                            </iframe>
                         </div>
+
                     <% } %>
 
                 </section>

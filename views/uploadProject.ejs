@@ -10,9 +10,16 @@
 
                     <!-- LINKED THUMBNAIL -->
                     <label class="text-white" for="linkedThumbnail"><b>Sélectionner thumbnail associé :</b></label>
-                    <select class="form-select mb-3" id="linkedThumbnail" name="linkedThumbnail" aria-label="Default select example" required>
+                    <select 
+                        class="form-select mb-3" 
+                        id="linkedThumbnail" 
+                        name="linkedThumbnail" 
+                        aria-label="Default select example" 
+                        required >
                         <% thumbnailsList.forEach(thumbnail => {%>
-                            <option value="<%= thumbnail._id %>"><%= thumbnail.title %></option>
+                            <option value="<%= thumbnail._id %>">
+                                <%= thumbnail.title %>
+                            </option>
                         <%})%>
                     </select>
                     
@@ -30,7 +37,7 @@
                             id="project_title" 
                             name="project_title"
                             required
-                            > 
+                        > 
                     </div> 
                     <br>
                     <!-- DIRECTOR -->
@@ -45,7 +52,7 @@
                             aria-describedby="inputGroup-sizing-default"
                             value="directed by Regis Raffin"
                             required
-                            >
+                        >
                     </div>
                     <br>      
                     <!-- OTHER CONTRIBUTORS -->
@@ -84,7 +91,7 @@
                             id="array_vids" 
                             name="array_vids"
                             placeholder="https://player.vimeo.com/video/341833479, https://player.vimeo.com/video/341833479,..."
-                           >
+                        >
                     </div> 
                     <br>
                     <!-- VIDEO 2 DESCRIPTION -->
