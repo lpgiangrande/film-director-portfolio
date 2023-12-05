@@ -20,6 +20,7 @@ const Thumbnail = require('../models/Thumbnails');
 const Project = require('../models/Project');
 const User = require('../models/User');
 const Biography = require('../models/Biography');
+const errorMessage = 'Sorry, we could not retrieve the data at this time. Please try again later.';
 
 
 /**
@@ -29,14 +30,17 @@ const Biography = require('../models/Biography');
  * @param {Object} res - The HTTP response object.
  * @returns {void}
  */
-exports.homePage = async (req, res) => {
 
+exports.homePage = async (req, res) => {
     try {
-      const thumbnails = await Thumbnail.find().populate('project').sort({ releaseDate: -1 });
+      const thumbnails = await Thumbnail.find()
+        .populate('project')
+        .sort({ releaseDate: -1 });
+
       res.render('index', { thumbnailsList: thumbnails });
     } catch (err) {
         console.log(err);
-        res.status(500).send('Sorry, we could not retrieve the data at this time. Please try again later.');
+        res.status(500).send(errorMessage);
     }
 };
   
@@ -44,18 +48,18 @@ exports.homePage = async (req, res) => {
  * Renders the animation page and displays the list of animation thumbnails 
  * sorted by release date in descending order.
 */
-exports.animationPage = async (req, res) => {
 
+exports.animationPage = async (req, res) => {
     try {
       const thumbnails = await Thumbnail.find({ category: 'animation' })
-      .populate('project')
-      .sort({ releaseDate: -1 })
-      .exec();
-
+        .populate('project')
+        .sort({ releaseDate: -1 })
+        .exec();
       res.render('animation', { thumbnailsList: thumbnails });
+
     } catch (err) {
         console.log(err);
-        res.status(500).send('Sorry, we could not retrieve the data at this time. Please try again later.');
+        res.status(500).send(errorMessage);
     }
 };
   
@@ -63,17 +67,17 @@ exports.animationPage = async (req, res) => {
 /**
  * Same with liveaction page. 
 */
+
 exports.liveActionPage = async (req, res) => {
     try {
       const thumbnails = await Thumbnail.find({ category: 'liveaction' })
         .populate('project')
         .sort({ releaseDate: -1 })
         .exec();
-  
       res.render('liveaction', { thumbnailsList: thumbnails });
     } catch (err) {
         console.log(err);
-        res.status(500).send('Sorry, we could not retrieve the data at this time. Please try again later.');
+        res.status(500).send(errorMessage);
     }
   };
   
@@ -126,13 +130,10 @@ exports.seeFullProject = async (req, res) => {
 };
 
 
-
-
 /**
  * Render the view for the About page (biography, photo, contact infos).
  */
 
-// test on another ocntroller file
 exports.aboutPage = async (req, res, next) => {
   try {
     const biography = await Biography.findOne().exec();
@@ -149,8 +150,6 @@ exports.aboutPage = async (req, res, next) => {
     next(error);
   }
 };
-  
-  
   
 
 /**
@@ -179,6 +178,7 @@ exports.registerPage = (req, res) => {
  * the user to the database.
  * Limit of 2 users.
  */
+
 exports.handleRegistration =  async (req, res) => { 
     
     console.log("req body : ", req.body);
