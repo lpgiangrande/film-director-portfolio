@@ -16,7 +16,6 @@ const mongoose = require("mongoose");
 const Thumbnail = require('../models/Thumbnails');
 const Project = require('../models/Project');
 const Biography = require('../models/Biography');
-// const biography = req.session.biography;
 require('../config/passport') 
 
 
@@ -42,6 +41,7 @@ require('../config/passport')
  * @const {newProject} Project
  * @properties ... id, thumbnail, title, ... gallery ...
  */
+
 exports.addProject = async (req, res) => {
     try {
       const array_vids = req.body.array_vids.split(',').map((vid) => vid.trim());
@@ -77,17 +77,19 @@ exports.addProject = async (req, res) => {
     }
   };
   
+
 /**
  * addThumbnail 
  */
+
 exports.addThumbnail = async (req, res) => {
     try {
       const newThumbnail = new Thumbnail({
         _id: new mongoose.Types.ObjectId(),
         title: req.body.title_thumbnail,
         category: req.body.category,
-        imgSrc: req.body.img_thumbnail, //req.files.img_thumbnail[0].path,
-        videoSrc: req.body.vid_thumbnail, //req.files.vid_thumbnail[0].path,
+        imgSrc: req.body.img_thumbnail, 
+        videoSrc: req.body.vid_thumbnail, 
         releaseDate: req.body.release_date,
       });
   
@@ -101,25 +103,24 @@ exports.addThumbnail = async (req, res) => {
     }
   };
 
+
 /**
  * GET controllers
  */
   
 // /admin/list : Render all projects into a table on admin homepage
 exports.list = async (req, res) => {
-
     try {
       const projects = await Project.find({});
       const thumbnails = await Thumbnail.find({});
-      // const biography = await Biography.findOne();
   
       res.render('list', {
-        // biography: biography,
         projectsList: projects,
         thumbnailsList: thumbnails,
         username: req.user.username,
         biography: res.locals.biography
       });
+
     } catch (error) {
         console.log(error);
     }
@@ -133,8 +134,12 @@ exports.uploadThumbnail = (req, res) => {
 // /admin/uploadProject : Project upload form linked to a home page thumbnail 
 exports.uploadProject = async (req, res) => {
   try {
-    const thumbnails = await Thumbnail.find().populate("project").exec();
+    const thumbnails = await Thumbnail.find()
+      .populate("project")
+      .exec();
+
     res.render('uploadProject', {thumbnailsList: thumbnails});
+    
   } catch (error) {
     console.error(error);
     res.status(500).send("Une erreur s'est produite lors de la récupération des miniatures.");
@@ -148,7 +153,6 @@ exports.updateThumbnail = async (req, res) => {
         const thumbnail = await Thumbnail.findById(id).exec();
 
         res.render('updateThumbnail', {thumbnail: thumbnail});
-
     } catch (error) {
         console.log(error);
     }
@@ -161,7 +165,9 @@ exports.updateProject = async (req, res) => {
         const projectId = req.params.id;
 
         await Thumbnail.find().exec();
-        const project = await Project.findById(projectId).populate("thumbnail").exec();
+        const project = await Project.findById(projectId)
+          .populate("thumbnail")
+          .exec();
 
         res.render("updateProject", { project: project });
 
@@ -181,7 +187,6 @@ exports.updateBiography = (req, res) => {
     res.render('updateAbout', { biography: biography });
   });
 };
-
 
 
 /**
@@ -273,7 +278,7 @@ exports.handleBiographyUpdate = async (req, res, next) => {
 exports.logoff = (req, res, next) => {
   req.logout(function(err) {
     if (err) {
-      next(err); // Passes the error to the next error-handling middleware or default error handler
+      next(err); 
     } else {
       req.flash('success_msg', 'You are logged out');
       res.redirect('/login');
