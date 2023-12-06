@@ -22,10 +22,11 @@ const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
-// Generate secret key
-const secretKey = crypto.randomBytes(32).toString('hex');
-
 const app = express();
+
+// Generate secret
+const secretKey = process.env.SECRET_KEY || crypto.randomBytes(32).toString('hex');
+
 
 // Set X-Frame-Options header middleware
 app.use((req, res, next) => {
@@ -33,9 +34,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// Passport config
-import { configurePassport } from './config/passport.js';
-configurePassport(passport);
 
 // Mongodb connect
 import dbConnect from './db/dbConnect.js';
@@ -105,7 +103,7 @@ app.use(
     resave: true,
     saveUninitialized: true,
     cookie: {
-      secure: true, 
+      secure: false, 
       maxAge: 24 * 60 * 60 * 1000, 
     },
   })
