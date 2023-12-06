@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const biographySchema = new mongoose.Schema(
   {
@@ -21,7 +21,7 @@ const biographySchema = new mongoose.Schema(
 
 const Biography = mongoose.model('Biography', biographySchema);
 
-module.exports = Biography;
+export default Biography;
 
 
 

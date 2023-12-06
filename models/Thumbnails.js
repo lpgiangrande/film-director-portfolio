@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose';
 
 /* next time, use :
 
@@ -39,5 +39,5 @@ const thumbnailsSchema = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Thumbnail', thumbnailsSchema);
+export default mongoose.model('Thumbnail', thumbnailsSchema);
 

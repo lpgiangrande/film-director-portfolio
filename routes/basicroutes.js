@@ -4,14 +4,14 @@
  * GET / POST route once used to create 2 CMS users (me and client, limit of 2 accounts)
  */
 
-const express = require("express");
-const router = express.Router();
-const mainController = require('../controllers/main_controller');
-const passport = require('passport');
-const { forwardAuthenticated } = require('../config/auth');
-const rateLimit = require('express-rate-limit');
-const he = require('he'); // prevent cross-site scripting (XSS) attacks by encoding the characters
-
+import express from "express";
+import { Router } from "express";
+import mainController from '../controllers/main_controller.js';
+import passport from 'passport';
+import { forwardAuthenticated } from '../config/auth.js';
+import rateLimit from 'express-rate-limit';
+import he from 'he'; // prevent cross-site scripting (XSS) attacks by encoding the characters
+const router = Router();
 /**
  * POST route for user login.
  */
@@ -73,5 +73,4 @@ router.post('/login', limiter, (req, res, next) => {
 // Dynamic parameter routes
 router.get('/:id', mainController.seeFullProject);
 
-
-module.exports = router;
+export default router;

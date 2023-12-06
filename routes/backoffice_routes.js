@@ -1,71 +1,35 @@
 /**
  * This file contains the routes for the admin panel
  */
-const express = require("express");
-const router = express.Router();
-const backofficeController = require('../controllers/backoffice_controller');
-const { ensureAuthenticated } = require('../config/auth');
+import express from 'express';
+import { Router } from 'express';
+import mongoose from 'mongoose';
+import * as backofficeController from '../controllers/backoffice_controller.js';
+import { ensureAuthenticated } from '../config/auth.js';
+
+const router = Router();
 
 // General Admin Routes
 router.get('/list', ensureAuthenticated, backofficeController.list);
-router.get('/logoff', ensureAuthenticated, backofficeController.logoff);
+router.get('/logoff', ensureAuthenticated, backofficeController.logoutController.logoff);
 
 // Biography Route
-router.get('/updateAbout', ensureAuthenticated, backofficeController.updateBiography);
-router.post('/updateAbout', backofficeController.handleBiographyUpdate);
+router.get('/updateAbout', ensureAuthenticated, backofficeController.biographyController.updateBiography);
+router.post('/updateAbout', backofficeController.biographyController.handleBiographyUpdate);
 
 // Thumbnail Routes
-router.get('/uploadThumbnail', ensureAuthenticated, backofficeController.uploadThumbnail);
-router.post('/uploadThumbnail', backofficeController.addThumbnail);
-router.get('/updateThumbnail/:id', ensureAuthenticated, backofficeController.updateThumbnail);
-router.post('/thumbnailUpdated', ensureAuthenticated, backofficeController.handleThumbnailUpdate);
+router.get('/uploadThumbnail', ensureAuthenticated, backofficeController.thumbnailController.uploadThumbnail);
+router.post('/uploadThumbnail', backofficeController.thumbnailController.addThumbnail);
+router.get('/updateThumbnail/:id', ensureAuthenticated, backofficeController.thumbnailController.updateThumbnail);
+router.post('/thumbnailUpdated', ensureAuthenticated, backofficeController.thumbnailController.handleThumbnailUpdate);
 
 // Project Routes
-router.get('/uploadProject', ensureAuthenticated,  backofficeController.uploadProject);
-router.post('/uploadProject', backofficeController.addProject);
-router.get('/updateProject/:id', ensureAuthenticated, backofficeController.updateProject);
-router.post('/projectUpdated', ensureAuthenticated, backofficeController.handleProjectUpdate);
-
-
+router.get('/uploadProject', ensureAuthenticated, backofficeController.projectController.uploadProject);
+router.post('/uploadProject', backofficeController.projectController.addProject);
+router.get('/updateProject/:id', ensureAuthenticated, backofficeController.projectController.updateProject);
+router.post('/projectUpdated', ensureAuthenticated, backofficeController.projectController.handleProjectUpdate);
 
 // Other Routes
-//router.get('/deleteThumbnail/:id', ensureAuthenticated, backofficeController.deleteThumbnail);
-   
+// router.get('/deleteThumbnail/:id', ensureAuthenticated, backofficeController.deleteThumbnail);
 
-module.exports = router;
-
-
-/**
- * // SIMPLE MULTER CONFIG
- */
-
-//require('dotenv').config();
-//const multer = require('multer');
-
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//        if(file.mimetype === 'image/jpeg') {
-//         cb(null, 'public/thumbnails_imgs/')
-//       } else if (file.mimetype === 'video/mp4') {
-//         cb(null, 'public/thumbnails_vids/')
-//       } else {
-//         console.log(file.mimetype)
-//         cb({ error: 'Mime type not supported' })
-//       }
-//     },
-//     filename: function (req, file, cb) {
-//         cb(null, file.originalname)
-//     },
-//   })
-
-// const upload = multer({ storage: storage })
-
-
-
-
-/*upload.fields(
-  [
-    { name: 'img_thumbnail', maxCount: 1}, 
-    { name: 'vid_thumbnail', maxCount: 1}
-  ]
-),*/ 
+export default router;
