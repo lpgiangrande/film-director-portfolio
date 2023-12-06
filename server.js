@@ -1,21 +1,31 @@
 /**
  * REQUIRED EXTERNAL MODULES
  */
-const express = require('express');
-const ejs = require('ejs');
-const path = require('path');
-const morgan = require("morgan");
-const mongoose = require('mongoose');
-const passport = require('passport');
-const flash = require('connect-flash');
-const session = require('express-session');
-const cacheControl = require('cache-control');
-const helmet = require('helmet');
-require("dotenv").config();
-const rateLimit = require('express-rate-limit');
-//const csrf = require('csrf');
-const app = express();
+import express from 'express';
+import ejs from 'ejs';
+import path from 'path';
+import morgan from 'morgan';
+import mongoose from 'mongoose';
+import passport from 'passport';
+import flash from 'connect-flash';
+import session from 'express-session';
+import cacheControl from 'cache-control';
+import helmet from 'helmet';
+import dotenv from 'dotenv';
+import rateLimit from 'express-rate-limit';
+import crypto from 'crypto'; 
 
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config();
+
+// Generate secret key
+const secretKey = crypto.randomBytes(32).toString('hex');
+
+const app = express();
 
 // Set X-Frame-Options header middleware
 app.use((req, res, next) => {
@@ -23,11 +33,12 @@ app.use((req, res, next) => {
   next();
 });
 
-//Passport config
-require('./config/passport')(passport);
+// Passport config
+import { configurePassport } from './config/passport.js';
+configurePassport(passport);
 
 // Mongodb connect
-const dbConnect = require('./db/dbConnect');
+import dbConnect from './db/dbConnect.js';
 
 /**
  * APP CONFIGURATION 
@@ -37,22 +48,17 @@ const dbConnect = require('./db/dbConnect');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//to log HTTP requests and errors
+// to log HTTP requests and errors
 app.use(morgan("dev"));
 
 // EJS
-app.set('view engine', 'ejs')
-
-// GET PUBLIC FILES
-//app.use('/public', express.static(path.join(__dirname, 'public')))
-//app.use(express.static('public'));
+app.set('view engine', 'ejs');
 
 // Serve static files from the root route ("/")
 app.use('/', express.static(path.join(__dirname, 'public')));
 
 // Helmet (helps secure your Express apps by setting various HTTP headers)
- app.use(helmet.noSniff());
-//app.use(helmet());
+app.use(helmet.noSniff());
 
 app.use(
   helmet.contentSecurityPolicy({
@@ -95,28 +101,22 @@ app.use(
 // Session Configuration 
 app.use(
   session({
-    secret: 'secret',
+    secret: secretKey,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+      secure: true, 
+      maxAge: 24 * 60 * 60 * 1000, 
+    },
   })
 );
-
-// CSRF Protection
-//app.use(csrf());
-
-/*ensures that the CSRF token is added to the res.locals object for every subsequent route or handler that needs access to the CSRF token. */
-// app.use((req, res, next) => {
-//   res.locals.csrfToken = req.csrfToken();
-//   next();
-// });
-
 
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Connect flash
-app.use(flash()); // req.flash
+app.use(flash());
 
 // Global vars
 app.use(function(req, res, next) {
@@ -128,50 +128,38 @@ app.use(function(req, res, next) {
 
 // Cache-control
 app.use(cacheControl({
-  maxAge: 86400 // durée de mise en cache en secondes (ici 24 heures)
+  maxAge: 86400 
 }));
-
 
 // Protect form
 const limiter = rateLimit({
-  //windowMs: 1000, // Set a very short ban duration (1 second) for testing purposes
-  windowMs: 15 * 60 * 1000, // ban 15 minutes + fail2ban 
-	max: 3, 
-	standardHeaders: true, 
-	legacyHeaders: false, 
+  windowMs: 15 * 60 * 1000,
+  max: 3,
+  standardHeaders: true,
+  legacyHeaders: false,
   message: "Too many login attempts from this IP, please try again in 15 minutes",
-})
+});
 
 /**
  * ROUTES
  */
 
 // Import routes
-const backoffice_routes = require('./routes/backoffice_routes.js')
-const basicroutes = require('./routes/basicroutes.js')
+import backofficeRoutes from './routes/backoffice_routes.js';
+import basicRoutes from './routes/basicroutes.js';
 
 // Use routes
-app.use('/admin', backoffice_routes)
-app.use('/', basicroutes)
-
+app.use('/admin', backofficeRoutes);
+app.use('/', basicRoutes);
 
 /**
  * SERVER CONFIGURATION
  */
-const PORT = process.env.PORT || 3000 
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-    console.log(`server is running on ${PORT}`);
-  });
+  console.log(`server is running on ${PORT}`);
+});
 
-
-// app.use('/login', limiter);
-module.exports = {
-  app,
-  limiter
-};
-
-
-// app listen loads the http module for you, creates a server and then starts it. no need for require http
-// src https://www.youtube.com/watch?v=yH593K9fYvE&ab_channel=MarinaKim
-
+// Exporting variables
+export { app, limiter };
