@@ -10,35 +10,34 @@ This js file has two purposes :
 */
 'use strict';
 
+console.log(">>> thumbnail.js version locale chargée <<<");
+
 const mouseTarget = document.getElementsByClassName('title');
 const targetTitle = document.getElementsByTagName('h3');
 const thumbnail_img = document.querySelectorAll("img.thumbnail_img");
 const thumbnail_vid = document.querySelectorAll("video.thumbnail_vid");
 
 
-for (let i = 0 ; 
-    i < mouseTarget.length 
-    && i < targetTitle.length 
-    && i < thumbnail_img.length 
-    && i < thumbnail_vid.length; i++) 
-    {
+for (let i = 0;
+    i < mouseTarget.length
+    && i < targetTitle.length
+    && i < thumbnail_img.length
+    && i < thumbnail_vid.length; i++) {
 
-        // OVER
-        mouseTarget[i].addEventListener('mouseover', show); 
-        // LEAVE
-        mouseTarget[i].addEventListener('mouseleave', hide);
+    mouseTarget[i].addEventListener('mouseover', show);
+    mouseTarget[i].addEventListener('mouseleave', hide);
 
-        function show(){
-            thumbnail_vid[i].style.opacity = "0.5";
-            targetTitle[i].style.opacity = "1"; 
-            thumbnail_vid[i].style.display = "block";
-            thumbnail_img[i].style.display = "none";
-        }
-
-        function hide(){
-            thumbnail_img[i].style.opacity = "1";
-            targetTitle[i].style.opacity = "0"; 
-            thumbnail_vid[i].style.display = "none";
-            thumbnail_img[i].style.display = "block";
-        }
+    function show() {
+        //thumbnail_vid[i].style.opacity = "0.5";
+        targetTitle[i].style.opacity = "1";
+        thumbnail_vid[i].style.display = "block";
+        thumbnail_img[i].style.display = "none";
     }
+
+    function hide() {
+        //thumbnail_img[i].style.opacity = "1";
+        targetTitle[i].style.opacity = "0";
+        thumbnail_vid[i].style.display = "none";
+        thumbnail_img[i].style.display = "block";
+    }
+}

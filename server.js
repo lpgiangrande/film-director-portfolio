@@ -13,7 +13,7 @@ import cacheControl from 'cache-control';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 import rateLimit from 'express-rate-limit';
-import crypto from 'crypto'; 
+import crypto from 'crypto';
 
 import { fileURLToPath } from 'url';
 
@@ -62,7 +62,11 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      connectSrc: ["https://ka-f.fontawesome.com"],
+      connectSrc: [
+        "'self'",
+        "https://ka-f.fontawesome.com",
+        "https://cdn.jsdelivr.net",
+      ],
       frameSrc: ["'self'", "https://player.vimeo.com", "https://www.youtube.com"],
       scriptSrc: [
         "'self'",
@@ -79,7 +83,7 @@ app.use(
         "https://ka-f.fontawesome.com",
       ],
       fontSrc: ["'self'", "https://fonts.gstatic.com", "https://ka-f.fontawesome.com"],
-      imgSrc: ["'self'", "https://site-regis.s3.eu-west-3.amazonaws.com",  "https://i.vimeocdn.com"],
+      imgSrc: ["'self'", "https://site-regis.s3.eu-west-3.amazonaws.com", "https://i.vimeocdn.com"],
       mediaSrc: ["'self'", "https://site-regis.s3.eu-west-3.amazonaws.com"],
       scriptSrcAttr: ["'unsafe-inline'"],
       styleSrcAttr: ["'unsafe-inline'"],
@@ -103,8 +107,8 @@ app.use(
     resave: true,
     saveUninitialized: true,
     cookie: {
-      secure: false, 
-      maxAge: 24 * 60 * 60 * 1000, 
+      secure: false,
+      maxAge: 24 * 60 * 60 * 1000,
     },
   })
 );
@@ -117,7 +121,7 @@ app.use(passport.session());
 app.use(flash());
 
 // Global vars
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
@@ -126,7 +130,7 @@ app.use(function(req, res, next) {
 
 // Cache-control
 app.use(cacheControl({
-  maxAge: 86400 
+  maxAge: 86400
 }));
 
 // Protect form
