@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const biographySchema = new mongoose.Schema(
   {
-    _id: mongoose.Schema.Types.ObjectId,
+    //_id: mongoose.Schema.Types.ObjectId,
     pic: {
       type: String,
       required: true,
@@ -25,11 +25,11 @@ export default Biography;
 
 
 
-  /*
-  email: {
-    type: String,
-    required: true,
-    unique: true, 
-    match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  }
-  */
+/*
+email: {
+  type: String,
+  required: true,
+  unique: true, 
+  match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+}
+*/

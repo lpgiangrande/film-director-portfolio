@@ -25,7 +25,7 @@
     "express-validator": "^7.0.1",
     "he": "^1.2.0",
     "helmet": "^7.0.0",
-    "mongoose": "^6.5.0",
+    "mongoose": "^8.18.1",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "passport": "^0.6.0",
@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "jest": "^29.5.0",
-    "nodemon": "^2.0.22",
+    "nodemon": "^3.1.10",
     "supertest": "^6.3.3"
   }
 }

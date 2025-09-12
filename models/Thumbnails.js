@@ -10,11 +10,11 @@ import mongoose from 'mongoose';
 */
 
 const thumbnailsSchema = mongoose.Schema({
-    _id : mongoose.Schema.Types.ObjectId,
+    //_id : mongoose.Schema.Types.ObjectId,
     title: {
         type: String,
         required: true
-    }, 
+    },
     category: {
         type: String,
         required: true
@@ -22,9 +22,9 @@ const thumbnailsSchema = mongoose.Schema({
     imgSrc: {
         type: String,
         required: true
-    }, 
+    },
     videoSrc: {
-        type : String,
+        type: String,
         required: true
     },
     releaseDate: {
@@ -34,8 +34,8 @@ const thumbnailsSchema = mongoose.Schema({
     },
     // link with project 
     project: {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : "Project"
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Project"
     }
 })
 

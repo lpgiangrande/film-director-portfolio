@@ -1,48 +1,35 @@
 import mongoose from 'mongoose';
-import Thumbnail from '../models/Thumbnails.js';  
-import Project from '../models/Project.js';  
-import Biography from '../models/Biography.js';  
-import * as thumbnailController from './thumbnailController.js'
-import * as projectController from './projectController.js'
-import * as logoutController from './logoutController.js'
-import * as biographyController from './biographyController.js';  // Import biographyController
+import Thumbnail from '../models/Thumbnails.js';
+import Project from '../models/Project.js';
+import Biography from '../models/Biography.js';
+
+import * as thumbnailController from './thumbnailController.js';
+import * as projectController from './projectController.js';
+import * as logoutController from './logoutController.js';
+import * as biographyController from './biographyController.js';
+
 import { configurePassport, LocalStrategy, bcrypt, User, passport } from '../config/passport.js';
 
-// Now, configure Passport
+// Configure Passport
 configurePassport(passport);
 
-
 /**
- * This file contains @private functions for the admin panel.:
- * 
- *  - list: Renders a list of projects and thumbnails in a table
- * 
- *  - addProject: Adds a new project (a new web page)
- *  - updateProject: Handles the update of a project.
- *  - handleProjectUpdate: Submits the updated project.
- * 
- *  - addThumbnail: Adds a new Project's thumbnail for the homepage
- *  - updateThumbnail: Handles the update of a thumbnail.
- *  - handleThumbnailUpdate: Submits the updated thumbnail.
- *  
- *  - updateBio
- *  - handleBioUpdate
+ * Render the admin panel list of projects and thumbnails
  */
-
-// Define the list function
-const list = async (req, res) => {
+const list = async (req, res, next) => {
   try {
-    const projects = await Project.find({});
-    const thumbnails = await Thumbnail.find({});
+    const projects = await Project.find({}).exec();
+    const thumbnails = await Thumbnail.find({}).exec();
 
     res.render('list', {
       projectsList: projects,
       thumbnailsList: thumbnails,
-      username: req.user.username,
-      biography: res.locals.biography,
+      username: req.user?.username || '',
+      biography: res.locals.biography || null,
     });
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.error('Error fetching projects or thumbnails:', err);
+    next(err);
   }
 };
 

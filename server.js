@@ -14,59 +14,62 @@ import helmet from 'helmet';
 import dotenv from 'dotenv';
 import rateLimit from 'express-rate-limit';
 import crypto from 'crypto';
-
 import { fileURLToPath } from 'url';
+
+/**
+ * CONFIGURATION
+ */
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-dotenv.config();
-
 const app = express();
 
-// Generate secret
+// Generate secret key for sessions
 const secretKey = process.env.SECRET_KEY || crypto.randomBytes(32).toString('hex');
 
+/**
+ * DATABASE CONNECTION
+ */
+// Préparer le projet pour Mongoose 7 (avant toute connexion)
+mongoose.set('strictQuery', false);
 
-// Set X-Frame-Options header middleware
+// Importer la fonction de connexion
+import dbConnect from './db/dbConnect.js';
+
+// Appeler la connexion explicitement
+dbConnect();
+
+/**
+ * APP MIDDLEWARE
+ */
+// X-Frame-Options header
 app.use((req, res, next) => {
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
   next();
 });
 
-
-// Mongodb connect
-import dbConnect from './db/dbConnect.js';
-
-/**
- * APP CONFIGURATION 
- */
-
-// for posted data to server via forms 
+// Parse JSON and URL-encoded form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// to log HTTP requests and errors
-app.use(morgan("dev"));
+// HTTP request logger
+app.use(morgan('dev'));
 
-// EJS
+// EJS view engine
 app.set('view engine', 'ejs');
 
-// Serve static files from the root route ("/")
+// Serve static files
 app.use('/', express.static(path.join(__dirname, 'public')));
 
-// Helmet (helps secure your Express apps by setting various HTTP headers)
+// Helmet security headers
 app.use(helmet.noSniff());
-
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      connectSrc: [
-        "'self'",
-        "https://ka-f.fontawesome.com",
-        "https://cdn.jsdelivr.net",
-      ],
+      connectSrc: ["'self'", "https://ka-f.fontawesome.com", "https://cdn.jsdelivr.net"],
       frameSrc: ["'self'", "https://player.vimeo.com", "https://www.youtube.com"],
       scriptSrc: [
         "'self'",
@@ -91,7 +94,6 @@ app.use(
   })
 );
 
-// Enable Strict-Transport-Security header
 app.use(
   helmet.hsts({
     maxAge: 31536000,
@@ -100,16 +102,13 @@ app.use(
   })
 );
 
-// Session Configuration 
+// Session configuration
 app.use(
   session({
     secret: secretKey,
     resave: true,
     saveUninitialized: true,
-    cookie: {
-      secure: false,
-      maxAge: 24 * 60 * 60 * 1000,
-    },
+    cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000 },
   })
 );
 
@@ -120,8 +119,8 @@ app.use(passport.session());
 // Connect flash
 app.use(flash());
 
-// Global vars
-app.use(function (req, res, next) {
+// Global template variables
+app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
@@ -129,13 +128,11 @@ app.use(function (req, res, next) {
 });
 
 // Cache-control
-app.use(cacheControl({
-  maxAge: 86400
-}));
+app.use(cacheControl({ maxAge: 86400 }));
 
-// Protect form
+// Rate limiter for form protection
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
+  windowMs: 15 * 60 * 1000, // 15 minutes
   max: 3,
   standardHeaders: true,
   legacyHeaders: false,
@@ -145,12 +142,9 @@ const limiter = rateLimit({
 /**
  * ROUTES
  */
-
-// Import routes
 import backofficeRoutes from './routes/backoffice_routes.js';
 import basicRoutes from './routes/basicroutes.js';
 
-// Use routes
 app.use('/admin', backofficeRoutes);
 app.use('/', basicRoutes);
 
@@ -160,8 +154,10 @@ app.use('/', basicRoutes);
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`server is running on ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
 
-// Exporting variables
+/**
+ * EXPORTS
+ */
 export { app, limiter };

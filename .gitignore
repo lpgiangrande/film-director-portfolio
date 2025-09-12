@@ -1,11 +1,27 @@
 # Node build artifacts
-node_modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Local development
+# Local environment
 .env
 .DS_Store
-.vscode
+.vscode/
 
+# Logs
+logs/
+*.log
+
+# Optional npm cache
+.npm
+
+# Coverage reports
+coverage/
+
+# Optional temporary files
+*.tmp
+*.swp
 
 # others
 /views/privacy-policy.ejs

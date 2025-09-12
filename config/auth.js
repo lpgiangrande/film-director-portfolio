@@ -10,5 +10,6 @@ export const forwardAuthenticated = (req, res, next) => {
   if (!req.isAuthenticated()) {
     return next();
   }
-  res.redirect('/list');
+  res.redirect('/admin/list'); // plus cohérent avec tes routes
 };
+

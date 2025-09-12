@@ -10,10 +10,10 @@ import mongoose from 'mongoose';
 
 const projectSchema = mongoose.Schema({
 
-    _id : mongoose.Schema.Types.ObjectId,
-    thumbnail : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : "Thumbnail"
+    //_id : mongoose.Schema.Types.ObjectId,
+    thumbnail: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Thumbnail"
     },/*
     category: {
         type: String,
@@ -21,46 +21,46 @@ const projectSchema = mongoose.Schema({
     project_title: {
         type: String,
         required: true,
-    }, 
+    },
     director: {
         type: String,
         required: true
     },
-    other_contributors: { 
+    other_contributors: {
         type: String,
     },
     productor: {
         type: String,
-    }, 
+    },
     // Liens vimeo, max 7 :
-    array_vids: { 
+    array_vids: {
         type: [String],
         required: true
-    }, 
-    video2_description:{
+    },
+    video2_description: {
         type: String
     },
-    video3_description:{
+    video3_description: {
         type: String
     },
-    video4_description:{
+    video4_description: {
         type: String
     },
-    video5_description:{
+    video5_description: {
         type: String
     },
-    video6_description:{
+    video6_description: {
         type: String
     },
-    video7_description:{
+    video7_description: {
         type: String
     },
     // Images ou vids, max 16
-    gallery: {  
+    gallery: {
         type: [String],
         required: true
     },
-    gallery_row_1_description: {    
+    gallery_row_1_description: {
         type: String,
     },
     gallery_row_2_description: {

@@ -6,42 +6,27 @@ import Project from '../models/Project.js';
 import User from '../models/User.js';
 import Biography from '../models/Biography.js';
 
-const errorMessage = 'Sorry, we could not retrieve the data at this time. Please try again later.';
+const ERROR_MESSAGE = 'Sorry, we could not retrieve the data at this time. Please try again later.';
 
 /** 
- * 
- * This is a Node.js module that exports several functions 
- * to handle HTTP requests and render views using the Express framework. 
- * It also interacts with a MongoDB database using Mongoose ORM.
- * 
- * first 5 functions : display views for the user
- *  
- * The last functions are for the client to either register or login to access his admin panel. 
- * 
- *  /!\ the register function allows only 2 users, that are already registered. 
- * 
+ * Page rendering functions
  */
 
-
-/**
- * Renders the home page by finding all the Thumbnails from the database and sorting them by release date in descending order.
- */
+// Render home page with all thumbnails sorted by release date descending
 const homePage = async (req, res) => {
   try {
     const thumbnails = await Thumbnail.find()
       .populate('project')
-      .sort({ releaseDate: -1 });
-
+      .sort({ releaseDate: -1 })
+      .exec();
     res.render('index', { thumbnailsList: thumbnails });
   } catch (err) {
-    console.log(err);
-    res.status(500).send(errorMessage);
+    console.error(err);
+    res.status(500).send(ERROR_MESSAGE);
   }
 };
 
-/**
- * Renders the animation page and displays the list of animation thumbnails sorted by release date in descending order.
- */
+// Render animation page
 const animationPage = async (req, res) => {
   try {
     const thumbnails = await Thumbnail.find({ category: 'animation' })
@@ -50,14 +35,12 @@ const animationPage = async (req, res) => {
       .exec();
     res.render('animation', { thumbnailsList: thumbnails });
   } catch (err) {
-    console.log(err);
-    res.status(500).send(errorMessage);
+    console.error(err);
+    res.status(500).send(ERROR_MESSAGE);
   }
 };
 
-/**
- * Renders the live action page and displays the list of live action thumbnails sorted by release date in descending order.
- */
+// Render live action page
 const liveActionPage = async (req, res) => {
   try {
     const thumbnails = await Thumbnail.find({ category: 'liveaction' })
@@ -66,164 +49,90 @@ const liveActionPage = async (req, res) => {
       .exec();
     res.render('liveaction', { thumbnailsList: thumbnails });
   } catch (err) {
-    console.log(err);
-    res.status(500).send(errorMessage);
+    console.error(err);
+    res.status(500).send(ERROR_MESSAGE);
   }
 };
 
-/**
- * Render either homepage/:id, liveaction/:id, animation/:id.
- * Retrieves the project details from the DB based on the thumbnail ID.
- * Can render 2 different layouts depending on the number of img, 
- * in order to display a balanced and variable grid for the user.
- */
+// Render full project page based on thumbnail ID
 const seeFullProject = async (req, res) => {
   try {
-    if (req.params.id === "favicon.ico") {
-      // Skip processing for the /favicon.ico route
-      return;
+    const thumbnailId = req.params.id;
+
+    if (thumbnailId === 'favicon.ico') return;
+
+    if (!mongoose.Types.ObjectId.isValid(thumbnailId)) {
+      return res.status(400).send('Invalid thumbnail ID');
     }
 
-    const project = await Project.findOne({ thumbnail: mongoose.Types.ObjectId(req.params.id) })
+    const project = await Project.findOne({ thumbnail: thumbnailId })
       .populate('thumbnail')
       .exec();
 
-    if (!project) {
-      res.status(404).send('Project not found.');
-      return;
-    }
+    if (!project) return res.status(404).send('Project not found');
 
-    if (project.gallery.length % 2 === 0) {
-      res.render('project_v2', { project: project }); // even
-    } else {
-      res.render('project', { project: project }); // odd
-    }
+    const viewTemplate = project.gallery.length % 2 === 0 ? 'project_v2' : 'project';
+    res.render(viewTemplate, { project });
   } catch (error) {
-    console.log(error);
-    res.status(500).send(errorMessage);
+    console.error(error);
+    res.status(500).send(ERROR_MESSAGE);
   }
 };
 
-/**
- * Render the view for the About page (biography, photo, contact infos).
- */
+// Render about page
 const aboutPage = async (req, res, next) => {
   try {
     const biography = await Biography.findOne().exec();
-
-    if (!biography) {
-      console.log('Biography entry not found');
-      return res.status(404).send('Biography entry not found');
-    }
-
-    console.log('Rendering about page with biography:', biography);
-    res.render('about', { biography: biography });
+    if (!biography) return res.status(404).send('Biography entry not found');
+    res.render('about', { biography });
   } catch (error) {
-    console.log('Error:', error);
+    console.error(error);
     next(error);
   }
 };
 
-/**
- * Render privacy policy page.
- */
-// export const privacyPolicy = (req, res) => {
-//   res.render('privacy-policy');
-// };
+// Render login page
+const loginPage = (req, res) => res.render('login');
 
-/**
- * Render login page.
- */
-const loginPage = (req, res) => {
-  res.render('login');
-};
+// Render register page
+const registerPage = (req, res) => res.render('register');
 
-/**
- * Render register page.
- */
-const registerPage = (req, res) => {
-  res.render('register');
-};
-
-/**
- * Handles user registration.
- */
+// Handle user registration
 const handleRegistration = async (req, res) => {
-  console.log("req body : ", req.body);
   const { username, pwd, pwd2 } = req.body;
-  let errors = [];
+  const errors = [];
 
-  // Check required fields
-  if (!username || !pwd || !pwd2) {
-    errors.push({ msg: 'Fields should not be empty' });
-  }
-
-  // Check Pwd match
-  if (pwd !== pwd2) {
-    errors.push({ msg: 'Passwords do not match' });
-  }
-
-  // Check pwd length
-  if (pwd.length < 6) {
-    errors.push({ msg: 'Password should be at least 6 characters' });
-  }
+  if (!username || !pwd || !pwd2) errors.push({ msg: 'Fields should not be empty' });
+  if (pwd !== pwd2) errors.push({ msg: 'Passwords do not match' });
+  if (pwd.length < 6) errors.push({ msg: 'Password should be at least 6 characters' });
 
   if (errors.length > 0) {
-    res.render('register', {
-      errors,
-      username,
-      pwd,
-      pwd2
-    });
-  } else {
-    try {
-      // check for the number of users already registered
-      const userCount = await User.countUsers();
-      if (userCount >= 2) {
-        errors.push({ msg: 'Only two users are allowed.' });
-        res.render('register', {
-          errors,
-          username,
-          pwd,
-          pwd2
-        });
-      } else {
-        const user = await User.findOne({ username: username });
-        if (user) {
-          // User exists
-          errors.push({ msg: 'already registered' });
-          res.render('register', {
-            errors,
-            username,
-            pwd,
-            pwd2
-          });
-        } else {
-          const newUser = new User({
-            username: username,
-            pwd: pwd
-          });
+    return res.render('register', { errors, username, pwd, pwd2 });
+  }
 
-          // Hash pwd
-          bcrypt.genSalt(10, (err, salt) =>
-            bcrypt.hash(newUser.pwd, salt, (err, hash) => {
-              if (err) throw err;
-              // Set pwd to hash
-              newUser.pwd = hash;
-              // Save user
-              newUser.save()
-                .then(user => {
-                  req.flash('success_msg', 'You are now registered. You can log in.');
-                  res.redirect('/login');
-                })
-                .catch(err => console.log(err));
-            })
-          );
-        }
-      }
-    } catch (err) {
-      console.log(err);
+  try {
+    const userCount = await User.countUsers();
+    if (userCount >= 2) {
+      errors.push({ msg: 'Only two users are allowed.' });
+      return res.render('register', { errors, username, pwd, pwd2 });
     }
+
+    const existingUser = await User.findOne({ username }).exec();
+    if (existingUser) {
+      errors.push({ msg: 'User already registered' });
+      return res.render('register', { errors, username, pwd, pwd2 });
+    }
+
+    const hashedPwd = await bcrypt.hash(pwd, 10);
+
+    const newUser = new User({ username, pwd: hashedPwd });
+    await newUser.save();
+
+    req.flash('success_msg', 'You are now registered. You can log in.');
+    res.redirect('/login');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error while registering user');
   }
 };
 
@@ -233,7 +142,6 @@ const mainController = {
   liveActionPage,
   seeFullProject,
   aboutPage,
-  // privacyPolicy,
   loginPage,
   registerPage,
   handleRegistration

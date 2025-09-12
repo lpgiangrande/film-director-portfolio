@@ -1,26 +1,34 @@
-import mongoose from 'mongoose';
 import Biography from '../models/Biography.js';
 
-// /admin/updateBiography : form for updating the biography (view)
-export const updateBiography = (req, res) => {
-    Biography.findOne({}).exec((err, biography) => {
-      if (err) {
-        console.log(err);
-        return;
-      } //console.log('Biography:', biography);
-      res.render('updateAbout', { biography: biography });
-    });
-  };
-  
+/**
+ * Render the form to update the biography (admin view)
+ */
+export const updateBiography = async (req, res, next) => {
+  try {
+    const biography = await Biography.findOne().exec();
 
-// Submit updated biography
+    if (!biography) {
+      console.log('Biography not found');
+      return res.status(404).send('Biography entry not found');
+    }
+
+    res.render('updateAbout', { biography });
+  } catch (err) {
+    console.error('Error retrieving biography:', err);
+    next(err);
+  }
+};
+
+/**
+ * Handle the submission of updated biography
+ */
 export const handleBiographyUpdate = async (req, res, next) => {
   try {
     const { pic, text, email } = req.body;
 
-    const biography = await Biography.findOne();
+    const biography = await Biography.findOne().exec();
 
-    if (!biography) { // Handle case when no biography entry exists
+    if (!biography) {
       return res.status(404).send('Biography entry not found');
     }
 
@@ -31,9 +39,9 @@ export const handleBiographyUpdate = async (req, res, next) => {
     await biography.save();
 
     req.flash('success_msg', 'Biography updated successfully');
-    res.redirect(301, '/admin/list');
-
-  } catch (error) {
-    next(error);
+    res.redirect('/admin/list');
+  } catch (err) {
+    console.error('Error updating biography:', err);
+    next(err);
   }
 };
