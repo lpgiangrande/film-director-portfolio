@@ -32,13 +32,8 @@ const secretKey = process.env.SECRET_KEY || crypto.randomBytes(32).toString('hex
 /**
  * DATABASE CONNECTION
  */
-// Préparer le projet pour Mongoose 7 (avant toute connexion)
 mongoose.set('strictQuery', false);
-
-// Importer la fonction de connexion
 import dbConnect from './db/dbConnect.js';
-
-// Appeler la connexion explicitement
 dbConnect();
 
 /**
@@ -65,7 +60,7 @@ app.set('view engine', 'ejs');
 
 // Serve static files with cache
 app.use('/public', express.static(path.join(__dirname, 'public'), {
-  maxAge: '7d', // 7 jours pour tes assets
+  maxAge: '7d',
   etag: true
 }));
 
@@ -73,9 +68,9 @@ app.use('/public', express.static(path.join(__dirname, 'public'), {
 // Headers de cache spécifiques par type de fichier
 app.use((req, res, next) => {
   if (req.url.match(/\.(jpg|jpeg|png|gif|webp)$/)) {
-    res.set('Cache-Control', 'public, max-age=2592000'); // 30 jours images
+    res.set('Cache-Control', 'public, max-age=2592000');
   } else if (req.url.match(/\.(css|js)$/)) {
-    res.set('Cache-Control', 'public, max-age=604800'); // 7 jours CSS/JS
+    res.set('Cache-Control', 'public, max-age=604800');
   }
   next();
 });
@@ -147,13 +142,15 @@ app.use((req, res, next) => {
 
 // Rate limiter for form protection
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
+  windowMs: 15 * 60 * 1000, // 15 min
   max: 3,
   standardHeaders: true,
   legacyHeaders: false,
   message: "Too many login attempts from this IP, please try again in 15 minutes",
 });
 
+// Route for robots.txt
+// xxxx
 /**
  * ROUTES
  */
