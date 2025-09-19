@@ -12,9 +12,10 @@
                         <iframe 
                             class="resp-iframe" 
                             title="vimeo-player" 
-                            src="<%= project.array_vids[0]%>"  
+                            src="<%= project.array_vids[0]%>?dnt=1&autopause=0"
                             frameborder="0" 
-                            allowfullscreen>
+                            allowfullscreen
+                            loading="lazy">
                         </iframe>
                     </div>
                     <!-- INFOS -->
@@ -52,9 +53,9 @@
 
                                 <div class="col-sm-6 col-xs-12">
                                     <video 
-                                        class="img-fluid"  
-                                        autoplay playsinline muted loop 
-                                        src="<%= project.gallery[index] %>"  
+                                        class="img-fluid video-lazy"  
+                                        muted loop playsinline
+                                        data-src="<%= project.gallery[index] %>"  
                                         type="video/mp4">
                                     </video>
                                 </div>
@@ -120,9 +121,9 @@
 
                                     <div class="col-sm-4 col-xs-12">
                                         <video 
-                                            class="img-fluid"  
-                                            autoplay playsinline muted loop 
-                                            src="<%= project.gallery[index] %>"  
+                                            class="img-fluid video-lazy"  
+                                            muted loop playsinline
+                                            data-src="<%= project.gallery[index] %>"  
                                             type="video/mp4">
                                         </video>
                                     </div>
@@ -258,10 +259,10 @@
                                  <% } else { %>
 
                                     <div class="col-sm-6 col-xs-12">
-                                        <video 
-                                            class="img-fluid"  
-                                            autoplay playsinline muted loop 
-                                            src="<%= project.gallery[index] %>"  
+                                       <video 
+                                            class="img-fluid video-lazy"  
+                                            muted loop playsinline
+                                            data-src="<%= project.gallery[index] %>"  
                                             type="video/mp4">
                                         </video>
                                     </div>
@@ -330,9 +331,9 @@
 
                                     <div class="col-sm-6 col-xs-12">
                                         <video 
-                                            class="img-fluid"  
-                                            autoplay playsinline muted loop 
-                                            src="<%= project.gallery[index] %>"  
+                                            class="img-fluid video-lazy"  
+                                            muted loop playsinline
+                                            data-src="<%= project.gallery[index] %>"  
                                             type="video/mp4">
                                         </video>
                                     </div>
@@ -397,5 +398,21 @@
             </main>
         </div>
         <%- include('partials/footer.ejs') %>
+        <script>
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const video = entry.target;
+                        video.src = video.dataset.src;
+                        video.load();
+                        video.addEventListener('canplay', () => {
+                            video.play().catch(e => console.log('Autoplay bloqué:', e));
+                        });
+                        observer.unobserve(video);
+                    }
+                });
+            });
+            document.querySelectorAll('.video-lazy').forEach(v => observer.observe(v));
+        </script>
     </body>
 </html>
