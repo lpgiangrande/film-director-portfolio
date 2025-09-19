@@ -9,11 +9,11 @@ import mongoose from 'mongoose';
 import passport from 'passport';
 import flash from 'connect-flash';
 import session from 'express-session';
-import cacheControl from 'cache-control';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 import rateLimit from 'express-rate-limit';
 import crypto from 'crypto';
+import compression from 'compression';
 import { fileURLToPath } from 'url';
 
 /**
@@ -44,6 +44,9 @@ dbConnect();
 /**
  * APP MIDDLEWARE
  */
+// Compression GZIP
+app.use(compression());
+
 // X-Frame-Options header
 app.use((req, res, next) => {
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
@@ -60,8 +63,22 @@ app.use(morgan('dev'));
 // EJS view engine
 app.set('view engine', 'ejs');
 
-// Serve static files
-app.use('/', express.static(path.join(__dirname, 'public')));
+// Serve static files with cache
+app.use('/public', express.static(path.join(__dirname, 'public'), {
+  maxAge: '7d', // 7 jours pour tes assets
+  etag: true
+}));
+
+
+// Headers de cache spécifiques par type de fichier
+app.use((req, res, next) => {
+  if (req.url.match(/\.(jpg|jpeg|png|gif|webp)$/)) {
+    res.set('Cache-Control', 'public, max-age=2592000'); // 30 jours images
+  } else if (req.url.match(/\.(css|js)$/)) {
+    res.set('Cache-Control', 'public, max-age=604800'); // 7 jours CSS/JS
+  }
+  next();
+});
 
 // Helmet security headers
 app.use(helmet.noSniff());
@@ -73,6 +90,7 @@ app.use(
       frameSrc: ["'self'", "https://player.vimeo.com", "https://www.youtube.com"],
       scriptSrc: [
         "'self'",
+        "'unsafe-inline'", // Pour le script lazy loading
         "https://site-regis.s3.eu-west-3.amazonaws.com",
         "https://cdn.jsdelivr.net",
         "https://kit.fontawesome.com",
@@ -126,9 +144,6 @@ app.use((req, res, next) => {
   res.locals.error = req.flash('error');
   next();
 });
-
-// Cache-control
-app.use(cacheControl({ maxAge: 86400 }));
 
 // Rate limiter for form protection
 const limiter = rateLimit({
