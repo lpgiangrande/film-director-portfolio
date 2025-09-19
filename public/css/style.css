@@ -3,6 +3,11 @@
     margin: 0;
     padding: 0;
 }
+@font-face {
+  font-family: 'Font Awesome 6 Brands';
+  src: url('https://ka-f.fontawesome.com/releases/v6.0.0/webfonts/free-fa-brands-400.woff2') format('woff2');
+  font-display: swap;
+}
 body {
     background-color : black;
     font-size: 12px;
