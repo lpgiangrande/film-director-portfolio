@@ -65,6 +65,7 @@ app.use('/public', express.static(path.join(__dirname, 'public'), {
   maxAge: '7d',
   etag: true
 }));
+app.use('/js', express.static(path.join(__dirname, 'public/js')));
 
 // Headers de cache spécifiques par type de fichier
 app.use((req, res, next) => {

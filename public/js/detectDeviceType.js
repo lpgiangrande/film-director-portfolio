@@ -12,8 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Determine which script to load based on device type
     const scriptSrc = deviceType === 'Desktop'
-        ? '/public/js/thumbnail.js'
-        : '/public/js/remove_vids.js';
+        ? '/js/thumbnail.js'
+        : '/js/remove_vids.js';
+
 
     console.log(deviceType === 'Desktop'
         ? ">>> Desktop: thumbnail.js loaded <<<"
