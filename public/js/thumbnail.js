@@ -1,5 +1,3 @@
-// alert('works only for desktops');
-
 /*
 
 This js file has two purposes :
