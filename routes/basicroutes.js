@@ -32,7 +32,6 @@ router.get('/', mainController.homePage);
 router.get('/animation', mainController.animationPage);
 router.get('/liveaction', mainController.liveActionPage);
 router.get('/about', mainController.aboutPage);
-// router.get('/privacypolicy', mainController.privacyPolicy);
 
 // -------------------- Authentication -------------------- //
 router.get('/register', forwardAuthenticated, mainController.registerPage);
@@ -51,6 +50,10 @@ router.post('/login', loginLimiter, (req, res, next) => {
 });
 
 // -------------------- Dynamic Project Pages -------------------- //
+// 1️⃣ Route par slug (doit être avant la route générique)
+//router.get('/project/:slug', mainController.seeFullProjectBySlug);
+
+// 2️⃣ Route par ID (ancienne route, générique)
 router.get('/:id', mainController.seeFullProject);
 
 export default router;

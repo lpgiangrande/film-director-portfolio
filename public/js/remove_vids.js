@@ -9,11 +9,11 @@ This js file prevents videos from loading on mobile devices
 
 let videos = document.querySelectorAll('video.no-load-mobile');
 
-videos.forEach(function(video){ 
+videos.forEach(function (video) {
 
     video.pause();
     video.removeAttribute('src');
     video.load();
 
-   
+
 }); 

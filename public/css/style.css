@@ -76,7 +76,7 @@ h3.thumbnail_title{
     left: 50%;
     transform: translate(-50%,-50%);
     z-index: 90;
-    font-weight: 400;
+    font-weight: 300;
     letter-spacing: 2px;
     opacity: 0;
     transition: 1s;

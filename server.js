@@ -173,3 +173,9 @@ app.listen(PORT, () => {
  * EXPORTS
  */
 export { app, limiter };
+
+// router.get('/project/:slug', async (req, res) => {
+//     const project = await Project.findOne({ slug: req.params.slug });
+//     if (!project) return res.status(404).send('Projet introuvable');
+//     res.render('project', { project });
+// });
