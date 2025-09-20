@@ -94,13 +94,13 @@ footer .d-flex{
     align-items: center;
     padding-top: 30px;
 }
-footer i{
+footer .social-icon {
     opacity: 0.6;
     margin: 8px;
+    transition: opacity 1s; 
 }
-footer i:hover{
+footer .social-icon:hover {
     opacity: 1;
-    transition-duration: 1s;
 }
 .discrete-link{
     text-decoration: none;
