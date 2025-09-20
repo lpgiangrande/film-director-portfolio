@@ -1,41 +1,45 @@
-    <%- include('partials/header.ejs') %>
-        <main>
-            <!-- THUMBNAILS GALLERY -->
-            <div class="container-fluid d-flex g-0 mt-4">
-                <div class="row gx-0">
+<%- include('partials/header.ejs') %>
 
-                    <% thumbnailsList.forEach(thumbnail => {%>
+<main>
+    <!-- THUMBNAILS GALLERY -->
+    <div class="container-fluid d-flex g-0 mt-4">
+        <div class="row gx-0">
 
-                        <div class="col-md-6 col-lg-4 d-flex title"> 
-                            <a class="d-flex" href="/<%= thumbnail._id %>">
-                                <h3 class="text-center thumbnail_title"><%= thumbnail.title %></h3>
-                                <div class="source1">
-                                    <img 
-                                        class="img-fluid thumbnail_img" 
-                                        width="1000" 
-                                        src="<%= thumbnail.imgSrc %>" 
-                                        alt="visual for <%= thumbnail.title %> by regis raffin">
-                                </div>
-                                <div class="source2">
-                                    <video 
-                                        class="thumbnail_vid hidden w-100 h-100 no-load-mobile" 
-                                        autoplay playsinline muted loop preload="metadata" 
-                                        src="<%= thumbnail.videoSrc %>" 
-                                        type="video/mp4">
-                                    </video>
-                                </div>
-                            </a>
+            <% thumbnailsList.forEach(thumbnail => { %>
+
+                <div class="col-md-6 col-lg-4 d-flex title"> 
+                    <a class="d-flex" href="/<%= thumbnail._id %>">
+                        <h3 class="text-center thumbnail_title"><%= thumbnail.title %></h3>
+                        <div class="source1">
+                            <img 
+                                class="img-fluid thumbnail_img" 
+                                width="1000" 
+                                src="<%= thumbnail.imgSrc %>" 
+                                alt="visual for <%= thumbnail.title %> by regis raffin"
+                            >
                         </div>
-
-                    <%})%>
-                    
+                        <div class="source2">
+                            <video 
+                                class="thumbnail_vid hidden w-100 h-100 no-load-mobile" 
+                                autoplay 
+                                playsinline 
+                                muted 
+                                loop 
+                                preload="metadata" 
+                                src="<%= thumbnail.videoSrc %>" 
+                                type="video/mp4">
+                            </video>
+                        </div>
+                    </a>
                 </div>
-            </div>
-        </main>
-        <%- include('partials/footer.ejs') %>
-        <!-- CHECK DEVICE TYPE & LOAD APPROPRIATE SCRIPT -->
-        <script src="https://site-regis.s3.eu-west-3.amazonaws.com/public/js/detectDeviceType.js"></script>
-    </body>
-</html>
 
+            <% }) %>
 
+        </div>
+    </div>
+</main>
+
+<%- include('partials/footer.ejs') %>
+
+<!-- DEVICE DETECTION SCRIPT -->
+<script defer src="/public/js/detectDeviceType.js"></script>

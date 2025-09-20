@@ -1,42 +1,46 @@
 <%- include('partials/header.ejs') %>
-        <!-- THUMBNAILS - IMG / VID GALLERY-->
-        <main>
-            <div class="container-fluid d-flex g-0">
-                <div class="row gx-0 thumb_box">
 
-                    <% thumbnailsList.forEach(thumbnail => {%>
+<!-- THUMBNAILS - IMAGE / VIDEO GALLERY -->
+<main>
+    <div class="container-fluid d-flex g-0">
+        <div class="row gx-0 thumb_box">
 
-                        <div class="col-md-6 col-lg-4 title"> 
-                            <a class="d-flex thumbnail_title hidden" href="/<%= thumbnail._id %>">
-                                <h3 class="text-center thumbnail_title"><%= thumbnail.title %></h3>
-                                <div class="source1">
-                                    <img 
-                                        class="img-fluid thumbnail_img" 
-                                        width="1000" src="<%= thumbnail.imgSrc %>" 
-                                        alt="visual for <%= thumbnail.title %> by regis raffin"
-                                        fetchpriority="high"
-                                        loading="eager"
-                                    >
-                                </div>
-                                <div class="source2"> 
-                                    <video 
-                                        class="thumbnail_vid hidden w-100 h-100 no-load-mobile" 
-                                        autoplay playsinline muted loop preload="metadata" 
-                                        src="<%= thumbnail.videoSrc %>" 
-                                        type="video/mp4">
-                                    </video>
-                                </div>                                
-                            </a>
+            <% thumbnailsList.forEach(thumbnail => { %>
+                <div class="col-md-6 col-lg-4 title"> 
+                    <a class="d-flex thumbnail_title hidden" href="/<%= thumbnail._id %>">
+                        <h3 class="text-center thumbnail_title"><%= thumbnail.title %></h3>
+                        
+                        <div class="source1">
+                            <!-- LCP IMAGE: eager load, high priority, dimensions set to prevent layout shift -->
+                            <img 
+                                class="img-fluid thumbnail_img" 
+                                src="<%= thumbnail.imgSrc %>" 
+                                alt="visual for <%= thumbnail.title %> by regis raffin"
+                                width="1000"
+                                height="563" <!-- adjust according to real image ratio -->
+                                fetchpriority="high"
+                                loading="eager"
+                            >
                         </div>
-
-                    <%})%>
-                    
+                        
+                        <div class="source2"> 
+                            <!-- VIDEO: deferred / lazy loading for performance -->
+                            <video 
+                                class="thumbnail_vid hidden w-100 h-100 no-load-mobile" 
+                                autoplay playsinline muted loop preload="metadata" 
+                                src="<%= thumbnail.videoSrc %>" 
+                                type="video/mp4">
+                            </video>
+                        </div>                                
+                    </a>
                 </div>
-            </div>
-        </main>
-        <%- include('partials/footer.ejs') %>
-         <!-- CHECK DEVICE TYPE -->
-        <script defer src="/public/js/detectDeviceType.js"></script>
+            <% }) %>
+            
+        </div>
+    </div>
+</main>
 
-    </body>
-</html>
+<%- include('partials/footer.ejs') %>
+
+<!-- DEVICE DETECTION SCRIPT -->
+<script defer src="/public/js/detectDeviceType.js"></script>
