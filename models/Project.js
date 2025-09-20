@@ -1,8 +1,6 @@
 import mongoose from 'mongoose';
-import slugify from 'slugify';
 
 // PROJECT PAGE
-
 /**
  * array_vids = Main videos (full width on the page)
  * gallery = Gallery of visuals  | 1 to 4 rows of 3 images/videos
@@ -11,21 +9,13 @@ import slugify from 'slugify';
 
 const projectSchema = mongoose.Schema({
 
-    //_id : mongoose.Schema.Types.ObjectId,
     thumbnail: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Thumbnail"
-    },/*
-    category: {
-        type: String,
-    },*/
+    },
     project_title: {
         type: String,
         required: true,
-    },
-    slug: {
-        type: String,
-        unique: true,
     },
     director: {
         type: String,
@@ -79,23 +69,4 @@ const projectSchema = mongoose.Schema({
     }
 });
 
-// Hook pour générer le slug avant sauvegarde, à partir du titre
-projectSchema.pre('save', function (next) {
-    if (!this.slug && this.project_title) {
-        this.slug = slugify(this.project_title, { lower: true, strict: true });
-    }
-    next();
-});
-
 export default mongoose.model('Project', projectSchema);
-
-
-
-
-/*
-const mySchema = mongoose.Schema({
-    image: {
-        type: [{ type: String }]
-    }
-});
-*/

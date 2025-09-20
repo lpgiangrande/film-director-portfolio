@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * REQUIRED EXTERNAL MODULES
  */
@@ -26,8 +28,8 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-// Generate secret key for sessions
-const secretKey = process.env.SECRET_KEY || crypto.randomBytes(32).toString('hex');
+// Generate stable secret key for sessions (fallback if .env is not set)
+const secretKey = process.env.SECRET_KEY || 'fallback-secret-key-for-dev';
 
 /**
  * DATABASE CONNECTION
@@ -63,7 +65,6 @@ app.use('/public', express.static(path.join(__dirname, 'public'), {
   maxAge: '7d',
   etag: true
 }));
-
 
 // Headers de cache spécifiques par type de fichier
 app.use((req, res, next) => {
@@ -115,13 +116,16 @@ app.use(
   })
 );
 
-// Session configuration
+// Session configuration (secure cookie in prod)
 app.use(
   session({
     secret: secretKey,
     resave: true,
     saveUninitialized: true,
-    cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000 },
+    cookie: {
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: 24 * 60 * 60 * 1000 // 1 day
+    },
   })
 );
 
@@ -149,8 +153,6 @@ const limiter = rateLimit({
   message: "Too many login attempts from this IP, please try again in 15 minutes",
 });
 
-// Route for robots.txt
-// xxxx
 /**
  * ROUTES
  */
@@ -173,9 +175,3 @@ app.listen(PORT, () => {
  * EXPORTS
  */
 export { app, limiter };
-
-// router.get('/project/:slug', async (req, res) => {
-//     const project = await Project.findOne({ slug: req.params.slug });
-//     if (!project) return res.status(404).send('Projet introuvable');
-//     res.render('project', { project });
-// });

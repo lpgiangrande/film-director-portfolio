@@ -1,7 +1,7 @@
 'use strict';
 
 // Detect local environment
-const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+const isLocal = ["localhost", "127.0.0.1"].includes(window.location.hostname);
 
 // Detect device type
 const detectDeviceType = () =>
@@ -9,27 +9,31 @@ const detectDeviceType = () =>
         ? 'Mobile'
         : 'Desktop';
 
-console.log(detectDeviceType());
+document.addEventListener('DOMContentLoaded', () => {
+    const deviceType = detectDeviceType();
+    console.log(`Device type detected: ${deviceType}`);
 
-// Inject JS based on device
-if (detectDeviceType() === 'Desktop') {
+    let scriptSrc;
+    if (deviceType === 'Desktop') {
+        scriptSrc = isLocal
+            ? '/js/thumbnail.js'
+            : 'https://site-regis.s3.eu-west-3.amazonaws.com/public/js/thumbnail.js';
+        console.log(isLocal
+            ? ">>> Desktop: thumbnail.js loaded locally <<<"
+            : ">>> Desktop: thumbnail.js loaded from S3 <<<"
+        );
+    } else {
+        scriptSrc = isLocal
+            ? '/js/remove_vids.js'
+            : 'https://site-regis.s3.eu-west-3.amazonaws.com/public/js/remove_vids.js';
+        console.log(isLocal
+            ? ">>> Mobile: remove_vids.js loaded locally <<<"
+            : ">>> Mobile: remove_vids.js loaded from S3 <<<"
+        );
+    }
+
     const script = document.createElement('script');
-    script.src = isLocal
-        ? '/js/thumbnail.js'
-        : 'https://site-regis.s3.eu-west-3.amazonaws.com/public/js/thumbnail.js';
+    script.src = scriptSrc;
+    script.async = true; // optionnel mais recommandé
     document.head.appendChild(script);
-    console.log(isLocal
-        ? ">>> Desktop: thumbnail.js loaded locally <<<"
-        : ">>> Desktop: thumbnail.js loaded from S3 <<<"
-    );
-} else {
-    const script = document.createElement('script');
-    script.src = isLocal
-        ? '/js/remove_vids.js'
-        : 'https://site-regis.s3.eu-west-3.amazonaws.com/public/js/remove_vids.js';
-    document.head.appendChild(script);
-    console.log(isLocal
-        ? ">>> Mobile: remove_vids.js loaded locally <<<"
-        : ">>> Mobile: remove_vids.js loaded from S3 <<<"
-    );
-}
+});
