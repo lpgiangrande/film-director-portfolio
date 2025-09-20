@@ -10,8 +10,6 @@ This js file has two purposes :
 */
 'use strict';
 
-console.log(">>> thumbnail.js version locale chargée <<<");
-
 const mouseTarget = document.getElementsByClassName('title');
 const targetTitle = document.getElementsByTagName('h3');
 const thumbnail_img = document.querySelectorAll("img.thumbnail_img");
