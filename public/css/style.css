@@ -1,57 +1,50 @@
+/* RESET */
 *, ::before, ::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
+
+/* BODY & TEXT */
 body {
-    background-color : black;
+    background-color: black;
     font-size: 12px;
+    font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-h1, h2, h3, p, span{
+
+h1, h2, h3, p, span {
     color: white;
     font-family: 'Roboto', sans-serif;
 }
-/* NAV */
+
 h1, h2, h3 {
     text-transform: uppercase;
 }
-nav h1{
-    font-size: 1.7em;
-}
-nav h2{
-    font-weight: 400;
-    font-size: 1.1em;
-}
-.nav1, .nav2{
+
+/* NAVIGATION */
+nav h1 { font-size: 1.7em; }
+nav h2 { font-weight: 400; font-size: 1.1em; }
+
+.nav1, .nav2 {
     flex-direction: row;
     justify-content: center;
     align-items: center;
     letter-spacing: 1.5px; 
 }
-nav li:nth-child(-n+3){
-    text-transform: uppercase;
-}
-nav li:nth-child(4){
-    text-transform: capitalize;
-}
-nav li a{
+
+nav li:nth-child(-n+3){ text-transform: uppercase; }
+nav li:nth-child(4){ text-transform: capitalize; }
+
+nav li a {
     text-decoration: none; 
     color: white;
     font-size: 0.9em;
     margin: 5px;
 }
-li{
-    list-style-type: none;
-}
-nav li a:hover, nav li a:focus { 
-    color:rgba(147, 183, 227, 0.851);
-}
-.current{
-    color:rgba(147, 183, 227, 0.851);
-}
-.nav1>h1,.nav1>img, .nav1>h2{
-    margin: 0.4em;
-}
+
+nav li a:hover, nav li a:focus,
+.current { color: rgba(147, 183, 227, 0.85); }
+
 #logo {
     width: 33px; 
     height: auto; 
@@ -59,68 +52,59 @@ nav li a:hover, nav li a:focus {
     display: block; 
     aspect-ratio: 500 / 309;
 }
-/* à revoir*/
-ul {
-    padding: 0!important;
-}
 
+ul { padding: 0 !important; }
+li { list-style-type: none; }
 
 /* MAIN */
+.title { position: relative; }
 
-.title{
-    position: relative;
-}
-
-h3.thumbnail_title{
+h3.thumbnail_title {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     z-index: 90;
     font-weight: 300;
     letter-spacing: 2px;
     opacity: 0;
     transition: 1s;
-    /*white-space: nowrap;*/
     text-shadow: 1px 1px 0px black;
 }
 
-.hidden{
-    display: none;
-}
+.hidden { display: none; }
 
 /* FOOTER */
-
-footer .d-flex{
+footer .d-flex {
     justify-content: center;
     align-items: center;
     padding-top: 30px;
 }
+
 footer .socials {
     opacity: 0.6;
     margin: 8px;
-    transition: opacity 1s; 
+    transition: opacity 1s;
 }
-footer .socials:hover {
-    opacity: 1;
-}
-.discrete-link{
+
+footer .socials:hover { opacity: 1; }
+
+.discrete-link {
     text-decoration: none;
     opacity: 0.6;
     color: rgb(101, 101, 101);
 }
-.discrete-link:hover{
-    opacity: 1;
-    transition-duration: 1s;
-    color: rgb(174, 174, 174);
-}
 
+.discrete-link:hover {
+    opacity: 1;
+    color: rgb(174, 174, 174);
+    transition-duration: 1s;
+}
 
 /* PAGE ABOUT */
-.about{
-    margin-bottom: 15px;
-}
-#button-email>a{
+.about { margin-bottom: 15px; }
+
+#button-email > a {
     text-decoration: none;
     text-transform: uppercase;
     font-weight: 500;
@@ -129,44 +113,44 @@ footer .socials:hover {
     color: black;
     padding: 0.5em 1.1em;
 }
-#button-email>a:hover{
+
+#button-email > a:hover {
     background-color: rgb(191, 213, 197);
     transition-duration: 1s;
 }
+
 p.about {
     font-size: 1em;
     text-align: justify;
 }
 
 /* PAGE PROJET */
+h1.project_title { font-size: 14px; }
 
-h1.project_title{
-    text-transform: uppercase;
-    font-size: 14px;
-}
-p{
-    margin-bottom: 0.4em;
-}
-p.projet-paragraphe{
-    font-size: 1.167em!important;
-}
-.video-iframe{
-    position: relative; 
-    overflow: hidden; 
-    padding-top: 56.25%; 
-}
-.resp-iframe { 
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    border: 0; 
-}
+p { margin-bottom: 0.4em; }
 
-/* page upload */
-textarea, p.projet-paragraphe{
+p.projet-paragraphe {
+    font-size: 1.167em !important;
     white-space: pre-wrap;
-    text-align : justify;
+    text-align: justify;
 }
 
+/* VIDÉOS RESPONSIVES */
+.video-iframe {
+    position: relative;
+    overflow: hidden;
+    padding-top: 56.25%; /* 16/9 ratio */
+    margin-bottom: 1rem;  /* équivalent mb-3 */
+}
+
+.resp-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* PAGE UPLOAD */
+textarea { white-space: pre-wrap; }

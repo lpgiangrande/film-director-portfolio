@@ -1,401 +1,74 @@
- <%- include('partials/header.ejs') %>
+<%- include('partials/header.ejs') %>
 
-         <!-- TEMPLATE 1 - impair -->
+<div class="container">
+    <main class="project-wrapper">  
 
-        <div class="container d-flex ">
-            <main class="project-wrapper">  
-                    
-                <!-- SECTION 1 - Intro -->
-                <section id="section-1" class="mb-3">
-                    <!-- VID 1 -->
-                    <div class="video-iframe d-flex justify-content-center mb-3">
-                        <iframe 
-                            class="resp-iframe" 
-                            title="vimeo-player" 
-                            src="<%= project.array_vids[0]%>"  
-                            frameborder="0" 
-                            allowfullscreen>
+        <!-- SECTION 1 - Intro -->
+        <section id="section-1" class="mb-3">
+            <!-- VID 1 -->
+            <div class="video-iframe mb-3">
+                <iframe class="resp-iframe" 
+                        src="<%= project.array_vids[0]%>"  
+                        frameborder="0" allowfullscreen
+                        title="vimeo-player">
+                </iframe>
+            </div>
+
+            <!-- INFOS -->
+            <div class="text-center mt-3">
+                <h1 class="project_title"><%= project.project_title %></h1>
+                <p class="project"><%= project.director %></p>
+                <p class="project"><%= project.other_contributors %></p>
+                <p class="project"><%= project.productor %></p>
+            </div>
+        </section>
+
+        <!-- SECTION 2 - Galerie -->
+        <section id="section-2">
+
+            <!-- ROWS DE GALERIE -->
+            <% 
+            const gallerySlices = [
+                {start:0,end:2,cols:'col-sm-6 col-12'},
+                {start:2,end:5,cols:'col-sm-4 col-12'},
+                {start:5,end:9,cols:'col-sm-6 col-12'},
+                {start:9,end:13,cols:'col-sm-6 col-12'},
+                {start:13,end:15,cols:'col-sm-6 col-12'}
+            ];
+            
+            gallerySlices.forEach(slice => { 
+            %>
+                <div class="row gy-4 gx-4 mb-4">
+                    <% project.gallery.slice(slice.start, slice.end).forEach((element) => { %>
+                        <div class="<%= slice.cols %>">
+                            <% if(element.endsWith('.jpg')) { %>
+                                <img class="img-fluid" 
+                                     src="<%= element %>" 
+                                     alt="visuel pour <%= project.project_title %>" 
+                                     data-action="zoom">
+                            <% } else { %>
+                                <video class="img-fluid" autoplay playsinline muted loop src="<%= element %>"></video>
+                            <% } %>
+                        </div>
+                    <% }) %>
+                </div>
+            <% }) %>
+
+            <!-- VIDÉOS SUPPLÉMENTAIRES -->
+            <% [1,2,3,4,5,6].forEach((vidIndex) => { %>
+                <% if (project.array_vids[vidIndex]) { %>
+                    <div class="video-iframe mb-4">
+                        <iframe class="resp-iframe" 
+                                src="<%= project.array_vids[vidIndex]%>"  
+                                frameborder="0" allowfullscreen
+                                title="vimeo-player">
                         </iframe>
                     </div>
-                    <!-- INFOS -->
-                    <div class="mt-3">
-                        <h1 class="text-center project_title"><%= project.project_title %></h1>
-                        <p class="text-center project"><%= project.director %></p>
-                        <p class="text-center project"><%= project.other_contributors %></p>
-                        <p class="text-center project"><%= project.productor %></p>
-                    </div>
-                </section>
-                
+                <% } %>
+            <% }) %>
 
-                <!-- SECTION 2 -  Gallerie -->
-                <section id="section-2">
+        </section>
+    </main>
+</div>
 
-                    <!--ROW 1 - GALLERY : indexes 0 to 1 | visuels 1 et 2  -->
-                    <div class="row gy-4 gx-4 d-flex mb-4">
-
-                        <% project.gallery.slice(0, 2).forEach((element, index) => {%>
-
-                            <%# console.log("DECOUPE 1", project.gallery.slice(0, 2)) %> 
-
-                            <%if(project.gallery[index].endsWith('.jpg')){%>
-
-                                <div class="col-sm-6 col-xs-12">
-                                    <img 
-                                        class="img-fluid" 
-                                        src="<%= project.gallery[index] %>" 
-                                        alt="visuel pour <%= project.project_title %>" 
-                                        data-action="zoom"
-                                    >
-                                </div>
-
-                            <% }  else { %>
-
-                                <div class="col-sm-6 col-xs-12">
-                                    <video 
-                                        class="img-fluid"  
-                                        autoplay playsinline muted loop 
-                                        src="<%= project.gallery[index] %>"  
-                                        type="video/mp4">
-                                    </video>
-                                </div>
-
-                            <% } %>
-                            <%# console.log(project.gallery) %>
-                    
-                        <%})%>
-                    
-                    </div>
-
-                    <!--ROW 1 - TEXT -->
-                    <% if (project.gallery_row_1_description) {%>
-
-                        <p class="text-white projet-paragraphe mb-4">
-                            <%=project.gallery_row_1_description%>
-                        </p>
-
-                    <% } %>
-
-                    <!-- VID 2 -->
-                    <% if (project.video2_description) {%>
-
-                        <p class="text-white projet-paragraphe mb-4">
-                            <%=project.video2_description%>
-                        </p>
-
-                    <% } %>
-
-                    <% if (project.array_vids[1]) {%>
-
-                        <div class="video-iframe d-flex justify-content-center mb-4">
-                            <iframe 
-                                class="resp-iframe" 
-                                title="vimeo-player" 
-                                src="<%= project.array_vids[1]%>"  
-                                frameborder="0" 
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-
-                    <% } %>
-
-                    <!-- ROW 2 - GALLERY : indexes 2 to 4 | visuels 3 à 5 -->
-                    <div class="row gy-4 gx-4 d-flex mb-4"> 
-
-                        <% project.gallery.forEach((element, index) => {%>
-                            
-                            <% if(index > 1 && index < 5) {%>
-
-                                <%if(project.gallery[index].endsWith('.jpg')){%>
-
-                                    <div class="col-sm-4 col-xs-12">
-                                        <img 
-                                            class="img-fluid" 
-                                            src="<%= project.gallery[index] %>" 
-                                            alt="visuel pour <%= project.project_title %>" 
-                                            data-action="zoom"
-                                        >
-                                    </div>
-
-                                <% }  else { %>
-
-                                    <div class="col-sm-4 col-xs-12">
-                                        <video 
-                                            class="img-fluid"  
-                                            autoplay playsinline muted loop 
-                                            src="<%= project.gallery[index] %>"  
-                                            type="video/mp4">
-                                        </video>
-                                    </div>
-
-                                <% } %>
-
-                            <% } %>
-
-                        <%})%>
-
-                    </div>
-
-                    <!--ROW 2 TEXT -->
-                    <% if (project.gallery_row_2_description) {%>
-
-                        <p class="text-white projet-paragraphe mb-4">
-                            <%=project.gallery_row_2_description%>
-                        </p>
-
-                    <% } %>
-
-                    <!-- VID 3 -->
-                    <% if (project.video3_description) {%>
-
-                        <p class="text-white projet-paragraphe mb-4">
-                            <%=project.video3_description%>
-                        </p>
-
-                    <% } %>
-
-                    <% if (project.array_vids[2]) {%>
-
-                        <div class="video-iframe d-flex justify-content-center pb-4">
-                            <iframe 
-                                class="resp-iframe" 
-                                title="vimeo-player" 
-                                src="<%= project.array_vids[2]%>"  
-                                frameborder="0" 
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                        <br>
-
-                    <% } %>
-                    
-                    <!-- ROW 3 - GALLERY : indexes 5 to 8 | visuels 6 à 9 -->
-                    <div class="row gy-4 gx-4 d-flex mb-4"> 
-
-                        <% project.gallery.forEach((element, index) => {%>
-
-                            <% if(index >=5  && index <= 8) {%>
-
-                                <%if(project.gallery[index].endsWith('.jpg')){%>
-                                    
-                                    <div class="col-sm-6 col-xs-12">
-                                        <img class="img-fluid w-100" 
-                                            src="<%= project.gallery[index] %>" 
-                                            alt="visuel pour <%= project.project_title %>" 
-                                            data-action="zoom"
-                                        >
-                                    </div>
-
-                                <% }  else { %>
-
-                                    <div class="col-sm-6 col-xs-12">
-                                        <video 
-                                            class="img-fluid"  
-                                            autoplay playsinline muted loop 
-                                            src="<%= project.gallery[index] %>"  
-                                            type="video/mp4">
-                                        </video>
-                                    </div>
-
-                                <% } %>
-
-                            <% } %>
-
-                        <%})%>
-
-                    </div>
-
-                    <!--ROW 3 TEXT -->
-                    <% if (project.gallery_row_3_description) {%>
-
-                        <p class="text-white projet-paragraphe mb-4">
-                            <%=project.gallery_row_3_description%>
-                        </p>
-
-                    <% } %>
-
-                    <!-- VID 4 -->
-                    <% if (project.video4_description) {%>
-
-                        <p class="text-white projet-paragraphe mb-4">
-                            <%=project.video4_description%>
-                        </p>
-
-                    <% } %>
-
-                    <% if (project.array_vids[3]) {%>
-
-                        <div class="video-iframe d-flex justify-content-center pb-4">
-                            <iframe 
-                                class="resp-iframe" 
-                                title="vimeo-player" 
-                                src="<%= project.array_vids[3]%>"  
-                                frameborder="0" 
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                        <br>
-
-                    <% } %>
-
-                    <!-- ROW 4 - GALLERY : indexes 9 to 12 | visuels 10 à 13 -->
-                    <div class="row gy-4 gx-4 d-flex mb-4"> 
-
-                        <% project.gallery.forEach((element, index) => {%>
-
-                            <% if(index > 8 && index <=12) {%>
-
-                                <%if(project.gallery[index].endsWith('.jpg')){%>
-
-                                    <div class="col-sm-6 col-xs-12">
-                                        <img 
-                                            class="img-fluid w-100" 
-                                            src="<%= project.gallery[index] %>" 
-                                            alt="visuel pour <%= project.project_title %>" 
-                                            data-action="zoom"
-                                        >
-                                    </div>
-                                
-                                 <% } else { %>
-
-                                    <div class="col-sm-6 col-xs-12">
-                                        <video 
-                                            class="img-fluid"  
-                                            autoplay playsinline muted loop 
-                                            src="<%= project.gallery[index] %>"  
-                                            type="video/mp4">
-                                        </video>
-                                    </div>
-
-                                <% } %>
-
-                            <% } %>
-
-                        <%})%>
-
-                    </div>
-
-                    <!--ROW 4 TEXT -->
-                    <% if (project.gallery_row_4_description) {%>
-
-                        <p class="text-white projet-paragraphe mb-4">
-                            <%=project.gallery_row_4_description%>
-                        </p>
-
-                    <% } %>
-
-                    <!-- VID 5 -->
-                    <% if (project.video5_description) {%>
-
-                        <p class="text-white projet-paragraphe mb-4">
-                            <%=project.video5_description%>
-                        </p>
-
-                    <% } %>
-
-                    <% if (project.array_vids[4]) {%>
-
-                        <div class="video-iframe d-flex justify-content-center pb-4">
-                            <iframe 
-                                class="resp-iframe" 
-                                title="vimeo-player" 
-                                src="<%= project.array_vids[4]%>"  
-                                frameborder="0" 
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-
-                    <% } %>
-
-                    <br>
-
-                    <!-- ROW 5 - GALLERY : indexes 13 to 14 | visuels 14 à 15 -->
-                    <div class="row gy-4 gx-4 d-flex mb-4"> 
-
-                        <% project.gallery.forEach((element, index) => {%>
-
-                            <% if(index > 12 && index <=14) {%>
-
-                                <%if(project.gallery[index].endsWith('.jpg')){%>
-
-                                    <div class="col-sm-6 col-xs-12">
-                                        <img 
-                                            class="img-fluid w-100" 
-                                            src="<%= project.gallery[index] %>" 
-                                            alt="visuel pour <%= project.project_title %>" 
-                                            data-action="zoom"
-                                        >
-                                    </div>
-
-                                <% } else { %>
-
-                                    <div class="col-sm-6 col-xs-12">
-                                        <video 
-                                            class="img-fluid"  
-                                            autoplay playsinline muted loop 
-                                            src="<%= project.gallery[index] %>"  
-                                            type="video/mp4">
-                                        </video>
-                                    </div>
-                                
-                                <% } %>
-
-                            <% } %>
-
-                        <%})%>
-
-                    </div>
-
-                    <!-- VID 6 -->
-                    <% if (project.video6_description) {%>
-
-                        <p class="text-white projet-paragraphe mb-4">
-                            <%=project.video6_description%>
-                        </p>
-
-                    <% } %>
-
-                    <% if (project.array_vids[5]) {%>
-
-                        <div class="video-iframe d-flex justify-content-center pb-4">
-                            <iframe 
-                                class="resp-iframe" 
-                                title="vimeo-player" 
-                                src="<%= project.array_vids[5]%>"  
-                                frameborder="0" 
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-
-                        <br>
-
-                    <% } %>
-
-                    <!-- VID 7 -->
-                    <% if (project.video7_description) {%>
-
-                        <p class="text-white projet-paragraphe mb-4">
-                            <%=project.video7_description%>
-                        </p>
-
-                    <% } %>
-
-                    <% if (project.array_vids[6]) {%>
-
-                        <div class="video-iframe d-flex justify-content-center pb-4">
-                            <iframe 
-                                class="resp-iframe" 
-                                title="vimeo-player" 
-                                src="<%= project.array_vids[6]%>"  
-                                frameborder="0" 
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-
-                    <% } %>
-
-                </section>
-            </main>
-        </div>
-        <%- include('partials/footer.ejs') %>
-    </body>
-</html>
+<%- include('partials/footer.ejs') %>
