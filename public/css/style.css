@@ -52,10 +52,12 @@ nav li a:hover, nav li a:focus {
 .nav1>h1,.nav1>img, .nav1>h2{
     margin: 0.4em;
 }
-#logo{
-    width: 33px;
-    height: auto;
+#logo {
+    width: 33px; 
+    height: auto; 
     margin: 0 5px;
+    display: block; 
+    aspect-ratio: 500 / 309;
 }
 /* à revoir*/
 ul {
@@ -94,12 +96,12 @@ footer .d-flex{
     align-items: center;
     padding-top: 30px;
 }
-footer .social-icon {
+footer .socials {
     opacity: 0.6;
     margin: 8px;
     transition: opacity 1s; 
 }
-footer .social-icon:hover {
+footer .socials:hover {
     opacity: 1;
 }
 .discrete-link{
