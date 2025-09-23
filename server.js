@@ -62,17 +62,16 @@ app.set('view engine', 'ejs');
 
 // Serve static files with cache
 app.use('/public', express.static(path.join(__dirname, 'public'), {
-  maxAge: '7d',
   etag: true
 }));
 app.use('/js', express.static(path.join(__dirname, 'public/js')));
 
-// Headers de cache spécifiques par type de fichier
+// Cache headers specific to each file type
 app.use((req, res, next) => {
-  if (req.url.match(/\.(jpg|jpeg|png|gif|webp)$/)) {
-    res.set('Cache-Control', 'public, max-age=2592000');
+  if (req.url.match(/\.(jpg|jpeg|png|gif|webp|mp4)$/)) {
+    res.set('Cache-Control', 'public, max-age=31536000, immutable');
   } else if (req.url.match(/\.(css|js)$/)) {
-    res.set('Cache-Control', 'public, max-age=604800');
+    res.set('Cache-Control', 'public, max-age=31536000, immutable');
   }
   next();
 });
