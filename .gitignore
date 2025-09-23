@@ -26,3 +26,13 @@ coverage/
 # others
 /views/privacy-policy.ejs
 ancien-about.ejs
+
+# scripts
+convert_s3_webp.sh
+
+# Images originales / WebP
+images_projets_originaux/
+images_projets_webp/
+
+thumbnails_local/
+thumbnails_webp/

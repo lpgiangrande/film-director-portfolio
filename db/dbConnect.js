@@ -5,6 +5,6 @@ dotenv.config();
 
 export default function dbConnect() {
   mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log('Connexion à MongoDB réussie !'))
-    .catch((err) => console.error('Connexion à MongoDB échouée !', err));
+    .then(() => console.log('Successfully connected to MongoDB'))
+    .catch((err) => console.error('Failed to connect to MongoDB', err));
 }
