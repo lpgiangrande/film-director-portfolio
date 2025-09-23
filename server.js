@@ -60,11 +60,10 @@ app.use(morgan('dev'));
 // EJS view engine
 app.set('view engine', 'ejs');
 
-// Serve static files with cache
-app.use('/public', express.static(path.join(__dirname, 'public'), {
-  etag: true
-}));
-app.use('/js', express.static(path.join(__dirname, 'public/js')));
+// Serve static files
+app.use('/public', express.static(path.join(__dirname, 'public'), { etag: true }));
+app.use('/js', express.static(path.join(__dirname, 'public/js'), { etag: true }));
+app.use('/css', express.static(path.join(__dirname, 'public/css'), { etag: true }));
 
 // Cache headers specific to each file type
 app.use((req, res, next) => {
