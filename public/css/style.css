@@ -14,7 +14,6 @@ body {
 
 h1, h2, h3, p, span {
     color: white;
-    font-family: 'Roboto', sans-serif;
 }
 
 h1, h2, h3 {
@@ -22,7 +21,16 @@ h1, h2, h3 {
 }
 
 /* NAVIGATION */
-nav h1 { font-size: 1.7em; }
+nav h1 { 
+    font-size: 1.7em; 
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+}
+.nav1 h1, .nav1 h2 {
+    margin: 0; /* supprime tout margin résiduel */
+    line-height: 1; /* optionnel, pour que le texte soit bien aligné */
+}
 nav h2 { font-weight: 400; font-size: 1.1em; }
 
 .nav1, .nav2 {
@@ -46,11 +54,11 @@ nav li a:hover, nav li a:focus,
 .current { color: rgba(147, 183, 227, 0.85); }
 
 #logo {
-    width: 33px; 
-    height: auto; 
-    margin: 0 5px;
-    display: block; 
-    aspect-ratio: 500 / 309;
+    display: inline-block; /* important pour vertical-align */
+    vertical-align: middle; /* aligne le logo avec le texte */
+    height: 20px; /* hauteur adaptée aux textes */
+    width: auto; /* pour garder les proportions */
+    margin : 0 6px;
 }
 
 ul { padding: 0 !important; }
@@ -140,7 +148,7 @@ p.projet-paragraphe {
     position: relative;
     overflow: hidden;
     padding-top: 56.25%; /* 16/9 ratio */
-    margin-bottom: 1rem;  /* équivalent mb-3 */
+    margin-bottom: 1rem;
 }
 
 .resp-iframe {
