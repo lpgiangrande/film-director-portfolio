@@ -40,7 +40,10 @@ export const addProject = async (req, res) => {
 export const uploadProject = async (req, res) => {
   try {
     const thumbnails = await Thumbnail.find().populate('project').exec();
-    res.render('uploadProject', { thumbnailsList: thumbnails });
+    res.render('uploadProject', {
+      thumbnailsList: thumbnails,
+      csrfToken: req.csrfToken() // ajout pour les formulaires
+    });
   } catch (error) {
     console.error(error);
     res.status(500).send('Error fetching thumbnails');
@@ -66,7 +69,7 @@ export const updateProject = async (req, res) => {
 
     res.render('updateProject', {
       project,
-      csrfToken: req.csrfToken()
+      csrfToken: req.csrfToken() // ajout pour le formulaire
     });
   } catch (error) {
     console.error(error);

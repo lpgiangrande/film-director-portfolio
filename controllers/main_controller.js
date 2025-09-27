@@ -92,10 +92,19 @@ const aboutPage = async (req, res, next) => {
 };
 
 // Render login page
-const loginPage = (req, res) => res.render('login');
+const loginPage = (req, res) => {
+  res.render('login', {
+    csrfToken: req.csrfToken(), // Fournit csrfToken à la vue
+  });
+};
 
 // Render register page
-const registerPage = (req, res) => res.render('register');
+const registerPage = (req, res) => {
+  res.render('register', {
+    csrfToken: req.csrfToken(),
+  });
+};
+
 
 // Handle user registration
 const handleRegistration = async (req, res) => {
