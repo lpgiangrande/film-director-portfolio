@@ -64,7 +64,10 @@ export const updateProject = async (req, res) => {
       return res.status(404).send('Project not found');
     }
 
-    res.render('updateProject', { project });
+    res.render('updateProject', {
+      project,
+      csrfToken: req.csrfToken()
+    });
   } catch (error) {
     console.error(error);
     res.status(500).send('Server error while fetching project');
