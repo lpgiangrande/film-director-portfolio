@@ -4,7 +4,9 @@
             <!-- FORM 1 -->
 
             <div class="container mt-5 d-flex justify-content-center align-items-center">
+
                 <form id="updateFormProject" action="/admin/projectUpdated" method="POST"> 
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
                     <!-- LINKED THUMBNAIL -->
                     <label class="text-white" for="linkedThumbnail"><b>Sélectionner thumbnail associé :</b></label>
@@ -176,10 +178,11 @@
                     <br> 
                     <!-- SEND -->
                     <div class="d-flex justify-content-center align-items-center">
-                        <input type="hidden" name="identifiant" value="<%= project._id %>">
+                        <input type="hidden" name="identifier" value="<%= project._id %>">
                         <input type="submit" class="btn btn-outline-light btn-lg"  value="Update">
                     </div>
                 </form>
+                
             </div>
         </main>
     </body>
