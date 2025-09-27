@@ -3,11 +3,14 @@ import mongoose from 'mongoose'
 const userSchema = mongoose.Schema({
     username: {
         type: String,
-        required: true
-    }, 
+        required: true,
+        unique: true,
+        trim: true
+    },
     pwd: {
         type: String,
-        required: true
+        required: true,
+        select: false
     },
     date: {
         type: Date,

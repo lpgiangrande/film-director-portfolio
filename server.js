@@ -17,6 +17,7 @@ import rateLimit from 'express-rate-limit';
 import crypto from 'crypto';
 import compression from 'compression';
 import { fileURLToPath } from 'url';
+import csrf from 'csurf';
 
 /**
  * CONFIGURATION
@@ -25,10 +26,9 @@ dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 const app = express();
 
-// Generate stable secret key for sessions (fallback if .env is not set)
+// Generate a stable secret key for sessions (fallback if .env is not set)
 const secretKey = process.env.SECRET_KEY || 'fallback-secret-key-for-dev';
 
 /**
@@ -39,18 +39,19 @@ import dbConnect from './db/dbConnect.js';
 dbConnect();
 
 /**
- * APP MIDDLEWARE
+ * -------------------- APP MIDDLEWARE --------------------
  */
-// Compression GZIP
+
+// Compress responses using GZIP
 app.use(compression());
 
-// X-Frame-Options header
+// X-Frame-Options header to prevent clickjacking
 app.use((req, res, next) => {
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
   next();
 });
 
-// Parse JSON and URL-encoded form data
+// Parse incoming JSON and URL-encoded form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -60,12 +61,12 @@ app.use(morgan('dev'));
 // EJS view engine
 app.set('view engine', 'ejs');
 
-// Serve static files
+// Serve static files with caching
 app.use('/public', express.static(path.join(__dirname, 'public'), { etag: true }));
 app.use('/js', express.static(path.join(__dirname, 'public/js'), { etag: true }));
 app.use('/css', express.static(path.join(__dirname, 'public/css'), { etag: true }));
 
-// Cache headers specific to each file type
+// Set long-term cache headers for (images, videos,) CSS, and JS
 app.use((req, res, next) => {
   if (req.url.match(/\.(jpg|jpeg|png|gif|webp|mp4)$/)) {
     res.set('Cache-Control', 'public, max-age=31536000, immutable');
@@ -75,8 +76,12 @@ app.use((req, res, next) => {
   next();
 });
 
-// Helmet security headers
+// -------------------- SECURITY HEADERS --------------------
+
+// Basic Helmet headers
 app.use(helmet.noSniff());
+
+// Content Security Policy
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
@@ -85,7 +90,7 @@ app.use(
       frameSrc: ["'self'", "https://player.vimeo.com", "https://www.youtube.com"],
       scriptSrc: [
         "'self'",
-        "'unsafe-inline'", // Pour le script lazy loading
+        "'unsafe-inline'", // for lazy loading scripts
         "https://site-regis.s3.eu-west-3.amazonaws.com",
         "https://cdn.jsdelivr.net",
         "https://kit.fontawesome.com",
@@ -107,6 +112,7 @@ app.use(
   })
 );
 
+// HSTS header for HTTPS
 app.use(
   helmet.hsts({
     maxAge: 31536000,
@@ -115,27 +121,27 @@ app.use(
   })
 );
 
-// Session configuration (secure cookie in prod)
+// -------------------- SESSION CONFIGURATION --------------------
 app.use(
   session({
     secret: secretKey,
-    resave: true,
-    saveUninitialized: true,
+    resave: false,           // don't save session if unmodified
+    saveUninitialized: false,// don't create session until something stored
     cookie: {
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: 24 * 60 * 60 * 1000 // 1 day
+      secure: process.env.NODE_ENV === 'production', // HTTPS only in prod
+      httpOnly: true,       // prevent access from client-side JS
+      sameSite: 'strict',   // protect against CSRF
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
     },
   })
 );
 
-// Passport middleware
+// -------------------- PASSPORT & FLASH --------------------
 app.use(passport.initialize());
 app.use(passport.session());
-
-// Connect flash
 app.use(flash());
 
-// Global template variables
+// Global template variables for flash messages
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
@@ -143,34 +149,41 @@ app.use((req, res, next) => {
   next();
 });
 
-// Rate limiter for form protection
+// -------------------- CSRF PROTECTION --------------------
+const csrfProtection = csrf({ cookie: false }); // token stored in session
+
+// Apply CSRF only to sensitive POST routes
+app.use(['/login', '/register', '/admin/*'], csrfProtection);
+
+// Pass the CSRF token to all views
+app.use((req, res, next) => {
+  if (req.csrfToken) res.locals.csrfToken = req.csrfToken();
+  next();
+});
+
+// -------------------- RATE LIMITER --------------------
+// Limit login/register attempts to prevent brute-force attacks
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 min
-  max: 3,
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 3,                    // max 3 requests per window
   standardHeaders: true,
   legacyHeaders: false,
   message: "Too many login attempts from this IP, please try again in 15 minutes",
 });
 
-/**
- * ROUTES
- */
+// -------------------- ROUTES --------------------
 import backofficeRoutes from './routes/backoffice_routes.js';
 import basicRoutes from './routes/basicroutes.js';
 
 app.use('/admin', backofficeRoutes);
 app.use('/', basicRoutes);
 
-/**
- * SERVER CONFIGURATION
- */
+// -------------------- SERVER CONFIGURATION --------------------
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-/**
- * EXPORTS
- */
+// -------------------- EXPORTS --------------------
 export { app, limiter };

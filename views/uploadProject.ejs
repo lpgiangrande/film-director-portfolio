@@ -4,7 +4,9 @@
             <!-- FORM 1 -->
 
             <div class="container mt-5 d-flex justify-content-center align-items-center">
-                <form id="uploadFormProject1" action="" method="POST"> <!--enctype="multipart/form-data"-->
+
+                <form id="uploadFormProject1" action="" method="POST"> 
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
                     <h2 class="mb-4">Remplir données d'une page Projet</h2>
 
@@ -177,6 +179,7 @@ https://AMAZONBUCKET.s3.eu-west-3.amazonaws.com/FOLDER/IMG_2.jpg, ..."" name="ga
                         <input type="submit" class="btn btn-outline-light btn-lg"  value="Send">
                     </div>
                 </form>
+                
             </div>
         </main>
     </body>

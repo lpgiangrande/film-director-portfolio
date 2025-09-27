@@ -9,7 +9,7 @@ const configurePassport = (passport) => {
       { usernameField: 'username', passwordField: 'pwd', passReqToCallback: false },
       async (username, pwd, done) => {
         try {
-          const user = await User.findOne({ username: username });
+          const user = await User.findOne({ username }).select('+pwd').exec();
           if (!user) {
             return done(null, false, { message: 'That username is not registered' });
           }

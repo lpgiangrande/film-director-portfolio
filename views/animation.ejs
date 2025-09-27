@@ -8,7 +8,9 @@
             <% thumbnailsList.forEach(thumbnail => { %>
 
                 <div class="col-md-6 col-lg-4 d-flex title"> 
-                    <a class="d-flex" href="/<%= thumbnail._id %>">
+                    <!-- <a class="d-flex" href="/<%= thumbnail._id %>"> -->
+                        <a class="d-flex" href="/project/<%= thumbnail.project.slug %>"></a>
+                        
                         <h3 class="text-center thumbnail_title"><%= thumbnail.title %></h3>
                         <div class="source1">
                             <img 

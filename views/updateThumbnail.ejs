@@ -2,7 +2,9 @@
 <br><br><br><br>
       
         <div class="container d-flex justify-content-center align-items-center">
-            <form id="updateFormThumb" action="/admin/thumbnailUpdated" method="POST">            
+
+            <form id="updateFormThumb" action="/admin/thumbnailUpdated" method="POST">    
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">        
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="title_thumbnail"><b>Titre du projet</b></span>
                     <input 
@@ -56,6 +58,7 @@
                     <input type="submit" class="btn btn-outline-light btn-lg"  value="Update">
                 </div>
             </form>
+            
         </div>
     </body>
 </html>

@@ -2,7 +2,9 @@
 <br><br><br><br>
         <!-- form -->
         <div class="container d-flex justify-content-center align-items-center">
+
             <form id="uploadFormThumb" action="" method="POST">    
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
                  <!-- TITLE -->    
                 <div class="input-group mb-3">
@@ -59,6 +61,7 @@
                     <input type="submit" class="btn btn-outline-light btn-lg"  value="Send">
                 </div>
             </form>
+            
         </div>
     </body>
 </html>

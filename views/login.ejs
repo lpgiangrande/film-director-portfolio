@@ -28,6 +28,7 @@
     <br><br>
         <div class="container mt-5">
             <form action="/login" method="POST" id="auth-form">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <div class="row d-flex justify-content-center align-items-center">
                     <div class="col-md-8">
                         <div class="card bg-dark text-white text-center card-body p-5" style="border-radius: 1rem;">

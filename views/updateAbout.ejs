@@ -2,6 +2,8 @@
 
         <div class="container d-flex flex-column align-items-center">
             <form action="/admin/updateAbout" method="POST" id="bio-form">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
                 <label for="bioText">Texte bio :</label>
                 <textarea id="text" name="text" rows="20" cols="100"><%= biography.text %></textarea>
   
