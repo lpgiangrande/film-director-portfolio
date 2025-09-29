@@ -18,7 +18,7 @@
 - Mongoose ORM with NoSQL database MongoDB
 - Asynchronous JS
 - Security of ExpressJs apps (helmet, express-validator...)
-- AWS services
+- AWS services (lightsail, s3, Cloudfront)
 - Debian VPS | fail2ban, ufw, snort, ...
 - Jest
 
@@ -27,7 +27,7 @@
 - autoplay system on safari
 - https://expressjs.com/en/advanced/best-practice-security.html
 - modify password
-- modify biography
+- 
 
 ### Screenshots
 
