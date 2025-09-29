@@ -30,6 +30,12 @@
                                 src="<%= cdnUrl(thumbnail.videoSrc) %>" 
                                 type="video/mp4">
                             </video>
+                            <!-- FALLBACK IMAGE pour Firefox/Safari -->
+                            <img 
+                                class="thumbnail_img fallback w-100 h-100 no-load-mobile" 
+                                src="<%= cdnUrl(thumbnail.imgSrc) %>" 
+                                alt="fallback thumbnail for <%= thumbnail.title %>"
+                            >
                         </div>
                     </a>
                 </div>

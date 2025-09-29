@@ -1,11 +1,11 @@
-/* RESET */
+/* ================= RESET ================= */
 *, ::before, ::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-/* BODY & TEXT */
+/* ================= BODY & TEXT ================= */
 body {
     background-color: black;
     font-size: 12px;
@@ -20,17 +20,19 @@ h1, h2, h3 {
     text-transform: uppercase;
 }
 
-/* NAVIGATION */
+/* ================= NAVIGATION ================= */
 nav h1 { 
     font-size: 1.7em; 
     display: flex;
     align-items: center; 
     justify-content: center;
 }
+
 .nav1 h1, .nav1 h2 {
-    margin: 0; /* supprime tout margin résiduel */
-    line-height: 1; /* optionnel, pour que le texte soit bien aligné */
+    margin: 0;
+    line-height: 1;
 }
+
 nav h2 { font-weight: 400; font-size: 1.1em; }
 
 .nav1, .nav2 {
@@ -40,8 +42,8 @@ nav h2 { font-weight: 400; font-size: 1.1em; }
     letter-spacing: 1.5px; 
 }
 
-nav li:nth-child(-n+3){ text-transform: uppercase; }
-nav li:nth-child(4){ text-transform: capitalize; }
+nav li:nth-child(-n+3) { text-transform: uppercase; }
+nav li:nth-child(4) { text-transform: capitalize; }
 
 nav li a {
     text-decoration: none; 
@@ -54,17 +56,17 @@ nav li a:hover, nav li a:focus,
 .current { color: rgba(147, 183, 227, 0.85); }
 
 #logo {
-    display: inline-block; /* important pour vertical-align */
-    vertical-align: middle; /* aligne le logo avec le texte */
-    height: 20px; /* hauteur adaptée aux textes */
-    width: auto; /* pour garder les proportions */
-    margin : 0 6px;
+    display: inline-block;
+    vertical-align: middle;
+    height: 20px;
+    width: auto;
+    margin: 0 6px;
 }
 
 ul { padding: 0 !important; }
 li { list-style-type: none; }
 
-/* MAIN */
+/* ================= MAIN ================= */
 .title { position: relative; }
 
 h3.thumbnail_title {
@@ -82,7 +84,17 @@ h3.thumbnail_title {
 
 .hidden { display: none; }
 
-/* FOOTER */
+/* THUMBNAILS - VIDEO / IMAGE / FALLBACK */
+.source2 video.thumbnail_vid,
+.source2 img.thumbnail_img.fallback {
+    display: none; /* caché par défaut */
+}
+
+.source1 img.thumbnail_img {
+    display: block; /* visible par défaut */
+}
+
+/* ================= FOOTER ================= */
 footer .d-flex {
     justify-content: center;
     align-items: center;
@@ -109,7 +121,7 @@ footer .socials:hover { opacity: 1; }
     transition-duration: 1s;
 }
 
-/* PAGE ABOUT */
+/* ================= PAGE ABOUT ================= */
 .about { margin-bottom: 15px; }
 
 #button-email > a {
@@ -132,7 +144,7 @@ p.about {
     text-align: justify;
 }
 
-/* PAGE PROJET */
+/* ================= PAGE PROJET ================= */
 h1.project_title { font-size: 14px; }
 
 p { margin-bottom: 0.4em; }
@@ -143,7 +155,7 @@ p.projet-paragraphe {
     text-align: justify;
 }
 
-/* VIDÉOS RESPONSIVES */
+/* ================= VIDÉOS RESPONSIVES ================= */
 .video-iframe {
     position: relative;
     overflow: hidden;
@@ -160,5 +172,5 @@ p.projet-paragraphe {
     border: 0;
 }
 
-/* PAGE UPLOAD */
+/* ================= PAGE UPLOAD ================= */
 textarea { white-space: pre-wrap; }

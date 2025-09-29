@@ -8,32 +8,44 @@ This js file has two purposes :
 */
 'use strict';
 
-const mouseTarget = document.getElementsByClassName('title');
-const targetTitle = document.getElementsByTagName('h3');
-const thumbnail_img = document.querySelectorAll("img.thumbnail_img");
-const thumbnail_vid = document.querySelectorAll("video.thumbnail_vid");
+const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
+const mouseTargets = document.querySelectorAll('.title');
 
-for (let i = 0;
-    i < mouseTarget.length
-    && i < targetTitle.length
-    && i < thumbnail_img.length
-    && i < thumbnail_vid.length; i++) {
+mouseTargets.forEach((container) => {
+    const title = container.querySelector('h3.thumbnail_title');
+    const img = container.querySelector('img.thumbnail_img:not(.fallback)');
+    const vid = container.querySelector('video.thumbnail_vid');
+    const fallback = container.querySelector('img.thumbnail_img.fallback');
 
-    mouseTarget[i].addEventListener('mouseover', show);
-    mouseTarget[i].addEventListener('mouseleave', hide);
+    container.addEventListener('mouseover', () => {
+        // Titre toujours visible
+        if (title) title.style.opacity = '1';
 
-    function show() {
-        //thumbnail_vid[i].style.opacity = "0.5";
-        targetTitle[i].style.opacity = "1";
-        thumbnail_vid[i].style.display = "block";
-        thumbnail_img[i].style.display = "none";
-    }
+        if ((isFirefox || isSafari) && fallback) {
+            // Pour Firefox/Safari : afficher fallback
+            fallback.style.display = 'block';
+            if (img) img.style.display = 'none';
+            if (vid) vid.style.display = 'none';
+        } else if (vid) {
+            // Pour Chrome et autres : afficher vidéo
+            vid.style.display = 'block';
+            if (img) img.style.display = 'none';
+            if (fallback) fallback.style.display = 'none';
+            vid.play().catch(() => {
+                // ignore errors if autoplay blocked
+            });
+        }
+    });
 
-    function hide() {
-        //thumbnail_img[i].style.opacity = "1";
-        targetTitle[i].style.opacity = "0";
-        thumbnail_vid[i].style.display = "none";
-        thumbnail_img[i].style.display = "block";
-    }
-}
+    container.addEventListener('mouseleave', () => {
+        // Masquer titre
+        if (title) title.style.opacity = '0';
+
+        // Revenir à l'image principale
+        if (img) img.style.display = 'block';
+        if (vid) vid.style.display = 'none';
+        if (fallback) fallback.style.display = 'none';
+    });
+});
