@@ -30,9 +30,12 @@ ancien-about.ejs
 # scripts
 convert_s3_webp.sh
 
-# Images originales / WebP
+# Images et mp4 
 images_projets_originaux/
 images_projets_webp/
 
 thumbnails_local/
 thumbnails_webp/
+
+thumbnails_vids/
+thumbnails_vids_encoded/
