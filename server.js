@@ -29,7 +29,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 // set CDN domain from environment
-app.locals.cdnDomain = process.env.CDN_DOMAIN;
+app.locals.cdnDomain = process.env.CDN_DOMAIN || 'd1g8vhsh8s80a9.cloudfront.net';
 // Make cdnDomain available in all EJS templates
 app.use((req, res, next) => {
   res.locals.cdnDomain = app.locals.cdnDomain;
