@@ -37,7 +37,7 @@ app.use((req, res, next) => {
 });
 
 // Generate a stable secret key for sessions (fallback if .env is not set)
-const secretKey = process.env.SECRET_KEY;
+const secretKey = process.env.SECRET_KEY || 'fallback-secret-key-for-dev';
 
 /**
  * DATABASE CONNECTION
