@@ -28,9 +28,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
 
-// set CDN domain from environment
-app.locals.cdnDomain = process.env.CDN_DOMAIN || 'd1g8vhsh8s80a9.cloudfront.net';
-// Make cdnDomain available in all EJS templates
+// -------------------- ENV VARIABLES --------------------
+const S3_DOMAIN = process.env.S3_DOMAIN;
+const CDN_DOMAIN = process.env.CDN_DOMAIN;
+
+// Make CDN domain available in all EJS templates
+app.locals.cdnDomain = CDN_DOMAIN;
 app.use((req, res, next) => {
   res.locals.cdnDomain = app.locals.cdnDomain;
   next();
@@ -74,7 +77,7 @@ app.use('/public', express.static(path.join(__dirname, 'public'), { etag: true }
 app.use('/js', express.static(path.join(__dirname, 'public/js'), { etag: true }));
 app.use('/css', express.static(path.join(__dirname, 'public/css'), { etag: true }));
 
-// Set long-term cache headers for (images, videos,) CSS, and JS
+// Set long-term cache headers for images, videos, CSS, and JS
 app.use((req, res, next) => {
   if (req.url.match(/\.(jpg|jpeg|png|gif|webp|mp4)$/)) {
     res.set('Cache-Control', 'public, max-age=31536000, immutable');
@@ -89,7 +92,7 @@ app.use((req, res, next) => {
 // Basic Helmet headers
 app.use(helmet.noSniff());
 
-// Content Security Policy
+// Content Security Policy with dynamic CDN
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
@@ -99,26 +102,21 @@ app.use(
       scriptSrc: [
         "'self'",
         "'unsafe-inline'", // for lazy loading scripts
-        "https://site-regis.s3.eu-west-3.amazonaws.com",
+        `https://${S3_DOMAIN}`,
         "https://cdn.jsdelivr.net",
         "https://kit.fontawesome.com",
       ],
       styleSrc: [
         "'self'",
         "'unsafe-inline'",
-        "https://site-regis.s3.eu-west-3.amazonaws.com",
+        `https://${S3_DOMAIN}`,
         "https://cdn.jsdelivr.net",
         "https://fonts.googleapis.com",
         "https://ka-f.fontawesome.com",
       ],
-      fontSrc: ["'self'", "https://site-regis.s3.eu-west-3.amazonaws.com", "https://fonts.gstatic.com", "https://ka-f.fontawesome.com"],
-      imgSrc: [
-        "'self'",
-        "https://site-regis.s3.eu-west-3.amazonaws.com",
-        "https://i.vimeocdn.com",
-        "https://d1g8vhsh8s80a9.cloudfront.net"
-      ],
-      mediaSrc: ["'self'", "https://site-regis.s3.eu-west-3.amazonaws.com", "https://d1g8vhsh8s80a9.cloudfront.net"],
+      fontSrc: ["'self'", `https://${S3_DOMAIN}`, "https://fonts.gstatic.com", "https://ka-f.fontawesome.com"],
+      imgSrc: ["'self'", `https://${S3_DOMAIN}`, "https://i.vimeocdn.com", `https://${CDN_DOMAIN}`],
+      mediaSrc: ["'self'", `https://${S3_DOMAIN}`, `https://${CDN_DOMAIN}`],
       scriptSrcAttr: ["'unsafe-inline'"],
       styleSrcAttr: ["'unsafe-inline'"],
     },
