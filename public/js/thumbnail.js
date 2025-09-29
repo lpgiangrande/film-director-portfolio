@@ -1,11 +1,9 @@
 /*
-
-This js file has two purposes :
-
-- 1. Make thumbnails title appear when mouse enter
-- 2. Switch thumbnail content from img to video when mouse enter & video to img on mouse leave
-
+  1. Show thumbnail title when mouse enters
+  2. Switch thumbnail from image to video on hover, and back to image on mouse leave
+  3. Handle fallback for Safari & Firefox where autoplay is blocked (display static image instead)
 */
+
 'use strict';
 
 const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
