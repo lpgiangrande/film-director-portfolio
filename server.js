@@ -28,8 +28,16 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
 
+// set CDN domain from environment
+app.locals.cdnDomain = process.env.CDN_DOMAIN;
+// Make cdnDomain available in all EJS templates
+app.use((req, res, next) => {
+  res.locals.cdnDomain = app.locals.cdnDomain;
+  next();
+});
+
 // Generate a stable secret key for sessions (fallback if .env is not set)
-const secretKey = process.env.SECRET_KEY || 'fallback-secret-key-for-dev';
+const secretKey = process.env.SECRET_KEY;
 
 /**
  * DATABASE CONNECTION
