@@ -8,8 +8,8 @@
             <% thumbnailsList.forEach(thumbnail => { %>
 
                 <div class="col-md-6 col-lg-4 d-flex title"> 
-                    <!-- <a class="d-flex" href="/<%= thumbnail._id %>"> -->
-                        <a class="d-flex" href="/project/<%= thumbnail.project.slug %>"></a>
+                    <a class="d-flex" href="/<%= thumbnail._id %>">
+                        
                         
                         <h3 class="text-center thumbnail_title"><%= thumbnail.title %></h3>
                         <div class="source1">
@@ -17,7 +17,7 @@
                                 class="img-fluid thumbnail_img" 
                                 width="800"  
                                 height="331"  
-                                src="<%= thumbnail.imgSrc %>" 
+                                src="<%= cdnUrl(thumbnail.imgSrc) %>" 
                                 alt="visual for <%= thumbnail.title %> by regis raffin"
                             >
                         </div>
@@ -29,7 +29,7 @@
                                 muted 
                                 loop 
                                 preload="metadata" 
-                                src="<%= thumbnail.videoSrc %>" 
+                                src="<%= cdnUrl(thumbnail.videoSrc) %>" 
                                 type="video/mp4">
                             </video>
                         </div>

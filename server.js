@@ -104,8 +104,13 @@ app.use(
         "https://ka-f.fontawesome.com",
       ],
       fontSrc: ["'self'", "https://site-regis.s3.eu-west-3.amazonaws.com", "https://fonts.gstatic.com", "https://ka-f.fontawesome.com"],
-      imgSrc: ["'self'", "https://site-regis.s3.eu-west-3.amazonaws.com", "https://i.vimeocdn.com"],
-      mediaSrc: ["'self'", "https://site-regis.s3.eu-west-3.amazonaws.com"],
+      imgSrc: [
+        "'self'",
+        "https://site-regis.s3.eu-west-3.amazonaws.com",
+        "https://i.vimeocdn.com",
+        "https://d1g8vhsh8s80a9.cloudfront.net"
+      ],
+      mediaSrc: ["'self'", "https://site-regis.s3.eu-west-3.amazonaws.com", "https://d1g8vhsh8s80a9.cloudfront.net"],
       scriptSrcAttr: ["'unsafe-inline'"],
       styleSrcAttr: ["'unsafe-inline'"],
     },

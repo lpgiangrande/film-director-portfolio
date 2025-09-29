@@ -34,12 +34,12 @@
                     <div class="col-sm-6 col-12">
                         <% if(project.gallery[index].endsWith('.jpg')) { %>
                             <img class="img-fluid" 
-                                 src="<%= project.gallery[index] %>" 
+                                 src="<%= cdnUrl(project.gallery[index]) %>" 
                                  alt="visuel pour <%= project.project_title %>" 
                                  data-action="zoom">
                         <% } else { %>
                             <video class="img-fluid" autoplay playsinline muted loop 
-                                   src="<%= project.gallery[index] %>" type="video/mp4">
+                                   src="<%= cdnUrl(project.gallery[index]) %>" type="video/mp4">
                             </video>
                         <% } %>
                     </div>
@@ -69,11 +69,12 @@
                     <div class="col-sm-4 col-12">
                         <% if(element.endsWith('.jpg')) { %>
                             <img class="img-fluid" 
-                                 src="<%= element %>" 
+                                 src="<%= cdnUrl(element) %>" 
                                  alt="visuel pour <%= project.project_title %>" 
                                  data-action="zoom">
                         <% } else { %>
-                            <video class="img-fluid" autoplay playsinline muted loop src="<%= element %>"></video>
+                            <video class="img-fluid" autoplay playsinline muted loop 
+                                   src="<%= cdnUrl(element) %>"></video>
                         <% } %>
                     </div>
                 <% }) %>
@@ -102,11 +103,12 @@
                     <div class="col-sm-6 col-12">
                         <% if(element.endsWith('.jpg')) { %>
                             <img class="img-fluid w-100" 
-                                 src="<%= element %>" 
+                                 src="<%= cdnUrl(element) %>" 
                                  alt="visuel pour <%= project.project_title %>" 
                                  data-action="zoom">
                         <% } else { %>
-                            <video class="img-fluid" autoplay playsinline muted loop src="<%= element %>"></video>
+                            <video class="img-fluid" autoplay playsinline muted loop 
+                                   src="<%= cdnUrl(element) %>"></video>
                         <% } %>
                     </div>
                 <% }) %>
@@ -135,11 +137,12 @@
                     <div class="col-sm-6 col-12">
                         <% if(element.endsWith('.jpg')) { %>
                             <img class="img-fluid w-100" 
-                                 src="<%= element %>" 
+                                 src="<%= cdnUrl(element) %>" 
                                  alt="visuel pour <%= project.project_title %>" 
                                  data-action="zoom">
                         <% } else { %>
-                            <video class="img-fluid" autoplay playsinline muted loop src="<%= element %>"></video>
+                            <video class="img-fluid" autoplay playsinline muted loop 
+                                   src="<%= cdnUrl(element) %>"></video>
                         <% } %>
                     </div>
                 <% }) %>
@@ -169,4 +172,3 @@
 </div>
 
 <%- include('partials/footer.ejs') %>
-

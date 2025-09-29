@@ -5,6 +5,7 @@ import Thumbnail from '../models/Thumbnails.js';
 import Project from '../models/Project.js';
 import User from '../models/User.js';
 import Biography from '../models/Biography.js';
+import cdnUrl from '../utils/cdn.js';
 
 const ERROR_MESSAGE = 'Sorry, we could not retrieve the data at this time. Please try again later.';
 
@@ -19,7 +20,7 @@ const homePage = async (req, res) => {
       .populate('project')
       .sort({ releaseDate: -1 })
       .exec();
-    res.render('index', { thumbnailsList: thumbnails });
+    res.render('index', { thumbnailsList: thumbnails, cdnUrl });
   } catch (err) {
     console.error(err);
     res.status(500).send(ERROR_MESSAGE);
@@ -33,7 +34,7 @@ const animationPage = async (req, res) => {
       .populate('project')
       .sort({ releaseDate: -1 })
       .exec();
-    res.render('animation', { thumbnailsList: thumbnails });
+    res.render('animation', { thumbnailsList: thumbnails, cdnUrl });
   } catch (err) {
     console.error(err);
     res.status(500).send(ERROR_MESSAGE);
@@ -47,7 +48,7 @@ const liveActionPage = async (req, res) => {
       .populate('project')
       .sort({ releaseDate: -1 })
       .exec();
-    res.render('liveaction', { thumbnailsList: thumbnails });
+    res.render('liveaction', { thumbnailsList: thumbnails, cdnUrl });
   } catch (err) {
     console.error(err);
     res.status(500).send(ERROR_MESSAGE);
@@ -72,7 +73,7 @@ const seeFullProject = async (req, res) => {
     if (!project) return res.status(404).send('Project not found');
 
     const viewTemplate = project.gallery.length % 2 === 0 ? 'project_v2' : 'project';
-    res.render(viewTemplate, { project });
+    res.render(viewTemplate, { project, cdnUrl });
   } catch (error) {
     console.error(error);
     res.status(500).send(ERROR_MESSAGE);
@@ -84,7 +85,7 @@ const aboutPage = async (req, res, next) => {
   try {
     const biography = await Biography.findOne().exec();
     if (!biography) return res.status(404).send('Biography entry not found');
-    res.render('about', { biography });
+    res.render('about', { biography, cdnUrl });
   } catch (error) {
     console.error(error);
     next(error);

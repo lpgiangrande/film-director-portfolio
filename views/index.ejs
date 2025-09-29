@@ -14,7 +14,7 @@
                             <!-- LCP IMAGE: eager load, high priority, dimensions set to prevent layout shift -->
                             <img 
                                 class="img-fluid thumbnail_img" 
-                                src="<%= thumbnail.imgSrc %>" 
+                                src="<%= cdnUrl(thumbnail.imgSrc) %>" 
                                 alt="visual for <%= thumbnail.title %> by regis raffin"
                                 width="800"  
                                 height="331"  
@@ -28,7 +28,7 @@
                             <video 
                                 class="thumbnail_vid hidden w-100 h-100 no-load-mobile" 
                                 autoplay playsinline muted loop preload="metadata" 
-                                src="<%= thumbnail.videoSrc %>" 
+                                src="<%= cdnUrl(thumbnail.videoSrc) %>" 
                                 type="video/mp4">
                             </video>
                         </div>                                

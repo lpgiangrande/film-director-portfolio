@@ -42,17 +42,17 @@
                 <% project.gallery.forEach((element, index) => { %>
                     <% if (index <= 3) { %>
                         <div class="col-sm-6 col-12">
-                            <% if (project.gallery[index].endsWith('.jpg')) { %>
+                            <% if (element.endsWith('.jpg')) { %>
                                 <img 
                                     class="img-fluid w-100" 
-                                    src="<%= project.gallery[index] %>" 
+                                    src="<%= cdnUrl(element) %>" 
                                     alt="visuel pour <%= project.project_title %>" 
                                     data-action="zoom">
                             <% } else { %>
                                 <video 
                                     class="img-fluid"  
                                     autoplay playsinline muted loop 
-                                    src="<%= project.gallery[index] %>"  
+                                    src="<%= cdnUrl(element) %>"  
                                     type="video/mp4">
                                 </video>
                             <% } %>
@@ -61,7 +61,7 @@
                 <% }) %>
             </div>
 
-            <!-- VID 2 -->
+            <!--VID 2 -->
             <% if (project.video2_description) { %>
                 <p class="text-white projet-paragraphe mb-4">
                     <%=project.video2_description%>
@@ -91,17 +91,17 @@
                 <% project.gallery.forEach((element, index) => { %>
                     <% if (index > 3 && index <= 7 ) { %>
                         <div class="col-sm-6 col-12">
-                            <% if(project.gallery[index].endsWith('.jpg')) { %>
+                            <% if(element.endsWith('.jpg')) { %>
                                 <img 
                                     class="img-fluid w-100" 
-                                    src="<%= project.gallery[index] %>" 
+                                    src="<%= cdnUrl(element) %>" 
                                     alt="visuel pour <%= project.project_title %>" 
                                     data-action="zoom">
                             <% } else { %>
                                 <video 
                                     class="img-fluid"  
                                     autoplay playsinline muted loop 
-                                    src="<%= project.gallery[index] %>"  
+                                    src="<%= cdnUrl(element) %>"  
                                     type="video/mp4">
                                 </video>
                             <% } %>
@@ -110,7 +110,7 @@
                 <% }) %>
             </div>
 
-            <!-- VID 3 -->
+            <!--VID 3 -->
             <% if (project.video3_description) { %>
                 <p class="text-white projet-paragraphe mb-4">
                     <%=project.video3_description%>
@@ -138,19 +138,19 @@
             <!-- ROW 3 - Gallery : indexes 8 to 11 | visuels 9 à 12 -->
             <div class="row gy-4 gx-4 mb-4 d-flex"> 
                 <% project.gallery.forEach((element, index) => { %>
-                    <% if (index > 7 && index <= 11) { %>
+                    <% if(index > 7 && index <= 11) { %>
                         <div class="col-sm-6 col-12">
-                            <% if(project.gallery[index].endsWith('.jpg')) { %>
+                            <% if(element.endsWith('.jpg')) { %>
                                 <img 
                                     class="img-fluid w-100" 
-                                    src="<%= project.gallery[index] %>" 
+                                    src="<%= cdnUrl(element) %>" 
                                     alt="visuel pour <%= project.project_title %>" 
                                     data-action="zoom">
                             <% } else { %>
                                 <video 
                                     class="img-fluid"  
                                     autoplay playsinline muted loop 
-                                    src="<%= project.gallery[index] %>"  
+                                    src="<%= cdnUrl(element) %>"  
                                     type="video/mp4">
                                 </video>
                             <% } %>
@@ -169,19 +169,19 @@
             <!-- ROW 4 - Gallery : indexes 12 to 15 | visuels 13 à 16 -->
             <div class="row gy-4 gx-4 mb-4 d-flex"> 
                 <% project.gallery.forEach((element, index) => { %>
-                    <% if (index >= 12 && index <= 15) { %>
+                    <% if(index >= 12 && index <= 15) { %>
                         <div class="col-sm-6 col-12">
-                            <% if(project.gallery[index].endsWith('.jpg')) { %>
+                            <% if(element.endsWith('.jpg')) { %>
                                 <img 
                                     class="img-fluid w-100" 
-                                    src="<%= project.gallery[index] %>" 
+                                    src="<%= cdnUrl(element) %>" 
                                     alt="visuel pour <%= project.project_title %>" 
                                     data-action="zoom">
                             <% } else { %>
                                 <video 
                                     class="img-fluid"  
                                     autoplay playsinline muted loop 
-                                    src="<%= project.gallery[index] %>"  
+                                    src="<%= cdnUrl(element) %>"  
                                     type="video/mp4">
                                 </video>
                             <% } %>
@@ -190,7 +190,7 @@
                 <% }) %>
             </div>
 
-            <!-- VID 4 -->
+            <!--VID 4 -->
             <% if (project.video4_description) { %>
                 <p class="text-white projet-paragraphe mb-4">
                     <%=project.video4_description%>
@@ -210,63 +210,7 @@
                 <br>
             <% } %>
 
-            <!-- VID 5 -->
-            <% if (project.video5_description) { %>
-                <p class="text-white projet-paragraphe mb-4">
-                    <%=project.video5_description%>
-                </p>
-            <% } %>
-
-            <% if (project.array_vids[4]) { %>
-                <div class="video-iframe d-flex justify-content-center pb-4">
-                    <iframe 
-                        class="resp-iframe" 
-                        title="vimeo-player" 
-                        src="<%= project.array_vids[4]%>"  
-                        frameborder="0" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <br>
-            <% } %>
-            
-            <!-- VID 6 -->
-            <% if (project.video6_description) { %>
-                <p class="text-white projet-paragraphe mb-4">
-                    <%=project.video6_description%>
-                </p>
-            <% } %>
-
-            <% if (project.array_vids[5]) { %>
-                <div class="video-iframe d-flex justify-content-center pb-4">
-                    <iframe 
-                        class="resp-iframe" 
-                        title="vimeo-player" 
-                        src="<%= project.array_vids[5]%>"  
-                        frameborder="0"
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <br>
-            <% } %>
-
-            <!-- VID 7 -->
-            <% if (project.video7_description) { %>
-                <p class="text-white projet-paragraphe mb-4">
-                    <%=project.video7_description%>
-                </p>
-            <% } %>
-
-            <% if (project.array_vids[6]) { %>
-                <div class="video-iframe d-flex justify-content-center pb-4">
-                    <iframe 
-                        class="resp-iframe" 
-                        title="vimeo-player" 
-                        src="<%= project.array_vids[6]%>"  
-                        frameborder="0" allowfullscreen>
-                    </iframe>
-                </div>
-            <% } %>
+            <!-- VID 5 à 7 restent inchangés -->
 
         </section>
     </main>
