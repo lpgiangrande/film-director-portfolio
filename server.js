@@ -28,6 +28,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
 
+// Behind Apache (Bitnami on Lightsail): trust the first proxy so req.ip is the visitor's IP
+// (X-Forwarded-For), otherwise the login rate limiter counts every visitor as the same one
+app.set('trust proxy', 1);
+
 // -------------------- ENV VARIABLES --------------------
 const S3_DOMAIN = process.env.S3_DOMAIN;
 const CDN_DOMAIN = process.env.CDN_DOMAIN;
