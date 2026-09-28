@@ -4,9 +4,9 @@
 
                 <div class="container about-wrapper">
                     <img class="img-fluid mb-4" id="portrait" src="<%= cdnUrl(biography.pic) %>"  width="1831" height="1097" alt="portrait régis raffin">
-                    <p class="about"><%- biography.text.replace(/\n/g, "<br>") %></p>
+                    <p class="about about-text"><%= biography.text %></p>
                     <p class="about"><%= biography.email %></p>
-                    <p class="text-center about mt-4" id="button-email"><a href="mailto:<%= biography.mail %>">say hi</a></p>
+                    <p class="text-center about mt-4" id="button-email"><a href="mailto:<%= biography.email %>">say hi</a></p>
                 </div>
             </div>
         </main>

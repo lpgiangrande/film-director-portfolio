@@ -1,23 +1,73 @@
 <%- include('partials/header_backoff.ejs') %>
-
-        <div class="container d-flex flex-column align-items-center">
+        <!-- Biography editor: same layout and styles as views/projectForm.ejs (pe-*), live preview by public/js/about-editor.js -->
+        <main class="pe-page">
             <form action="/admin/updateAbout" method="POST" id="bio-form">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
-                <label for="bioText">Texte bio :</label>
-                <textarea id="text" name="text" rows="20" cols="100"><%= biography.text %></textarea>
-  
-                <label for="photo">Photo</label>
-                <input type="text" name="pic" id="pic" size="100" value="<%= biography.pic %>"> 
-             
-                <label for="mail">mail</label>
-                <input type="text" name="email" id="email" size="30" value="<%= biography.email %>">
-          
-                <div class="mt-3">
-                    <input type="submit" class="btn btn-outline-light btn-lg"  value="Update bio">
+                <div class="pe-layout">
+
+                    <!-- ==================== EDITOR ==================== -->
+                    <div class="pe-editor">
+                        <h2 class="pe-title">Modifier la page About</h2>
+
+                        <!-- 1. PHOTO -->
+                        <section class="pe-card">
+                            <h3 class="pe-card__title"><span class="pe-step">1</span> Photo</h3>
+                            <div class="bio-photo">
+                                <img id="bio-photo-current" class="bio-photo__img" src="<%= cdnUrl(biography.pic) %>" alt="Photo actuelle">
+                                <div>
+                                    <label class="pe-btn" for="pic_file">Changer la photo</label>
+                                    <!-- direct upload to S3 (public/js/s3-upload.js), fills the hidden #pic field -->
+                                    <input type="file" id="pic_file" class="pe-visually-hidden"
+                                           accept="image/jpeg,.jpg,.jpeg"
+                                           data-s3-upload data-folder="about" data-target="pic">
+                                    <p class="pe-help">JPG, format paysage de préférence (environ 2000 px de large). La nouvelle photo remplace l'ancienne une fois la page enregistrée.</p>
+                                </div>
+                            </div>
+                            <input type="hidden" name="pic" id="pic" value="<%= biography.pic %>">
+                        </section>
+
+                        <!-- 2. TEXT -->
+                        <section class="pe-card">
+                            <h3 class="pe-card__title"><span class="pe-step">2</span> Texte</h3>
+                            <label class="pe-label" for="text">Biographie</label>
+                            <textarea class="form-control pe-textarea" id="text" name="text" rows="12" required><%= biography.text %></textarea>
+                            <p class="pe-help">Les retours à la ligne sont conservés : laissez une ligne vide entre deux paragraphes.</p>
+                        </section>
+
+                        <!-- 3. EMAIL -->
+                        <section class="pe-card">
+                            <h3 class="pe-card__title"><span class="pe-step">3</span> Contact</h3>
+                            <label class="pe-label" for="email">Adresse email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="<%= biography.email %>" required>
+                            <p class="pe-help">Affichée sous le texte, et utilisée par le bouton « say hi ».</p>
+                        </section>
+
+                        <div class="pe-submit">
+                            <button type="submit" class="btn btn-light btn-lg">Enregistrer la page About</button>
+                        </div>
+                    </div>
+
+                    <!-- ==================== PREVIEW ==================== -->
+                    <aside class="pe-preview-col" aria-label="Aperçu de la page">
+                        <div class="pe-preview-head"><span>Aperçu</span></div>
+                        <div class="pe-preview-frame" id="pe-preview-frame">
+                            <!-- markup and styles of views/about.ejs -->
+                            <div class="pe-preview bio-preview" id="pe-preview">
+                                <div class="about-wrapper">
+                                    <img class="img-fluid mb-4" id="bio-preview-pic" src="<%= cdnUrl(biography.pic) %>" alt="">
+                                    <p class="about about-text" id="bio-preview-text"></p>
+                                    <p class="about" id="bio-preview-email"></p>
+                                    <p class="text-center about mt-4 bio-preview-button"><span>say hi</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
                 </div>
-            </form>  
-        </div>
+            </form>
+        </main>
+
+        <script src="/public/js/s3-upload.js?v=2" defer></script>
+        <script src="/public/js/about-editor.js?v=1" data-cdn-domain="<%= cdnDomain %>" defer></script>
     </body>
 </html>
-

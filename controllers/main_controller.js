@@ -72,8 +72,7 @@ const seeFullProject = async (req, res) => {
 
     if (!project) return res.status(404).send('Project not found');
 
-    const viewTemplate = project.gallery.length % 2 === 0 ? 'project_v2' : 'project';
-    res.render(viewTemplate, { project, cdnUrl });
+    res.render('project', { project, cdnUrl });
   } catch (error) {
     console.error(error);
     res.status(500).send(ERROR_MESSAGE);

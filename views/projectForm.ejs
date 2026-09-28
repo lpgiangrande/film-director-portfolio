@@ -1,0 +1,108 @@
+<%- include('partials/header_backoff.ejs') %>
+<%
+    // Same form for creation (project = null) and update. The page content is edited by
+    // public/js/project-editor.js, which sends it as JSON in the hidden "blocks" field.
+    const editorData = {
+        blocks: project ? project.blocks : [],
+        cdnDomain,
+    };
+%>
+        <main class="pe-page">
+            <form id="projectForm" method="POST" action="<%= project ? '/admin/projectUpdated' : '/admin/uploadProject' %>">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <% if (project) { %>
+                    <input type="hidden" name="identifier" value="<%= project._id %>">
+                <% } %>
+                <input type="hidden" name="blocks" id="blocks">
+
+                <div class="pe-layout">
+
+                    <!-- ==================== EDITOR ==================== -->
+                    <div class="pe-editor">
+                        <h2 class="pe-title"><%= project ? `Modifier « ${project.project_title} »` : 'Nouvelle page projet' %></h2>
+
+                        <!-- 1. INFOS -->
+                        <section class="pe-card">
+                            <h3 class="pe-card__title"><span class="pe-step">1</span> Informations</h3>
+
+                            <label class="pe-label" for="linkedThumbnail">Thumbnail associé</label>
+                            <select class="form-select mb-1" id="linkedThumbnail" name="linkedThumbnail" required>
+                                <% if (!project) { %><option value="" disabled selected>— Choisir le thumbnail de ce projet —</option><% } %>
+                                <% thumbnailsList.forEach(thumbnail => { %>
+                                    <option value="<%= thumbnail._id %>" <%= project && String(project.thumbnail) === String(thumbnail._id) ? 'selected' : '' %>>
+                                        <%= thumbnail.title %>
+                                    </option>
+                                <% }) %>
+                            </select>
+                            <p class="pe-help">Seuls les thumbnails qui n'ont pas encore de page projet sont proposés. Créez d'abord le thumbnail s'il n'apparaît pas.</p>
+
+                            <label class="pe-label" for="project_title">Nom du projet</label>
+                            <input type="text" class="form-control mb-3" id="project_title" name="project_title"
+                                   value="<%= project ? project.project_title : '' %>" data-preview="title" required>
+
+                            <label class="pe-label" for="director">Réalisateur</label>
+                            <input type="text" class="form-control mb-3" id="director" name="director"
+                                   value="<%= project ? project.director : 'directed by Regis Raffin' %>" data-preview="director" required>
+
+                            <label class="pe-label" for="other_contributors">Autres contributeurs <span class="pe-optional">(optionnel)</span></label>
+                            <input type="text" class="form-control mb-3" id="other_contributors" name="other_contributors"
+                                   value="<%= project ? project.other_contributors : '' %>" data-preview="other_contributors">
+
+                            <label class="pe-label" for="productor">Producteur <span class="pe-optional">(optionnel)</span></label>
+                            <input type="text" class="form-control" id="productor" name="productor"
+                                   value="<%= project ? project.productor : '' %>" data-preview="productor">
+                        </section>
+
+                        <!-- 2. MAIN VIDEO -->
+                        <section class="pe-card">
+                            <h3 class="pe-card__title"><span class="pe-step">2</span> Vidéo principale <span class="pe-optional">(en haut de la page)</span></h3>
+                            <label class="pe-label" for="main_video">Lien Vimeo</label>
+                            <input type="text" class="form-control" id="main_video" name="main_video"
+                                   value="<%= project ? project.main_video : '' %>"
+                                   placeholder="https://vimeo.com/341833479" autocomplete="off" data-vimeo-input>
+                            <p class="pe-help" data-vimeo-status>Copiez le lien de la vidéo depuis Vimeo (bouton « Partager » ou barre d'adresse) et collez-le ici.</p>
+                        </section>
+
+                        <!-- 3. BLOCKS -->
+                        <section class="pe-card pe-card--blocks">
+                            <h3 class="pe-card__title"><span class="pe-step">3</span> Contenu de la page</h3>
+                            <p class="pe-help">
+                                La page se construit de haut en bas, bloc par bloc, comme dans l'aperçu.
+                                Une <b>rangée</b> contient 1 à 4 visuels côte à côte (JPG ou MP4), avec une légende sous chacun et un texte sous la rangée si besoin.
+                            </p>
+
+                            <div id="pe-blocks" class="pe-blocks"></div>
+
+                            <div class="pe-add">
+                                <span class="pe-add__label">Ajouter :</span>
+                                <button type="button" class="pe-btn" data-add="row">＋ Rangée de visuels</button>
+                                <button type="button" class="pe-btn" data-add="vimeo">＋ Vidéo Vimeo</button>
+                                <button type="button" class="pe-btn" data-add="text">＋ Paragraphe</button>
+                            </div>
+                        </section>
+
+                        <div class="pe-submit">
+                            <p class="pe-submit__status" id="pe-submit-status" aria-live="polite"></p>
+                            <button type="submit" class="btn btn-light btn-lg"><%= project ? 'Enregistrer les modifications' : 'Créer la page projet' %></button>
+                        </div>
+                    </div>
+
+                    <!-- ==================== PREVIEW ==================== -->
+                    <aside class="pe-preview-col" aria-label="Aperçu de la page">
+                        <div class="pe-preview-head">
+                            <span>Aperçu</span>
+                            <small>cliquer sur un élément pour le retrouver dans le formulaire</small>
+                        </div>
+                        <div class="pe-preview-frame" id="pe-preview-frame">
+                            <div class="pe-preview" id="pe-preview"></div>
+                        </div>
+                    </aside>
+                </div>
+            </form>
+        </main>
+
+        <script id="pe-data" type="application/json"><%- JSON.stringify(editorData).replace(/</g, '\\u003c') %></script>
+        <script src="/public/js/s3-upload.js?v=2" defer></script>
+        <script src="/public/js/project-editor.js?v=1" defer></script>
+    </body>
+</html>

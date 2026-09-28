@@ -17,7 +17,7 @@ import rateLimit from 'express-rate-limit';
 import crypto from 'crypto';
 import compression from 'compression';
 import { fileURLToPath } from 'url';
-import csrf from 'csurf';
+import { csrfSync } from 'csrf-sync';
 
 /**
  * CONFIGURATION
@@ -39,8 +39,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// Generate a stable secret key for sessions (fallback if .env is not set)
-const secretKey = process.env.SECRET_KEY || 'fallback-secret-key-for-dev';
+// Session secret from .env. If it is missing, use a random key rather than a known one written in the code
+// (sessions are then lost at each restart, which the in-memory session store already does anyway).
+const secretKey = process.env.SECRET_KEY || crypto.randomBytes(32).toString('hex');
+if (!process.env.SECRET_KEY) console.warn('⚠ SECRET_KEY is missing in .env: using a random session key');
 
 /**
  * DATABASE CONNECTION
@@ -97,7 +99,7 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      connectSrc: ["'self'", "https://ka-f.fontawesome.com", "https://cdn.jsdelivr.net"],
+      connectSrc: ["'self'", `https://${S3_DOMAIN}`, "https://ka-f.fontawesome.com", "https://cdn.jsdelivr.net"],
       frameSrc: ["'self'", "https://player.vimeo.com", "https://www.youtube.com"],
       scriptSrc: [
         "'self'",
@@ -161,7 +163,10 @@ app.use((req, res, next) => {
 });
 
 // -------------------- CSRF PROTECTION --------------------
-const csrfProtection = csrf({ cookie: false }); // token stored in session
+// Synchronizer token stored in the session, sent by the forms in the hidden "_csrf" field
+const { csrfSynchronisedProtection: csrfProtection } = csrfSync({
+  getTokenFromRequest: (req) => (req.body && req.body._csrf) || req.headers['x-csrf-token'],
+});
 
 // Apply CSRF only to sensitive POST routes
 app.use(['/login', '/register', '/admin/*'], csrfProtection);

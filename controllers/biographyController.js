@@ -1,4 +1,5 @@
 import Biography from '../models/Biography.js';
+import cdnUrl from '../utils/cdn.js';
 
 /**
  * Render the form to update the biography (admin view)
@@ -12,7 +13,7 @@ export const updateBiography = async (req, res, next) => {
       return res.status(404).send('Biography entry not found');
     }
 
-    res.render('updateAbout', { biography });
+    res.render('updateAbout', { biography, cdnUrl });
   } catch (err) {
     console.error('Error retrieving biography:', err);
     next(err);
@@ -32,9 +33,10 @@ export const handleBiographyUpdate = async (req, res, next) => {
       return res.status(404).send('Biography entry not found');
     }
 
-    biography.pic = pic;
+    // The photo link comes from the S3 uploader; keep the current one if the field is empty or invalid
+    if (typeof pic === 'string' && pic.startsWith('https://')) biography.pic = pic.trim();
     biography.text = text;
-    biography.email = email;
+    biography.email = (email || '').trim();
 
     await biography.save();
 

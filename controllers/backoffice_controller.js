@@ -18,12 +18,18 @@ configurePassport(passport);
  */
 const list = async (req, res, next) => {
   try {
-    const projects = await Project.find({}).exec();
-    const thumbnails = await Thumbnail.find({}).exec();
+    const projects = await Project.find({}).sort({ project_title: 1 }).exec();
+    const thumbnails = await Thumbnail.find({}).sort({ releaseDate: -1 }).exec();
+
+    // thumbnail id -> title of its project page (a thumbnail without page leads to a 404 on the site)
+    const projectTitleByThumbnail = Object.fromEntries(
+      projects.filter(p => p.thumbnail).map(p => [String(p.thumbnail), p.project_title])
+    );
 
     res.render('list', {
       projectsList: projects,
       thumbnailsList: thumbnails,
+      projectTitleByThumbnail,
       username: req.user?.username || '',
       biography: res.locals.biography || null,
     });

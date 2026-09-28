@@ -38,3 +38,20 @@
 ![](public/screenshots-readme/logout.png)
 ![](public/screenshots-readme/secured_routes.png)
 ![](public/screenshots-readme/two-users-only.png)
+
+
+## Déploiement
+
+**Sur le Mac** (
+
+git add . && git commit -m "message clair" && git push
+
+**Sur le serveur Lightsail** (connexion via la console AWS) :
+
+cd ~/htdocs/film-director-portfolio
+git pull
+npm install        # seulement si package.json a changé
+pm2 restart all
+
+
+**En cas de souci** : `git fetch && git status` pour voir si le serveur a du retard, puis recharger avec Cmd + Shift + R.

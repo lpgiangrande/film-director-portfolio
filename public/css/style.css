@@ -164,6 +164,9 @@ p.about {
     text-align: justify;
 }
 
+/* biography text: keeps the line breaks typed in the back office */
+p.about-text { white-space: pre-line; }
+
 /* ================= PAGE PROJET ================= */
 h1.project_title { font-size: 14px; }
 
@@ -173,6 +176,13 @@ p.projet-paragraphe {
     font-size: 1.167em !important;
     white-space: pre-wrap;
     text-align: justify;
+}
+
+/* caption under a visual (project blocks) */
+p.projet-legende {
+    font-size: 1em;
+    white-space: pre-wrap;
+    opacity: 0.8;
 }
 
 /* ================= VIDÉOS RESPONSIVES ================= */

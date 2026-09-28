@@ -38,6 +38,18 @@
                         required >
                     <br>
                 </div>   
+                <!-- IMG_THUMBNAIL : direct upload to S3, fills the field above -->
+                <div class="s3-upload mb-3">
+                    <label class="text-white" for="img_thumbnail_file">Importer l'image (JPG) — le lien ci-dessus se remplit automatiquement :</label>
+                    <input 
+                        type="file" 
+                        class="form-control" 
+                        id="img_thumbnail_file" 
+                        accept="image/jpeg,.jpg,.jpeg"
+                        data-s3-upload 
+                        data-folder="thumbnails" 
+                        data-target="img_thumbnail">
+                </div>
                 <br>
                 <!-- VIDEO --> 
                 <div class="input-group mb-3">
@@ -51,15 +63,28 @@
                         required >
                     <br>
                 </div>
+                <!-- VID_THUMBNAIL : direct upload to S3, fills the field above -->
+                <div class="s3-upload mb-3">
+                    <label class="text-white" for="vid_thumbnail_file">Importer la vidéo (MP4) — le lien ci-dessus se remplit automatiquement :</label>
+                    <input 
+                        type="file" 
+                        class="form-control" 
+                        id="vid_thumbnail_file" 
+                        accept="video/mp4,.mp4"
+                        data-s3-upload 
+                        data-folder="thumbnails" 
+                        data-target="vid_thumbnail">
+                </div>
                 <br><br>
                 <!-- SEND -->
                 <div class="d-flex justify-content-center align-items-center">
-                    <input type="hidden" name="identifiant" value="<%= thumbnail._id %>">
+                    <input type="hidden" name="identifier" value="<%= thumbnail._id %>">
                     <input type="submit" class="btn btn-outline-light btn-lg"  value="Update">
                 </div>
             </form>
             
         </div>
+        <script src="/public/js/s3-upload.js?v=2" defer></script>
     </body>
 </html>
 

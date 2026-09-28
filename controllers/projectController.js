@@ -1,52 +1,55 @@
 import mongoose from 'mongoose';
 import Thumbnail from '../models/Thumbnails.js';
 import Project from '../models/Project.js';
+import parseBlocks from '../utils/projectBlocks.js';
+import toVimeoEmbed from '../utils/vimeo.js';
+import { deleteUnusedFiles, projectFiles, flashS3Result } from '../utils/s3Cleanup.js';
+import { removeProjectEntirely } from './thumbnailController.js';
 
-// Add a new project
-export const addProject = async (req, res) => {
-  try {
-    const array_vids = req.body.array_vids.split(',').map(v => v.trim());
-    const gallery = req.body.gallery.split(',').map(img => img.trim());
+// Builds the project fields from the form (same form for creation and update: views/projectForm.ejs)
+const projectDataFromForm = (body) => ({
+  thumbnail: body.linkedThumbnail,
+  project_title: body.project_title,
+  director: body.director,
+  other_contributors: body.other_contributors,
+  productor: body.productor,
+  main_video: toVimeoEmbed(body.main_video),
+  blocks: parseBlocks(body.blocks),
+});
 
-    const newProject = new Project({
-      thumbnail: req.body.linkedThumbnail,
-      project_title: req.body.project_title,
-      director: req.body.director,
-      other_contributors: req.body.other_contributors,
-      productor: req.body.productor,
-      array_vids,
-      video2_description: req.body.video2_description,
-      video3_description: req.body.video3_description,
-      video4_description: req.body.video4_description,
-      video5_description: req.body.video5_description,
-      video6_description: req.body.video6_description,
-      video7_description: req.body.video7_description,
-      gallery,
-      gallery_row_1_description: req.body.description_1,
-      gallery_row_2_description: req.body.description_2,
-      gallery_row_3_description: req.body.description_3,
-      gallery_row_4_description: req.body.description_4
-    });
+// Thumbnails offered in the select: those not linked to a project yet (+ the current one when editing)
+const availableThumbnails = async (currentProject) => {
+  const usedIds = await Project.distinct('thumbnail', currentProject ? { _id: { $ne: currentProject._id } } : {});
+  return Thumbnail.find({ _id: { $nin: usedIds } }).sort({ releaseDate: -1 }).exec();
+};
 
-    await newProject.save();
-    res.redirect(301, '/admin/list');
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Server error while adding project');
-  }
+const renderForm = async (req, res, project) => {
+  res.render('projectForm', {
+    project,
+    thumbnailsList: await availableThumbnails(project),
+    csrfToken: req.csrfToken()
+  });
 };
 
 // Render project upload form
 export const uploadProject = async (req, res) => {
   try {
-    const thumbnails = await Thumbnail.find().populate('project').exec();
-    res.render('uploadProject', {
-      thumbnailsList: thumbnails,
-      csrfToken: req.csrfToken() // ajout pour les formulaires
-    });
+    await renderForm(req, res, null);
   } catch (error) {
     console.error(error);
     res.status(500).send('Error fetching thumbnails');
+  }
+};
+
+// Add a new project
+export const addProject = async (req, res) => {
+  try {
+    const newProject = new Project(projectDataFromForm(req.body));
+    await newProject.save();
+    res.redirect('/admin/list');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server error while adding project');
   }
 };
 
@@ -59,18 +62,13 @@ export const updateProject = async (req, res) => {
       return res.status(400).send('Invalid project ID');
     }
 
-    const project = await Project.findById(projectId)
-      .populate('thumbnail')
-      .exec();
+    const project = await Project.findById(projectId).exec();
 
     if (!project) {
       return res.status(404).send('Project not found');
     }
 
-    res.render('updateProject', {
-      project,
-      csrfToken: req.csrfToken() // ajout pour le formulaire
-    });
+    await renderForm(req, res, project);
   } catch (error) {
     console.error(error);
     res.status(500).send('Server error while fetching project');
@@ -86,38 +84,51 @@ export const handleProjectUpdate = async (req, res) => {
       return res.status(400).send('Invalid project ID');
     }
 
-    const array_vids = req.body.array_vids.split(',').map(v => v.trim());
-    const gallery = req.body.gallery.split(',').map(img => img.trim());
+    const project = await Project.findById(projectId).exec();
 
-    const updateData = {
-      thumbnail: req.body.linkedThumbnail,
-      project_title: req.body.project_title,
-      director: req.body.director,
-      other_contributors: req.body.other_contributors,
-      productor: req.body.productor,
-      array_vids,
-      video2_description: req.body.video2_description,
-      video3_description: req.body.video3_description,
-      video4_description: req.body.video4_description,
-      video5_description: req.body.video5_description,
-      video6_description: req.body.video6_description,
-      video7_description: req.body.video7_description,
-      gallery,
-      gallery_row_1_description: req.body.description_1,
-      gallery_row_2_description: req.body.description_2,
-      gallery_row_3_description: req.body.description_3,
-      gallery_row_4_description: req.body.description_4
-    };
-
-    const result = await Project.updateOne({ _id: projectId }, updateData).exec();
-
-    if (result.modifiedCount === 0) {
-      return res.status(404).send('Project not found or no changes detected');
+    if (!project) {
+      return res.status(404).send('Project not found');
     }
 
-    res.redirect(301, '/admin/list');
+    // save() rather than updateOne() so the schema validation and the slug middleware run
+    project.set(projectDataFromForm(req.body));
+    await project.save();
+
+    res.redirect('/admin/list');
   } catch (error) {
     console.error(error);
     res.status(500).send('Server error while updating project');
+  }
+};
+
+// Delete a whole project (page + thumbnail + files): see removeProjectEntirely
+export const deleteProject = async (req, res) => {
+  try {
+    const projectId = req.params.id;
+
+    if (!mongoose.Types.ObjectId.isValid(projectId)) {
+      return res.status(400).send('Invalid project ID');
+    }
+
+    const project = await Project.findById(projectId).exec();
+
+    if (!project) {
+      return res.status(404).send('Project not found');
+    }
+
+    if (project.thumbnail) {
+      const { message } = await removeProjectEntirely(req, project.thumbnail);
+      req.flash('success_msg', message);
+    } else {
+      // Page without thumbnail (should not happen): delete the page alone
+      await project.deleteOne();
+      const s3 = flashS3Result(req, await deleteUnusedFiles(projectFiles(project)));
+      req.flash('success_msg', `Projet « ${project.project_title} » supprimé du site.${s3}`);
+    }
+
+    res.redirect('/admin/list');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server error while deleting project');
   }
 };

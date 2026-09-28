@@ -8,7 +8,6 @@ import mainController from '../controllers/main_controller.js';
 import passport from 'passport';
 import { forwardAuthenticated } from '../config/auth.js';
 import rateLimit from 'express-rate-limit';
-import he from 'he';
 import path from 'path';
 
 const router = Router();
@@ -39,9 +38,6 @@ router.post('/register', mainController.handleRegistration);
 
 router.get('/login', forwardAuthenticated, mainController.loginPage);
 router.post('/login', loginLimiter, (req, res, next) => {
-  const username = he.encode(req.body.username.trim());
-  const pwd = he.encode(req.body.pwd.trim());
-
   passport.authenticate('local', {
     successRedirect: '/admin/list',
     failureRedirect: '/login',

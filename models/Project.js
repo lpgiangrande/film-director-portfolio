@@ -3,10 +3,37 @@ import slugify from 'slugify';
 
 // PROJECT PAGE
 /**
- * array_vids = Main videos (full width on the page)
- * gallery = Gallery of visuals  | 1 to 4 rows of 3 images/videos
- * gallery_row_n_description = text under each rows of visuals 
+ * main_video = Vimeo player URL shown at the top of the page
+ * blocks     = page content, in display order (built in the back office, see public/js/project-editor.js):
+ *   { type: 'row',   items: [{ url, caption }], text }  -> 1 to 4 visuals (S3 .jpg / .mp4) side by side + text under the row
+ *   { type: 'vimeo', url, text }                         -> Vimeo video + text under it
+ *   { type: 'text',  text }                              -> paragraph alone
+ *
+ * Legacy fields (array_vids, video*_description, gallery, gallery_row_*_description) come from the
+ * former fixed templates. They are no longer displayed: scripts/migrateProjectBlocks.js converted them
+ * to main_video + blocks. Kept in the schema so the original data is not lost.
  */
+
+const MAX_ITEMS_PER_ROW = 4;
+
+const mediaSchema = mongoose.Schema({
+    url: { type: String, required: true },
+    caption: { type: String },
+}, { _id: false });
+
+const blockSchema = mongoose.Schema({
+    type: { type: String, enum: ['row', 'vimeo', 'text'], required: true },
+    items: {
+        type: [mediaSchema],
+        default: undefined,
+        validate: {
+            validator: items => !items || items.length <= MAX_ITEMS_PER_ROW,
+            message: `${MAX_ITEMS_PER_ROW} visuels maximum par rangée`,
+        },
+    },
+    url: { type: String },
+    text: { type: String },
+}, { _id: false });
 
 const projectSchema = mongoose.Schema({
 
@@ -31,10 +58,17 @@ const projectSchema = mongoose.Schema({
     productor: {
         type: String,
     },
-    // Liens vimeo, max 7 :
+    main_video: {
+        type: String,
+    },
+    blocks: {
+        type: [blockSchema],
+        default: [],
+    },
+
+    // ---------- Legacy (see top of file) ---------- //
     array_vids: {
         type: [String],
-        required: true
     },
     video2_description: {
         type: String
@@ -54,10 +88,8 @@ const projectSchema = mongoose.Schema({
     video7_description: {
         type: String
     },
-    // Images ou vids, max 16
     gallery: {
         type: [String],
-        required: true
     },
     gallery_row_1_description: {
         type: String,
@@ -81,4 +113,5 @@ projectSchema.pre('save', function (next) {
     next();
 });
 
+export { MAX_ITEMS_PER_ROW };
 export default mongoose.model('Project', projectSchema);
