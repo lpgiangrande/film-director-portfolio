@@ -9,8 +9,12 @@ import passport from 'passport';
 import { forwardAuthenticated } from '../config/auth.js';
 import rateLimit from 'express-rate-limit';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 const router = Router();
+
+// __dirname does not exist in ES modules
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // -------------------- Rate Limiter for Login -------------------- //
 const loginLimiter = rateLimit({
