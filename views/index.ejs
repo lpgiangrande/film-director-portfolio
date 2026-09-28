@@ -2,12 +2,12 @@
 
 <!-- THUMBNAILS - IMAGE / VIDEO GALLERY -->
 <main>
-    <div class="container-fluid d-flex g-0">
+    <div class="container-fluid g-0">
         <div class="row gx-0 thumb_box">
 
             <% thumbnailsList.forEach(thumbnail => { %>
                 <div class="col-md-6 col-lg-4 title"> 
-                    <a class="d-flex thumbnail_title hidden" href="/<%= thumbnail._id %>">
+                    <a href="/<%= thumbnail._id %>">
                         <h3 class="text-center thumbnail_title"><%= thumbnail.title %></h3>
                         
                         <div class="source1">
