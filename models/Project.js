@@ -45,8 +45,14 @@ const projectSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    // Public URL = /project/<slug>, generated from the title (see pre('save') below)
     slug: {
         type: String, unique: true
+    },
+    // Slugs of former titles: their URLs redirect to the current one
+    previous_slugs: {
+        type: [String],
+        index: true,
     },
     director: {
         type: String,
@@ -105,12 +111,29 @@ const projectSchema = mongoose.Schema({
     }
 });
 
-// Middleware pour générer le slug avant sauvegarde
-projectSchema.pre('save', function (next) {
-    if (this.isModified('project_title') || !this.slug) {
-        this.slug = slugify(this.project_title, { lower: true, strict: true });
+// Slug from the title, made unique with -2, -3... if another project already uses it
+projectSchema.statics.makeSlug = async function (title, projectId) {
+    const base = slugify(title || '', { lower: true, strict: true }) || String(projectId);
+    let slug = base;
+    for (let n = 2; await this.exists({ slug, _id: { $ne: projectId } }); n++) {
+        slug = `${base}-${n}`;
     }
-    next();
+    return slug;
+};
+
+// Generate the slug before saving; when the title changes, keep the old slug so its URL still works
+projectSchema.pre('save', async function () {
+    if (!this.isModified('project_title') && this.slug) return;
+
+    const slug = await this.constructor.makeSlug(this.project_title, this._id);
+    if (this.slug && this.slug !== slug && !this.previous_slugs.includes(this.slug)) {
+        this.previous_slugs.push(this.slug);
+    }
+    this.slug = slug;
+});
+
+projectSchema.virtual('url').get(function () {
+    return `/project/${this.slug}`;
 });
 
 export { MAX_ITEMS_PER_ROW };

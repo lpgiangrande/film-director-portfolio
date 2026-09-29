@@ -50,10 +50,10 @@ router.post('/login', loginLimiter, (req, res, next) => {
 });
 
 // -------------------- Dynamic Project Pages -------------------- //
-// 1️⃣ Route par slug (doit être avant la route générique)
-//router.get('/project/:slug', mainController.seeFullProjectBySlug);
+// Project page by slug
+router.get('/project/:slug', mainController.seeFullProjectBySlug);
 
-// 2️⃣ Route par ID (ancienne route, générique)
+// Former URL by thumbnail id: redirects to /project/<slug>. Must stay last (it matches any /<word>)
 router.get('/:id', mainController.seeFullProject);
 
 export default router;

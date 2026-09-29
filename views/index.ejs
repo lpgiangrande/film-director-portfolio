@@ -7,7 +7,7 @@
 
             <% thumbnailsList.forEach(thumbnail => { %>
                 <div class="col-md-6 col-lg-4 title"> 
-                    <a href="/<%= thumbnail._id %>">
+                    <a href="<%= projectUrls[String(thumbnail._id)] || '#' %>">
                         <h3 class="text-center thumbnail_title"><%= thumbnail.title %></h3>
                         
                         <div class="source1">

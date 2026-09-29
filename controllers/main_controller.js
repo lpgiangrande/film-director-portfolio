@@ -13,66 +13,59 @@ const ERROR_MESSAGE = 'Sorry, we could not retrieve the data at this time. Pleas
  * Page rendering functions
  */
 
-// Render home page with all thumbnails sorted by release date descending
-const homePage = async (req, res) => {
+// Render a thumbnails gallery (sorted by release date descending), each thumbnail linking to its project page
+const renderGallery = (view, filter = {}) => async (req, res) => {
   try {
-    const thumbnails = await Thumbnail.find()
-      .populate('project')
-      .sort({ releaseDate: -1 })
-      .exec();
-    res.render('index', { thumbnailsList: thumbnails, cdnUrl });
+    const thumbnails = await Thumbnail.find(filter).sort({ releaseDate: -1 }).exec();
+
+    // thumbnail id -> /project/<slug> (the link is on the project side: Project.thumbnail)
+    const projects = await Project.find({ thumbnail: { $ne: null } }, 'thumbnail slug').exec();
+    const projectUrls = Object.fromEntries(projects.map(p => [String(p.thumbnail), p.url]));
+
+    res.render(view, { thumbnailsList: thumbnails, projectUrls, cdnUrl });
   } catch (err) {
     console.error(err);
     res.status(500).send(ERROR_MESSAGE);
   }
 };
 
-// Render animation page
-const animationPage = async (req, res) => {
+const homePage = renderGallery('index');
+const animationPage = renderGallery('animation', { category: 'animation' });
+const liveActionPage = renderGallery('liveaction', { category: 'liveaction' });
+
+// Render full project page: /project/<slug>
+const seeFullProjectBySlug = async (req, res) => {
   try {
-    const thumbnails = await Thumbnail.find({ category: 'animation' })
-      .populate('project')
-      .sort({ releaseDate: -1 })
-      .exec();
-    res.render('animation', { thumbnailsList: thumbnails, cdnUrl });
-  } catch (err) {
-    console.error(err);
+    const { slug } = req.params;
+
+    const project = await Project.findOne({ slug }).populate('thumbnail').exec();
+    if (project) return res.render('project', { project, cdnUrl });
+
+    // Former slug (the title was changed since): permanent redirect to the current URL
+    const renamed = await Project.findOne({ previous_slugs: slug }, 'slug').exec();
+    if (renamed) return res.redirect(301, renamed.url);
+
+    res.status(404).send('Project not found');
+  } catch (error) {
+    console.error(error);
     res.status(500).send(ERROR_MESSAGE);
   }
 };
 
-// Render live action page
-const liveActionPage = async (req, res) => {
-  try {
-    const thumbnails = await Thumbnail.find({ category: 'liveaction' })
-      .populate('project')
-      .sort({ releaseDate: -1 })
-      .exec();
-    res.render('liveaction', { thumbnailsList: thumbnails, cdnUrl });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send(ERROR_MESSAGE);
-  }
-};
-
-// Render full project page based on thumbnail ID
+// Former URLs /<thumbnail id>: permanent redirect to /project/<slug>, so old links and search results still work
 const seeFullProject = async (req, res) => {
   try {
     const thumbnailId = req.params.id;
 
-    if (thumbnailId === 'favicon.ico') return;
-
     if (!mongoose.Types.ObjectId.isValid(thumbnailId)) {
-      return res.status(400).send('Invalid thumbnail ID');
+      return res.status(404).send('Page not found');
     }
 
-    const project = await Project.findOne({ thumbnail: thumbnailId })
-      .populate('thumbnail')
-      .exec();
+    const project = await Project.findOne({ thumbnail: thumbnailId }, 'slug').exec();
 
-    if (!project) return res.status(404).send('Project not found');
+    if (!project || !project.slug) return res.status(404).send('Project not found');
 
-    res.render('project', { project, cdnUrl });
+    res.redirect(301, project.url);
   } catch (error) {
     console.error(error);
     res.status(500).send(ERROR_MESSAGE);
@@ -150,6 +143,7 @@ const mainController = {
   animationPage,
   liveActionPage,
   seeFullProject,
+  seeFullProjectBySlug,
   aboutPage,
   loginPage,
   registerPage,
