@@ -37,9 +37,6 @@ router.get('/liveaction', mainController.liveActionPage);
 router.get('/about', mainController.aboutPage);
 
 // -------------------- Authentication -------------------- //
-router.get('/register', forwardAuthenticated, mainController.registerPage);
-router.post('/register', mainController.handleRegistration);
-
 router.get('/login', forwardAuthenticated, mainController.loginPage);
 router.post('/login', loginLimiter, (req, res, next) => {
   passport.authenticate('local', {

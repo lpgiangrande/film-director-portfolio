@@ -173,7 +173,7 @@ const { csrfSynchronisedProtection: csrfProtection } = csrfSync({
 });
 
 // Apply CSRF only to sensitive POST routes
-app.use(['/login', '/register', '/admin/*'], csrfProtection);
+app.use(['/login', '/admin/*'], csrfProtection);
 
 // Pass the CSRF token to all views
 app.use((req, res, next) => {

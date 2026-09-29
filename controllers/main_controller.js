@@ -1,9 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
 import Thumbnail from '../models/Thumbnails.js';
 import Project from '../models/Project.js';
-import User from '../models/User.js';
 import Biography from '../models/Biography.js';
 import cdnUrl from '../utils/cdn.js';
 
@@ -91,52 +89,7 @@ const loginPage = (req, res) => {
   });
 };
 
-// Render register page
-const registerPage = (req, res) => {
-  res.render('register', {
-    csrfToken: req.csrfToken(),
-  });
-};
-
-
-// Handle user registration
-const handleRegistration = async (req, res) => {
-  const { username, pwd, pwd2 } = req.body;
-  const errors = [];
-
-  if (!username || !pwd || !pwd2) errors.push({ msg: 'Fields should not be empty' });
-  if (pwd !== pwd2) errors.push({ msg: 'Passwords do not match' });
-  if (pwd.length < 6) errors.push({ msg: 'Password should be at least 6 characters' });
-
-  if (errors.length > 0) {
-    return res.render('register', { errors, username, pwd, pwd2 });
-  }
-
-  try {
-    const userCount = await User.countUsers();
-    if (userCount >= 2) {
-      errors.push({ msg: 'Only two users are allowed.' });
-      return res.render('register', { errors, username, pwd, pwd2 });
-    }
-
-    const existingUser = await User.findOne({ username }).exec();
-    if (existingUser) {
-      errors.push({ msg: 'User already registered' });
-      return res.render('register', { errors, username, pwd, pwd2 });
-    }
-
-    const hashedPwd = await bcrypt.hash(pwd, 10);
-
-    const newUser = new User({ username, pwd: hashedPwd });
-    await newUser.save();
-
-    req.flash('success_msg', 'You are now registered. You can log in.');
-    res.redirect('/login');
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Server error while registering user');
-  }
-};
+// Account creation is in the back office: see userController.js
 
 const mainController = {
   homePage,
@@ -145,9 +98,7 @@ const mainController = {
   seeFullProject,
   seeFullProjectBySlug,
   aboutPage,
-  loginPage,
-  registerPage,
-  handleRegistration
+  loginPage
 };
 
 export default mainController;

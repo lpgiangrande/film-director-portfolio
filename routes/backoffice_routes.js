@@ -12,6 +12,11 @@ const router = Router();
 router.get('/list', ensureAuthenticated, backofficeController.list);
 router.get('/logoff', ensureAuthenticated, backofficeController.logoutController.logoff);
 
+// -------------------- Account Routes -------------------- //
+// Only a logged-in admin can create an account (max 2, see userController)
+router.get('/register', ensureAuthenticated, backofficeController.userController.registerPage);
+router.post('/register', ensureAuthenticated, backofficeController.userController.handleRegistration);
+
 // -------------------- Biography Routes -------------------- //
 router.get('/updateAbout', ensureAuthenticated, backofficeController.biographyController.updateBiography);
 router.post('/updateAbout', ensureAuthenticated, backofficeController.biographyController.handleBiographyUpdate);

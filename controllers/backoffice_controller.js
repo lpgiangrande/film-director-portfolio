@@ -7,6 +7,7 @@ import * as thumbnailController from './thumbnailController.js';
 import * as projectController from './projectController.js';
 import * as logoutController from './logoutController.js';
 import * as biographyController from './biographyController.js';
+import * as userController from './userController.js';
 
 import { configurePassport, LocalStrategy, bcrypt, User, passport } from '../config/passport.js';
 
@@ -53,5 +54,6 @@ export {
   projectController,
   logoutController,
   biographyController,
+  userController,
   list
 };
