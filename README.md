@@ -1,6 +1,6 @@
 # Regis Raffin — Film Director Portfolio
 
-A portfolio website for film director **Regis Raffin**, with a custom back office that lets him publish and edit his projects himself: upload images and videos, build each project page block by block, and see the result live before saving.
+A portfolio website for a film director, with a custom back office that lets him publish and edit his projects himself: upload images and videos, build each project page block by block, and see the result live before saving.
 
 **Live site → [regisraffin.com](https://www.regisraffin.com)**
 
